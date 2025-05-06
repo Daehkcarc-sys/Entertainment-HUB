@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | Entertainment Hub</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="description" content="Manage your personal profile, reviews, and preferences on Entertainment Hub.">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        /* Profile page specific styles with manga-inspired elements */
+        .profile-header {
+            position: relative;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, var(--primary-color), #ff8f82);
+            color: white;
+            border-bottom: 4px solid #000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Manga panel-styled background elements */
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../images/mangawallpaper.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        /* Manga panel-style diagonal lines overlay */
+        .profile-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(45deg, rgba(0,0,0,0.1) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1) 75%, transparent 75%, transparent);
+            background-size: 20px 20px;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .profile-header-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: white;
+            overflow: hidden;
+            border: 4px solid white;
+            box-shadow: var(--shadow);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-avatar:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Manga-style avatar frame */
+        .profile-avatar::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profile-info h1 {
+            margin-bottom: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            display: inline-block;
+        }
+        
+        /* Manga-style heading underline */
+        .profile-info h1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), transparent);
+        }
+        
+        .profile-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .stat-item {
+            padding-right: 1.5rem;
+            border-right: 1px solid rgba(255,255,255,0.3);
+            transition: transform 0.2s ease;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-3px);
+        }
+        
+        .stat-item:last-child {
+            border-right: none;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .profile-actions {
+            margin-left: auto;
+        }
+        
+        /* Manga-style button */
+        .profile-actions .btn {
+            border: 2px solid #fff;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+        .profile-actions .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .main-profile {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+        }
+        
+        .profile-sidebar {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .profile-nav {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            /* Manga-style border */
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .profile-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .profile-nav li {
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        /* Manga-style hover effect for navigation */
+        .profile-nav li::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 0;
+            height: 0;
+            width: 4px;
+            background-color: var(--accent-color);
+            transition: height 0.3s ease;
+        }
+        
+        .profile-nav li:hover::before {
+            height: 100%;
+        }
+        
+        .profile-nav li:last-child {
+            border-bottom: none;
+        }
+        
+        .profile-nav a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .profile-nav a:hover, .profile-nav a.active {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .profile-nav a i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Manga-style content panels */
+        .profile-content {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            position: relative;
+            border-top: 3px solid var(--primary-color);
+        }
+        
+        /* Manga panel corner accents */
+        .profile-content::before, 
+        .profile-content::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-color: var(--primary-color);
+            border-style: solid;
+        }
+        
+        .profile-content::before {
+            top: 10px;
+            left: 10px;
+            border-width: 3px 0 0 3px;
+        }
+        
+        .profile-content::after {
+            top: 10px;
+            right: 10px;
+            border-width: 3px 3px 0 0;
+        }
+        
+        .profile-section {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding-bottom: 2rem;
+            position: relative;
+        }
+        
+        .profile-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        /* Manga-style section headers */
+        .section-header h2 {
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), transparent);
+        }
+        
+        .section-header .view-all {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .section-header .view-all::after {
+            content: '→';
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .section-header .view-all:hover::after {
+            transform: translateX(3px);
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        /* Manga-style content cards */
+        .history-item {
+            background-color: rgba(0,0,0,0.02);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .history-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        /* Manga-style corner fold */
+        .history-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 15px 15px 0;
+            border-color: transparent var(--primary-color) transparent transparent;
+            transition: all 0.3s;
+        }
+        
+        .history-item:hover::after {
+            border-width: 0 20px 20px 0;
+        }
+        
+        .history-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+        
+        .history-info {
+            padding: 1rem;
+        }
+        
+        .history-info h3 {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .history-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--light-text);
+            margin-top: 0.5rem;
+        }
+        
+        .history-progress {
+            height: 4px;
+            background-color: #e0e0e0;
+            margin-top: 0.5rem;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .history-progress-bar {
+            height: 100%;
+            background-color: var(--primary-color);
+        }
+
+        /* Additional manga-specific styles */
+        .manga-shelf-item {
+            display: flex;
+            flex-direction: column;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            background-color: var(--card-color);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            padding-bottom: 10px;
+            height: 100%;
+        }
+        
+        .manga-shelf-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .manga-cover {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            transform-origin: center left;
+        }
+        
+        .manga-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+        
+        .manga-progress-badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3px 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-top-left-radius: var(--border-radius-sm);
+        }
+        
+        .manga-shelf-info {
+            padding: 12px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .manga-shelf-info h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.1rem;
+            line-height: 1.3;
+        }
+        
+        .manga-author {
+            font-size: 0.85rem;
+            color: var(--light-text);
+            margin-bottom: 8px;
+        }
+        
+        .progress-stats {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            flex-grow: 1;
+        }
+        
+        .manga-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            border-radius: var(--border-radius-sm);
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-sm:hover {
+            background-color: var(--primary-color-dark);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* Recommendations section styles */
+        .recommendations-preview {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        /* Manga-inspired corner accent */
+        .recommendations-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 40px 40px 0;
+            border-color: transparent var(--primary-color) transparent transparent;
+            opacity: 0.4;
+        }
+        
+        .reco-stats {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .reco-stat {
+            text-align: center;
+        }
+        
+        .reco-stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.25rem;
+            position: relative;
+        }
+        
+        /* Manga-style emphasis for stat numbers */
+        .reco-stat:first-child .reco-stat-number::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 2px;
+            background: var(--primary-color);
+            opacity: 0.5;
+        }
+        
+        .reco-stat-label {
+            font-size: 0.8rem;
+            color: var(--light-text);
+        }
+        
+        .reco-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .reco-preview-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .reco-preview-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--shadow);
+            z-index: 1;
+        }
+        
+        .reco-preview-item img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .reco-preview-item:hover img {
+            transform: scale(1.08);
+        }
+        
+        .reco-preview-content {
+            padding: 0.8rem;
+            background: rgba(255,255,255,0.9);
+            background: var(--card-color);
+        }
+        
+        .reco-match {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: white;
+            background: var(--primary-color);
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-bottom: 0.3rem;
+        }
+        
+        .reco-preview-content h4 {
+            margin: 0.25rem 0;
+            font-size: 0.95rem;
+        }
+        
+        .reco-type {
+            font-size: 0.75rem;
+            color: var(--light-text);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .reco-action {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 0.25rem;
+        }
+        
+        .reco-action::after {
+            content: '→';
+            margin-left: 3px;
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+        
+        .reco-action:hover::after {
+            transform: translateX(3px);
+        }
+        
+        .reco-preferences-summary {
+            background: rgba(0,0,0,0.02);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .reco-preferences-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .reco-preferences-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .reco-preference {
+            font-size: 0.8rem;
+            background: rgba(255,107,107,0.1);
+            color: var(--primary-color);
+            padding: 2px 8px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,107,107,0.2);
+        }
+        
+        .btn-primary-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-primary-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="profile-page">
+    <header>
+        <h1><i class="fas fa-user"></i> Profile</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="manga.html">Manga</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="discussions.html">Discussions</a></li>
+                <li><a href="watchlist.html">Watchlist</a></li>
+                <li><a href="profile.html" class="active">Profile</a></li>
+                <li><a href="signin.html">Sign In / Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="profile-header">
+        <div class="profile-header-content">
+            <div class="profile-avatar">
+                <img src="../images/Avatar.jpg" alt="User profile picture">
+            </div>
+            <div class="profile-info">
+                <h1>FilmFanatic42</h1>
+                <p>Member since April 2023</p>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">247</span>
+                        <span class="stat-label">Reviews</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">89</span>
+                        <span class="stat-label">Lists</span>
+                    </div>
+                    <div class="stat-item">
+                        <a href="ratings.html" style="color:inherit;text-decoration:none;">
+                            <span class="stat-number">1,256</span>
+                            <span class="stat-label">Ratings</span>
+                        </a>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">352</span>
+                        <span class="stat-label">Following</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">189</span>
+                        <span class="stat-label">Followers</span>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-actions">
+                <a href="edit-profile.html" class="btn btn-secondary">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+
+    <main class="main-profile">
+        <aside class="profile-sidebar">
+            <nav class="profile-nav">
+                <ul>
+                    <li><a href="#activity" class="active"><i class="fas fa-chart-line"></i> Activity</a></li>
+                    <li><a href="#reviews"><i class="fas fa-star"></i> Reviews</a></li>
+                    <li><a href="#lists"><i class="fas fa-list"></i> Lists</a></li>
+                    <li><a href="#watchlist"><i class="fas fa-bookmark"></i> Watchlist</a></li>
+                    <li><a href="#history"><i class="fas fa-history"></i> History</a></li>
+                    <li><a href="#manga-shelf"><i class="fas fa-book-open"></i> Manga Shelf</a></li>
+                    <li><a href="#badges"><i class="fas fa-award"></i> Badges</a></li>
+                    <li><a href="#stats"><i class="fas fa-chart-bar"></i> Stats</a></li>
+                    <li><a href="#following"><i class="fas fa-users"></i> Following</a></li>
+                    <li><a href="#preferences"><i class="fas fa-cog"></i> Preferences</a></li>
+                    <li><a href="ratings.html"><i class="fas fa-star-half-alt"></i> Ratings</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="profile-content">
+            <div id="activity" class="profile-section">
+                <div class="section-header">
+                    <h2>Recent Activity</h2>
+                    <a href="activity.html" class="view-all">View All</a>
+                </div>
+
+                <div class="activity-feed">
+                    <div class="activity-item">
+                        <div class="activity-avatar">
+                            <img src="../images/Avatar.jpg" alt="User avatar">
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-header">
+                                <span class="activity-user">You</span>
+                                <span class="activity-action">rated</span>
+                                <span class="activity-time">2 hours ago</span>
+                            </div>
+                            <div class="activity-body">
+                                <a href="#" class="activity-title">Oppenheimer - 9.2/10</a>
+                                <p>"A mesmerizing historical drama with outstanding performances. Nolan delivers another masterpiece that will be remembered for years to come."</p>
+                            </div>
+                            <div class="activity-footer">
+                                <div class="activity-reactions">
+                                    <button><i class="fas fa-heart"></i> <span>24</span></button>
+                                    <button><i class="fas fa-comment"></i> <span>8</span></button>
+                                    <button><i class="fas fa-share"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-avatar">
+                            <img src="../images/Avatar.jpg" alt="User avatar">
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-header">
+                                <span class="activity-user">You</span>
+                                <span class="activity-action">added to manga collection</span>
+                                <span class="activity-time">Yesterday</span>
+                            </div>
+                            <div class="activity-body">
+                                <a href="#" class="activity-title">Chainsaw Man - Volume 14</a>
+                                <p>Latest volume in Tatsuki Fujimoto's critically acclaimed dark fantasy series.</p>
+                            </div>
+                            <div class="activity-footer">
+                                <div class="activity-reactions">
+                                    <button><i class="fas fa-heart"></i> <span>31</span></button>
+                                    <button><i class="fas fa-comment"></i> <span>5</span></button>
+                                    <button><i class="fas fa-share"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-avatar">
+                            <img src="../images/Avatar.jpg" alt="User avatar">
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-header">
+                                <span class="activity-user">You</span>
+                                <span class="activity-action">created a list</span>
+                                <span class="activity-time">3 days ago</span>
+                            </div>
+                            <div class="activity-body">
+                                <a href="#" class="activity-title">Top 10 Sci-Fi Movies of the Last Decade</a>
+                                <p>My personal selection of the best science fiction films released between 2015-2025.</p>
+                            </div>
+                            <div class="activity-footer">
+                                <div class="activity-reactions">
+                                    <button><i class="fas fa-heart"></i> <span>42</span></button>
+                                    <button><i class="fas fa-comment"></i> <span>15</span></button>
+                                    <button><i class="fas fa-share"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Manga Shelf Section -->
+            <div id="manga-shelf" class="profile-section">
+                <div class="section-header">
+                    <h2>Your Manga Shelf</h2>
+                    <a href="#" class="view-all">View All</a>
+                </div>
+
+                <div class="content-grid">
+                    <div class="manga-shelf-item">
+                        <div class="manga-cover">
+                            <img src="../images/Chainsaw.jpg" alt="Chainsaw Man">
+                            <div class="manga-progress-badge">Vol. 14</div>
+                        </div>
+                        <div class="manga-shelf-info">
+                            <h3>Chainsaw Man</h3>
+                            <div class="manga-author">by Tatsuki Fujimoto</div>
+                            <div class="progress-stats">
+                                <span>14/14 volumes</span>
+                                <span>100% complete</span>
+                            </div>
+                            <div class="manga-actions">
+                                <button class="btn-sm">Read</button>
+                                <button class="btn-sm btn-outline">Rate</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="manga-shelf-item">
+                        <div class="manga-cover">
+                            <img src="../images/JJK.jpeg" alt="Jujutsu Kaisen">
+                            <div class="manga-progress-badge">Vol. 18</div>
+                        </div>
+                        <div class="manga-shelf-info">
+                            <h3>Jujutsu Kaisen</h3>
+                            <div class="manga-author">by Gege Akutami</div>
+                            <div class="progress-stats">
+                                <span>18/22 volumes</span>
+                                <span>82% complete</span>
+                            </div>
+                            <div class="manga-actions">
+                                <button class="btn-sm">Read</button>
+                                <button class="btn-sm btn-outline">Rate</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="manga-shelf-item">
+                        <div class="manga-cover">
+                            <img src="../images/OnePiece.jpg" alt="One Piece">
+                            <div class="manga-progress-badge">Vol. 105</div>
+                        </div>
+                        <div class="manga-shelf-info">
+                            <h3>One Piece</h3>
+                            <div class="manga-author">by Eiichiro Oda</div>
+                            <div class="progress-stats">
+                                <span>105/107 volumes</span>
+                                <span>98% complete</span>
+                            </div>
+                            <div class="manga-actions">
+                                <button class="btn-sm">Read</button>
+                                <button class="btn-sm btn-outline">Rate</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="manga-shelf-item">
+                        <div class="manga-cover">
+                            <img src="../images/DemonSlayer.jpg" alt="Demon Slayer">
+                            <div class="manga-progress-badge">Complete</div>
+                        </div>
+                        <div class="manga-shelf-info">
+                            <h3>Demon Slayer</h3>
+                            <div class="manga-author">by Koyoharu Gotouge</div>
+                            <div class="progress-stats">
+                                <span>23/23 volumes</span>
+                                <span>100% complete</span>
+                            </div>
+                            <div class="manga-actions">
+                                <button class="btn-sm">Read</button>
+                                <button class="btn-sm btn-outline">Rate</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Personalized Recommendations section -->
+            <div id="recommendations" class="profile-section">
+                <div class="section-header">
+                    <h2>Your Recommendations</h2>
+                    <a href="recommendations.html" class="view-all">See All Recommendations</a>
+                </div>
+
+                <div class="recommendations-preview">
+                    <div class="reco-stats">
+                        <div class="reco-stat">
+                            <div class="reco-stat-number">87%</div>
+                            <div class="reco-stat-label">Match Accuracy</div>
+                        </div>
+                        <div class="reco-stat">
+                            <div class="reco-stat-number">325</div>
+                            <div class="reco-stat-label">New Recommendations</div>
+                        </div>
+                        <div class="reco-stat">
+                            <div class="reco-stat-number">42</div>
+                            <div class="reco-stat-label">Added to Watchlist</div>
+                        </div>
+                    </div>
+                    
+                    <div class="reco-preview-grid">
+                        <div class="reco-preview-item">
+                            <img src="../images/Interstellar.jpg" alt="Interstellar">
+                            <div class="reco-preview-content">
+                                <span class="reco-match">98% Match</span>
+                                <h4>Interstellar</h4>
+                                <span class="reco-type">Movie • Sci-Fi</span>
+                                <a href="recommendations.html" class="reco-action">View Details</a>
+                            </div>
+                        </div>
+                        <div class="reco-preview-item">
+                            <img src="../images/Steins.jpg" alt="Steins;Gate">
+                            <div class="reco-preview-content">
+                                <span class="reco-match">95% Match</span>
+                                <h4>Steins;Gate</h4>
+                                <span class="reco-type">Anime • Sci-Fi</span>
+                                <a href="recommendations.html" class="reco-action">View Details</a>
+                            </div>
+                        </div>
+                        <div class="reco-preview-item">
+                            <img src="../images/JJK.jpeg" alt="Jujutsu Kaisen">
+                            <div class="reco-preview-content">
+                                <span class="reco-match">93% Match</span>
+                                <h4>Jujutsu Kaisen</h4>
+                                <span class="reco-type">Manga • Action</span>
+                                <a href="recommendations.html" class="reco-action">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="reco-preferences-summary">
+                        <div class="reco-preferences-title">Based on your preferences:</div>
+                        <div class="reco-preferences-tags">
+                            <span class="reco-preference">Sci-Fi</span>
+                            <span class="reco-preference">Drama</span>
+                            <span class="reco-preference">Fantasy</span>
+                            <span class="reco-preference">Horror</span>
+                            <span class="reco-preference">Seinen</span>
+                        </div>
+                        <a href="recommendations.html" class="btn btn-primary-outline btn-sm">Edit Preferences</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="history" class="profile-section">
+                <div class="section-header">
+                    <h2>Recently Watched</h2>
+                    <a href="history.html" class="view-all">View All</a>
+                </div>
+
+                <div class="content-grid">
+                    <div class="history-item">
+                        <img src="../images/Oppenheimer.jpg" alt="Oppenheimer">
+                        <div class="history-info">
+                            <h3>Oppenheimer</h3>
+                            <div class="history-meta">
+                                <span>Movie</span>
+                                <span>3 hours ago</span>
+                            </div>
+                            <div class="history-progress">
+                                <div class="history-progress-bar" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="history-item">
+                        <img src="../images/DemonSlayer.jpg" alt="Demon Slayer">
+                        <div class="history-info">
+                            <h3>Demon Slayer S3E5</h3>
+                            <div class="history-meta">
+                                <span>Anime</span>
+                                <span>Yesterday</span>
+                            </div>
+                            <div class="history-progress">
+                                <div class="history-progress-bar" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="history-item">
+                        <img src="../images/FightClub.jpg" alt="Fight Club">
+                        <div class="history-info">
+                            <h3>Fight Club</h3>
+                            <div class="history-meta">
+                                <span>Movie</span>
+                                <span>3 days ago</span>
+                            </div>
+                            <div class="history-progress">
+                                <div class="history-progress-bar" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="history-item">
+                        <img src="../images/BladeRunner.jpg" alt="Blade Runner 2049">
+                        <div class="history-info">
+                            <h3>Blade Runner 2049</h3>
+                            <div class="history-meta">
+                                <span>Movie</span>
+                                <span>Last week</span>
+                            </div>
+                            <div class="history-progress">
+                                <div class="history-progress-bar" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Entertainment Hub</h3>
+                <p>Your ultimate destination for entertainment reviews and discussions.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="mangareader.html">Manga Reader</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <a href="#" id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        // Initialize charts for the profile stats section
+        document.addEventListener('DOMContentLoaded', () => {
+            // Activity chart
+            const activityCtx = document.getElementById('activity-chart')?.getContext('2d');
+            if (activityCtx) {
+                new Chart(activityCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Reviews',
+                            data: [12, 19, 15, 25, 22, 30],
+                            backgroundColor: 'rgba(255, 111, 97, 0.7)'
+                        }, {
+                            label: 'Watchlist Adds',
+                            data: [8, 15, 12, 17, 10, 15],
+                            backgroundColor: 'rgba(0, 123, 255, 0.7)'
+                        }, {
+                            label: 'Manga Chapters Read',
+                            data: [22, 35, 28, 42, 38, 45],
+                            backgroundColor: 'rgba(75, 192, 192, 0.7)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Time spent chart
+            const timeCtx = document.getElementById('time-chart')?.getContext('2d');
+            if (timeCtx) {
+                new Chart(timeCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Movies', 'TV Shows', 'Anime', 'Manga', 'Games'],
+                        datasets: [{
+                            data: [120, 80, 65, 95, 35],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.7)',
+                                'rgba(54, 162, 235, 0.7)',
+                                'rgba(255, 206, 86, 0.7)',
+                                'rgba(75, 192, 192, 0.7)',
+                                'rgba(153, 102, 255, 0.7)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+
+            // Manga-specific animation effects
+            const mangaItems = document.querySelectorAll('.manga-shelf-item');
+            if (mangaItems.length) {
+                mangaItems.forEach(item => {
+                    item.addEventListener('mouseenter', () => {
+                        const cover = item.querySelector('.manga-cover');
+                        cover.style.transform = 'translateY(-10px) rotateY(10deg)';
+                        cover.style.boxShadow = '5px 5px 15px rgba(0,0,0,0.3)';
+                    });
+
+                    item.addEventListener('mouseleave', () => {
+                        const cover = item.querySelector('.manga-cover');
+                        cover.style.transform = '';
+                        cover.style.boxShadow = '';
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

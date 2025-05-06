@@ -1,0 +1,30 @@
+/**
+ * Entertainment Hub - Master CSS File
+ * This file organizes the import order of all stylesheets
+ */
+
+/* Base Styles & Utilities */
+@import url('common.css');
+@import url('animations.css');
+@import url('dark-theme.css');
+
+/* Main Layout & Components */
+@import url('styles.css');
+
+/* Theme-Specific Styles */
+@import url('themes.css');
+
+/* Page-Specific Styles */
+@import url('search.css');
+@import url('watchlist.css');
+@import url('recommendations.css');
+@import url('admin.css');
+@import url('dashboard.css');
+
+/* Note: The following files have been consolidated into themes.css
+ * - animes.css
+ * - movies.css
+ * - manga.css
+ * - series.css
+ * - games.css
+ */

@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies | Entertainment Hub</title>
+    
+    <!-- Master Stylesheet - includes all CSS files -->
+    <link rel="stylesheet" href="../css/master.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <meta name="description" content="Discover, rate, and discuss the best movies on Entertainment Hub.">
+</head>
+
+<body class="movies-page">
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+            </div>
+            <nav class="main-nav">
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span class="hamburger-icon"></span>
+                </button>
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html" class="active">Movies</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                    <li class="dropdown">
+                        <a href="community.html">Community <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="discussions.html">Discussions</a></li>
+                            <li><a href="reviews.html">Reviews</a></li>
+                            <li><a href="polls.html">Polls</a></li>
+                            <li><a href="events.html">Events</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="watchlist.html">Watchlist</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li class="auth-links"><a href="signin.html">Sign In / Sign Up</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        
+        <section class="movie-hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h2>Discover <span>Exceptional</span> Cinema</h2>
+                <p>Rate, review, and explore thousands of films from classics to the latest releases</p>
+                <div class="hero-buttons">
+                    <a href="#featured" class="btn-primary">Featured Movies</a>
+                    <a href="#watchlist" class="btn-secondary">Create Watchlist</a>
+                </div>
+            </div>
+        </section>
+
+       
+        <section class="search-filter-section">
+            <div class="search-container">
+                <form action="#" method="get" role="search">
+                    <input type="search" name="movie-search" id="movie-search" placeholder="Search movies by title, director, actor..." aria-label="Search for movies">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+            
+            <div class="filter-sort-container">
+                <div class="filter-group">
+                    <label for="year-filter">Year:</label>
+                    <select id="year-filter" name="year">
+                        <option value="all">All Years</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="old">Pre-2020</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="rating-filter">Rating:</label>
+                    <select id="rating-filter" name="rating">
+                        <option value="all">All Ratings</option>
+                        <option value="9">9+ Stars</option>
+                        <option value="8">8+ Stars</option>
+                        <option value="7">7+ Stars</option>
+                        <option value="6">6+ Stars</option>
+                    </select>
+                </div>
+                
+                <div class="sort-group">
+                    <label for="sort-movies">Sort By:</label>
+                    <select id="sort-movies" name="sort">
+                        <option value="popularity">Popularity</option>
+                        <option value="rating">Highest Rating</option>
+                        <option value="newest">Release Date (Newest)</option>
+                        <option value="oldest">Release Date (Oldest)</option>
+                        <option value="title">Title (A-Z)</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        
+        <section class="genres-section" id="genres">
+            <h2>Explore by Genre</h2>
+            <div class="genres-container">
+                <a href="#" class="genre-card">
+                    <i class="fas fa-fist-raised"></i>
+                    <span>Action</span>
+                </a>
+                <a href="#" class="genre-card">
+                    <i class="fas fa-theater-masks"></i>
+                    <span>Comedy</span>
+                </a>
+                <a href="#" class="genre-card">
+                    <i class="fas fa-heart-broken"></i>
+                    <span>Drama</span>
+                </a>
+                <a href="#" class="genre-card">
+                    <i class="fas fa-ghost"></i>
+                    <span>Horror</span>
+                </a>
+                <a href="#" class
+                    <i class="fas fa-rocket"></i>
+                    <span>Sci-Fi</span>
+                </a>
+                <a href="#" class="genre-card">
+                    <i class="fas fa-hat-wizard"></i>
+                    <span>Fantasy</span>
+                </a>
+                <a href="#" class="genre-card">
+                    <i class="fas fa-bomb"></i>
+                    <span>Thriller</span>
+                </a>
+                <a href="#" class="genre-card">
+                    <i class="fas fa-globe-americas"></i>
+                    <span>Documentary</span>
+                </a>
+            </div>
+        </section>
+
+       
+        <section class="featured-movies" id="featured">
+            <h2>Featured Movies</h2>
+            <div class="carousel-container">
+                <button class="carousel-button prev" aria-label="Previous slide">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="carousel-track-container">
+                    <ul class="carousel-track">
+                        
+                        <li class="carousel-slide">
+                            <figure class="movie-card featured-card">
+                                <div class="movie-poster">
+                                    <img src="../images/Lalaland.jpg" alt="Movie 1 Poster">
+                                    <div class="movie-overlay">
+                                        <span class="movie-rating">9.5</span>
+                                        <div class="movie-actions">
+                                            <button class="action-button" aria-label="Add to watchlist">
+                                                <i class="fas fa-bookmark"></i>
+                                            </button>
+                                            <a href="ratings.html" class="action-button rating-btn" aria-label="Rate movie">
+                                                <i class="fas fa-star"></i>
+                                            </a>
+                                            <button class="action-button" aria-label="More information">
+                                                <i class="fas fa-info-circle"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <figcaption>
+                                    <h3>Lalaland</h3>
+                                    <p class="movie-director">Damien Chazelle</p>
+                                    <time datetime="2010-07-16">2016</time>
+                                </figcaption>
+                            </figure>
+                        </li>
+                        
+                        <li class="carousel-slide">
+                            <figure class="movie-card featured-card">
+                                <div class="movie-poster">
+                                    <img src="../images/AvengersInfinity.jpg" alt="Movie 2 Poster">
+                                    <div class="movie-overlay">
+                                        <span class="movie-rating">9.2</span>
+                                        <div class="movie-actions">
+                                            <button class="action-button" aria-label="Add to watchlist">
+                                                <i class="fas fa-bookmark"></i>
+                                            </button>
+                                            <a href="ratings.html" class="action-button rating-btn" aria-label="Rate movie">
+                                                <i class="fas fa-star"></i>
+                                            </a>
+                                            <button class="action-button" aria-label="More information">
+                                                <i class="fas fa-info-circle"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <figcaption>
+                                    <h3>Avengers:Infinity War</h3>
+                                    <p class="movie-director">Russo Brothers</p>
+                                    <time datetime="1994-09-23">2018</time>
+                                </figcaption>
+                            </figure>
+                        </li>
+                       
+
+                        <li class="carousel-slide">
+                            <figure class="movie-card featured-card">
+                                <div class="movie-poster">
+                                    <img src="../images/Godfather.jpg" alt="Movie 3 Poster">
+                                    <div class="movie-overlay">
+                                        <span class="movie-rating">9.0</span>
+                                        <div class="movie-actions">
+                                            <button class="action-button" aria-label="Add to watchlist">
+                                                <i class="fas fa-bookmark"></i>
+                                            </button>
+                                            <a href="ratings.html" class="action-button rating-btn" aria-label="Rate movie">
+                                                <i class="fas fa-star"></i>
+                                            </a>
+                                            <button class="action-button" aria-label="More information">
+                                                <i class="fas fa-info-circle"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <figcaption>
+                                    <h3>The Godfather</h3>
+                                    <p class="movie-director">Francis Ford Coppola</p>
+                                    <time datetime="1972-03-24">1972</time>
+                                </figcaption>
+                            </figure>
+                        </li>
+                    </ul>
+                </div>
+                <button class="carousel-button next" aria-label="Next slide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        
+        <section class="movie-categories">
+            <h2>Movie Collections</h2>
+            <div class="tabs-container">
+                <nav class="tabs">
+                    <button class="tab-button active" data-target="top-rated">Top Rated</button>
+                    <button class="tab-button" data-target="new-releases">New Releases</button>
+                    <button class="tab-button" data-target="coming-soon">Coming Soon</button>
+                    <button class="tab-button" data-target="classics">Classics</button>
+                </nav>
+                
+                <div class="tab-content-container">
+                    
+                    <div id="top-rated" class="tab-content active">
+                        <div class="movies-grid">
+                           
+                            <figure class="movie-card">
+                                <div class="movie-poster">
+                                    <img src="../images/Interstellar.jpg" alt="Movie 4 Poster">
+                                    <div class="movie-overlay">
+                                        <meter class="rating-meter" value="9.5" min="0" max="10" optimum="10" high="8" low="4">9.5/10</meter>
+                                        <div class="movie-actions">
+                                            <button class="action-button"><i class="fas fa-bookmark"></i></button>
+                                            <a href="ratings.html" class="action-button rating-btn"><i class="fas fa-star"></i></a>
+                                            <button class="action-button"><i class="fas fa-info-circle"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <figcaption>
+                                    <h3>Interstellar</h3>
+                                    <div class="movie-meta">
+                                        <span class="movie-year">2014</span>
+                                        <span class="movie-rating">9.5</span>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                            
+
+                            <figure class="movie-card">
+                                <div class="movie-poster">
+                                    <img src="../images/Darkknight.jpg" alt="Movie 5 Poster">
+                                    <div class="movie-overlay">
+                                        <meter class="rating-meter" value="9.2" min="0" max="10" optimum="10" high="8" low="4">9.2/10</meter>
+                                        <div class="movie-actions">
+                                            <button class="action-button"><i class="fas fa-bookmark"></i></button>
+                                            <a href="ratings.html" class="action-button rating-btn"><i class="fas fa-star"></i></a>
+                                            <button class="action-button"><i class="fas fa-info-circle"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <figcaption>
+                                    <h3>The Dark Knight</h3>
+                                    <div class="movie-meta">
+                                        <span class="movie-year">2008</span>
+                                        <span class="movie-rating">9.2</span>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                            
+
+                            <figure class="movie-card">
+                                <div class="movie-poster">
+                                    <img src="../images/FightClub.jpg" alt="Movie 6 Poster">
+                                    <div class="movie-overlay">
+                                        <meter class="rating-meter" value="9.0" min="0" max="10" optimum="10" high="8" low="4">9.0/10</meter>
+                                        <div class="movie-actions">
+                                            <button class="action-button"><i class="fas fa-bookmark"></i></button>
+                                            <a href="ratings.html" class="action-button rating-btn"><i class="fas fa-star"></i></a>
+                                            <button class="action-button"><i class="fas fa-info-circle"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <figcaption>
+                                    <h3>Fight Club</h3>
+                                    <div class="movie-meta">
+                                        <span class="movie-year">1999</span>
+                                        <span class="movie-rating">9.0</span>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                            
+
+                            <figure class="movie-card">
+                                <div class="movie-poster">
+                                    <img src="../images/GoodFellas.jpg" alt="Movie 7 Poster">
+                                    <div class="movie-overlay">
+                                        <meter class="rating-meter" value="8.9" min="0" max="10" optimum="10" high="8" low="4">8.9/10</meter>
+                                        <div class="movie-actions">
+                                            <button class="action-button"><i class="fas fa-bookmark"></i></button>
+                                            <a href="ratings.html" class="action-button rating-btn"><i class="fas fa-star"></i></a>
+                                            <button class="action-button"><i class="fas fa-info-circle"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <figcaption>
+                                    <h3>Goodfellas</h3>
+                                    <div class="movie-meta">
+                                        <span class="movie-year">1990</span>
+                                        <span class="movie-rating">8.9</span>
+                                    </div>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                    
+                    
+                    <div id="new-releases" class="tab-content">
+                        <div class="movies-grid">
+                            
+
+                            <p class="placeholder-text">New releases content loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div id="coming-soon" class="tab-content">
+                        <div class="movies-grid">
+                            
+
+                            <p class="placeholder-text">Coming soon content loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div id="classics" class="tab-content">
+                        <div class="movies-grid">
+                            
+
+                            <p class="placeholder-text">Classics content loading...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section class="movie-spotlight">
+            <h2>Movie Spotlight</h2>
+            <div class="spotlight-container">
+                <div class="spotlight-image">
+                    <img src="../images/Interstellar.jpg" alt="Spotlight Movie">
+                </div>
+                <div class="spotlight-content">
+                    <h3>Interstellar</h3>
+                    <div class="spotlight-meta">
+                        <span class="spotlight-year"><i class="far fa-calendar-alt"></i> <time datetime="2014-11-07">2014</time></span>
+                        <span class="spotlight-runtime"><i class="far fa-clock"></i> 169 min</span>
+                        <span class="spotlight-rating"><i class="fas fa-star"></i> 8.6/10</span>
+                    </div>
+                    <p class="spotlight-director"><strong>Director:</strong> Christopher Nolan</p>
+                    <p class="spotlight-cast"><strong>Cast:</strong> Matthew McConaughey, Anne Hathaway, Jessica Chastain</p>
+                    <div class="spotlight-genres">
+                        <span class="genre-tag">Adventure</span>
+                        <span class="genre-tag">Drama</span>
+                        <span class="genre-tag">Sci-Fi</span>
+                    </div>
+                    
+                    <details class="spotlight-synopsis">
+                        <summary>Synopsis</summary>
+                        <p>A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival as Earth's resources are depleting.</p>
+                    </details>
+                    
+                    <details class="spotlight-trivia">
+                        <summary>Trivia & Facts</summary>
+                        <ul>
+                            <li>The visual effects team consulted with theoretical physicist Kip Thorne to create realistic depictions of black holes.</li>
+                            <li>Christopher Nolan planted 500 acres of corn for the film because he didn't want to use CGI.</li>
+                            <li>The film won the Academy Award for Best Visual Effects.</li>
+                        </ul>
+                    </details>
+                    
+                    <div class="spotlight-actions">
+                        <a href="ratings.html" class="btn-primary">
+                            <i class="fas fa-star"></i> Rate This Movie
+                        </a>
+                        <button class="btn-secondary">
+                            <i class="fas fa-bookmark"></i> Add to Watchlist
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="rating-criteria">
+            <h2>Rating Breakdown</h2>
+            <div class="criteria-container">
+                <div class="criteria-item">
+                    <div class="criteria-info">
+                        <span class="criteria-label">Story</span>
+                        <span class="criteria-score">9.5</span>
+                    </div>
+                    <div class="criteria-bar">
+                        <div class="criteria-fill" style="width:95%"></div>
+                    </div>
+                </div>
+                
+                <div class="criteria-item">
+                    <div class="criteria-info">
+                        <span class="criteria-label">Visuals</span>
+                        <span class="criteria-score">9.7</span>
+                    </div>
+                    <div class="criteria-bar">
+                        <div class="criteria-fill" style="width:97%"></div>
+                    </div>
+                </div>
+                
+                <div class="criteria-item">
+                    <div class="criteria-info">
+                        <span class="criteria-label">Characters</span>
+                        <span class="criteria-score">9.3</span>
+                    </div>
+                    <div class="criteria-bar">
+                        <div class="criteria-fill" style="width:93%"></div>
+                    </div>
+                </div>
+                
+                <div class="criteria-item">
+                    <div class="criteria-info">
+                        <span class="criteria-label">Soundtrack</span>
+                        <span class="criteria-score">9.0</span>
+                    </div>
+                    <div class="criteria-bar">
+                        <div class="criteria-fill" style="width:90%"></div>
+                    </div>
+                </div>
+                
+                <div class="criteria-item">
+                    <div class="criteria-info">
+                        <span class="criteria-label">Direction</span>
+                        <span class="criteria-score">9.6</span>
+                    </div>
+                    <div class="criteria-bar">
+                        <div class="criteria-fill" style="width:96%"></div>
+                    </div>
+                </div>
+                
+                <div class="criteria-item">
+                    <div class="criteria-info">
+                        <span class="criteria-label">Overall</span>
+                        <span class="criteria-score">9.4</span>
+                    </div>
+                    <div class="criteria-bar overall">
+                        <div class="criteria-fill" style="width:94%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center" style="margin-top: 20px;">
+                <a href="ratings.html" class="btn-primary">View All Ratings</a>
+            </div>
+        </section>
+
+        
+        <section class="comparison-section">
+            <h2>Compare Top Movies</h2>
+            <div class="table-container">
+                <table id="movie-comparison">
+                    <caption>Feature comparison of top-rated films</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Movie</th>
+                            <th scope="col">Release Year</th>
+                            <th scope="col">Director</th>
+                            <th scope="col">Rating</th>
+                            <th scope="col">Runtime</th>
+                            <th scope="col">Oscars</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Movie">The Godfather</td>
+                            <td data-label="Year">1972</td>
+                            <td data-label="Director">Francis Ford Coppola</td>
+                            <td data-label="Rating"><meter value="9.2" min="0" max="10" optimum="10" high="8" low="5">9.2</meter> 9.2/10</td>
+                            <td data-label="Runtime">175 min</td>
+                            <td data-label="Oscars">3</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Movie">The Shawshank Redemption</td>
+                            <td data-label="Year">1994</td>
+                            <td data-label="Director">Frank Darabont</td>
+                            <td data-label="Rating"><meter value="9.3" min="0" max="10" optimum="10" high="8" low="5">9.3</meter> 9.3/10</td>
+                            <td data-label="Runtime">142 min</td>
+                            <td data-label="Oscars">0</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Movie">The Dark Knight</td>
+                            <td data-label="Year">2008</td>
+                            <td data-label="Director">Christopher Nolan</td>
+                            <td data-label="Rating"><meter value="9.0" min="0" max="10" optimum="10" high="8" low="5">9.0</meter> 9.0/10</td>
+                            <td data-label="Runtime">152 min</td>
+                            <td data-label="Oscars">2</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Movie">Pulp Fiction</td>
+                            <td data-label="Year">1994</td>
+                            <td data-label="Director">Quentin Tarantino</td>
+                            <td data-label="Rating"><meter value="8.9" min="0" max="10" optimum="10" high="8" low="5">8.9</meter> 8.9/10</td>
+                            <td data-label="Runtime">154 min</td>
+                            <td data-label="Oscars">1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+       
+        <section class="rate-movie-section" id="rate-movie">
+            <h2>Rate a Movie</h2>
+            <div class="redirect-message">
+                <p>Our rating system has moved to a dedicated page for a more interactive experience.</p>
+                <a href="ratings.html" class="btn-primary">Go to Ratings Page</a>
+                <p class="small-text">Rate movies, anime, series, manga, and games all in one place!</p>
+            </div>
+        </section>
+
+       
+        <section class="user-reviews-section">
+            <h2>Community Reviews</h2>
+            <div class="user-review-summary">
+                <div class="average-score">
+                    <span class="average-number">9.2</span>
+                    <div class="stars-display">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span class="review-count">Based on 3,241 reviews</span>
+                </div>
+
+                <div class="score-distribution">
+                    <div class="score-row">
+                        <span class="score-stars">5 stars</span>
+                        <div class="score-bar">
+                            <div class="score-fill" style="width: 75%"></div>
+                        </div>
+                        <span class="score-percent">75%</span>
+                    </div>
+                    <div class="score-row">
+                        <span class="score-stars">4 stars</span>
+                        <div class="score-bar">
+                            <div class="score-fill" style="width: 18%"></div>
+                        </div>
+                        <span class="score-percent">18%</span>
+                    </div>
+                    <div class="score-row">
+                        <span class="score-stars">3 stars</span>
+                        <div class="score-bar">
+                            <div class="score-fill" style="width: 5%"></div>
+                        </div>
+                        <span class="score-percent">5%</span>
+                    </div>
+                    <div class="score-row">
+                        <span class="score-stars">2 stars</span>
+                        <div class="score-bar">
+                            <div class="score-fill" style="width: 1%"></div>
+                        </div>
+                        <span class="score-percent">1%</span>
+                    </div>
+                    <div class="score-row">
+                        <span class="score-stars">1 star</span>
+                        <div class="score-bar">
+                            <div class="score-fill" style="width: 1%"></div>
+                        </div>
+                        <span class="score-percent">1%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reviews-container">
+                
+                <article class="user-review">
+                    <header class="review-header">
+                        <img src="../images/SwagSonic.jpg" alt="User Avatar" class="review-avatar">
+                        <div class="review-meta">
+                            <h3 class="review-username">MovieBuff42</h3>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <time datetime="2024-12-15" class="review-date">December 15, 2024</time>
+                        </div>
+                    </header>
+                    <div class="review-content">
+                        <p>A cinematic masterpiece that pushes the boundaries of what's possible in film. The narrative complexity and visual storytelling are unmatched. Christopher Nolan has outdone himself with this profound exploration of time, memory, and human connection.</p>
+                    </div>
+                    <footer class="review-footer">
+                        <div class="review-helpful">
+                            <span>Was this review helpful?</span>
+                            <button class="helpful-btn"><i class="fas fa-thumbs-up"></i> Yes (124)</button>
+                            <button class="helpful-btn"><i class="fas fa-thumbs-down"></i> No (12)</button>
+                        </div>
+                    </footer>
+                </article>
+
+              
+
+                <article class="user-review">
+                    <header class="review-header">
+                        <img src="../images/Abousen.jpg" alt="User Avatar" class="review-avatar">
+                        <div class="review-meta">
+                            <h3 class="review-username">FilmCritic2000</h3>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <time datetime="2024-11-28" class="review-date">November 28, 2024</time>
+                        </div>
+                    </header>
+                    <div class="review-content">
+                        <p>While visually stunning and ambitious, the film occasionally gets lost in its own complexity. The performances are stellar across the board, but the third act feels somewhat rushed. Still, a remarkable achievement that rewards multiple viewings.</p>
+                    </div>
+                    <footer class="review-footer">
+                        <div class="review-helpful">
+                            <span>Was this review helpful?</span>
+                            <button class="helpful-btn"><i class="fas fa-thumbs-up"></i> Yes (89)</button>
+                            <button class="helpful-btn"><i class="fas fa-thumbs-down"></i> No (15)</button>
+                        </div>
+                    </footer>
+                </article>
+            </div>
+
+            <div class="load-more-container">
+                <button class="load-more-btn">Load More Reviews</button>
+            </div>
+        </section>
+
+        <section class="related-movies">
+            <h2>You Might Also Like</h2>
+            <div class="related-grid">
+                <a href="#" class="related-movie">
+                    <img src="../images/Starwars.jpg" alt="Related Movie 1" class="related-poster">
+                    <div class="related-info">
+                        <h4>Starwars:The Empire Strikes back</h4>
+                        <div class="related-rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.3/10</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="related-movie">
+                    <img src="../images/BladeRunner.jpg" alt="Related Movie 2" class="related-poster">
+                    <div class="related-info">
+                        <h4>Blade Runner 2049</h4>
+                        <div class="related-rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.1/10</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="related-movie">
+                    <img src="../images/SpiritedAway.jpg" alt="Related Movie 3" class="related-poster">
+                    <div class="related-info">
+                        <h4>SpiritedAway</h4>
+                        <div class="related-rating">
+                            <i class="fas fa-star"></i>
+                            <span>7.8/10</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="related-movie">
+                    <img src="../images/Dune.jpg" alt="Related Movie 4" class="related-poster">
+                    <div class="related-info">
+                        <h4>Dune</h4>
+                        <div class="related-rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.4/10</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        
+        <section class="movie-quiz">
+            <h2>Test Your Movie Knowledge</h2>
+            <div class="quiz-container">
+                <form id="movie-quiz-form">
+                    <div class="quiz-question">
+                        <p>Which director is known as the "Master of Suspense"?</p>
+                        <div class="quiz-options">
+                            <label>
+                                <input type="radio" name="q1" value="spielberg"> Steven Spielberg
+                            </label>
+                            <label>
+                                <input type="radio" name="q1" value="hitchcock"> Alfred Hitchcock
+                            </label>
+                            <label>
+                                <input type="radio" name="q1" value="kubrick"> Stanley Kubrick
+                            </label>
+                            <label>
+                                <input type="radio" name="q1" value="cameron"> James Cameron
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p>Which film won the Academy Award for Best Picture in 2020?</p>
+                        <div class="quiz-options">
+                            <label>
+                                <input type="radio" name="q2" value="1917"> 1917
+                            </label>
+                            <label>
+                                <input type="radio" name="q2" value="parasite"> Parasite
+                            </label>
+                            <label>
+                                <input type="radio" name="q2" value="joker"> Joker
+                            </label>
+                            <label>
+                                <input type="radio" name="q2" value="irishman"> The Irishman
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="quiz-submit">Submit Answers</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Entertainment Hub</h3>
+                <p>Your ultimate destination for entertainment reviews and discussions.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="discussions.html">Discussions</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/movies.js"></script>
+    <a href="#" class="back-to-top" id="back-to-top-btn" aria-label="Back to top">↑</a>
+</body>
+
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications | Entertainment Hub</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Your notifications on Entertainment Hub">
+</head>
+
+<body data-theme="light">
+    <a class="skip-link" href="#main">Skip to content</a>
+    
+    <header>
+        <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="manga.html">Manga</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+            </ul>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="user-menu">
+                <button class="user-menu-toggle" aria-expanded="false" aria-label="User menu">
+                    <i class="fas fa-user"></i>
+                </button>
+                <div class="user-dropdown">
+                    <a href="profile.html" class="dropdown-item">
+                        <i class="fas fa-user-circle"></i> My Profile
+                    </a>
+                    <a href="dashboard.html" class="dropdown-item">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                    <a href="settings.html" class="dropdown-item">
+                        <i class="fas fa-cog"></i> Settings
+                    </a>
+                    <button id="logout-btn" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i> Log Out
+                    </button>
+                </div>
+            </div>
+            <div class="notification-center">
+                <button class="notification-toggle" aria-expanded="false" aria-label="Notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="notification-dropdown">
+                    <div class="notification-header">
+                        <h3>Notifications</h3>
+                        <button class="mark-all-read">Mark all as read</button>
+                    </div>
+                    <div class="notification-list">
+                        <a href="#" class="notification-item unread">
+                            <div class="notification-icon"><i class="fas fa-comment"></i></div>
+                            <div class="notification-content">
+                                <p>John replied to your comment on "Attack on Titan"</p>
+                                <span class="notification-time">5 minutes ago</span>
+                            </div>
+                        </a>
+                        <a href="#" class="notification-item unread">
+                            <div class="notification-icon"><i class="fas fa-heart"></i></div>
+                            <div class="notification-content">
+                                <p>Mary liked your review of "Oppenheimer"</p>
+                                <span class="notification-time">2 hours ago</span>
+                            </div>
+                        </a>
+                        <a href="#" class="notification-item unread">
+                            <div class="notification-icon"><i class="fas fa-film"></i></div>
+                            <div class="notification-content">
+                                <p>New episodes of "One Piece" are now available</p>
+                                <span class="notification-time">1 day ago</span>
+                            </div>
+                        </a>
+                        <a href="#" class="notification-item">
+                            <div class="notification-icon"><i class="fas fa-user-plus"></i></div>
+                            <div class="notification-content">
+                                <p>Alex started following you</p>
+                                <span class="notification-time">3 days ago</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="notification-footer">
+                        <a href="notifications.html">View all notifications</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="mobile-menu-toggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <main id="main" class="notification-page">
+        <div class="container">
+            <div class="page-header animate-fade-in">
+                <h1><i class="fas fa-bell"></i> Notifications</h1>
+                <div class="notification-actions">
+                    <button class="primary-btn mark-all-btn">
+                        <i class="fas fa-check-double"></i> Mark all as read
+                    </button>
+                    <div class="notification-filter">
+                        <label for="filter-notifications">Filter by:</label>
+                        <select id="filter-notifications">
+                            <option value="all">All notifications</option>
+                            <option value="unread">Unread</option>
+                            <option value="comments">Comments</option>
+                            <option value="likes">Likes</option>
+                            <option value="follows">Follows</option>
+                            <option value="content">Content updates</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notification-tabs animate-fade-in delay-200">
+                <button class="tab-btn active" data-tab="all">All</button>
+                <button class="tab-btn" data-tab="comments">Comments</button>
+                <button class="tab-btn" data-tab="likes">Likes</button>
+                <button class="tab-btn" data-tab="follows">Follows</button>
+                <button class="tab-btn" data-tab="content">Content Updates</button>
+            </div>
+
+            <div class="notification-container animate-fade-in delay-300">
+                <!-- Today's notifications -->
+                <div class="notification-group">
+                    <div class="notification-day">
+                        <h2>Today</h2>
+                    </div>
+                    <div class="notification-list full">
+                        <div class="notification-item unread" data-type="comments">
+                            <div class="notification-icon"><i class="fas fa-comment"></i></div>
+                            <div class="notification-content">
+                                <p>John replied to your comment on <a href="anime.html">Attack on Titan</a>: "I totally agree with your thoughts on the final season!"</p>
+                                <span class="notification-time">5 minutes ago</span>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn reply-btn" title="Reply">
+                                    <i class="fas fa-reply"></i>
+                                </button>
+                                <button class="action-btn mark-read-btn" title="Mark as read">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="notification-item unread" data-type="likes">
+                            <div class="notification-icon"><i class="fas fa-heart"></i></div>
+                            <div class="notification-content">
+                                <p>Mary and 5 others liked your review of <a href="movies.html">Oppenheimer</a></p>
+                                <span class="notification-time">2 hours ago</span>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn view-btn" title="View">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn mark-read-btn" title="Mark as read">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="notification-item unread" data-type="content">
+                            <div class="notification-icon"><i class="fas fa-film"></i></div>
+                            <div class="notification-content">
+                                <p>New episodes of <a href="anime.html">One Piece</a> are now available</p>
+                                <span class="notification-time">4 hours ago</span>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn watch-btn" title="Watch now">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <button class="action-btn mark-read-btn" title="Mark as read">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Yesterday's notifications -->
+                <div class="notification-group">
+                    <div class="notification-day">
+                        <h2>Yesterday</h2>
+                    </div>
+                    <div class="notification-list full">
+                        <div class="notification-item" data-type="follows">
+                            <div class="notification-icon"><i class="fas fa-user-plus"></i></div>
+                            <div class="notification-content">
+                                <p><a href="profile.html">Alex</a> started following you</p>
+                                <span class="notification-time">Yesterday at 2:15 PM</span>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn follow-btn" title="Follow back">
+                                    <i class="fas fa-user-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="notification-item" data-type="comments">
+                            <div class="notification-icon"><i class="fas fa-comment"></i></div>
+                            <div class="notification-content">
+                                <p>Sara replied to your comment on <a href="manga.html">Chainsaw Man</a>: "The art style is definitely unique!"</p>
+                                <span class="notification-time">Yesterday at 11:42 AM</span>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn reply-btn" title="Reply">
+                                    <i class="fas fa-reply"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- This week's notifications -->
+                <div class="notification-group">
+                    <div class="notification-day">
+                        <h2>This Week</h2>
+                    </div>
+                    <div class="notification-list full">
+                        <div class="notification-item" data-type="comments">
+                            <div class="notification-icon"><i class="fas fa-star"></i></div>
+                            <div class="notification-content">
+                                <p>Your review of <a href="movies.html">Dune: Part Two</a> received a community award: "Best Analysis"</p>
+                                <span class="notification-time">May 3 at 8:30 PM</span>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn view-btn" title="View">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="notification-item" data-type="content">
+                            <div class="notification-icon"><i class="fas fa-gamepad"></i></div>
+                            <div class="notification-content">
+                                <p><a href="games.html">Elden Ring: Shadow of the Erdtree</a> DLC has been released</p>
+                                <span class="notification-time">May 2 at 10:00 AM</span>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn view-btn" title="View details">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="notification-item" data-type="follows">
+                            <div class="notification-icon"><i class="fas fa-user-plus"></i></div>
+                            <div class="notification-content">
+                                <p><a href="profile.html">Michael</a> and 3 others started following you</p>
+                                <span class="notification-time">May 1 at 5:20 PM</span>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn follow-btn" title="View followers">
+                                    <i class="fas fa-users"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Earlier notifications -->
+                <div class="notification-group">
+                    <div class="notification-day">
+                        <h2>Earlier</h2>
+                    </div>
+                    <div class="notification-list full">
+                        <div class="notification-item" data-type="likes">
+                            <div class="notification-icon"><i class="fas fa-heart"></i></div>
+                            <div class="notification-content">
+                                <p>Your watchlist "Must-Watch Anime 2025" received 25 likes</p>
+                                <span class="notification-time">April 25 at 7:15 PM</span>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn view-btn" title="View watchlist">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="notification-item" data-type="content">
+                            <div class="notification-icon"><i class="fas fa-book"></i></div>
+                            <div class="notification-content">
+                                <p>New chapters of <a href="manga.html">Jujutsu Kaisen</a> are available</p>
+                                <span class="notification-time">April 20 at 9:30 AM</span>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="action-btn read-btn" title="Read now">
+                                    <i class="fas fa-book-open"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pagination animate-fade-in delay-400">
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <span class="pagination-ellipsis">...</span>
+                <button class="pagination-btn">10</button>
+                <button class="pagination-btn"><i class="fas fa-angle-right"></i></button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>About Entertainment Hub</h3>
+                <p>Your all-in-one platform for movies, TV shows, anime, manga, and games. Discover, rate, and discuss your favorite entertainment.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                    <a href="#" aria-label="Reddit"><i class="fab fa-reddit"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-envelope"></i> support@entertainmenthub.com</p>
+                <p><i class="fas fa-phone"></i> +1 (123) 456-7890</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Entertainment St, Media City, CA 90210</p>
+            </div>
+            
+            <div class="footer-section newsletter">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for the latest updates on your favorite entertainment.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" aria-label="Subscribe"><i class="fas fa-paper-plane"></i></button>
+                </form>
+                <div class="app-links">
+                    <a href="#"><img src="../images/appstore.jpg" alt="Download on App Store"></a>
+                    <a href="#"><img src="../images/Googleplay.jpg" alt="Get it on Google Play"></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Back to top button -->
+    <button id="back-to-top-btn" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="../js/common.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/notifications.js"></script>
+</body>
+
+</html>

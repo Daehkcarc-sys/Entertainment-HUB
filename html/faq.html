@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions | Entertainment Hub</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .faq-header {
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+        
+        .faq-header h1 {
+            margin-bottom: 1rem;
+        }
+        
+        .faq-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-muted);
+        }
+        
+        .faq-search {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+        
+        .faq-search input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            padding-right: 3rem;
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 1.1rem;
+        }
+        
+        .faq-search input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+        }
+        
+        .faq-search button {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .category-button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        
+        .category-button:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .category-button.active {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .faq-section {
+            margin-bottom: 3rem;
+        }
+        
+        .faq-section h2 {
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            font-size: 1.75rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .faq-item {
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: var(--card-bg);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .faq-question:hover {
+            background-color: rgba(108, 99, 255, 0.05);
+        }
+        
+        .faq-question .icon {
+            color: var(--accent-color);
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-question .icon {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .faq-answer-content {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+        
+        .faq-answer-content a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        
+        .faq-answer-content a:hover {
+            text-decoration: underline;
+        }
+        
+        .faq-contact {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .faq-contact h2 {
+            margin-bottom: 1rem;
+        }
+        
+        .faq-contact p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+        
+        .faq-contact a {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .faq-contact a:hover {
+            background-color: var(--accent-hover);
+        }
+    </style>
+</head>
+
+<body data-theme="light">
+    <header>
+        <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="manga.html">Manga</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="discussions.html">Discussions</a></li>
+                <li><a href="watchlist.html">Watchlist</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="signin.html">Sign In / Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="faq-container">
+            <div class="faq-header">
+                <h1>Frequently Asked Questions</h1>
+                <p>Find answers to the most common questions about Entertainment Hub, our features, and how to make the most of our platform.</p>
+            </div>
+            
+            <div class="faq-search">
+                <input type="text" id="faqSearch" placeholder="Search for questions...">
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="faq-categories">
+                <button class="category-button active" data-category="all">All Questions</button>
+                <button class="category-button" data-category="account">Account</button>
+                <button class="category-button" data-category="features">Features</button>
+                <button class="category-button" data-category="watchlist">Watchlists</button>
+                <button class="category-button" data-category="reviews">Reviews & Ratings</button>
+                <button class="category-button" data-category="technical">Technical</button>
+            </div>
+            
+            <div class="faq-section" id="account-section">
+                <h2>Account & Settings</h2>
+                
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question">
+                        <span>How do I create an account?</span>
+                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Creating an account on Entertainment Hub is quick and easy! Simply click on the "Sign In / Sign Up" button in the navigation menu and follow these steps:</p>
+                            <ol>
+                                <li>Click on "Create Account" or "Sign Up" button</li>
+                                <li>Enter your email address</li>
+                                <li>Choose a username and secure password</li>
+                                <li>Read and accept our Terms of Service and Privacy Policy</li>
+                                <li>Click "Create Account" to complete the process</li>
+                            </ol>
+                            <p>You can also sign up using your Google or Facebook account for an even quicker registration process.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question">
+                        <span>How do I change my password?</span>
+                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>To change your password, follow these steps:</p>
+                            <ol>
+                                <li>Sign in to your account</li>
+                                <li>Navigate to your <a href="profile.html">Profile</a> page</li>
+                                <li>Click on "Account Settings"</li>
+                                <li>Select the "Security" tab</li>
+                                <li>Click "Change Password"</li>
+                                <li>Enter your current password and your new password</li>
+                                <li>Click "Update Password" to save changes</li>
+                            </ol>
+                            <p>If you've forgotten your password, you can use the "Forgot Password" option on the sign-in page to reset it.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question">
+                        <span>How do I delete my account?</span>
+                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>We're sorry to see you go! To delete your account:</p>
+                            <ol>
+                                <li>Sign in to your account</li>
+                                <li>Go to your <a href="profile.html">Profile</a> page</li>
+                                <li>Click on "Account Settings"</li>
+                                <li>Scroll to the bottom and click "Delete Account"</li>
+                                <li>Confirm your decision by entering your password</li>
+                            </ol>
+                            <p><strong>Please note:</strong> Account deletion is permanent and will remove all your data, including reviews, ratings, watchlists, and comments. This action cannot be undone.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-section" id="features-section">
+                <h2>Features & Navigation</h2>
+                
+                <div class="faq-item" data-category="features">
+                    <div class="faq-question">
+                        <span>What can I do on Entertainment Hub?</span>
+                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Entertainment Hub offers a wide range of features for entertainment enthusiasts:</p>
+                            <ul>
+                                <li>Discover movies, TV series, anime, manga, and games</li>
+                                <li>Create and manage your watchlist across different media types</li>
+                                <li>Rate and review content you've watched or played</li>
+                                <li>Participate in community discussions and forums</li>
+                                <li>Get personalized recommendations based on your preferences</li>
+                                <li>Track your watching/reading/playing progress</li>
+                                <li>Follow other users with similar tastes</li>
+                                <li>Stay updated with entertainment news and upcoming releases</li>
+                            </ul>
+                            <p>Explore different sections through the main navigation menu to discover all our features!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="features">
+                    <div class="faq-question">
+                        <span>How do I find content on the site?</span>
+                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>You can find content on Entertainment Hub in several ways:</p>
+                            <ul>
+                                <li><strong>Search Bar:</strong> Use the search bar at the top of the page to search for specific titles</li>
+                                <li><strong>Category Pages:</strong> Browse our dedicated pages for <a href="movies.html">Movies</a>, <a href="series.html">Series</a>, <a href="anime.html">Anime</a>, <a href="manga.html">Manga</a>, and <a href="games.html">Games</a></li>
+                                <li><strong>Trending Content:</strong> Check the homepage for trending and newly released content</li>
+                                <li><strong>Genre Filtering:</strong> Use genre filters on category pages to narrow down your search</li>
+                                <li><strong>Advanced Search:</strong> Use our advanced search options to filter by release year, rating, studio, and more</li>
+                                <li><strong>Recommendations:</strong> Visit your <a href="recommendations.html">Recommendations</a> page for personalized suggestions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-section" id="watchlist-section">
+                <h2>Watchlists & Collections</h2>
+                
+                <div class="faq-item" data-category="watchlist">
+                    <div class="faq-question">
+                        <span>How do I add something to my watchlist?</span>
+                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Adding items to your watchlist is simple:</p>
+                            <ol>
+                                <li>Navigate to the content page of the movie, series, anime, manga, or game you want to add</li>
+                                <li>Click the "+ Add to Watchlist" button on the content page</li>
+                                <li>Alternatively, you can click the watchlist icon (bookmark) that appears on content cards</li>
+                            </ol>
+                            <p>You can view and manage your watchlist by clicking on <a href="watchlist.html">Watchlist</a> in the main navigation menu. You need to be signed in to use the watchlist feature.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="watchlist">
+                    <div class="faq-question">
+                        <span>How do I organize my watchlist?</span>
+                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>You can organize your watchlist in several ways:</p>
+                            <ul>
+                                <li><strong>Custom Lists:</strong> Create custom lists (like "Weekend Binge" or "Must Watch") to organize content</li>
+                                <li><strong>Priority Levels:</strong> Set priority levels (High, Medium, Low) to help you decide what to watch next</li>
+                                <li><strong>Sorting:</strong> Sort your watchlist by name, date added, release date, or rating</li>
+                                <li><strong>Filtering:</strong> Filter your watchlist by content type, genre, completed status, or other criteria</li>
+                                <li><strong>Progress Tracking:</strong> Mark episodes as watched to track your progress through series or anime</li>
+                            </ul>
+                            <p>All these organization features are available in the <a href="watchlist.html">Watchlist</a> section after signing in.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-section" id="reviews-section">
+                <h2>Reviews & Ratings</h2>
+                
+                <div class="faq-item" data-category="reviews">
+                    <div class="faq-question">
+                        <span>How do I write a review?</span>
+                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>To write a review:</p>
+                            <ol>
+                                <li>Navigate to the content page you want to review</li>
+                                <li>Scroll down to the "Reviews" section</li>
+                                <li>Click on "Write a Review" button</li>
+                                <li>Select your rating (1-10 stars)</li>
+                                <li>Write your review in the text box provided</li>
+                                <li>Add tags or select specific aspects to rate (optional)</li>
+                                <li>Click "Submit Review" when finished</li>
+                            </ol>
+                            <p>You must be signed in to write reviews. You can view all your reviews in the "Reviews" tab of your <a href="profile.html">Profile</a> page.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="reviews">
+                    <div class="faq-question">
+                        <span>Can I edit or delete my reviews?</span>
+                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Yes, you can edit or delete your reviews at any time:</p>
+                            <p><strong>To edit a review:</strong></p>
+                            <ol>
+                                <li>Go to the content page where you left the review</li>
+                                <li>Find your review and click the "Edit" button</li>
+                                <li>Make your changes and click "Update Review"</li>
+                            </ol>
+                            <p><strong>To delete a review:</strong></p>
+                            <ol>
+                                <li>Go to the content page where you left the review</li>
+                                <li>Find your review and click the "Delete" button</li>
+                                <li>Confirm the deletion when prompted</li>
+                            </ol>
+                            <p>You can also manage all your reviews from the "Reviews" tab on your <a href="profile.html">Profile</a> page.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-section" id="technical-section">
+                <h2>Technical Issues</h2>
+                
+                <div class="faq-item" data-category="technical">
+                    <div class="faq-question">
+                        <span>How do I report a bug or technical issue?</span>
+                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>If you encounter any bugs or technical issues:</p>
+                            <ol>
+                                <li>Go to our <a href="contact.html">Contact Us</a> page</li>
+                                <li>Select "Report a Bug" from the dropdown menu</li>
+                                <li>Provide as much detail as possible, including:</li>
+                                <ul>
+                                    <li>What you were trying to do</li>
+                                    <li>What device and browser you were using</li>
+                                    <li>Any error messages you saw</li>
+                                    <li>Screenshots of the issue (if possible)</li>
+                                </ul>
+                                <li>Submit the form and our technical team will investigate</li>
+                            </ol>
+                            <p>For urgent issues, you can also email us directly at support@entertainmenthub.com.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="technical">
+                    <div class="faq-question">
+                        <span>How do I enable dark mode?</span>
+                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Entertainment Hub offers both light and dark themes. To toggle between them:</p>
+                            <ol>
+                                <li>Look for the theme toggle icon (sun/moon) in the navigation bar or footer</li>
+                                <li>Click the icon to switch between light and dark modes</li>
+                            </ol>
+                            <p>Your preference will be saved for future visits. You can also set your theme preference in your account settings to always use a specific theme or to automatically match your system preferences.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="technical">
+                    <div class="faq-question">
+                        <span>Is there a mobile app available?</span>
+                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Yes, Entertainment Hub has mobile apps available for both iOS and Android devices:</p>
+                            <ul>
+                                <li>iOS app is available on the <a href="#">App Store</a></li>
+                                <li>Android app is available on <a href="#">Google Play</a></li>
+                            </ul>
+                            <p>Our mobile apps offer all the same features as the website, with additional benefits like:</p>
+                            <ul>
+                                <li>Push notifications for new episodes of shows you're watching</li>
+                                <li>Offline access to your watchlists</li>
+                                <li>Barcode scanning to quickly add physical media to your collection</li>
+                                <li>Widget support for quick access</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-contact">
+                <h2>Still Have Questions?</h2>
+                <p>If you couldn't find the answer you were looking for, our support team is here to help.</p>
+                <a href="contact.html" class="contact-button">Contact Support</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Entertainment Hub</h3>
+                <p>Your ultimate destination for entertainment reviews and discussions.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top" id="back-to-top-btn" aria-label="Back to top">↑</a>
+    
+    <script src="../js/common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ accordion functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', function() {
+                    // Toggle active class on the clicked item
+                    item.classList.toggle('active');
+                    
+                    // Optional: Close other items when one is opened
+                    // Uncomment if you want accordion behavior instead of independent toggles
+                    /*
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    */
+                });
+            });
+            
+            // Category filtering
+            const categoryButtons = document.querySelectorAll('.category-button');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    
+                    // Update active button
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show/hide FAQ items based on category
+                    if (category === 'all') {
+                        faqItems.forEach(item => {
+                            item.style.display = 'block';
+                        });
+                    } else {
+                        faqItems.forEach(item => {
+                            if (item.getAttribute('data-category') === category) {
+                                item.style.display = 'block';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+            
+            // Search functionality
+            const searchInput = document.getElementById('faqSearch');
+            const searchButton = document.getElementById('searchBtn');
+            
+            function searchFaqs() {
+                const searchTerm = searchInput.value.toLowerCase();
+                
+                if (searchTerm === '') {
+                    // If search is empty, show all items
+                    faqItems.forEach(item => {
+                        item.style.display = 'block';
+                    });
+                    return;
+                }
+                
+                // Reset category buttons
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                document.querySelector('[data-category="all"]').classList.add('active');
+                
+                // Filter items
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question').textContent.toLowerCase();
+                    const answer = item.querySelector('.faq-answer-content').textContent.toLowerCase();
+                    
+                    if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                        item.style.display = 'block';
+                        // Open items that match the search
+                        item.classList.add('active');
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+            
+            searchButton.addEventListener('click', searchFaqs);
+            searchInput.addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') {
+                    searchFaqs();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

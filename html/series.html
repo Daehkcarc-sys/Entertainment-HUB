@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Series | Entertainment Hub</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/series.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="description" content="Discover, rate, and discuss the best TV series from around the world on Entertainment Hub.">
+    <style>
+        /* Add some styles for the rating link */
+        .action-button.rating-btn,
+        .btn.rating-btn {
+            transition: all 0.3s ease;
+        }
+
+        .action-button.rating-btn:hover,
+        .btn.rating-btn:hover {
+            transform: scale(1.1);
+            color: #FFD700;
+        }
+    </style>
+</head>
+
+<body class="series-page">
+    <header class="main-header">
+        <div class="header-top">
+            <div class="logo-container">
+                <a href="index.html" class="logo">Entertainment Hub</a>
+            </div>
+            <div class="search-container">
+                <form action="search.html" method="get">
+                    <input type="search" name="query" placeholder="Search for movies, series, anime..." aria-label="Search">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+            <div class="user-actions">
+                <a href="watchlist.html" class="user-action-icon" aria-label="Your watchlist"><i class="fas fa-bookmark"></i></a>
+                <a href="notifications.html" class="user-action-icon" aria-label="Notifications"><i class="fas fa-bell"></i></a>
+                <a href="profile.html" class="user-action-icon user-profile" aria-label="User profile"><i class="fas fa-user-circle"></i></a>
+                <a href="signin.html" class="sign-in-btn">Sign In</a>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <button class="menu-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="series.html" class="active">Series</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="manga.html">Manga</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Community <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="discussions.html">Discussions</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="leaderboard.html">Leaderboard</a></li>
+                        <li><a href="events.html">Events</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">More <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="recommendations.html">Recommendations</a></li>
+                        <li><a href="polls.html">Polls</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Banner Section -->
+        <section class="series-hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h2>Discover the World of <span>Series</span></h2>
+                <p>Explore thousands of TV series from gripping dramas to hilarious comedies</p>
+                <div class="hero-buttons">
+                    <a href="#popular" class="btn-primary">Popular Series</a>
+                    <a href="#watchlist" class="btn-secondary">Create Watchlist</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search and Filter Section -->
+        <section class="search-filter-section">
+            <div class="search-container">
+                <form action="#" method="get" role="search">
+                    <input type="search" name="series-search" id="series-search" placeholder="Search series by title, genre, actor..." aria-label="Search for series">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+
+            <div class="filter-sort-container">
+                <div class="filter-group">
+                    <label for="genre-filter">Genre:</label>
+                    <select id="genre-filter" name="genre">
+                        <option value="all">All Genres</option>
+                        <option value="drama">Drama</option>
+                        <option value="comedy">Comedy</option>
+                        <option value="thriller">Thriller</option>
+                        <option value="sci-fi">Sci-Fi</option>
+                        <option value="fantasy">Fantasy</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="status-filter">Status:</label>
+                    <select id="status-filter" name="status">
+                        <option value="all">All Status</option>
+                        <option value="ongoing">Ongoing</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+
+                <div class="sort-group">
+                    <label for="sort-series">Sort By:</label>
+                    <select id="sort-series" name="sort">
+                        <option value="popularity">Popularity</option>
+                        <option value="rating">Highest Rating</option>
+                        <option value="newest">Release Date (Newest)</option>
+                        <option value="oldest">Release Date (Oldest)</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Series Section -->
+        <section class="top-series" id="popular">
+            <h2>Top Series</h2>
+            <div class="series-grid">
+                <!-- Series Card 1 -->
+                <div class="series-card">
+                    <div class="series-image">
+                        <img src="../images/Severence.jpg" alt="Breaking Bad">
+                        <div class="series-overlay">
+                            <span class="series-rating">9.2</span>
+                            <div class="series-actions">
+                                <button class="action-button" aria-label="Add to watchlist">
+                                    <i class="fas fa-bookmark"></i>
+                                </button>
+                                <a href="ratings.html" class="action-button rating-btn" aria-label="Rate series">
+                                    <i class="fas fa-star"></i>
+                                </a>
+                                <button class="action-button" aria-label="More information">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="series-info">
+                        <h3>Breaking Bad</h3>
+                        <div class="series-meta">
+                            <span class="seasons">5 Seasons</span>
+                            <span class="episodes">62 Episodes</span>
+                        </div>
+                        <div class="series-tags">
+                            <span class="series-tag drama">Drama</span>
+                            <span class="series-tag crime">Crime</span>
+                            <span class="series-tag thriller">Thriller</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Series Card 2 -->
+                <div class="series-card">
+                    <div class="series-image">
+                        <img src="../images/Series.jpg" alt="Game of Thrones">
+                        <div class="series-overlay">
+                            <span class="series-rating">8.9</span>
+                            <div class="series-actions">
+                                <button class="action-button" aria-label="Add to watchlist">
+                                    <i class="fas fa-bookmark"></i>
+                                </button>
+                                <a href="ratings.html" class="action-button rating-btn" aria-label="Rate series">
+                                    <i class="fas fa-star"></i>
+                                </a>
+                                <button class="action-button" aria-label="More information">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="series-info">
+                        <h3>Game of Thrones</h3>
+                        <div class="series-meta">
+                            <span class="seasons">8 Seasons</span>
+                            <span class="episodes">73 Episodes</span>
+                        </div>
+                        <div class="series-tags">
+                            <span class="series-tag fantasy">Fantasy</span>
+                            <span class="series-tag drama">Drama</span>
+                            <span class="series-tag action">Action</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rating section replacement -->
+        <section class="series-rating">
+            <h2>Rate a Series</h2>
+            <div class="redirect-message">
+                <p>Our rating system has moved to a dedicated page for a more interactive experience.</p>
+                <a href="ratings.html" class="btn-primary">Go to Ratings Page</a>
+                <p class="small-text">Rate movies, anime, series, manga, and games all in one place!</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-section about-section">
+                <h3>Entertainment Hub</h3>
+                <p>Your ultimate destination for entertainment reviews and discussions.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <div class="footer-section links-section">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="games.html">Games</a></li>
+                </ul>
+            </div>
+            <div class="footer-section links-section">
+                <h4>Community</h4>
+                <ul>
+                    <li><a href="discussions.html">Discussions</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="events.html">Events</a></li>
+                </ul>
+            </div>
+            <div class="footer-section links-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section subscribe-section">
+                <h4>Subscribe</h4>
+                <p>Get weekly updates on the latest entertainment news</p>
+                <form class="subscribe-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+                <div class="app-badges">
+                    <a href="#"><img src="../images/appstore.jpg" alt="Download on App Store"></a>
+                    <a href="#"><img src="../images/Googleplay.jpg" alt="Get it on Google Play"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart"></i> for entertainment fans everywhere</p>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize rating buttons to link to ratings.html
+            document.querySelectorAll('button, .btn').forEach(button => {
+                if ((button.textContent.includes('Rate') || button.querySelector('i.fa-star')) &&
+                    !(button instanceof HTMLAnchorElement) &&
+                    !button.classList.contains('rating-btn')) {
+
+                    const rateText = button.innerHTML;
+                    const parent = button.parentNode;
+                    const anchor = document.createElement('a');
+                    anchor.href = 'ratings.html';
+                    anchor.className = button.className + ' rating-btn';
+                    anchor.innerHTML = rateText;
+                    parent.replaceChild(anchor, button);
+                }
+            });
+        });
+    </script>
+    <a href="#" class="back-to-top" id="back-to-top-btn" aria-label="Back to top">↑</a>
+</body>
+
+</html>

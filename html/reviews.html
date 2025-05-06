@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entertainment Reviews | Entertainment Hub</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body data-theme="light">
+    <a class="skip-link" href="#main">Skip to content</a>
+    
+    <header>
+        <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="manga.html">Manga</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="discussions.html">Discussions</a></li>
+                <li><a href="watchlist.html">Watchlist</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="signin.html">Sign In / Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main">
+        <section class="hero reviews-hero">
+            <div class="container">
+                <h1>Entertainment Reviews</h1>
+                <p class="subtitle">Critical analysis and fan opinions on all things entertainment</p>
+            </div>
+        </section>
+
+        <section class="filter-section">
+            <div class="container">
+                <h2 class="section-title">Filter Reviews</h2>
+                <div class="filter-controls">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="movies">Movies</button>
+                    <button class="filter-btn" data-filter="series">TV Series</button>
+                    <button class="filter-btn" data-filter="anime">Anime</button>
+                    <button class="filter-btn" data-filter="manga">Manga</button>
+                    <button class="filter-btn" data-filter="games">Games</button>
+                </div>
+                <div class="sorting-controls">
+                    <label for="sort-by">Sort by:</label>
+                    <select id="sort-by">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="highest">Highest Rated</option>
+                        <option value="lowest">Lowest Rated</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <section class="reviews-grid-section">
+            <div class="container">
+                <div class="reviews-grid">
+                    <!-- Movie Reviews -->
+                    <div class="review-card" data-category="movies">
+                        <div class="review-image">
+                            <img src="../images/Oppenheimer.jpg" alt="Oppenheimer">
+                            <span class="review-category">Movie</span>
+                            <span class="review-score">9.2</span>
+                        </div>
+                        <div class="review-content">
+                            <h3>Oppenheimer</h3>
+                            <div class="review-meta">
+                                <span class="review-author">By Alex Thompson</span>
+                                <span class="review-date">April 25, 2025</span>
+                            </div>
+                            <p class="review-excerpt">A masterful portrayal of the complexities surrounding the creation of the atomic bomb, with stellar performances...</p>
+                            <a href="movies.html?id=oppenheimer&review=1" class="btn btn-primary">Read Full Review</a>
+                        </div>
+                    </div>
+
+                    <div class="review-card" data-category="movies">
+                        <div class="review-image">
+                            <img src="../images/Dune.jpg" alt="Dune">
+                            <span class="review-category">Movie</span>
+                            <span class="review-score">8.9</span>
+                        </div>
+                        <div class="review-content">
+                            <h3>Dune</h3>
+                            <div class="review-meta">
+                                <span class="review-author">By Maria Chen</span>
+                                <span class="review-date">April 19, 2025</span>
+                            </div>
+                            <p class="review-excerpt">Villeneuve's vision of Herbert's classic is visually stunning and thematically resonant, blending spectacle with substance...</p>
+                            <a href="movies.html?id=dune&review=1" class="btn btn-primary">Read Full Review</a>
+                        </div>
+                    </div>
+
+                    <!-- Anime Reviews -->
+                    <div class="review-card" data-category="anime">
+                        <div class="review-image">
+                            <img src="../images/attack on titan.jpg" alt="Attack on Titan">
+                            <span class="review-category">Anime</span>
+                            <span class="review-score">9.4</span>
+                        </div>
+                        <div class="review-content">
+                            <h3>Attack on Titan: Final Season</h3>
+                            <div class="review-meta">
+                                <span class="review-author">By Kevin Wu</span>
+                                <span class="review-date">May 1, 2025</span>
+                            </div>
+                            <p class="review-excerpt">A breathtaking conclusion to one of anime's most ambitious stories, challenging viewers with its moral complexities...</p>
+                            <a href="anime.html?id=attack-on-titan&review=1" class="btn btn-primary">Read Full Review</a>
+                        </div>
+                    </div>
+
+                    <!-- Game Reviews -->
+                    <div class="review-card" data-category="games">
+                        <div class="review-image">
+                            <img src="../images/EldenRing.jpg" alt="Elden Ring">
+                            <span class="review-category">Game</span>
+                            <span class="review-score">9.5</span>
+                        </div>
+                        <div class="review-content">
+                            <h3>Elden Ring</h3>
+                            <div class="review-meta">
+                                <span class="review-author">By Chris Martinez</span>
+                                <span class="review-date">April 28, 2025</span>
+                            </div>
+                            <p class="review-excerpt">FromSoftware has crafted their most ambitious world yet, combining punishing combat with unprecedented freedom...</p>
+                            <a href="games.html?id=elden-ring&review=1" class="btn btn-primary">Read Full Review</a>
+                        </div>
+                    </div>
+
+                    <!-- Series Reviews -->
+                    <div class="review-card" data-category="series">
+                        <div class="review-image">
+                            <img src="../images/Series.jpg" alt="The Last of Us">
+                            <span class="review-category">Series</span>
+                            <span class="review-score">8.8</span>
+                        </div>
+                        <div class="review-content">
+                            <h3>The Last of Us</h3>
+                            <div class="review-meta">
+                                <span class="review-author">By Sarah Johnson</span>
+                                <span class="review-date">April 22, 2025</span>
+                            </div>
+                            <p class="review-excerpt">HBO's adaptation faithfully captures the emotional core of the game while expanding the world in meaningful ways...</p>
+                            <a href="series.html?id=last-of-us&review=1" class="btn btn-primary">Read Full Review</a>
+                        </div>
+                    </div>
+
+                    <!-- Manga Reviews -->
+                    <div class="review-card" data-category="manga">
+                        <div class="review-image">
+                            <img src="../images/OnePiece.jpg" alt="One Piece">
+                            <span class="review-category">Manga</span>
+                            <span class="review-score">9.3</span>
+                        </div>
+                        <div class="review-content">
+                            <h3>One Piece: Egghead Arc</h3>
+                            <div class="review-meta">
+                                <span class="review-author">By Ryan Tanaka</span>
+                                <span class="review-date">April 30, 2025</span>
+                            </div>
+                            <p class="review-excerpt">Oda continues to surprise with revelations that recontextualize the entire series while maintaining the sense of adventure...</p>
+                            <a href="manga.html?id=onepiece&review=1" class="btn btn-primary">Read Full Review</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-review-section">
+            <div class="container">
+                <h2 class="section-title">Featured Review</h2>
+                <div class="featured-review">
+                    <div class="featured-review-image">
+                        <img src="../images/Oppenheimer.jpg" alt="Oppenheimer">
+                    </div>
+                    <div class="featured-review-content">
+                        <h3>Oppenheimer: A Masterclass in Biographical Filmmaking</h3>
+                        <div class="featured-review-meta">
+                            <span class="review-author">By Editorial Team</span>
+                            <span class="review-date">May 3, 2025</span>
+                            <span class="review-score">9.5/10</span>
+                        </div>
+                        <p>Christopher Nolan's "Oppenheimer" stands as a towering achievement in biographical cinema, weaving together the personal, scientific, and political aspects of J. Robert Oppenheimer's life with remarkable precision and emotional resonance.</p>
+                        <p>The film's non-linear structure brilliantly mirrors the quantum physics at its core, allowing viewers to experience the contradictory facets of Oppenheimer's legacy simultaneously. Cillian Murphy delivers a career-defining performance, capturing both the intellectual brilliance and moral torment of a man whose work forever changed the course of human history.</p>
+                        <p>What elevates "Oppenheimer" beyond mere biopic is Nolan's unflinching examination of responsibility, power, and the ethical dimensions of scientific progress. The film refuses easy answers, instead inviting viewers to grapple with questions that remain urgently relevant in today's technological landscape.</p>
+                        <a href="movies.html?id=oppenheimer&featured=1" class="btn btn-primary">Read Full Analysis</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="submit-review-section">
+            <div class="container">
+                <h2 class="section-title">Share Your Thoughts</h2>
+                <p class="section-description">Have you watched, played, or read something recently? Let the community know what you think!</p>
+                <div class="submit-review-options">
+                    <a href="profile.html?new_review=movie" class="submit-option">
+                        <i class="fas fa-film"></i>
+                        <h3>Review a Movie</h3>
+                    </a>
+                    <a href="profile.html?new_review=series" class="submit-option">
+                        <i class="fas fa-tv"></i>
+                        <h3>Review a Series</h3>
+                    </a>
+                    <a href="profile.html?new_review=anime" class="submit-option">
+                        <i class="fas fa-dragon"></i>
+                        <h3>Review an Anime</h3>
+                    </a>
+                    <a href="profile.html?new_review=manga" class="submit-option">
+                        <i class="fas fa-book"></i>
+                        <h3>Review a Manga</h3>
+                    </a>
+                    <a href="profile.html?new_review=game" class="submit-option">
+                        <i class="fas fa-gamepad"></i>
+                        <h3>Review a Game</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="review-guidelines-section">
+            <div class="container">
+                <h2 class="section-title">Review Guidelines</h2>
+                <div class="guidelines-content">
+                    <div class="guideline-item">
+                        <i class="fas fa-balance-scale"></i>
+                        <h3>Be Balanced</h3>
+                        <p>Consider both the strengths and weaknesses of what you're reviewing.</p>
+                    </div>
+                    <div class="guideline-item">
+                        <i class="fas fa-comment-dots"></i>
+                        <h3>Be Specific</h3>
+                        <p>Support your opinions with concrete examples and details.</p>
+                    </div>
+                    <div class="guideline-item">
+                        <i class="fas fa-user-shield"></i>
+                        <h3>No Spoilers</h3>
+                        <p>Use spoiler tags when discussing plot points or surprises.</p>
+                    </div>
+                    <div class="guideline-item">
+                        <i class="fas fa-heart"></i>
+                        <h3>Be Respectful</h3>
+                        <p>Critique the work, not the creators or other fans.</p>
+                    </div>
+                </div>
+                <a href="faq.html#review-guidelines" class="btn btn-outline">Learn More About Our Community Guidelines</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h2>About Entertainment Hub</h2>
+                <p>Your one-stop destination for all things entertainment - movies, series, anime, manga, games and more.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section links">
+                <h2>Quick Links</h2>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="support.html">Support</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section newsletter">
+                <h2>Join Our Newsletter</h2>
+                <p>Stay updated with the latest in entertainment.</p>
+                <form action="#" method="post">
+                    <input type="email" name="email" placeholder="Enter your email">
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/common.js"></script>
+    <script>
+        // Filter functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const reviewCards = document.querySelectorAll('.review-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Toggle active class
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    // Filter cards
+                    const filter = button.dataset.filter;
+                    reviewCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Sorting functionality
+            const sortSelect = document.getElementById('sort-by');
+            sortSelect.addEventListener('change', () => {
+                alert('Sorting functionality would be implemented with actual data.');
+            });
+        });
+    </script>
+</body>
+</html>

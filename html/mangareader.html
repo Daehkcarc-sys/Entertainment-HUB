@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manga Reader | Entertainment Hub</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="description" content="Read your favorite manga chapters online on Entertainment Hub.">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        /* Manga Reader specific styles */
+        .reader-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .reader-header {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .manga-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .manga-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), transparent);
+        }
+
+        .chapter-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .chapter-selector {
+            width: auto;
+            padding: 0.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid #ddd;
+        }
+
+        .reader-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .reader-controls button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            background-color: var(--card-color);
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .reader-controls button:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .reader-controls .btn-active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .pages-display {
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .reader-view {
+            position: relative;
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        /* Single page view */
+        .page-view {
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .page-view img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: var(--border-radius-sm);
+        }
+
+        /* Double page view */
+        .double-page-view {
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .double-page-view .page-left,
+        .double-page-view .page-right {
+            max-width: 50%;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        .double-page-view .page-left {
+            box-shadow: 5px 0 10px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .double-page-view .page-right {
+            box-shadow: -5px 0 10px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Long strip view */
+        .longstrip-view {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+        }
+
+        .longstrip-view img {
+            max-width: 100%;
+            width: 100%;
+            margin-bottom: 5px;
+        }
+
+        .reader-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .nav-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        .nav-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .page-slider-container {
+            margin: 2rem 0;
+        }
+
+        .page-slider {
+            width: 100%;
+            height: 6px;
+            background-color: #e0e0e0;
+            border-radius: 3px;
+            position: relative;
+        }
+
+        .page-slider-fill {
+            position: absolute;
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 3px;
+            left: 0;
+            top: 0;
+        }
+
+        .page-slider-handle {
+            width: 18px;
+            height: 18px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+        }
+
+        .reader-options {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .option-group h4 {
+            margin-bottom: 0.75rem;
+        }
+
+        .option-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .option-controls button {
+            flex: 1;
+            padding: 0.5rem;
+            border-radius: var(--border-radius-sm);
+            border: 1px solid #ddd;
+            background-color: var(--bg-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option-controls button:hover,
+        .option-controls button.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .brightness-contrast {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .slider-control {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .slider-control label {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .slider-control input[type="range"] {
+            width: 100%;
+        }
+
+        .comments-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+
+        .comments-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .comment-form {
+            margin-bottom: 2rem;
+        }
+
+        .comment-form textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: var(--border-radius);
+            border: 1px solid #ddd;
+        }
+
+        .comment-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .comment {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .comment::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: var(--primary-color);
+            border-top-left-radius: var(--border-radius);
+            border-bottom-left-radius: var(--border-radius);
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+        }
+
+        .comment-author {
+            font-weight: 600;
+        }
+
+        .comment-time {
+            font-size: 0.85rem;
+            color: var(--light-text);
+        }
+
+        .comment-body {
+            margin-bottom: 0.75rem;
+        }
+
+        .comment-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .comment-actions button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: none;
+            color: var(--light-text);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .comment-actions button:hover {
+            color: var(--primary-color);
+        }
+
+        .comment-replies {
+            margin-left: 2rem;
+            margin-top: 1.5rem;
+            border-left: 2px solid #eee;
+            padding-left: 1rem;
+        }
+
+        /* Keyboard shortcuts modal */
+        .shortcuts-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .shortcuts-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .shortcuts-content {
+            background-color: var(--card-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .shortcuts-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .shortcuts-header h3 {
+            margin: 0;
+        }
+
+        .shortcuts-header button {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--light-text);
+            transition: color 0.2s ease;
+        }
+
+        .shortcuts-header button:hover {
+            color: var(--primary-color);
+        }
+
+        .shortcuts-body {
+            padding: 1.5rem;
+        }
+
+        .shortcut-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .shortcut-group h4 {
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .shortcut-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .shortcut-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .shortcut-key {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background-color: #f5f5f5;
+            border-radius: var(--border-radius-sm);
+            font-family: monospace;
+            font-weight: 600;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+            min-width: 30px;
+            text-align: center;
+        }
+
+        /* Animation for page turns */
+        @keyframes pageTurn {
+            0% {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .page-turn {
+            animation: pageTurn 0.3s ease-out;
+        }
+
+        /* Reading progress indicator */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background-color: var(--primary-color);
+            z-index: 1001;
+            transition: width 0.3s ease;
+        }
+        
+        /* Bookmark animation */
+        @keyframes bookmark-pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .bookmark-button.active i {
+            color: var(--primary-color);
+            animation: bookmark-pulse 0.5s ease-in-out;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .reader-controls {
+                flex-wrap: wrap;
+            }
+            
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .reader-navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-loader" id="page-loader">
+        <span class="loader"></span>
+    </div>
+    
+    <!-- Reading progress indicator -->
+    <div class="reading-progress" id="reading-progress"></div>
+
+    <header>
+        <div class="logo">
+            <h1>Entertainment Hub</h1>
+        </div>
+        <div class="search-container">
+            <form action="/search" method="get" class="search-form">
+                <input type="search" placeholder="Search for movies, anime, games..." aria-label="Search content">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+        <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav>
+            <ul id="main-nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="manga.html">Manga</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="discussions.html">Discussions</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="polls.html">Polls</a></li>
+                <li><a href="watchlist.html">Watchlist</a></li>
+                <li><a href="profile.html">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="reader-container page-transition">
+        <section class="reader-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="manga-title">Chainsaw Man</h1>
+                    <div class="chapter-info">
+                        <select class="chapter-selector" id="chapter-selector">
+                            <option value="120">Chapter 120: The End</option>
+                            <option value="119">Chapter 119: Closer to Power</option>
+                            <option value="118">Chapter 118: Devil Hunters</option>
+                            <option value="117" selected>Chapter 117: The Locked Room</option>
+                            <option value="116">Chapter 116: Eyes</option>
+                        </select>
+                        <button class="bookmark-button" id="bookmark-button" title="Bookmark this chapter">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn" id="download-chapter">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </div>
+            </div>
+            
+            <div class="reader-controls">
+                <button class="btn-active" id="single-page-btn">
+                    <i class="fas fa-file"></i> Single Page
+                </button>
+                <button id="double-page-btn">
+                    <i class="fas fa-book-open"></i> Double Page
+                </button>
+                <button id="longstrip-btn">
+                    <i class="fas fa-align-justify"></i> Long Strip
+                </button>
+                <button id="fullscreen-btn">
+                    <i class="fas fa-expand"></i> Fullscreen
+                </button>
+                <button id="auto-scroll-btn">
+                    <i class="fas fa-scroll"></i> Auto-Scroll
+                </button>
+                <button id="reader-settings-btn">
+                    <i class="fas fa-cog"></i> Settings
+                </button>
+                <button id="shortcuts-btn">
+                    <i class="fas fa-keyboard"></i> Shortcuts
+                </button>
+            </div>
+            
+            <div class="pages-display">
+                Page <span id="current-page">1</span> of <span id="total-pages">24</span>
+            </div>
+        </section>
+        
+        <section class="reader-view expand-on-hover" id="reader-view">
+            <!-- Single Page View (Default) -->
+            <div class="page-view page-turn" id="page-view">
+                <img src="../images/Chainsaw.jpg" alt="Chainsaw Man Chapter 117 Page 1" id="current-page-image">
+            </div>
+            
+            <!-- Double Page View (Hidden by default) -->
+            <div class="double-page-view" id="double-page-view" style="display: none;">
+                <img src="../images/Chainsaw.jpg" alt="Chainsaw Man Chapter 117 Left Page" class="page-left">
+                <img src="../images/Makima.jpg" alt="Chainsaw Man Chapter 117 Right Page" class="page-right">
+            </div>
+            
+            <!-- Long Strip View (Hidden by default) -->
+            <div class="longstrip-view" id="longstrip-view" style="display: none;">
+                <img src="../images/Chainsaw.jpg" alt="Chainsaw Man Chapter 117 Page 1">
+                <img src="../images/Makima.jpg" alt="Chainsaw Man Chapter 117 Page 2">
+                <img src="../images/JJK.jpeg" alt="Chainsaw Man Chapter 117 Page 3">
+                <img src="../images/Levi.jpg" alt="Chainsaw Man Chapter 117 Page 4">
+                <img src="../images/Abousen.jpg" alt="Chainsaw Man Chapter 117 Page 5">
+            </div>
+        </section>
+        
+        <div class="page-slider-container">
+            <div class="page-slider" id="page-slider">
+                <div class="page-slider-fill" id="page-slider-fill" style="width: 4%;"></div>
+                <div class="page-slider-handle" id="page-slider-handle" style="left: 4%;"></div>
+            </div>
+        </div>
+        
+        <section class="reader-navigation">
+            <button class="nav-button" id="prev-page-btn" disabled>
+                <i class="fas fa-chevron-left"></i> Previous Page
+            </button>
+            <button class="nav-button" id="next-page-btn">
+                Next Page <i class="fas fa-chevron-right"></i>
+            </button>
+        </section>
+        
+        <section class="reader-options" id="reader-options" style="display: none;">
+            <h3 class="mb-3">Reader Options</h3>
+            <div class="options-grid">
+                <div class="option-group">
+                    <h4>Reading Direction</h4>
+                    <div class="option-controls">
+                        <button class="active" data-direction="ltr">Left to Right</button>
+                        <button data-direction="rtl">Right to Left</button>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <h4>Background Color</h4>
+                    <div class="option-controls">
+                        <button class="active" data-bg="white">White</button>
+                        <button data-bg="black">Black</button>
+                        <button data-bg="sepia">Sepia</button>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <h4>Page Fit</h4>
+                    <div class="option-controls">
+                        <button class="active" data-fit="contain">Contain</button>
+                        <button data-fit="width">Width</button>
+                        <button data-fit="height">Height</button>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <h4>Image Quality</h4>
+                    <div class="option-controls">
+                        <button data-quality="low">Low</button>
+                        <button class="active" data-quality="medium">Medium</button>
+                        <button data-quality="high">High</button>
+                    </div>
+                </div>
+                
+                <div class="option-group brightness-contrast">
+                    <div class="slider-control">
+                        <label>
+                            <span>Brightness</span>
+                            <span id="brightness-value">100%</span>
+                        </label>
+                        <input type="range" min="50" max="150" value="100" id="brightness-slider">
+                    </div>
+                    
+                    <div class="slider-control">
+                        <label>
+                            <span>Contrast</span>
+                            <span id="contrast-value">100%</span>
+                        </label>
+                        <input type="range" min="50" max="150" value="100" id="contrast-slider">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="comments-section">
+            <div class="comments-header">
+                <h3>Comments (24)</h3>
+                <div class="comment-sort">
+                    <select>
+                        <option>Newest First</option>
+                        <option>Oldest First</option>
+                        <option>Most Liked</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="comment-form">
+                <textarea placeholder="Share your thoughts on this chapter..."></textarea>
+                <button class="btn btn-primary">Post Comment</button>
+            </div>
+            
+            <div class="comment-list">
+                <div class="comment stagger-animation">
+                    <div class="comment-header">
+                        <span class="comment-author">MangaFan123</span>
+                        <span class="comment-time">2 hours ago</span>
+                    </div>
+                    <div class="comment-body">
+                        <p>This chapter was absolutely mind-blowing! I can't believe Denji finally discovered the truth about the Gun Devil's real identity. The artwork in those final pages was spectacular.</p>
+                    </div>
+                    <div class="comment-actions">
+                        <button><i class="far fa-thumbs-up"></i> Like (42)</button>
+                        <button><i class="far fa-comment"></i> Reply</button>
+                        <button><i class="far fa-flag"></i> Report</button>
+                    </div>
+                    
+                    <div class="comment-replies">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <span class="comment-author">CSM_Lover</span>
+                                <span class="comment-time">1 hour ago</span>
+                            </div>
+                            <div class="comment-body">
+                                <p>I agree! Fujimoto's paneling in this chapter was on another level. The way he drew the action sequences was so fluid.</p>
+                            </div>
+                            <div class="comment-actions">
+                                <button><i class="far fa-thumbs-up"></i> Like (15)</button>
+                                <button><i class="far fa-comment"></i> Reply</button>
+                                <button><i class="far fa-flag"></i> Report</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="comment stagger-animation">
+                    <div class="comment-header">
+                        <span class="comment-author">PowerFanatic</span>
+                        <span class="comment-time">Yesterday</span>
+                    </div>
+                    <div class="comment-body">
+                        <p>I'm still processing that plot twist. Did anyone else catch the subtle foreshadowing in chapter 112? Fujimoto has been planning this reveal for a long time.</p>
+                    </div>
+                    <div class="comment-actions">
+                        <button><i class="far fa-thumbs-up"></i> Like (38)</button>
+                        <button><i class="far fa-comment"></i> Reply</button>
+                        <button><i class="far fa-flag"></i> Report</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Keyboard Shortcuts Modal -->
+    <div class="shortcuts-modal" id="shortcuts-modal">
+        <div class="shortcuts-content scale-in">
+            <div class="shortcuts-header">
+                <h3>Keyboard Shortcuts</h3>
+                <button id="close-shortcuts"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="shortcuts-body">
+                <div class="shortcut-group">
+                    <h4>Navigation</h4>
+                    <div class="shortcut-list">
+                        <div class="shortcut-item">
+                            <span>Next Page</span>
+                            <span class="shortcut-key">→</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>Previous Page</span>
+                            <span class="shortcut-key">←</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>First Page</span>
+                            <span class="shortcut-key">Home</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>Last Page</span>
+                            <span class="shortcut-key">End</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-group">
+                    <h4>View Modes</h4>
+                    <div class="shortcut-list">
+                        <div class="shortcut-item">
+                            <span>Single Page View</span>
+                            <span class="shortcut-key">1</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>Double Page View</span>
+                            <span class="shortcut-key">2</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>Long Strip View</span>
+                            <span class="shortcut-key">3</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>Fullscreen</span>
+                            <span class="shortcut-key">F</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="shortcut-group">
+                    <h4>Tools</h4>
+                    <div class="shortcut-list">
+                        <div class="shortcut-item">
+                            <span>Toggle Settings</span>
+                            <span class="shortcut-key">S</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>Toggle Auto-Scroll</span>
+                            <span class="shortcut-key">A</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>Bookmark Chapter</span>
+                            <span class="shortcut-key">B</span>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>Download Chapter</span>
+                            <span class="shortcut-key">D</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Entertainment Hub</h3>
+                <p>Your ultimate destination for entertainment reviews and discussions.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="mangareader.html">Manga Reader</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <a href="#" id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const readerView = document.getElementById('reader-view');
+            const pageView = document.getElementById('page-view');
+            const doublePageView = document.getElementById('double-page-view');
+            const longstripView = document.getElementById('longstrip-view');
+            const currentPageElement = document.getElementById('current-page');
+            const totalPagesElement = document.getElementById('total-pages');
+            const prevPageBtn = document.getElementById('prev-page-btn');
+            const nextPageBtn = document.getElementById('next-page-btn');
+            const singlePageBtn = document.getElementById('single-page-btn');
+            const doublePageBtn = document.getElementById('double-page-btn');
+            const longstripBtn = document.getElementById('longstrip-btn');
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+            const autoScrollBtn = document.getElementById('auto-scroll-btn');
+            const readerSettingsBtn = document.getElementById('reader-settings-btn');
+            const readerOptions = document.getElementById('reader-options');
+            const shortcutsBtn = document.getElementById('shortcuts-btn');
+            const shortcutsModal = document.getElementById('shortcuts-modal');
+            const closeShortcutsBtn = document.getElementById('close-shortcuts');
+            const bookmarkButton = document.getElementById('bookmark-button');
+            const pageSliderHandle = document.getElementById('page-slider-handle');
+            const pageSliderFill = document.getElementById('page-slider-fill');
+            const readingProgress = document.getElementById('reading-progress');
+            const currentPageImage = document.getElementById('current-page-image');
+            
+            // Reader state
+            let currentPage = 1;
+            let totalPages = 24;
+            let isAutoScrolling = false;
+            let autoScrollInterval;
+            let isBookmarked = false;
+            let viewMode = 'single';
+            let readingDirection = 'ltr';
+            
+            // Mock page images array (would come from API in real app)
+            const pageImages = [
+                'Chainsaw.jpg',
+                'Makima.jpg',
+                'JJK.jpeg',
+                'Levi.jpg',
+                'Abousen.jpg',
+                'DemonSlayer.jpg',
+                'Heroacademia.jpg',
+                'OnePiece.jpg'
+            ];
+            
+            // Initialize
+            function init() {
+                updatePageDisplay();
+                updateProgressBar();
+                updatePageImage();
+                initEventListeners();
+            }
+            
+            // Update the current page display
+            function updatePageDisplay() {
+                currentPageElement.textContent = currentPage;
+                totalPagesElement.textContent = totalPages;
+                
+                // Enable/disable navigation buttons
+                prevPageBtn.disabled = currentPage <= 1;
+                nextPageBtn.disabled = currentPage >= totalPages;
+            }
+            
+            // Update the progress bar
+            function updateProgressBar() {
+                const progress = (currentPage - 1) / (totalPages - 1) * 100;
+                pageSliderFill.style.width = `${progress}%`;
+                pageSliderHandle.style.left = `${progress}%`;
+                readingProgress.style.width = `${progress}%`;
+            }
+            
+            // Update the displayed page image
+            function updatePageImage() {
+                // In a real app, you'd load the actual page image
+                // Here we're cycling through our sample images
+                const imageIndex = (currentPage - 1) % pageImages.length;
+                currentPageImage.src = pageImages[imageIndex];
+                
+                // Add page turn animation
+                currentPageImage.classList.remove('page-turn');
+                void currentPageImage.offsetWidth; // Trigger reflow
+                currentPageImage.classList.add('page-turn');
+            }
+            
+            // Handle page navigation
+            function goToPage(pageNumber) {
+                if (pageNumber < 1 || pageNumber > totalPages) return;
+                
+                currentPage = pageNumber;
+                updatePageDisplay();
+                updateProgressBar();
+                updatePageImage();
+            }
+            
+            // Navigate to next page
+            function nextPage() {
+                if (currentPage < totalPages) {
+                    goToPage(currentPage + 1);
+                }
+            }
+            
+            // Navigate to previous page
+            function prevPage() {
+                if (currentPage > 1) {
+                    goToPage(currentPage - 1);
+                }
+            }
+            
+            // Toggle reader view mode
+            function setViewMode(mode) {
+                viewMode = mode;
+                
+                // Reset all buttons
+                singlePageBtn.classList.remove('btn-active');
+                doublePageBtn.classList.remove('btn-active');
+                longstripBtn.classList.remove('btn-active');
+                
+                // Hide all views
+                pageView.style.display = 'none';
+                doublePageView.style.display = 'none';
+                longstripView.style.display = 'none';
+                
+                // Show selected view
+                switch(mode) {
+                    case 'single':
+                        pageView.style.display = 'flex';
+                        singlePageBtn.classList.add('btn-active');
+                        break;
+                    case 'double':
+                        doublePageView.style.display = 'flex';
+                        doublePageBtn.classList.add('btn-active');
+                        break;
+                    case 'longstrip':
+                        longstripView.style.display = 'flex';
+                        longstripBtn.classList.add('btn-active');
+                        break;
+                }
+            }
+            
+            // Toggle fullscreen mode
+            function toggleFullscreen() {
+                if (!document.fullscreenElement) {
+                    readerView.requestFullscreen().catch(err => {
+                        console.error(`Error attempting to enable fullscreen: ${err.message}`);
+                    });
+                } else {
+                    document.exitFullscreen();
+                }
+            }
+            
+            // Toggle auto-scroll
+            function toggleAutoScroll() {
+                isAutoScrolling = !isAutoScrolling;
+                
+                if (isAutoScrolling) {
+                    autoScrollBtn.classList.add('btn-active');
+                    autoScrollInterval = setInterval(() => {
+                        if (currentPage < totalPages) {
+                            nextPage();
+                        } else {
+                            toggleAutoScroll(); // Stop at the end
+                        }
+                    }, 3000); // Change page every 3 seconds
+                } else {
+                    autoScrollBtn.classList.remove('btn-active');
+                    clearInterval(autoScrollInterval);
+                }
+            }
+            
+            // Toggle reader settings
+            function toggleReaderSettings() {
+                if (readerOptions.style.display === 'none') {
+                    readerOptions.style.display = 'block';
+                    readerSettingsBtn.classList.add('btn-active');
+                } else {
+                    readerOptions.style.display = 'none';
+                    readerSettingsBtn.classList.remove('btn-active');
+                }
+            }
+            
+            // Toggle bookmark
+            function toggleBookmark() {
+                isBookmarked = !isBookmarked;
+                
+                if (isBookmarked) {
+                    bookmarkButton.classList.add('active');
+                    bookmarkButton.innerHTML = '<i class="fas fa-bookmark"></i>';
+                } else {
+                    bookmarkButton.classList.remove('active');
+                    bookmarkButton.innerHTML = '<i class="far fa-bookmark"></i>';
+                }
+            }
+            
+            // Handle keyboard shortcuts
+            function handleKeyDown(e) {
+                switch(e.key) {
+                    case 'ArrowRight':
+                        nextPage();
+                        break;
+                    case 'ArrowLeft':
+                        prevPage();
+                        break;
+                    case 'Home':
+                        goToPage(1);
+                        break;
+                    case 'End':
+                        goToPage(totalPages);
+                        break;
+                    case '1':
+                        setViewMode('single');
+                        break;
+                    case '2':
+                        setViewMode('double');
+                        break;
+                    case '3':
+                        setViewMode('longstrip');
+                        break;
+                    case 'f':
+                    case 'F':
+                        toggleFullscreen();
+                        break;
+                    case 's':
+                    case 'S':
+                        toggleReaderSettings();
+                        break;
+                    case 'a':
+                    case 'A':
+                        toggleAutoScroll();
+                        break;
+                    case 'b':
+                    case 'B':
+                        toggleBookmark();
+                        break;
+                }
+            }
+            
+            // Show shortcuts modal
+            function showShortcutsModal() {
+                shortcutsModal.classList.add('active');
+            }
+            
+            // Hide shortcuts modal
+            function hideShortcutsModal() {
+                shortcutsModal.classList.remove('active');
+            }
+            
+            // Initialize all event listeners
+            function initEventListeners() {
+                // Navigation buttons
+                prevPageBtn.addEventListener('click', prevPage);
+                nextPageBtn.addEventListener('click', nextPage);
+                
+                // View mode buttons
+                singlePageBtn.addEventListener('click', () => setViewMode('single'));
+                doublePageBtn.addEventListener('click', () => setViewMode('double'));
+                longstripBtn.addEventListener('click', () => setViewMode('longstrip'));
+                
+                // Other control buttons
+                fullscreenBtn.addEventListener('click', toggleFullscreen);
+                autoScrollBtn.addEventListener('click', toggleAutoScroll);
+                readerSettingsBtn.addEventListener('click', toggleReaderSettings);
+                bookmarkButton.addEventListener('click', toggleBookmark);
+                
+                // Shortcuts modal
+                shortcutsBtn.addEventListener('click', showShortcutsModal);
+                closeShortcutsBtn.addEventListener('click', hideShortcutsModal);
+                shortcutsModal.addEventListener('click', (e) => {
+                    if (e.target === shortcutsModal) {
+                        hideShortcutsModal();
+                    }
+                });
+                
+                // Keyboard shortcuts
+                document.addEventListener('keydown', handleKeyDown);
+                
+                // Page slider
+                pageSliderHandle.addEventListener('mousedown', startDrag);
+                
+                // Reader settings options
+                document.querySelectorAll('.option-controls button').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const parentGroup = this.parentElement;
+                        parentGroup.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                    });
+                });
+                
+                // Brightness and contrast sliders
+                const brightnessSlider = document.getElementById('brightness-slider');
+                const contrastSlider = document.getElementById('contrast-slider');
+                const brightnessValue = document.getElementById('brightness-value');
+                const contrastValue = document.getElementById('contrast-value');
+                
+                if (brightnessSlider && contrastSlider) {
+                    brightnessSlider.addEventListener('input', function() {
+                        brightnessValue.textContent = `${this.value}%`;
+                        readerView.style.filter = `brightness(${this.value}%) contrast(${contrastSlider.value}%)`;
+                    });
+                    
+                    contrastSlider.addEventListener('input', function() {
+                        contrastValue.textContent = `${this.value}%`;
+                        readerView.style.filter = `brightness(${brightnessSlider.value}%) contrast(${this.value}%)`;
+                    });
+                }
+                
+                // Make comments section elements animate in when they appear in viewport
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('stagger-item');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.stagger-animation').forEach((item, index) => {
+                    item.style.animationDelay = `${index * 0.1}s`;
+                    observer.observe(item);
+                });
+            }
+            
+            // Page slider drag functionality
+            function startDrag(e) {
+                e.preventDefault();
+                
+                const sliderBounds = document.getElementById('page-slider').getBoundingClientRect();
+                const sliderWidth = sliderBounds.width;
+                
+                function dragMove(e) {
+                    const x = Math.max(0, Math.min(e.clientX - sliderBounds.left, sliderWidth));
+                    const percentage = (x / sliderWidth) * 100;
+                    const newPage = Math.max(1, Math.min(Math.round((percentage / 100) * totalPages), totalPages));
+                    goToPage(newPage);
+                }
+                
+                function dragEnd() {
+                    document.removeEventListener('mousemove', dragMove);
+                    document.removeEventListener('mouseup', dragEnd);
+                }
+                
+                document.addEventListener('mousemove', dragMove);
+                document.addEventListener('mouseup', dragEnd);
+            }
+            
+            // Initialize the reader
+            init();
+            
+            // Add animation class to elements when they enter the viewport
+            const fadeInElements = document.querySelectorAll('.reader-header, .reader-view, .reader-navigation, .reader-options, .comments-section');
+            
+            const animateOnScroll = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                        animateOnScroll.unobserve(entry.target);
+                    }
+                });
+            });
+            
+            fadeInElements.forEach(element => {
+                animateOnScroll.observe(element);
+            });
+        });
+    </script>
+</body>
+
+</html>

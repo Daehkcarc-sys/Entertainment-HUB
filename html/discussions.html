@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discussions | Entertainment Hub</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/discussions.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="description" content="Join discussions about movies, series, anime, manga, and games on Entertainment Hub.">
+</head>
+
+<body class="discussions-page">
+    <header>
+        <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="manga.html">Manga</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="discussions.html" class="active">Discussions</a></li>
+                <li><a href="watchlist.html">Watchlist</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="signin.html">Sign In / Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Search and filter bar -->
+        <section class="discussion-tools">
+            <div class="search-bar">
+                <form action="#" method="get" class="search-form">
+                    <input type="search" name="q" placeholder="Search discussions..." aria-label="Search discussions">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+            
+            <div class="filter-options">
+                <label for="filter-category">Filter by:</label>
+                <select id="filter-category">
+                    <option value="all">All Categories</option>
+                    <option value="movies">Movies</option>
+                    <option value="anime">Anime</option>
+                    <option value="series">Series</option>
+                    <option value="games">Games</option>
+                </select>
+                
+                <label for="sort-by">Sort by:</label>
+                <select id="sort-by">
+                    <option value="recent">Most Recent</option>
+                    <option value="popular">Most Popular</option>
+                    <option value="replies">Most Replies</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Featured discussion - with image -->
+        <section class="featured-discussion">
+            <h2>Featured Discussion</h2>
+            <article class="featured">
+                <div class="featured-content">
+                    <span class="badge hot">HOT</span>
+                    <h3>The Impact of AI in Modern Cinema</h3>
+                    <p>How is artificial intelligence changing the way movies are made and experienced? Join our panel of film critics and technology experts for this heated debate.</p>
+                    <div class="meta-info">
+                        <span><i class="fas fa-user"></i> Started by <strong>FilmBuff42</strong></span>
+                        <span><i class="fas fa-comments"></i> 128 replies</span>
+                        <span><i class="fas fa-eye"></i> 3.4k views</span>
+                    </div>
+                    <button class="primary-btn">Join Discussion</button>
+                </div>
+                <div class="featured-image">
+                    <img src="../images/Disscusion.jpg" alt="AI in Cinema illustration" onerror="this.src='https://via.placeholder.com/300x200?text=AI+in+Cinema'">
+                </div>
+            </article>
+        </section>
+
+        <!-- Discussion Categories with Tabs -->
+        <section class="discussion-categories">
+            <h2>Browse by Category</h2>
+            <div class="tabs">
+                <button class="tab-btn active" data-target="all-discussions">All</button>
+                <button class="tab-btn" data-target="movies-discussions">Movies</button>
+                <button class="tab-btn" data-target="anime-discussions">Anime</button>
+                <button class="tab-btn" data-target="series-discussions">Series</button>
+                <button class="tab-btn" data-target="games-discussions">Games</button>
+            </div>
+
+            <div id="all-discussions" class="tab-content active">
+                <!-- Discussion table -->
+                <table class="discussions-table">
+                    <thead>
+                        <tr>
+                            <th>Topic</th>
+                            <th>Category</th>
+                            <th>Started By</th>
+                            <th>Replies</th>
+                            <th>Last Post</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="#">Movie Talk: Latest Blockbuster Discussion</a>
+                                <span class="badge new">NEW</span>
+                            </td>
+                            <td>Movies</td>
+                            <td>MovieFan123</td>
+                            <td>42</td>
+                            <td><time datetime="2025-02-25T14:53">Yesterday</time></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">Anime Debate: Best Opening Theme of All Time</a>
+                                <span class="badge hot">HOT</span>
+                            </td>
+                            <td>Anime</td>
+                            <td>OtakuMaster</td>
+                            <td>87</td>
+                            <td><time datetime="2025-02-26T09:15">Today</time></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Is This Game Worth Playing in 2025?</a></td>
+                            <td>Games</td>
+                            <td>GamerPro99</td>
+                            <td>23</td>
+                            <td><time datetime="2025-02-24T18:30">2 days ago</time></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Season Finale Discussion (Spoilers!)</a></td>
+                            <td>Series</td>
+                            <td>BingeWatcher</td>
+                            <td>56</td>
+                            <td><time datetime="2025-02-26T12:42">3 hours ago</time></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="movies-discussions" class="tab-content">
+                <!-- Movie discussions content -->
+                <p>Loading movie discussions...</p>
+            </div>
+
+            <div id="anime-discussions" class="tab-content">
+                <!-- Anime discussions content -->
+                <p>Loading anime discussions...</p>
+            </div>
+
+            <div id="series-discussions" class="tab-content">
+                <!-- Series discussions content -->
+                <p>Loading series discussions...</p>
+            </div>
+
+            <div id="games-discussions" class="tab-content">
+                <!-- Games discussions content -->
+                <p>Loading games discussions...</p>
+            </div>
+        </section>
+
+        <!-- Active discussions with more detail and formatting -->
+        <section class="active-discussions">
+            <h2>Recent Discussions</h2>
+            <article class="discussion-post">
+                <div class="user-avatar">
+                    <img src="../images/SwagSonic.jpg" alt="User Avatar" onerror="this.src='https://via.placeholder.com/50?text=User'">
+                    <span class="user-status online"></span>
+                </div>
+                <div class="post-content">
+                    <h3>Movie Talk: <em>Latest Blockbuster</em></h3>
+                    <p>Share your thoughts on the latest release! I thought the <strong>special effects</strong> were amazing but the plot had some issues.</p>
+                    <div class="tags">
+                        <span class="tag">Movies</span>
+                        <span class="tag">Action</span>
+                        <span class="tag">Reviews</span>
+                    </div>
+                    <div class="post-actions">
+                        <button class="action-btn join-btn"><i class="fas fa-comment"></i> Join Discussion</button>
+                        <button class="action-btn bookmark-btn"><i class="fas fa-bookmark"></i> Bookmark</button>
+                    </div>
+                </div>
+                <div class="post-stats">
+                    <div class="stat"><i class="fas fa-comments"></i> 42</div>
+                    <div class="stat"><i class="fas fa-eye"></i> 1.2k</div>
+                </div>
+            </article>
+
+            <article class="discussion-post">
+                <div class="user-avatar">
+                    <img src="../images/swagspidey.jpg" alt="User Avatar" onerror="this.src='https://via.placeholder.com/50?text=User'">
+                    <span class="user-status offline"></span>
+                </div>
+                <div class="post-content">
+                    <h3>Anime Debate: <em>Best Opening Theme</em></h3>
+                    <p>Which anime has the <strong>best opening theme</strong>? Vote now and explain why you think it deserves the top spot!</p>
+                    <div class="tags">
+                        <span class="tag">Anime</span>
+                        <span class="tag">Music</span>
+                        <span class="tag">Poll</span>
+                    </div>
+                    <div class="post-actions">
+                        <button class="action-btn join-btn"><i class="fas fa-comment"></i> Join Discussion</button>
+                        <button class="action-btn bookmark-btn"><i class="fas fa-bookmark"></i> Bookmark</button>
+                    </div>
+                </div>
+                <div class="post-stats">
+                    <div class="stat"><i class="fas fa-comments"></i> 87</div>
+                    <div class="stat"><i class="fas fa-eye"></i> 2.4k</div>
+                </div>
+            </article>
+        </section>
+
+        <!-- Rules and guidelines with definition list -->
+        <section class="discussion-rules collapsible">
+            <h2 class="collapsible-header">Community Guidelines <i class="fas fa-chevron-down"></i></h2>
+            <div class="collapsible-content">
+                <dl class="guidelines">
+                    <dt>Be Respectful</dt>
+                    <dd>Treat others with respect. No personal attacks, hate speech, or harassment.</dd>
+                    
+                    <dt>Stay On Topic</dt>
+                    <dd>Keep discussions relevant to the thread topic. Create a new thread if you want to discuss something different.</dd>
+                    
+                    <dt>No Spoilers</dt>
+                    <dd>Use spoiler tags for recent content. Clearly mark spoilers in your post titles.</dd>
+                    
+                    <dt>Quality Content</dt>
+                    <dd>Make meaningful contributions. Low-effort posts may be removed.</dd>
+                </dl>
+            </div>
+        </section>
+
+        <!-- Enhanced create topic form -->
+        <section class="create-topic">
+            <h2>Start a New Discussion</h2>
+            <form action="#" method="post" id="create-topic-form">
+                <fieldset>
+                    <legend>Topic Details</legend>
+                    
+                    <div class="form-group">
+                        <label for="topic-title">Title:</label>
+                        <input type="text" id="topic-title" name="title" placeholder="Enter a descriptive title" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="topic-category">Category:</label>
+                        <select id="topic-category" name="category" required>
+                            <option value="">-- Select Category --</option>
+                            <option value="movies">Movies</option>
+                            <option value="anime">Anime</option>
+                            <option value="manga">Manga</option>
+                            <option value="series">Series</option>
+                            <option value="games">Games</option>
+                            <option value="general">General Discussion</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="topic-tags">Tags:</label>
+                        <input type="text" id="topic-tags" name="tags" placeholder="Add tags separated by commas">
+                    </div>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Content</legend>
+                    
+                    <div class="form-group">
+                        <label for="topic-content">Your Post:</label>
+                        <div class="rich-text-toolbar">
+                            <button type="button" class="toolbar-btn"><i class="fas fa-bold"></i></button>
+                            <button type="button" class="toolbar-btn"><i class="fas fa-italic"></i></button>
+                            <button type="button" class="toolbar-btn"><i class="fas fa-list"></i></button>
+                            <button type="button" class="toolbar-btn"><i class="fas fa-link"></i></button>
+                            <button type="button" class="toolbar-btn"><i class="fas fa-image"></i></button>
+                        </div>
+                        <textarea id="topic-content" name="content" rows="6" placeholder="Type your discussion content here..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="topic-image">Attach Image (optional):</label>
+                        <input type="file" id="topic-image" name="image" accept="image/*">
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="notify-replies" name="notify" value="1" checked>
+                        <label for="notify-replies">Notify me of replies</label>
+                        
+                        <input type="checkbox" id="topic-guidelines" name="agree" value="1" required>
+                        <label for="topic-guidelines">I have read and agree to the community guidelines</label>
+                    </div>
+                </fieldset>
+                
+                <div class="form-actions">
+                    <button type="submit" class="primary-btn">Create Discussion</button>
+                    <button type="reset" class="secondary-btn">Clear Form</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Entertainment Hub</h3>
+                <p>Your ultimate destination for entertainment reviews and discussions.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="discussions.html">Discussions</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/main.js"></script>
+    <a href="#" class="back-to-top" id="back-to-top-btn" aria-label="Back to top">↑</a>
+</body>
+
+</html>

@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games | Entertainment Hub</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/games.css">
+    <link rel="stylesheet" href="../css/carousel.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Add some styles for the rating link */
+        .action-button.rating-btn,
+        .btn.rating-btn {
+            transition: all 0.3s ease;
+        }
+
+        .action-button.rating-btn:hover,
+        .btn.rating-btn:hover {
+            transform: scale(1.1);
+            color: #FFD700;
+        }
+    </style>
+</head>
+
+<body class="games-page">
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="games.html" class="active">Games</a></li>
+                    <li><a href="community.html">Community</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="watchlist.html" class="action-button"><i class="fas fa-bookmark"></i> Watchlist</a>
+                <a href="leaderboard.html" class="action-button"><i class="fas fa-trophy"></i> Leaderboard</a>
+                <a href="signin.html" class="action-button"><i class="fas fa-user"></i> Sign In</a>
+                <div class="search-container">
+                    <input type="text" placeholder="Search...">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner Carousel Section -->
+    <section class="games-hero">
+        <div class="carousel-container banner carousel-hero overlay" data-autoplay="true" data-loop="true"
+            data-slides-per-view="1" data-autoplay-delay="8000">
+            <div class="carousel-wrapper">
+                <div class="carousel-item">
+                    <div class="carousel-image">
+                        <img src="../images/EldenRing.jpg" alt="Elden Ring" loading="eager">
+                    </div>
+                    <div class="carousel-caption">
+                        <span class="carousel-badge">Game of the Year</span>
+                        <h2>Elden Ring</h2>
+                        <p>A vast and seamless world awaits in this action RPG from FromSoftware and George R. R. Martin.
+                        </p>
+                        <div class="carousel-actions">
+                            <a href="#" class="btn btn-primary">View Details</a>
+                            <button class="btn btn-outline add-wishlist" data-id="elden-ring">Add to Wishlist</button>
+                        </div>
+                        <div class="carousel-meta">
+                            <span><i class="fas fa-star"></i> 9.6/10</span>
+                            <span><i class="fas fa-gamepad"></i> FromSoftware</span>
+                            <span><i class="fab fa-steam"></i> PC, PS5, Xbox</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-image">
+                        <img src="../images/GOW.jpg" alt="God of War Ragnarök" loading="eager">
+                    </div>
+                    <div class="carousel-caption">
+                        <span class="carousel-badge">Featured</span>
+                        <h2>God of War Ragnarök</h2>
+                        <p>Join Kratos and Atreus on their epic journey through the nine realms as they face the cataclysmic
+                            event known as Ragnarök.</p>
+                        <div class="carousel-actions">
+                            <a href="#" class="btn btn-primary">Watch Trailer</a>
+                            <button class="btn btn-outline add-wishlist" data-id="gow-ragnarok">Add to Wishlist</button>
+                        </div>
+                        <div class="carousel-meta">
+                            <span><i class="fas fa-star"></i> 9.5/10</span>
+                            <span><i class="fas fa-gamepad"></i> Santa Monica Studio</span>
+                            <span><i class="fab fa-playstation"></i> PlayStation</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-image">
+                        <img src="../images/minecraft.jpg" alt="Minecraft" loading="eager">
+                    </div>
+                    <div class="carousel-caption">
+                        <span class="carousel-badge">Most Popular</span>
+                        <h2>Minecraft</h2>
+                        <p>Explore, build, and survive in an infinitely generated world of blocks with limitless
+                            possibilities.</p>
+                        <div class="carousel-actions">
+                            <a href="#" class="btn btn-primary">View Details</a>
+                            <button class="btn btn-outline add-wishlist" data-id="minecraft">Add to Wishlist</button>
+                        </div>
+                        <div class="carousel-meta">
+                            <span><i class="fas fa-star"></i> 9.4/10</span>
+                            <span><i class="fas fa-gamepad"></i> Mojang Studios</span>
+                            <span><i class="fas fa-globe"></i> All Platforms</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-indicators">
+                <button class="carousel-indicator active" data-slide="0" aria-label="Go to slide 1"></button>
+                <button class="carousel-indicator" data-slide="1" aria-label="Go to slide 2"></button>
+                <button class="carousel-indicator" data-slide="2" aria-label="Go to slide 3"></button>
+            </div>
+            <button class="carousel-control carousel-control-prev" aria-label="Previous slide">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-control carousel-control-next" aria-label="Next slide">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Quick Category Navigation -->
+    <section class="category-nav">
+        <div class="container">
+            <div class="nav-cards">
+                <a href="#top-rated" class="nav-card">
+                    <i class="fas fa-award"></i>
+                    <span>Top Rated</span>
+                </a>
+                <a href="#genres" class="nav-card">
+                    <i class="fas fa-tags"></i>
+                    <span>Genres</span>
+                </a>
+                <a href="watchlist.html?type=games" class="nav-card">
+                    <i class="fas fa-bookmark"></i>
+                    <span>My Wishlist</span>
+                </a>
+                <a href="#upcoming" class="nav-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Upcoming</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="explore-section">
+        <div class="explore-header">
+            <h2>Explore Games by Genre</h2>
+            <div class="genre-grid">
+                <a href="#" class="genre-card rpg">
+                    <i class="fas fa-sword"></i>
+                    <span>RPG</span>
+                    <span class="game-count">1.2K Games</span>
+                </a>
+                <a href="#" class="genre-card action">
+                    <i class="fas fa-gun"></i>
+                    <span>Action</span>
+                    <span class="game-count">2.3K Games</span>
+                </a>
+                <a href="#" class="genre-card strategy">
+                    <i class="fas fa-chess"></i>
+                    <span>Strategy</span>
+                    <span class="game-count">856 Games</span>
+                </a>
+                <a href="#" class="genre-card sports">
+                    <i class="fas fa-football-ball"></i>
+                    <span>Sports</span>
+                    <span class="game-count">445 Games</span>
+                </a>
+                <a href="#" class="genre-card horror">
+                    <i class="fas fa-ghost"></i>
+                    <span>Horror</span>
+                    <span class="game-count">667 Games</span>
+                </a>
+                <a href="#" class="genre-card racing">
+                    <i class="fas fa-car-side"></i>
+                    <span>Racing</span>
+                    <span class="game-count">334 Games</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="advanced-search">
+            <div class="search-filters">
+                <div class="search-input-container">
+                    <input type="text" placeholder="Search games..." class="search-input">
+                    <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+
+                <div class="advanced-filters">
+                    <div class="filter-group">
+                        <label for="platform-filter">Platform:</label>
+                        <select id="platform-filter" class="cyber-select">
+                            <option value="all">All Platforms</option>
+                            <option value="pc">PC</option>
+                            <option value="ps5">PlayStation 5</option>
+                            <option value="xbox">Xbox Series X</option>
+                            <option value="switch">Nintendo Switch</option>
+                            <option value="mobile">Mobile</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="release-filter">Release Year:</label>
+                        <select id="release-filter" class="cyber-select">
+                            <option value="all">All Years</option>
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="older">2021 & Older</option>
+                        </select>
+                    </div>
+
+                    <div class="sort-options">
+                        <label for="sort-select">Sort By:</label>
+                        <select id="sort-select" class="cyber-select">
+                            <option value="popular">Most Popular</option>
+                            <option value="recent">Recently Added</option>
+                            <option value="rating">Highest Rated</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="filter-tags">
+                    <span class="filter-tag active">All</span>
+                    <span class="filter-tag">Single Player</span>
+                    <span class="filter-tag">Multiplayer</span>
+                    <span class="filter-tag">Co-op</span>
+                    <span class="filter-tag">Free to Play</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="quick-filters">
+        <button class="filter-pill active">Trending</button>
+        <button class="filter-pill">New Releases</button>
+        <button class="filter-pill">Coming Soon</button>
+        <button class="filter-pill">Specials</button>
+        <button class="filter-pill">Free Games</button>
+    </div>
+
+    <main>
+        <!-- Game categories with tabs -->
+        <section class="game-categories">
+            <h2>Browse Games by Category</h2>
+            <div class="tabs">
+                <button class="tab-btn active" data-target="top-rated">Top Rated</button>
+                <button class="tab-btn" data-target="new-releases">New Releases</button>
+                <button class="tab-btn" data-target="upcoming">Upcoming</button>
+                <button class="tab-btn" data-target="indie">Indie Gems</button>
+            </div>
+
+            <div id="top-rated" class="tab-content active">
+                <div class="game-grid">
+                    <article class="game-card">
+                        <div class="game-thumbnail">
+                            <img src="../images/EldenRing.jpg" alt="Elden Ring">
+                            <div class="game-platform-icons">
+                                <i class="fas fa-desktop" title="PC"></i>
+                                <i class="fab fa-playstation" title="PlayStation 5"></i>
+                                <i class="fab fa-xbox" title="Xbox Series X"></i>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Elden Ring</h3>
+                            <div class="game-meta">
+                                <span class="genre">Action RPG, Fantasy</span>
+                                <span class="release-year">2022</span>
+                            </div>
+                            <div class="rating">
+                                <div class="rating-bar">
+                                    <div class="rating-fill" style="width: 96%"></div>
+                                </div>
+                                <span class="rating-number">9.6</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="game-card">
+                        <div class="game-thumbnail">
+                            <img src="../images/GOW.jpg" alt="Civilization 6">
+                            <div class="game-platform-icons">
+                                <i class="fas fa-desktop" title="PC"></i>
+                                <i class="fab fa-playstation" title="PlayStation 5"></i>
+                                <i class="fab fa-xbox" title="Xbox Series X"></i>
+                                <i class="fab fa-nintendo-switch" title="Nintendo Switch"></i>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Civilization 6</h3>
+                            <div class="game-meta">
+                                <span class="genre">Strategy, Turn-based</span>
+                                <span class="release-year">2016</span>
+                            </div>
+                            <div class="rating">
+                                <div class="rating-bar">
+                                    <div class="rating-fill" style="width: 90%"></div>
+                                </div>
+                                <span class="rating-number">9.0</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="game-card">
+                        <div class="game-thumbnail">
+                            <img src="../images/SpiritedAway.jpg" alt="Phasmophobia">
+                            <div class="game-platform-icons">
+                                <i class="fas fa-desktop" title="PC"></i>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Phasmophobia</h3>
+                            <div class="game-meta">
+                                <span class="genre">Horror, Co-op</span>
+                                <span class="release-year">2020</span>
+                            </div>
+                            <div class="rating">
+                                <div class="rating-bar">
+                                    <div class="rating-fill" style="width: 88%"></div>
+                                </div>
+                                <span class="rating-number">8.8</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="game-card">
+                        <div class="game-thumbnail">
+                            <img src="../images/Avatar.jpg" alt="Marvel Rivals">
+                            <div class="game-platform-icons">
+                                <i class="fas fa-desktop" title="PC"></i>
+                                <i class="fab fa-playstation" title="PlayStation 5"></i>
+                                <i class="fab fa-xbox" title="Xbox Series X"></i>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>Marvel Rivals</h3>
+                            <div class="game-meta">
+                                <span class="genre">Hero Shooter, Multiplayer</span>
+                                <span class="release-year">2024</span>
+                            </div>
+                            <div class="rating">
+                                <div class="rating-bar">
+                                    <div class="rating-fill" style="width: 85%"></div>
+                                </div>
+                                <span class="rating-number">8.5</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="game-card">
+                        <div class="game-thumbnail">
+                            <img src="../images/Darkknight.jpg" alt="BattleTech: First Succession War">
+                            <div class="game-platform-icons">
+                                <i class="fas fa-desktop" title="PC"></i>
+                            </div>
+                        </div>
+                        <div class="game-info">
+                            <h3>BattleTech: First Succession War</h3>
+                            <div class="game-meta">
+                                <span class="genre">Strategy, Mech, Simulation</span>
+                                <span class="release-year">2023</span>
+                            </div>
+                            <div class="rating">
+                                <div class="rating-bar">
+                                    <div class="rating-fill" style="width: 82%"></div>
+                                </div>
+                                <span class="rating-number">8.2</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div id="new-releases" class="tab-content">
+                <!-- New releases content would go here -->
+                <p class="placeholder-text">New releases would be displayed here.</p>
+            </div>
+
+            <div id="upcoming" class="tab-content">
+                <!-- Upcoming games content would go here -->
+                <p class="placeholder-text">Upcoming games would be displayed here.</p>
+            </div>
+
+            <div id="indie" class="tab-content">
+                <!-- Indie games content would go here -->
+                <p class="placeholder-text">Indie games would be displayed here.</p>
+            </div>
+        </section>
+
+        <!-- Game Details with System Requirements -->
+        <section class="game-details-section">
+            <h2>Game Details</h2>
+            <div class="game-details-container">
+                <h3>Elden Ring</h3>
+
+                <div class="details-tabs">
+                    <button class="detail-tab active" data-target="overview">Overview</button>
+                    <button class="detail-tab" data-target="requirements">System Requirements</button>
+                    <button class="detail-tab" data-target="reviews">User Reviews</button>
+                </div>
+
+                <div id="overview" class="detail-content active">
+                    <div class="game-description">
+                        <p>Elden Ring is an action RPG developed by FromSoftware and published by Bandai Namco Entertainment.
+                            The game was directed by Hidetaka Miyazaki and made in collaboration with fantasy novelist George
+                            R. R. Martin, who provided material for the setting.</p>
+
+                        <p>Key Features:</p>
+                        <ul>
+                            <li>Vast open-world design with six main areas</li>
+                            <li>Intricate combat system with diverse weapon styles</li>
+                            <li>Rich lore and environmental storytelling</li>
+                            <li>Character customization with multiple builds and playstyles</li>
+                            <li>Legacy dungeons with complex level design</li>
+                            <li>Challenging boss fights that test player skill</li>
+                        </ul>
+                    </div>
+
+                    <div class="gallery">
+                        <h4>Screenshots</h4>
+                        <div class="screenshot-grid">
+                            <img src="../images/EldenRing.jpg" alt="Screenshot 1" class="screenshot">
+                            <img src="../images/GOW.jpg" alt="Screenshot 2" class="screenshot">
+                            <img src="../images/minecraft.jpg" alt="Screenshot 3" class="screenshot">
+                        </div>
+                    </div>
+
+                    <div class="video-section">
+                        <h4>Gameplay Trailer</h4>
+                        <div class="video-container">
+                            <video controls poster="../images/EldenRing.jpg">
+                                <source src="#" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="requirements" class="detail-content">
+                    <div class="system-requirements">
+                        <div class="req-column">
+                            <h4>Minimum Requirements</h4>
+                            <table class="req-table">
+                                <tr>
+                                    <th>OS:</th>
+                                    <td>Windows 10</td>
+                                </tr>
+                                <tr>
+                                    <th>Processor:</th>
+                                    <td>Intel Core i5-8400 / AMD Ryzen 3 3300X</td>
+                                </tr>
+                                <tr>
+                                    <th>Memory:</th>
+                                    <td>12 GB RAM</td>
+                                </tr>
+                                <tr>
+                                    <th>Graphics:</th>
+                                    <td>NVIDIA GeForce GTX 1060, 3 GB / AMD Radeon RX 580, 4 GB</td>
+                                </tr>
+                                <tr>
+                                    <th>Storage:</th>
+                                    <td>60 GB available space</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="req-column">
+                            <h4>Recommended Requirements</h4>
+                            <table class="req-table">
+                                <tr>
+                                    <th>OS:</th>
+                                    <td>Windows 10/11</td>
+                                </tr>
+                                <tr>
+                                    <th>Processor:</th>
+                                    <td>Intel Core i7-8700K / AMD Ryzen 5 3600X</td>
+                                </tr>
+                                <tr>
+                                    <th>Memory:</th>
+                                    <td>16 GB RAM</td>
+                                </tr>
+                                <tr>
+                                    <th>Graphics:</th>
+                                    <td>NVIDIA GeForce GTX 1070, 8 GB / AMD Radeon RX Vega 56, 8 GB</td>
+                                </tr>
+                                <tr>
+                                    <th>Storage:</th>
+                                    <td>60 GB SSD</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="reviews" class="detail-content">
+                    <div class="user-reviews">
+                        <div class="review-summary">
+                            <div class="average-score">
+                                <span class="big-score">9.6</span>
+                                <div class="star-display">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="review-count">Based on 745 reviews</span>
+                            </div>
+
+                            <div class="score-distribution">
+                                <div class="score-bar">
+                                    <span class="score-label">5 stars</span>
+                                    <div class="distribution-bar">
+                                        <div class="distribution-fill" style="width: 85%"></div>
+                                    </div>
+                                    <span class="score-percent">85%</span>
+                                </div>
+                                <div class="score-bar">
+                                    <span class="score-label">4 stars</span>
+                                    <div class="distribution-bar">
+                                        <div class="distribution-fill" style="width: 12%"></div>
+                                    </div>
+                                    <span class="score-percent">12%</span>
+                                </div>
+                                <div class="score-bar">
+                                    <span class="score-label">3 stars</span>
+                                    <div class="distribution-bar">
+                                        <div class="distribution-fill" style="width: 2%"></div>
+                                    </div>
+                                    <span class="score-percent">2%</span>
+                                </div>
+                                <div class="score-bar">
+                                    <span class="score-label">2 stars</span>
+                                    <div class="distribution-bar">
+                                        <div class="distribution-fill" style="width: 0.5%"></div>
+                                    </div>
+                                    <span class="score-percent">0.5%</span>
+                                </div>
+                                <div class="score-bar">
+                                    <span class="score-label">1 star</span>
+                                    <div class="distribution-bar">
+                                        <div class="distribution-fill" style="width: 0.5%"></div>
+                                    </div>
+                                    <span class="score-percent">0.5%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="review-list">
+                            <article class="user-review">
+                                <div class="review-header">
+                                    <img src="../images/SwagSonic.jpg" alt="User Avatar" class="user-avatar">
+                                    <div class="review-meta">
+                                        <h4 class="username">SoulsFan99</h4>
+                                        <div class="review-stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="review-date">December 5, 2023</span>
+                                    </div>
+                                </div>
+                                <div class="review-body">
+                                    <p>Elden Ring is FromSoftware's masterpiece. The open world design perfectly complements the
+                                        traditional Souls formula, offering unparalleled freedom while maintaining challenging
+                                        combat. After 200+ hours, I'm still discovering new areas and secrets.</p>
+                                </div>
+                            </article>
+
+                            <article class="user-review">
+                                <div class="review-header">
+                                    <img src="../images/swagspidey.jpg" alt="User Avatar" class="user-avatar">
+                                    <div class="review-meta">
+                                        <h4 class="username">RPGMaster42</h4>
+                                        <div class="review-stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="review-date">November 15, 2023</span>
+                                    </div>
+                                </div>
+                                <div class="review-body">
+                                    <p>This game sets a new standard for open world RPGs. The level of detail in the world design
+                                        is astounding, and the combat feels precise and rewarding. Boss fights are incredibly
+                                        challenging but fair. A true masterpiece that deserves all the praise.</p>
+                                </div>
+                            </article>
+                        </div>
+
+                        <button class="load-more-btn">Load More Reviews</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game cards where ratings occur -->
+        <section class="games-grid">
+            <!-- Existing game cards... -->
+
+            <div class="game-actions">
+                <a href="ratings.html" class="btn btn-secondary rating-btn">
+                    <i class="fas fa-star"></i> Rate
+                </a>
+                <!-- Existing action buttons... -->
+            </div>
+        </section>
+
+        <!-- Rating section replacement -->
+        <section class="game-rating">
+            <h2>Rate a Game</h2>
+            <div class="redirect-message">
+                <p>Our rating system has moved to a dedicated page for a more interactive experience.</p>
+                <a href="ratings.html" class="btn-primary">Go to Ratings Page</a>
+                <p class="small-text">Rate movies, anime, series, manga, and games all in one place!</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-section about">
+                <h3>About Entertainment Hub</h3>
+                <p>Your one-stop destination for movies, anime, manga, series, and games. Discover, track, and share your entertainment journey.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section links">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="series.html">TV Series</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="games.html">Games</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section links">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="discussions.html">Discussions</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                    <li><a href="recommendations.html">Recommendations</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="events.html">Events</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section links">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section newsletter">
+                <h3>Stay Updated</h3>
+                <p>Subscribe to our newsletter for the latest entertainment updates.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+            <div class="app-links">
+                <a href="#"><img src="../images/appstore.jpg" alt="Download on App Store"></a>
+                <a href="#"><img src="../images/Googleplay.jpg" alt="Get it on Google Play"></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/carousel.js"></script>
+    <script src="../js/games.js"></script>
+    <script src="../js/auth.js"></script>
+</body>
+</html>

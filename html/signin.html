@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | Entertainment Hub</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/signin.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Sign in or create an account on Entertainment Hub - your ultimate destination for anime, manga, movies, and games.">
+    <meta name="keywords" content="entertainment hub, login, register, sign in, sign up, anime, manga, movies, games">
+    
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#9370DB">
+</head>
+
+<body class="signin-page" data-theme="light">
+    <header>
+        <h1><i class="fas fa-sign-in-alt"></i> Sign In / Sign Up</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="manga.html">Manga</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="discussions.html">Discussions</a></li>
+                <li><a href="watchlist.html">Watchlist</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="signin.html" class="active">Sign In / Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="auth-container">
+        <!-- Breadcrumbs will be added by common.js -->
+        
+        <div class="auth-card animate-on-scroll" data-animation="fade-in">
+            <div class="auth-tabs">
+                <button class="tab-btn active" data-tab="signin">Sign In</button>
+                <button class="tab-btn" data-tab="signup">Sign Up</button>
+                <button class="tab-btn" data-tab="admin">Admin Access</button>
+            </div>
+            
+            <div class="auth-forms">
+                <!-- Alerts container for messages -->
+                <div id="auth-alerts" class="auth-alerts"></div>
+                
+                <!-- Sign In Form -->
+                <section id="signin" class="auth-form active">
+                    <h2><i class="fas fa-sign-in-alt"></i> Sign In</h2>
+                    <form id="signin-form" method="post">
+                        <div class="form-group">
+                            <label for="signin-email">Email</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="signin-email" name="email" placeholder="Enter your email" required autocomplete="email">
+                            </div>
+                            <div class="input-error" id="signin-email-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signin-password">Password</label>
+                            <div class="input-with-icon password-input">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="signin-password" name="password" placeholder="Enter your password" required autocomplete="current-password">
+                                <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="input-error" id="signin-password-error"></div>
+                        </div>
+                        
+                        <div class="form-options">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="remember-me" name="remember">
+                                <span class="checkmark"></span>
+                                Remember me
+                            </label>
+                            <a href="#" class="forgot-password">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <span class="btn-text">Sign In</span>
+                            <span class="btn-loader"><i class="fas fa-spinner fa-spin"></i></span>
+                        </button>
+                        
+                        <div class="social-signin">
+                            <p>Or sign in with:</p>
+                            <div class="social-buttons">
+                                <button type="button" class="social-btn google">
+                                    <i class="fab fa-google"></i> Google
+                                </button>
+                                <button type="button" class="social-btn facebook">
+                                    <i class="fab fa-facebook-f"></i> Facebook
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Sign Up Form -->
+                <section id="signup" class="auth-form">
+                    <h2><i class="fas fa-user-plus"></i> Sign Up</h2>
+                    <form id="signup-form" method="post" action="../api/auth.php?action=register">
+                        <div class="form-group">
+                            <label for="signup-username">Username</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="signup-username" name="username" placeholder="Choose a username" required>
+                            </div>
+                            <div class="input-error" id="signup-username-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signup-email">Email</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="signup-email" name="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="input-error" id="signup-email-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signup-password">Password</label>
+                            <div class="input-with-icon password-input">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="signup-password" name="password" placeholder="Create a password" required>
+                                <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div id="password-strength" class="password-strength"></div>
+                            <ul class="password-requirements">
+                                <li id="req-length"><i class="fas fa-times-circle"></i> At least 8 characters</li>
+                                <li id="req-uppercase"><i class="fas fa-times-circle"></i> At least 1 uppercase letter</li>
+                                <li id="req-lowercase"><i class="fas fa-times-circle"></i> At least 1 lowercase letter</li>
+                                <li id="req-number"><i class="fas fa-times-circle"></i> At least 1 number</li>
+                                <li id="req-special"><i class="fas fa-times-circle"></i> At least 1 special character</li>
+                            </ul>
+                            <div class="input-error" id="signup-password-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signup-confirm">Confirm Password</label>
+                            <div class="input-with-icon password-input">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="signup-confirm" name="confirm_password" placeholder="Confirm your password" required>
+                                <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="input-error" id="signup-confirm-error"></div>
+                        </div>
+                        
+                        <div class="form-options">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="terms" name="terms" required>
+                                <span class="checkmark"></span>
+                                I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                            </label>
+                            <div class="input-error" id="terms-error"></div>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <span class="btn-text">Create Account</span>
+                            <span class="btn-loader"><i class="fas fa-spinner fa-spin"></i></span>
+                        </button>
+                    </form>
+                </section>
+
+                <!-- Admin Form -->
+                <section id="admin" class="auth-form">
+                    <h2><i class="fas fa-user-shield"></i> Admin Access</h2>
+                    <div class="admin-notice">
+                        <p><i class="fas fa-info-circle"></i> This form is for authorized personnel only. All registrations are subject to approval by the system administrator.</p>
+                    </div>
+                    <form id="admin-form" method="post">
+                        <div class="form-group">
+                            <label for="admin-email">Admin Email</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="admin-email" name="email" placeholder="Enter your admin email" required>
+                            </div>
+                            <div class="input-error" id="admin-email-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="admin-password">Admin Password</label>
+                            <div class="input-with-icon password-input">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="admin-password" name="password" placeholder="Enter admin password" required>
+                                <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="input-error" id="admin-password-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="admin-code">Authorization Code</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-key"></i>
+                                <input type="text" id="admin-code" name="code" placeholder="Enter admin authorization code" required>
+                            </div>
+                            <div class="input-error" id="admin-code-error"></div>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn admin-submit">
+                            <span class="btn-text">Access Admin Panel</span>
+                            <span class="btn-loader"><i class="fas fa-spinner fa-spin"></i></span>
+                        </button>
+                    </form>
+                </section>
+            </div>
+        </div>
+        
+        <!-- Features Section -->
+        <div class="auth-features">
+            <div class="feature-card animate-on-scroll" data-animation="fade-in-up" data-delay="100">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Secure Account</h3>
+                <p>Your data is encrypted and protected with the latest security standards</p>
+            </div>
+            <div class="feature-card animate-on-scroll" data-animation="fade-in-up" data-delay="200">
+                <i class="fas fa-bookmark"></i>
+                <h3>Personalized Watchlist</h3>
+                <p>Create custom lists of your favorite anime, movies, and games</p>
+            </div>
+            <div class="feature-card animate-on-scroll" data-animation="fade-in-up" data-delay="300">
+                <i class="fas fa-comments"></i>
+                <h3>Join Discussions</h3>
+                <p>Connect with community members and share your opinions</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Entertainment Hub</h3>
+                <p>Your ultimate destination for entertainment reviews and discussions.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/common.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching functionality
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const authForms = document.querySelectorAll('.auth-form');
+            
+            // Check URL parameters for direct access to register form
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('register') === 'true') {
+                // Activate signup tab
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                authForms.forEach(form => form.classList.remove('active'));
+                
+                document.querySelector('[data-tab="signup"]').classList.add('active');
+                document.getElementById('signup').classList.add('active');
+            }
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetTab = this.dataset.tab;
+                    
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    authForms.forEach(form => form.classList.remove('active'));
+                    
+                    this.classList.add('active');
+                    document.getElementById(targetTab).classList.add('active');
+                    
+                    // Clear any previous error messages
+                    clearErrors();
+                });
+            });
+            
+            // Toggle password visibility
+            const toggleButtons = document.querySelectorAll('.toggle-password');
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const input = this.closest('.password-input').querySelector('input');
+                    const icon = this.querySelector('i');
+                    
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                    } else {
+                        input.type = 'password';
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    }
+                });
+            });
+            
+            // Password strength checker
+            const signupPassword = document.getElementById('signup-password');
+            if (signupPassword) {
+                signupPassword.addEventListener('input', checkPasswordStrength);
+            }
+            
+            // Form submission handlers
+            const signinForm = document.getElementById('signin-form');
+            const signupForm = document.getElementById('signup-form');
+            const adminForm = document.getElementById('admin-form');
+            
+            if (signinForm) {
+                signinForm.addEventListener('submit', handleSignIn);
+            }
+            
+            if (signupForm) {
+                signupForm.addEventListener('submit', handleSignUp);
+            }
+            
+            if (adminForm) {
+                adminForm.addEventListener('submit', handleAdminLogin);
+            }
+            
+            // Initialize any previously stored values
+            initializeFormValues();
+        });
+        
+        // Display error message
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+        }
+        
+        // Clear all error messages
+        function clearErrors() {
+            const errorElements = document.querySelectorAll('.input-error');
+            errorElements.forEach(el => {
+                el.textContent = '';
+                el.style.display = 'none';
+            });
+            
+            document.getElementById('auth-alerts').innerHTML = '';
+        }
+        
+        // Show alert message
+        function showAlert(message, type = 'error') {
+            const alertsContainer = document.getElementById('auth-alerts');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i> ${message}`;
+            
+            alertsContainer.innerHTML = '';
+            alertsContainer.appendChild(alert);
+            
+            // Auto-dismiss after 5 seconds
+            setTimeout(() => {
+                alert.classList.add('fade-out');
+                setTimeout(() => {
+                    alertsContainer.removeChild(alert);
+                }, 300);
+            }, 5000);
+        }
+        
+        // Set form state (loading or ready)
+        function setFormLoading(form, isLoading) {
+            const submitBtn = form.querySelector('.submit-btn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoader = submitBtn.querySelector('.btn-loader');
+            
+            if (isLoading) {
+                submitBtn.disabled = true;
+                btnText.style.display = 'none';
+                btnLoader.style.display = 'inline-block';
+            } else {
+                submitBtn.disabled = false;
+                btnText.style.display = 'inline-block';
+                btnLoader.style.display = 'none';
+            }
+        }
+        
+        // Handle sign in form submission
+        async function handleSignIn(e) {
+            e.preventDefault();
+            clearErrors();
+            
+            const form = e.target;
+            const email = form.querySelector('#signin-email').value.trim();
+            const password = form.querySelector('#signin-password').value;
+            const remember = form.querySelector('#remember-me').checked;
+            
+            // Basic validation
+            let isValid = true;
+            
+            if (!email) {
+                showError('signin-email-error', 'Please enter your email');
+                isValid = false;
+            }
+            
+            if (!password) {
+                showError('signin-password-error', 'Please enter your password');
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
+            // Handle form submission
+            try {
+                setFormLoading(form, true);
+                
+                // Save email for convenience if remember me is checked
+                if (remember) {
+                    localStorage.setItem('rememberedEmail', email);
+                } else {
+                    localStorage.removeItem('rememberedEmail');
+                }
+                
+                // Use Auth module to login
+                const user = await Auth.login(email, password);
+                
+                showAlert('Login successful! Redirecting...', 'success');
+                
+                // Redirect after successful login
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+                
+            } catch (error) {
+                showAlert(error.message || 'Login failed. Please check your credentials.');
+            } finally {
+                setFormLoading(form, false);
+            }
+        }
+        
+        // Handle sign up form submission
+        async function handleSignUp(e) {
+            e.preventDefault();
+            clearErrors();
+            
+            const form = e.target;
+            const username = form.querySelector('#signup-username').value.trim();
+            const email = form.querySelector('#signup-email').value.trim();
+            const password = form.querySelector('#signup-password').value;
+            const confirmPassword = form.querySelector('#signup-confirm').value;
+            const termsAccepted = form.querySelector('#terms').checked;
+            
+            // Basic validation
+            let isValid = true;
+            
+            if (!username) {
+                showError('signup-username-error', 'Please enter a username');
+                isValid = false;
+            } else if (username.length < 3) {
+                showError('signup-username-error', 'Username must be at least 3 characters');
+                isValid = false;
+            }
+            
+            if (!email) {
+                showError('signup-email-error', 'Please enter your email');
+                isValid = false;
+            } else if (!isValidEmail(email)) {
+                showError('signup-email-error', 'Please enter a valid email address');
+                isValid = false;
+            }
+            
+            if (!password) {
+                showError('signup-password-error', 'Please enter a password');
+                isValid = false;
+            } else if (password.length < 8) {
+                showError('signup-password-error', 'Password must be at least 8 characters');
+                isValid = false;
+            }
+            
+            if (!confirmPassword) {
+                showError('signup-confirm-error', 'Please confirm your password');
+                isValid = false;
+            } else if (password !== confirmPassword) {
+                showError('signup-confirm-error', 'Passwords do not match');
+                isValid = false;
+            }
+            
+            if (!termsAccepted) {
+                showError('terms-error', 'You must accept the Terms of Service');
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
+            // Handle form submission
+            try {
+                setFormLoading(form, true);
+                
+                // Use Auth module to register
+                const user = await Auth.register(username, email, password);
+                
+                showAlert('Registration successful! Welcome to Entertainment Hub!', 'success');
+                
+                // Redirect after successful registration
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+                
+            } catch (error) {
+                showAlert(error.message || 'Registration failed. Please try again.');
+            } finally {
+                setFormLoading(form, false);
+            }
+        }
+        
+        // Handle admin login form submission
+        async function handleAdminLogin(e) {
+            e.preventDefault();
+            clearErrors();
+            
+            const form = e.target;
+            const email = form.querySelector('#admin-email').value.trim();
+            const password = form.querySelector('#admin-password').value;
+            const code = form.querySelector('#admin-code').value.trim();
+            
+            // Basic validation
+            let isValid = true;
+            
+            if (!email) {
+                showError('admin-email-error', 'Please enter your admin email');
+                isValid = false;
+            }
+            
+            if (!password) {
+                showError('admin-password-error', 'Please enter your password');
+                isValid = false;
+            }
+            
+            if (!code) {
+                showError('admin-code-error', 'Please enter the authorization code');
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
+            // Handle form submission
+            try {
+                setFormLoading(form, true);
+                
+                // Demo admin login for now (replace with actual API call)
+                if (email === 'admin@example.com' && password === 'Admin123!' && code === 'admin2025') {
+                    // Mock admin login success
+                    showAlert('Admin login successful! Redirecting to dashboard...', 'success');
+                    
+                    // Create mock admin data
+                    const adminData = {
+                        id: 1,
+                        username: 'admin',
+                        email: 'admin@example.com',
+                        role: 'admin',
+                        avatar: 'Avatar.jpg'
+                    };
+                    
+                    // Store admin session
+                    localStorage.setItem('adminToken', 'admin-' + Date.now());
+                    localStorage.setItem('adminData', JSON.stringify(adminData));
+                    
+                    // Redirect to admin dashboard
+                    setTimeout(() => {
+                        window.location.href = 'admin/dashboard.html';
+                    }, 1500);
+                } else {
+                    throw new Error('Invalid admin credentials or authorization code');
+                }
+            } catch (error) {
+                showAlert(error.message || 'Admin login failed. Please check your credentials.');
+            } finally {
+                setFormLoading(form, false);
+            }
+        }
+        
+        // Check password strength
+        function checkPasswordStrength(e) {
+            const password = e.target.value;
+            const strengthMeter = document.getElementById('password-strength');
+            
+            // Update password requirement indicators
+            const reqLength = document.getElementById('req-length');
+            const reqUppercase = document.getElementById('req-uppercase');
+            const reqLowercase = document.getElementById('req-lowercase');
+            const reqNumber = document.getElementById('req-number');
+            const reqSpecial = document.getElementById('req-special');
+            
+            // Check each requirement
+            const hasLength = password.length >= 8;
+            const hasUppercase = /[A-Z]/.test(password);
+            const hasLowercase = /[a-z]/.test(password);
+            const hasNumber = /[0-9]/.test(password);
+            const hasSpecial = /[^A-Za-z0-9]/.test(password);
+            
+            // Update requirement indicators
+            updateRequirement(reqLength, hasLength);
+            updateRequirement(reqUppercase, hasUppercase);
+            updateRequirement(reqLowercase, hasLowercase);
+            updateRequirement(reqNumber, hasNumber);
+            updateRequirement(reqSpecial, hasSpecial);
+            
+            // Calculate strength score (0-5)
+            let strength = 0;
+            if (hasLength) strength++;
+            if (hasUppercase) strength++;
+            if (hasLowercase) strength++;
+            if (hasNumber) strength++;
+            if (hasSpecial) strength++;
+            
+            // Update strength indicator
+            const strengthText = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong', 'Very Strong'][strength];
+            strengthMeter.textContent = strengthText || '';
+            
+            // Update strength class
+            strengthMeter.className = 'password-strength';
+            if (strength > 0) {
+                strengthMeter.classList.add(`strength-${strength}`);
+            }
+        }
+        
+        // Update password requirement indicator
+        function updateRequirement(element, isValid) {
+            if (isValid) {
+                element.querySelector('i').className = 'fas fa-check-circle';
+                element.classList.add('valid');
+            } else {
+                element.querySelector('i').className = 'fas fa-times-circle';
+                element.classList.remove('valid');
+            }
+        }
+        
+        // Initialize form with stored values
+        function initializeFormValues() {
+            const rememberedEmail = localStorage.getItem('rememberedEmail');
+            const emailInput = document.getElementById('signin-email');
+            
+            if (rememberedEmail && emailInput) {
+                emailInput.value = rememberedEmail;
+                document.getElementById('remember-me').checked = true;
+            }
+        }
+        
+        // Validate email format
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+    </script>
+    <a href="#" class="back-to-top" id="back-to-top-btn" aria-label="Back to top">↑</a>
+</body>
+
+</html>

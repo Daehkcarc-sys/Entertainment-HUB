@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manga Hub | Entertainment Portal</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/manga.css">
+    <link rel="stylesheet" href="../css/carousel.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="description" content="Discover and track manga series, read reviews, and connect with other manga fans.">
+    <style>
+        /* Add some styles for the rating link */
+        .action-button.rating-btn,
+        .btn.rating-btn {
+            transition: all 0.3s ease;
+        }
+
+        .action-button.rating-btn:hover,
+        .btn.rating-btn:hover {
+            transform: scale(1.1);
+            color: #FFD700;
+        }
+    </style>
+</head>
+
+<body class="manga-page">
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html"><i class="fas fa-film"></i> Entertainment Hub</a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html" class="active">Manga</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="games.html">Games</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="search-toggle">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="user-menu">
+                    <a href="leaderboard.html">Leaderboard</a>
+                    <a href="watchlist.html">Watchlist</a>
+                    <a href="profile.html">Profile</a>
+                    <a href="signin.html" class="sign-in-btn">Sign In</a>
+                </div>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Banner Carousel Section -->
+        <section class="manga-hero">
+            <div class="carousel-container banner carousel-hero overlay" data-autoplay="true" data-loop="true"
+                data-slides-per-view="1" data-autoplay-delay="8000">
+                <div class="carousel-wrapper">
+                    <div class="carousel-item">
+                        <div class="carousel-image">
+                            <img src="../images/JJK.jpeg" alt="Jujutsu Kaisen" loading="eager">
+                        </div>
+                        <div class="carousel-caption">
+                            <span class="carousel-badge">Most Popular</span>
+                            <h2>Jujutsu Kaisen</h2>
+                            <p>A boy swallows a cursed object, gaining the power to fight back against evil spirits that feed on
+                                humans.</p>
+                            <div class="carousel-actions">
+                                <a href="#" class="btn btn-primary">Read Now</a>
+                                <button class="btn btn-outline add-wishlist" data-id="jujutsu-kaisen">Add to Reading List
+                                </button>
+                            </div>
+                            <div class="carousel-meta">
+                                <span><i class="fas fa-star"></i> 9.4/10</span>
+                                <span><i class="fas fa-pen"></i> Gege Akutami</span>
+                                <span><i class="fas fa-book"></i> Shonen Jump</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-image">
+                            <img src="../images/Chainsaw.jpg" alt="Chainsaw Man" loading="eager">
+                        </div>
+                        <div class="carousel-caption">
+                            <span class="carousel-badge">Trending</span>
+                            <h2>Chainsaw Man</h2>
+                            <p>A desperate young man makes a contract with a devil to become the hybrid Chainsaw Man in this dark
+                                fantasy series.</p>
+                            <div class="carousel-actions">
+                                <a href="#" class="btn btn-primary">Read Now</a>
+                                <button class="btn btn-outline add-wishlist" data-id="chainsaw-man">Add to Reading List
+                                </button>
+                            </div>
+                            <div class="carousel-meta">
+                                <span><i class="fas fa-star"></i> 9.3/10</span>
+                                <span><i class="fas fa-pen"></i> Tatsuki Fujimoto</span>
+                                <span><i class="fas fa-book"></i> Shonen Jump</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-image">
+                            <img src="../images/OnePiece.jpg" alt="One Piece" loading="eager">
+                        </div>
+                        <div class="carousel-caption">
+                            <span class="carousel-badge">All-Time Classic</span>
+                            <h2>One Piece</h2>
+                            <p>Follow Monkey D. Luffy and his pirate crew in their search for the world's ultimate treasure, the
+                                One Piece.</p>
+                            <div class="carousel-actions">
+                                <a href="#" class="btn btn-primary">Read Now</a>
+                                <button class="btn btn-outline add-wishlist" data-id="one-piece">Add to Reading List</button>
+                            </div>
+                            <div class="carousel-meta">
+                                <span><i class="fas fa-star"></i> 9.6/10</span>
+                                <span><i class="fas fa-pen"></i> Eiichiro Oda</span>
+                                <span><i class="fas fa-book"></i> Shonen Jump</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-indicators">
+                    <button class="carousel-indicator active" data-slide="0" aria-label="Go to slide 1"></button>
+                    <button class="carousel-indicator" data-slide="1" aria-label="Go to slide 2"></button>
+                    <button class="carousel-indicator" data-slide="2" aria-label="Go to slide 3"></button>
+                </div>
+                <button class="carousel-control carousel-control-prev" aria-label="Previous slide">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-control carousel-control-next" aria-label="Next slide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Quick Category Navigation -->
+        <section class="category-nav">
+            <div class="container">
+                <div class="nav-cards">
+                    <a href="#popular" class="nav-card">
+                        <i class="fas fa-fire"></i>
+                        <span>Popular</span>
+                    </a>
+                    <a href="#genres" class="nav-card">
+                        <i class="fas fa-tags"></i>
+                        <span>Genres</span>
+                    </a>
+                    <a href="mangareader.html" class="nav-card">
+                        <i class="fas fa-book-reader"></i>
+                        <span>Read Manga</span>
+                    </a>
+                    <a href="#new" class="nav-card">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>New Releases</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- Search and Filter Section -->
+        <section class="search-filter-section">
+            <div class="search-container">
+                <form action="#" method="get" role="search">
+                    <input type="search" name="manga-search" id="manga-search"
+                        placeholder="Search manga by title, author, or publishing house..." aria-label="Search for manga">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+
+            <div class="filter-sort-container">
+                <div class="filter-group">
+                    <label for="status-filter">Status:</label>
+                    <select id="status-filter" name="status">
+                        <option value="all">All Status</option>
+                        <option value="publishing">Publishing</option>
+                        <option value="completed">Completed</option>
+                        <option value="hiatus">On Hiatus</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="demographic-filter">Demographic:</label>
+                    <select id="demographic-filter" name="demographic">
+                        <option value="all">All Demographics</option>
+                        <option value="shounen">Shounen</option>
+                        <option value="shoujo">Shoujo</option>
+                        <option value="seinen">Seinen</option>
+                        <option value="josei">Josei</option>
+                    </select>
+                </div>
+
+                <div class="sort-group">
+                    <label for="sort-manga">Sort By:</label>
+                    <select id="sort-manga" name="sort">
+                        <option value="popularity">Popularity</option>
+                        <option value="rating">Highest Rating</option>
+                        <option value="chapters">Chapter Count</option>
+                        <option value="newest">Latest Updated</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Genres Section with Icons -->
+        <section class="genres-section" id="genres">
+            <h2>Explore by Genre</h2>
+            <div class="genres-container">
+                <a href="#" class="genre-card">
+                    <i class="fas fa-dragon"></i>
+                    <span>Isekai</span>
+                </a>
+                <a href="#" class="genre-card">
+                    <i class="fas fa-heart"></i>
+                    <span>Romance / Josei</span>
+                </a>
+                <a href="#" class="genre-card">
+                    <i class="fas fa-fist-raised"></i>
+                    <span>Battle Shounen</span>
+                </a>
+                <a href="#" class="genre-card">
+                    <i class="fas fa-ghost"></i>
+                    <span>Supernatural</span>
+                </a>
+                <a href="#" class="genre-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>School Life</span>
+                </a>
+                <a href="#" class="genre-card">
+                    <i class="fas fa-laugh-squint"></i>
+                    <span>Gag Manga</span>
+                </a>
+                <a href="#" class="genre-card">
+                    <i class="fas fa-user-ninja"></i>
+                    <span>Martial Arts</span>
+                </a>
+                <a href="#" class="genre-card">
+                    <i class="fas fa-robot"></i>
+                    <span>Mecha</span>
+                </a>
+                <a href="#" class="genre-card">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Game World</span>
+                </a>
+                <a href="#" class="genre-card">
+                    <i class="fas fa-atom"></i>
+                    <span>Sci-Fi</span>
+                </a>
+                <a href="#" class="genre-card">
+                    <i class="fas fa-skull"></i>
+                    <span>Dark Fantasy</span>
+                </a>
+                <a href="#" class="genre-card">
+                    <i class="fas fa-bread-slice"></i>
+                    <span>Cooking</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Top Manga Section -->
+        <section class="top-manga" id="popular">
+            <h2>Top Manga Series</h2>
+
+            <!-- Adding a multi-item carousel for "Currently Popular" manga -->
+            <div class="carousel-container multi-item" data-slides-per-view="4" data-loop="false" data-spacing="16"
+                data-breakpoints='{"1024":{"slidesPerView":4},"768":{"slidesPerView":3},"480":{"slidesPerView":2}}'>
+                <div class="carousel-wrapper">
+                    <!-- Carousel Item 1 -->
+                    <div class="carousel-item">
+                        <div class="carousel-content manga-card-content">
+                            <div class="manga-image">
+                                <img src="../images/OnePiece.jpg" alt="One Piece">
+                                <span class="carousel-badge">9.6 <i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="carousel-caption">
+                                <h3>One Piece</h3>
+                                <p>Adventure | 1060+ Chapters</p>
+                                <div class="manga-author">By Eiichiro Oda</div>
+                                <div class="manga-actions">
+                                    <button class="action-button" aria-label="Add to reading list">
+                                        <i class="fas fa-bookmark"></i>
+                                    </button>
+                                    <button class="action-button" aria-label="More information">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carousel Item 2 -->
+                    <div class="carousel-item">
+                        <div class="carousel-content manga-card-content">
+                            <div class="manga-image">
+                                <img src="../images/JJK.jpeg" alt="Jujutsu Kaisen">
+                                <span class="carousel-badge">9.4 <i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="carousel-caption">
+                                <h3>Jujutsu Kaisen</h3>
+                                <p>Action | 220+ Chapters</p>
+                                <div class="manga-author">By Gege Akutami</div>
+                                <div class="manga-actions">
+                                    <button class="action-button" aria-label="Add to reading list">
+                                        <i class="fas fa-bookmark"></i>
+                                    </button>
+                                    <button class="action-button" aria-label="More information">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carousel Item 3 -->
+                    <div class="carousel-item">
+                        <div class="carousel-content manga-card-content">
+                            <div class="manga-image">
+                                <img src="../images/Chainsaw.jpg" alt="Chainsaw Man">
+                                <span class="carousel-badge">9.3 <i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="carousel-caption">
+                                <h3>Chainsaw Man</h3>
+                                <p>Action | 130+ Chapters</p>
+                                <div class="manga-author">By Tatsuki Fujimoto</div>
+                                <div class="manga-actions">
+                                    <button class="action-button" aria-label="Add to reading list">
+                                        <i class="fas fa-bookmark"></i>
+                                    </button>
+                                    <button class="action-button" aria-label="More information">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carousel Item 4 -->
+                    <div class="carousel-item">
+                        <div class="carousel-content manga-card-content">
+                            <div class="manga-image">
+                                <img src="../images/attack on titan.jpg" alt="Attack on Titan">
+                                <span class="carousel-badge">9.6 <i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="carousel-caption">
+                                <h3>Attack on Titan</h3>
+                                <p>Dark Fantasy | 139 Chapters</p>
+                                <div class="manga-author">By Hajime Isayama</div>
+                                <div class="manga-actions">
+                                    <button class="action-button" aria-label="Add to reading list">
+                                        <i class="fas fa-bookmark"></i>
+                                    </button>
+                                    <button class="action-button" aria-label="More information">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carousel Item 5 -->
+                    <div class="carousel-item">
+                        <div class="carousel-content manga-card-content">
+                            <div class="manga-image">
+                                <img src="../images/Naruto.jpg" alt="Naruto">
+                                <span class="carousel-badge">9.2 <i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="carousel-caption">
+                                <h3>Naruto</h3>
+                                <p>Action | 700 Chapters</p>
+                                <div class="manga-author">By Masashi Kishimoto</div>
+                                <div class="manga-actions">
+                                    <button class="action-button" aria-label="Add to reading list">
+                                        <i class="fas fa-bookmark"></i>
+                                    </button>
+                                    <button class="action-button" aria-label="More information">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carousel Item 6 -->
+                    <div class="carousel-item">
+                        <div class="carousel-content manga-card-content">
+                            <div class="manga-image">
+                                <img src="../images/DemonSlayer.jpg" alt="Demon Slayer">
+                                <span class="carousel-badge">9.0 <i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="carousel-caption">
+                                <h3>Demon Slayer</h3>
+                                <p>Fantasy | 205 Chapters</p>
+                                <div class="manga-author">By Koyoharu Gotouge</div>
+                                <div class="manga-actions">
+                                    <button class="action-button" aria-label="Add to reading list">
+                                        <i class="fas fa-bookmark"></i>
+                                    </button>
+                                    <button class="action-button" aria-label="More information">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-control carousel-control-prev" aria-label="Previous slide">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-control carousel-control-next" aria-label="Next slide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Original manga grid can remain as fallback or additional content -->
+            <div class="manga-grid">
+                <!-- Manga Card 1 -->
+                <div class="manga-card">
+                    <div class="manga-image">
+                        <img src="https://via.placeholder.com/225x320?text=Manga+Cover" alt="Manga Title">
+                        <div class="manga-overlay">
+                            <span class="manga-rating">9.2</span>
+                            <div class="manga-actions">
+                                <button class="action-button" aria-label="Add to reading list">
+                                    <i class="fas fa-bookmark"></i>
+                                </button>
+                                <button class="action-button rating-btn" aria-label="Rate manga">
+                                    <i class="fas fa-star"></i>
+                                </button>
+                                <button class="action-button" aria-label="More information">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="manga-info">
+                        <h3>Attack on Titan</h3>
+                        <div class="manga-meta">
+                            <span class="author">Hajime Isayama</span>
+                            <span class="chapters">139 Chapters</span>
+                        </div>
+                        <div class="manga-tags">
+                            <span class="manga-tag action">Action</span>
+                            <span class="manga-tag drama">Drama</span>
+                            <span class="manga-tag fantasy">Fantasy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manga Card 2 -->
+                <div class="manga-card">
+                    <div class="manga-image">
+                        <img src="https://via.placeholder.com/225x320?text=Manga+Cover" alt="Manga Title">
+                        <div class="manga-overlay">
+                            <span class="manga-rating">8.7</span>
+                            <div class="manga-actions">
+                                <button class="action-button" aria-label="Add to reading list">
+                                    <i class="fas fa-bookmark"></i>
+                                </button>
+                                <button class="action-button rating-btn" aria-label="Rate manga">
+                                    <i class="fas fa-star"></i>
+                                </button>
+                                <button class="action-button" aria-label="More information">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="manga-info">
+                        <h3>Chainsaw Man</h3>
+                        <div class="manga-meta">
+                            <span class="author">Tatsuki Fujimoto</span>
+                            <span class="chapters">97 Chapters</span>
+                        </div>
+                        <div class="manga-tags">
+                            <span class="manga-tag action">Action</span>
+                            <span class="manga-tag horror">Horror</span>
+                            <span class="manga-tag supernatural">Supernatural</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reading Progress -->
+        <section class="reading-progress signed-in-only">
+            <div class="not-signed-in-message">
+                <p><i class="fas fa-lock"></i> Please <a href="signin.html">sign in</a> to track your reading progress
+                </p>
+            </div>
+            <div class="signed-in-content">
+                <h2>Your Reading Progress</h2>
+                <div class="progress-grid"></div>
+                <div class="progress-card">
+                    <div class="progress-header">
+                        <img src="../images/OnePiece.jpg" alt="Manga Title">
+                        <div class="progress-info">
+                            <h3>One Piece</h3>
+                            <p>Current: Chapter 1089 / 1090</p>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 99%;"></div>
+                    </div>
+                    <button class="continue-reading">Continue Reading</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Rated Manga -->
+        <section class="top-rated-manga">
+            <h2>Top Rated Manga</h2>
+            <div class="tabs-container">
+                <nav class="tabs">
+                    <button class="tab-button active" data-target="all-time">All Time</button>
+                    <button class="tab-button" data-target="this-year">This Year</button>
+                    <button class="tab-button" data-target="by-genre">By Genre</button>
+                </nav>
+                <div class="tab-content active" id="all-time">
+                    <div class="ranking-list">
+                        <div class="ranking-item">
+                            <span class="rank">#1</span>
+                            <img src="../images/FMA.jpg" alt="Berserk">
+                            <div class="ranking-info">
+                                <h3>Berserk</h3>
+                                <div class="rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="score">9.8</span>
+                                </div>
+                                <span class="votes">142,568 votes</span>
+                            </div>
+                        </div>
+                        <div class="ranking-item">
+                            <span class="rank">#2</span>
+                            <img src="../images/FMA.jpg" alt="Vagabond">
+                            <div class="ranking-info">
+                                <h3>Vagabond</h3>
+                                <div class="rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="score">9.7</span>
+                                </div>
+                                <span class="votes">98,742 votes</span>
+                            </div>
+                        </div>
+                        <div class="ranking-item">
+                            <span class="rank">#3</span>
+                            <img src="../images/FMA.jpg" alt="Monster">
+                            <div class="ranking-info">
+                                <h3>Monster</h3>
+                                <div class="rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="score">9.6</span>
+                                </div>
+                                <span class="votes">87,456 votes</span>
+                            </div>
+                        </div>
+                        <div class="ranking-item">
+                            <span class="rank">#4</span>
+                            <img src="../images/OnePiece.jpg" alt="One Piece">
+                            <div class="ranking-info">
+                                <h3>One Piece</h3>
+                                <div class="rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="score">9.5</span>
+                                </div>
+                                <span class="votes">256,789 votes</span>
+                            </div>
+                        </div>
+                        <div class="ranking-item">
+                            <span class="rank">#5</span>
+                            <img src="../images/FMA.jpg" alt="Fullmetal Alchemist">
+                            <div class="ranking-info">
+                                <h3>Fullmetal Alchemist</h3>
+                                <div class="rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="score">9.4</span>
+                                </div>
+                                <span class="votes">178,345 votes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Manga Quiz -->
+        <section class="manga-quiz">
+            <h2>Test Your Manga Knowledge</h2>
+            <div class="quiz-container">
+                <div class="quiz-progress">
+                    <span>Question <span id="current-question">1</span>/5</span>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 20%"></div>
+                    </div>
+                </div>
+                <div class="quiz-content">
+                    <div class="quiz-question active">
+                        <h3>Which manga artist created Dragon Ball?</h3>
+                        <div class="options">
+                            <button class="option">Akira Toriyama</button>
+                            <button class="option">Eiichiro Oda</button>
+                            <button class="option">Masashi Kishimoto</button>
+                            <button class="option">Tite Kubo</button>
+                        </div>
+                    </div>
+                    <div class="quiz-controls">
+                        <button class="btn-secondary" id="prev-question" disabled>Previous</button>
+                        <button class="btn-primary" id="next-question">Next</button>
+                    </div>
+                </div>
+                <div class="quiz-results hidden">
+                    <h3>Quiz Complete!</h3>
+                    <p>Your Score: <span id="quiz-score">0</span>/5</p>
+                    <button class="btn-primary" id="retry-quiz">Try Again</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Manga -->
+        <section class="featured-manga">
+            <h2>Featured Manga</h2>
+            <div class="featured-container">
+                <div class="featured-image">
+                    <img src="../images/FMA.jpg" alt="Berserk">
+                    <div class="featured-badges">
+                        <span class="featured-status">Ongoing</span>
+                        <span class="featured-type">Dark Fantasy</span>
+                    </div>
+                </div>
+
+                <div class="featured-content">
+                    <h3>Berserk</h3>
+                    <div class="featured-meta">
+                        <span class="featured-author"><i class="fas fa-pen"></i> Kentaro Miura</span>
+                        <span class="featured-chapters"><i class="fas fa-book"></i> 364 Chapters</span>
+                        <span class="featured-rating"><i class="fas fa-star"></i> 9.4/10</span>
+                    </div>
+
+                    <div class="featured-tags">
+                        <span class="featured-tag">Dark Fantasy</span>
+                        <span class="featured-tag">Action</span>
+                        <span class="featured-tag">Drama</span>
+                        <span class="featured-tag">Supernatural</span>
+                    </div>
+
+                    <div class="featured-synopsis">
+                        <h4>Synopsis</h4>
+                        <p>A dark fantasy epic following the journey of Guts, a lone mercenary warrior marked by fate, as he
+                            battles against otherworldly forces in a medieval European-inspired dark fantasy world.</p>
+                    </div>
+
+                    <div class="featured-actions">
+                        <button class="btn-primary">
+                            <i class="fas fa-bookmark"></i> Add to Reading List
+                        </button>
+                        <button class="btn-secondary">
+                            <i class="fas fa-star"></i> Rate
+                        </button>
+                        <button class="btn-secondary">
+                            <i class="fas fa-share-alt"></i> Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Author Spotlight -->
+        <section class="author-spotlight">
+            <h2>Author Spotlight</h2>
+            <div class="author-cards">
+                <div class="author-card">
+                    <div class="author-image">
+                        <img src="images/author1.jpg" alt="Eiichiro Oda">
+                    </div>
+                    <div class="author-info">
+                        <h3>Eiichiro Oda</h3>
+                        <p class="author-work">One Piece</p>
+                        <p class="author-desc">Creator of the best-selling manga series of all time.</p>
+                        <div class="author-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Experience</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 97%;"></div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Popularity</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 95%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Manga News -->
+        <section class="manga-news">
+            <h2>Latest Manga News</h2>
+            <div class="news-grid">
+                <article class="news-card">
+                    <div class="news-image">
+                        <img src="images/news1.jpg" alt="News Image">
+                        <span class="news-category">Industry</span>
+                    </div>
+                    <div class="news-content">
+                        <h3>Major Publisher Announces Digital Platform</h3>
+                        <p class="news-excerpt">Leading manga publisher reveals plans for a new digital reading platform with
+                            simultaneous release worldwide...</p>
+                        <div class="news-meta">
+                            <span class="news-date"><i class="far fa-calendar"></i> Apr 15, 2025</span>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Manga Terminology Section -->
+        <section class="manga-terms">
+            <h2>Manga Terminology</h2>
+            <div class="terms-container">
+                <details>
+                    <summary><i class="fas fa-book"></i> Manga Formats</summary>
+                    <dl>
+                        <dt>Tankōbon <span class="term-jp">(単行本)</span></dt>
+                        <dd>Collection volumes of manga chapters, typically containing 6-10 chapters per book.</dd>
+
+                        <dt>One-shot <span class="term-jp">(読み切り)</span></dt>
+                        <dd>A self-contained manga story published as a single chapter.</dd>
+                    </dl>
+                </details>
+            </div>
+        </section>
+
+        <!-- Manga Newsletter -->
+        <section class="manga-newsletter">
+            <div class="newsletter-content">
+                <h2><i class="fas fa-envelope"></i> Stay Updated on Manga</h2>
+                <p>Get weekly updates on new releases, reviews, and manga news!</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit" class="btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-section about-section">
+                <h3>Entertainment Hub</h3>
+                <p>Your ultimate destination for entertainment reviews and discussions.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <div class="footer-section links-section">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="games.html">Games</a></li>
+                </ul>
+            </div>
+            <div class="footer-section links-section">
+                <h4>Community</h4>
+                <ul>
+                    <li><a href="discussions.html">Discussions</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="events.html">Events</a></li>
+                </ul>
+            </div>
+            <div class="footer-section links-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section subscribe-section">
+                <h4>Subscribe</h4>
+                <p>Get weekly updates on the latest entertainment news</p>
+                <form class="subscribe-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+                <div class="app-badges">
+                    <a href="#"><img src="../images/appstore.jpg" alt="Download on App Store"></a>
+                    <a href="#"><img src="../images/Googleplay.jpg" alt="Get it on Google Play"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart"></i> for entertainment fans everywhere</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize rating buttons to link to ratings.html
+            document.querySelectorAll('button, .btn').forEach(button => {
+                if ((button.textContent.includes('Rate') || button.querySelector('i.fa-star')) &&
+                    !(button instanceof HTMLAnchorElement) &&
+                    !button.classList.contains('rating-btn')) {
+
+                    const rateText = button.innerHTML;
+                    const parent = button.parentNode;
+                    const anchor = document.createElement('a');
+                    anchor.href = 'ratings.html';
+                    anchor.className = button.className + ' rating-btn';
+                    anchor.innerHTML = rateText;
+                    parent.replaceChild(anchor, button);
+                }
+            });
+        });
+    </script>
+    <a href="#" class="back-to-top" id="back-to-top-btn" aria-label="Back to top">↑</a>
+</body>
+
+</html>

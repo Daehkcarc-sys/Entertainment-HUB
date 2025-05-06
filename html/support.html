@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Support | Entertainment Hub</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        .support-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .support-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .support-header h1 {
+            margin-bottom: 1rem;
+            color: var(--heading-color);
+        }
+        
+        .support-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+        
+        .support-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .support-option {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .support-option:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .support-option .icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .support-option h3 {
+            margin-bottom: 1rem;
+            color: var(--heading-color);
+        }
+        
+        .support-option p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .support-option a.btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .support-option a.btn:hover {
+            background-color: var(--accent-hover);
+        }
+        
+        .faq-preview {
+            margin-bottom: 4rem;
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .faq-preview h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--heading-color);
+        }
+        
+        .faq-item {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-question {
+            padding: 1rem 0;
+            font-weight: 600;
+            color: var(--heading-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question .icon {
+            color: var(--accent-color);
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-question .icon {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding-bottom: 1rem;
+        }
+        
+        .faq-preview .view-all {
+            display: block;
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .faq-preview .view-all:hover {
+            text-decoration: underline;
+        }
+        
+        .contact-form {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-form h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--heading-color);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--heading-color);
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+        }
+        
+        .form-submit {
+            text-align: center;
+        }
+        
+        .form-submit button {
+            padding: 0.75rem 2rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .form-submit button:hover {
+            background-color: var(--accent-hover);
+        }
+        
+        .ticket-status {
+            margin-top: 4rem;
+            text-align: center;
+        }
+        
+        .ticket-status h2 {
+            margin-bottom: 1.5rem;
+            color: var(--heading-color);
+        }
+        
+        .ticket-lookup {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+        }
+        
+        .ticket-lookup input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px 0 0 8px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+        }
+        
+        .ticket-lookup button {
+            padding: 0 1.5rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 0 8px 8px 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .ticket-lookup button:hover {
+            background-color: var(--accent-hover);
+        }
+    </style>
+</head>
+
+<body data-theme="light">
+    <header>
+        <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="manga.html">Manga</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="discussions.html">Discussions</a></li>
+                <li><a href="watchlist.html">Watchlist</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="signin.html">Sign In / Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="support-container">
+            <div class="support-header">
+                <h1>How Can We Help You?</h1>
+                <p>Our support team is here to assist you with any questions or issues you might have with Entertainment Hub.</p>
+            </div>
+            
+            <div class="support-options">
+                <div class="support-option">
+                    <div class="icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>Frequently Asked Questions</h3>
+                    <p>Find quick answers to common questions about our platform, features, and services.</p>
+                    <a href="faq.html" class="btn">Browse FAQs</a>
+                </div>
+                
+                <div class="support-option">
+                    <div class="icon">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <h3>Submit a Support Ticket</h3>
+                    <p>Need personalized help? Submit a ticket and our team will respond as soon as possible.</p>
+                    <a href="#contact-form" class="btn">Create Ticket</a>
+                </div>
+                
+                <div class="support-option">
+                    <div class="icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>Report an Issue</h3>
+                    <p>Found a bug or technical problem? Let us know so we can fix it quickly.</p>
+                    <a href="#contact-form" class="btn">Report Bug</a>
+                </div>
+            </div>
+            
+            <div class="faq-preview">
+                <h2>Popular Support Questions</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I reset my password?</span>
+                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To reset your password, click on the "Forgot Password" link on the sign-in page. Enter the email address associated with your account, and we'll send you a link to create a new password. The link will expire after 24 hours for security reasons.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I manage my subscription?</span>
+                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To manage your subscription, sign in to your account and go to your Profile page. Click on "Subscription" in the settings menu. From there, you can view your current plan, billing information, payment history, and make changes to your subscription.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Why can't I add certain content to my watchlist?</span>
+                        <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>There could be several reasons why you can't add content to your watchlist:</p>
+                        <ul>
+                            <li>You need to be signed in to use the watchlist feature</li>
+                            <li>The content may already be in your watchlist</li>
+                            <li>You may have reached the maximum limit for your watchlist (Premium accounts have unlimited watchlists)</li>
+                            <li>There might be a temporary technical issue</li>
+                        </ul>
+                        <p>If you continue to experience problems, please contact our support team for assistance.</p>
+                    </div>
+                </div>
+                
+                <a href="faq.html" class="view-all">View All FAQs <i class="fas fa-chevron-right"></i></a>
+            </div>
+            
+            <div class="contact-form" id="contact-form">
+                <h2>Contact Support</h2>
+                
+                <form id="supportForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="What's this about?" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="issueType">Issue Type</label>
+                        <select id="issueType" name="issueType" required>
+                            <option value="" selected disabled>Select an issue type</option>
+                            <option value="account">Account Problem</option>
+                            <option value="technical">Technical Issue</option>
+                            <option value="billing">Billing/Subscription</option>
+                            <option value="content">Content Request</option>
+                            <option value="feature">Feature Request</option>
+                            <option value="bug">Bug Report</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Please describe your issue in detail..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="attachments">Attachments (optional)</label>
+                        <input type="file" id="attachments" name="attachments" multiple>
+                        <small>You can attach screenshots or relevant files (max 5MB per file)</small>
+                    </div>
+                    
+                    <div class="form-submit">
+                        <button type="submit">Submit Support Request</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="ticket-status">
+                <h2>Check Ticket Status</h2>
+                <div class="ticket-lookup">
+                    <input type="text" placeholder="Enter your ticket number">
+                    <button>Check Status</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Entertainment Hub</h3>
+                <p>Your ultimate destination for entertainment reviews and discussions.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top" id="back-to-top-btn" aria-label="Back to top">↑</a>
+    
+    <script src="../js/common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ accordion functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', function() {
+                    // Toggle active class on the clicked item
+                    item.classList.toggle('active');
+                    
+                    // Close other items when one is opened
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // Form submission handling with validation
+            const supportForm = document.getElementById('supportForm');
+            
+            supportForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Basic form validation
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                const issueType = document.getElementById('issueType').value;
+                
+                if (!name || !email || !subject || !message || !issueType) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+                
+                // Email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    alert('Please enter a valid email address.');
+                    return;
+                }
+                
+                // Simulate form submission
+                const formData = new FormData(supportForm);
+                const ticketNumber = 'EH' + Math.floor(100000 + Math.random() * 900000);
+                
+                // Show success message
+                supportForm.innerHTML = `
+                    <div style="text-align: center; padding: 2rem 0;">
+                        <i class="fas fa-check-circle" style="font-size: 4rem; color: #4CAF50; margin-bottom: 1rem;"></i>
+                        <h3>Thank You!</h3>
+                        <p>Your support request has been submitted successfully.</p>
+                        <p>Your ticket number is: <strong>${ticketNumber}</strong></p>
+                        <p>We'll get back to you via email as soon as possible.</p>
+                    </div>
+                `;
+                
+                // In a real application, you would send this data to the server
+                console.log('Form submission:', Object.fromEntries(formData));
+            });
+        });
+    </script>
+</body>
+
+</html>

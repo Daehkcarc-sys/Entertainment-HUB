@@ -1,0 +1,442 @@
+:root {
+    --signin-primary: #5271ff;
+    --signin-secondary: #1b1c2e;
+    --signin-accent: #ff5757;
+    --signin-light: #f5f7ff;
+    --signin-dark: #1b1c2e;
+    --signin-gradient: linear-gradient(135deg, #5271ff, #7e94ff);
+    --signin-shadow: 0 8px 20px rgba(82, 113, 255, 0.15);
+    --admin-color: #ff5757;
+    --admin-gradient: linear-gradient(135deg, #ff5757, #ff7a7a);
+}
+
+.signin-page {
+    background-color: #f4f7fe;
+}
+
+.signin-page header {
+    background-color: var(--signin-dark);
+}
+
+/* Auth Container */
+.auth-container {
+    max-width: 800px;
+    margin: 3rem auto;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Tabs */
+.auth-tabs {
+    display: flex;
+    border-bottom: 1px solid #eee;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 1.2rem;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #777;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--signin-primary);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.tab-btn:hover {
+    color: var(--signin-primary);
+}
+
+.tab-btn.active {
+    color: var(--signin-primary);
+}
+
+.tab-btn.active::after {
+    transform: scaleX(1);
+}
+
+.tab-btn[data-tab="admin"] {
+    color: #777;
+}
+
+.tab-btn[data-tab="admin"]::after {
+    background-color: var(--admin-color);
+}
+
+.tab-btn[data-tab="admin"]:hover, 
+.tab-btn[data-tab="admin"].active {
+    color: var(--admin-color);
+}
+
+/* Auth Forms */
+.auth-form {
+    padding: 2rem;
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.auth-form h2 {
+    color: var(--signin-dark);
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.auth-form h2 i {
+    margin-right: 0.5rem;
+    color: var(--signin-primary);
+}
+
+#admin h2 i {
+    color: var(--admin-color);
+}
+
+/* Form Groups */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-weight: 500;
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    transition: color 0.3s ease;
+}
+
+.input-with-icon input,
+.input-with-icon select {
+    width: 100%;
+    padding: 0.8rem 1rem 0.8rem 2.8rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-with-icon input:focus,
+.input-with-icon select:focus {
+    border-color: var(--signin-primary);
+    box-shadow: 0 0 0 3px rgba(82, 113, 255, 0.1);
+    outline: none;
+}
+
+#admin .input-with-icon input:focus,
+#admin .input-with-icon select:focus {
+    border-color: var(--admin-color);
+    box-shadow: 0 0 0 3px rgba(255, 87, 87, 0.1);
+}
+
+.input-with-icon input:focus + i {
+    color: var(--signin-primary);
+}
+
+#admin .input-with-icon input:focus + i {
+    color: var(--admin-color);
+}
+
+/* Password Strength Meter */
+.password-strength {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.strength-label {
+    font-size: 0.8rem;
+    color: #777;
+    margin-bottom: 0.3rem;
+}
+
+.strength-meter {
+    height: 6px;
+    background-color: #eee;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.strength-fill {
+    height: 100%;
+    width: 0;
+    background: var(--signin-gradient);
+    transition: width 0.5s ease;
+}
+
+.strength-fill.admin {
+    background: var(--admin-gradient);
+}
+
+/* Form Options */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #555;
+    user-select: none;
+    margin: 0.5rem 0;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkbox-container .checkmark {
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background-color: var(--signin-primary);
+}
+
+#admin .checkbox-container input:checked ~ .checkmark {
+    background-color: var(--admin-color);
+}
+
+.checkbox-container .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.forgot-password {
+    color: var(--signin-primary);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.checkbox-container a {
+    color: var(--signin-primary);
+    text-decoration: none;
+}
+
+#admin .checkbox-container a {
+    color: var(--admin-color);
+}
+
+.checkbox-container a:hover {
+    text-decoration: underline;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--signin-gradient);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--signin-shadow);
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(82, 113, 255, 0.25);
+}
+
+.admin-submit {
+    background: var(--admin-gradient);
+    box-shadow: 0 8px 20px rgba(255, 87, 87, 0.15);
+}
+
+.admin-submit:hover {
+    box-shadow: 0 10px 25px rgba(255, 87, 87, 0.25);
+}
+
+/* Social Sign In */
+.social-signin {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.social-signin p {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.social-signin p::before,
+.social-signin p::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 35%;
+    height: 1px;
+    background-color: #eee;
+}
+
+.social-signin p::before {
+    left: 0;
+}
+
+.social-signin p::after {
+    right: 0;
+}
+
+.social-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.social-btn {
+    flex: 1;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.social-btn.google {
+    background-color: #fff;
+    color: #444;
+    border: 1px solid #ddd;
+}
+
+.social-btn.facebook {
+    background-color: #1877f2;
+    color: white;
+}
+
+.social-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Admin notice */
+.admin-notice {
+    background-color: #fff8f8;
+    border-left: 4px solid var(--admin-color);
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 4px;
+}
+
+.admin-notice p {
+    color: #555;
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.admin-notice i {
+    color: var(--admin-color);
+    margin-right: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .auth-container {
+        margin: 2rem 1rem;
+    }
+    
+    .auth-form {
+        padding: 1.5rem;
+    }
+    
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .forgot-password {
+        margin-top: 0.5rem;
+    }
+    
+    .social-buttons {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .tab-btn {
+        padding: 1rem 0.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .auth-form h2 {
+        font-size: 1.5rem;
+    }
+}

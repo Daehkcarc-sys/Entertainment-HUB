@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ratings | Entertainment Hub</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: var(--background-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .ratings-header {
+            background: linear-gradient(135deg, var(--primary-color), #ff8f82);
+            color: #fff;
+            padding: 2rem 0 1rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .ratings-header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .ratings-nav {
+            margin: 1.5rem 0 2rem 0;
+            text-align: center;
+        }
+        .ratings-nav a {
+            display: inline-block;
+            margin: 0 1rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .ratings-nav a.active, .ratings-nav a:hover {
+            color: #ff8f82;
+        }
+        .ratings-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--card-color);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+        }
+        .ratings-filter {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .ratings-filter select, .ratings-filter input {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+        .ratings-list {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .ratings-list th, .ratings-list td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+        .ratings-list th {
+            background: #f8f8f8;
+            font-weight: 700;
+        }
+        .star-rating {
+            color: #FFD700;
+            font-size: 1.2rem;
+        }
+        .ratings-actions button {
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 0.4rem 0.9rem;
+            margin-right: 0.5rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: background 0.2s;
+        }
+        .ratings-actions button:hover {
+            background: #ff8f82;
+        }
+        .add-rating-btn {
+            background: #fff;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 0.5rem 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .add-rating-btn:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+        .empty-state {
+            text-align: center;
+            color: #aaa;
+            margin: 2rem 0;
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .tab.active {
+            border-bottom: 3px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            height: 30px;
+            border-radius: 4px;
+            margin: 8px 0;
+        }
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .rating-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: var(--card-color);
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .modal-header h2 {
+            margin: 0;
+            color: var(--primary-color);
+        }
+        .close-modal {
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+        }
+        .star-picker {
+            font-size: 2rem;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .star-picker i {
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+            margin: 0 3px;
+        }
+        .star-picker i.active {
+            color: #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <div class="ratings-header">
+        <h1><i class="fas fa-star-half-alt"></i> My Ratings</h1>
+        <div class="ratings-nav">
+            <a href="profile.html">Profile</a>
+            <a href="ratings.html" class="active">Ratings</a>
+            <a href="watchlist.html">Watchlist</a>
+            <a href="leaderboard.html">Leaderboard</a>
+            <a href="recommendations.html">Recommendations</a>
+        </div>
+    </div>
+    <div class="ratings-container">
+        <div class="tabs">
+            <div class="tab active" data-tab="all">All Ratings</div>
+            <div class="tab" data-tab="movies">Movies</div>
+            <div class="tab" data-tab="anime">Anime</div>
+            <div class="tab" data-tab="manga">Manga</div>
+            <div class="tab" data-tab="series">Series</div>
+            <div class="tab" data-tab="games">Games</div>
+        </div>
+        <button class="add-rating-btn" id="openAddRatingBtn">
+            <i class="fas fa-plus"></i> Add New Rating
+        </button>
+        <div class="ratings-filter">
+            <input type="text" id="searchInput" placeholder="Search by title...">
+            <select id="sortFilter">
+                <option value="recent">Most Recent</option>
+                <option value="highest">Highest Rating</option>
+                <option value="lowest">Lowest Rating</option>
+                <option value="alpha">Alphabetical</option>
+            </select>
+        </div>
+        <table class="ratings-list" id="ratingsTable">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Your Rating</th>
+                    <th>Date Rated</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="ratingsTableBody">
+                <!-- Ratings will be dynamically inserted here -->
+                <tr class="skeleton-row">
+                    <td colspan="5">
+                        <div class="skeleton"></div>
+                    </td>
+                </tr>
+                <tr class="skeleton-row">
+                    <td colspan="5">
+                        <div class="skeleton"></div>
+                    </td>
+                </tr>
+                <tr class="skeleton-row">
+                    <td colspan="5">
+                        <div class="skeleton"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="empty-state" id="emptyState" style="display:none;">
+            <i class="fas fa-star-half-alt" style="font-size:2rem;"></i><br>
+            No ratings found. Start rating your favorite titles!
+        </div>
+    </div>
+
+    <!-- Add/Edit Rating Modal -->
+    <div class="rating-modal" id="ratingModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Rating</h2>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <form id="ratingForm">
+                <input type="hidden" id="ratingId" value="">
+                
+                <div class="form-group">
+                    <label for="titleInput">Title</label>
+                    <input type="text" id="titleInput" placeholder="Enter title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="typeSelect">Type</label>
+                    <select id="typeSelect" required>
+                        <option value="">Select type</option>
+                        <option value="Movie">Movie</option>
+                        <option value="Anime">Anime</option>
+                        <option value="Manga">Manga</option>
+                        <option value="Series">Series</option>
+                        <option value="Game">Game</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="starRating">Your Rating</label>
+                    <div class="star-picker" id="starPicker">
+                        <i class="fas fa-star" data-value="1"></i>
+                        <i class="fas fa-star" data-value="2"></i>
+                        <i class="fas fa-star" data-value="3"></i>
+                        <i class="fas fa-star" data-value="4"></i>
+                        <i class="fas fa-star" data-value="5"></i>
+                        <i class="fas fa-star" data-value="6"></i>
+                        <i class="fas fa-star" data-value="7"></i>
+                        <i class="fas fa-star" data-value="8"></i>
+                        <i class="fas fa-star" data-value="9"></i>
+                        <i class="fas fa-star" data-value="10"></i>
+                    </div>
+                    <input type="hidden" id="ratingValue" value="" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reviewText">Review (Optional)</label>
+                    <textarea id="reviewText" rows="4" placeholder="Write your thoughts about this title..."></textarea>
+                </div>
+                
+                <div style="text-align:center; margin-top:20px;">
+                    <button type="submit" class="add-rating-btn" style="background:var(--primary-color); color:#fff;">
+                        <i class="fas fa-save"></i> <span id="submitBtnText">Save Rating</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/ratings.js"></script>
+</body>
+</html>

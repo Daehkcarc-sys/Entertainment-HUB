@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard | Entertainment Hub</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/leaderboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Entertainment Hub's leaderboard of top-rated movies, TV shows, anime, manga, and games.">
+    <meta name="keywords" content="entertainment, leaderboard, top movies, top anime, top manga, top series, top games">
+    <meta property="og:title" content="Leaderboard | Entertainment Hub">
+    <meta property="og:description" content="Discover the highest-rated entertainment content across all categories.">
+    <meta property="og:image" content="../images/leaderboard-preview.jpg">
+    <meta property="og:url" content="https://entertainment-hub.com/leaderboard.html">
+</head>
+
+<body data-theme="light">
+    <a class="skip-link" href="#main">Skip to content</a>
+    
+    <header>
+        <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="manga.html">Manga</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="leaderboard.html" class="active">Leaderboard</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="discussions.html">Discussions</a></li>
+                <li><a href="watchlist.html">Watchlist</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="signin.html">Sign In / Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main">
+        <!-- Leaderboard Banner Section -->
+        <section class="leaderboard-banner bg-dark">
+            <div class="container">
+                <div class="leaderboard-header text-center">
+                    <h2 class="text-light mb-3">Entertainment Leaderboards</h2>
+                    <p class="text-light">Discover the highest-rated content across all entertainment categories</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Global Leaderboard Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Global Leaderboard</h2>
+                    <p class="section-subtitle">The top-rated entertainment content across all categories</p>
+                </div>
+
+                <div class="leaderboard-filters">
+                    <div class="filter-group">
+                        <button class="btn btn-outline active">All Time</button>
+                        <button class="btn btn-outline">This Year</button>
+                        <button class="btn btn-outline">This Month</button>
+                        <button class="btn btn-outline">This Week</button>
+                    </div>
+                </div>
+                
+                <div class="leaderboard-grid">
+                    <div class="leaderboard-card" data-rank="1">
+                        <div class="rank-badge">1</div>
+                        <div class="card">
+                            <div class="card-img-fixed">
+                                <img src="../images/Oppenheimer.jpg" alt="Oppenheimer">
+                                <span class="badge badge-movie">Movie</span>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">Oppenheimer</h3>
+                                <div class="rating">
+                                    <span class="rating-score">9.5</span>
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                </div>
+                                <p class="stats">
+                                    <span><i class="fas fa-eye"></i> 245K Views</span>
+                                    <span><i class="fas fa-comment"></i> 18.2K Reviews</span>
+                                </p>
+                                <a href="movies.html?id=oppenheimer" class="btn btn-primary btn-sm w-100">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="leaderboard-card" data-rank="2">
+                        <div class="rank-badge">2</div>
+                        <div class="card">
+                            <div class="card-img-fixed">
+                                <img src="../images/attack on titan.jpg" alt="Attack on Titan">
+                                <span class="badge badge-anime">Anime</span>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">Attack on Titan</h3>
+                                <div class="rating">
+                                    <span class="rating-score">9.3</span>
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                </div>
+                                <p class="stats">
+                                    <span><i class="fas fa-eye"></i> 320K Views</span>
+                                    <span><i class="fas fa-comment"></i> 37.5K Reviews</span>
+                                </p>
+                                <a href="anime.html?id=attack-on-titan" class="btn btn-primary btn-sm w-100">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="leaderboard-card" data-rank="3">
+                        <div class="rank-badge">3</div>
+                        <div class="card">
+                            <div class="card-img-fixed">
+                                <img src="../images/EldenRing.jpg" alt="Elden Ring">
+                                <span class="badge badge-game">Game</span>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">Elden Ring</h3>
+                                <div class="rating">
+                                    <span class="rating-score">9.1</span>
+                                    <div class="stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                </div>
+                                <p class="stats">
+                                    <span><i class="fas fa-eye"></i> 189K Views</span>
+                                    <span><i class="fas fa-comment"></i> 22.7K Reviews</span>
+                                </p>
+                                <a href="games.html?id=elden-ring" class="btn btn-primary btn-sm w-100">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="view-more text-center mt-5">
+                    <a href="#" class="btn btn-outline">View More Top Content</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Leaderboards -->
+        <section class="section bg-light">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Category Leaderboards</h2>
+                    <p class="section-subtitle">Explore top-rated content by category</p>
+                </div>
+                
+                <div class="category-tabs">
+                    <button class="category-tab active" data-category="movies">
+                        <i class="fas fa-film"></i> Movies
+                    </button>
+                    <button class="category-tab" data-category="series">
+                        <i class="fas fa-tv"></i> Series
+                    </button>
+                    <button class="category-tab" data-category="anime">
+                        <i class="fas fa-dragon"></i> Anime
+                    </button>
+                    <button class="category-tab" data-category="manga">
+                        <i class="fas fa-book"></i> Manga
+                    </button>
+                    <button class="category-tab" data-category="games">
+                        <i class="fas fa-gamepad"></i> Games
+                    </button>
+                </div>
+                
+                <div class="category-content">
+                    <!-- Movies Tab -->
+                    <div class="tab-panel active" id="movies-panel">
+                        <div class="leaderboard-table">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Title</th>
+                                        <th>Year</th>
+                                        <th>Genre</th>
+                                        <th>Rating</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span class="rank">1</span></td>
+                                        <td>
+                                            <div class="media">
+                                                <img src="../images/Oppenheimer.jpg" alt="Oppenheimer">
+                                                <div class="media-body">
+                                                    <h4>Oppenheimer</h4>
+                                                    <p class="director">Dir: Christopher Nolan</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>2023</td>
+                                        <td>Drama, Historical</td>
+                                        <td>
+                                            <div class="rating-compact">
+                                                <span>9.5</span>
+                                                <div class="stars-small">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star-half-alt"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="rank">2</span></td>
+                                        <td>
+                                            <div class="media">
+                                                <img src="../images/Darkknight.jpg" alt="The Dark Knight">
+                                                <div class="media-body">
+                                                    <h4>The Dark Knight</h4>
+                                                    <p class="director">Dir: Christopher Nolan</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>2008</td>
+                                        <td>Action, Crime</td>
+                                        <td>
+                                            <div class="rating-compact">
+                                                <span>9.2</span>
+                                                <div class="stars-small">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star-half-alt"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="rank">3</span></td>
+                                        <td>
+                                            <div class="media">
+                                                <img src="../images/PulpFiction.jpg" alt="Pulp Fiction">
+                                                <div class="media-body">
+                                                    <h4>Pulp Fiction</h4>
+                                                    <p class="director">Dir: Quentin Tarantino</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>1994</td>
+                                        <td>Crime, Drama</td>
+                                        <td>
+                                            <div class="rating-compact">
+                                                <span>9.0</span>
+                                                <div class="stars-small">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star-half-alt"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="rank">4</span></td>
+                                        <td>
+                                            <div class="media">
+                                                <img src="../images/Dune.jpg" alt="Dune">
+                                                <div class="media-body">
+                                                    <h4>Dune</h4>
+                                                    <p class="director">Dir: Denis Villeneuve</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>2021</td>
+                                        <td>Sci-Fi, Adventure</td>
+                                        <td>
+                                            <div class="rating-compact">
+                                                <span>8.9</span>
+                                                <div class="stars-small">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star-half-alt"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="rank">5</span></td>
+                                        <td>
+                                            <div class="media">
+                                                <img src="../images/Godfather.jpg" alt="The Godfather">
+                                                <div class="media-body">
+                                                    <h4>The Godfather</h4>
+                                                    <p class="director">Dir: Francis Ford Coppola</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>1972</td>
+                                        <td>Crime, Drama</td>
+                                        <td>
+                                            <div class="rating-compact">
+                                                <span>8.9</span>
+                                                <div class="stars-small">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star-half-alt"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="view-more text-center mt-4">
+                            <a href="movies.html" class="btn btn-primary">View All Top Movies</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Other tab panels will be populated via JavaScript -->
+                    <div class="tab-panel" id="series-panel"></div>
+                    <div class="tab-panel" id="anime-panel"></div>
+                    <div class="tab-panel" id="manga-panel"></div>
+                    <div class="tab-panel" id="games-panel"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Trending Leaderboard -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Trending This Week</h2>
+                    <p class="section-subtitle">The fastest-rising content in popularity</p>
+                </div>
+                
+                <div class="trending-leaderboard">
+                    <div class="trending-card">
+                        <div class="trend-indicator up">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+6</span>
+                        </div>
+                        <div class="card">
+                            <div class="card-img">
+                                <img src="../images/LastHorizon.jpg" alt="Last Horizon">
+                                <span class="badge badge-series">Series</span>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">Last Horizon</h3>
+                                <p class="card-text">Sci-fi thriller that's captivating audiences worldwide</p>
+                                <div class="stats-bar">
+                                    <span><i class="fas fa-chart-line"></i> +186% Viewing</span>
+                                    <span class="rating">8.7 <i class="fas fa-star"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="trending-card">
+                        <div class="trend-indicator up">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+4</span>
+                        </div>
+                        <div class="card">
+                            <div class="card-img">
+                                <img src="../images/JJK.jpeg" alt="Jujutsu Kaisen">
+                                <span class="badge badge-anime">Anime</span>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">Jujutsu Kaisen</h3>
+                                <p class="card-text">Season 2 finale has viewers raving</p>
+                                <div class="stats-bar">
+                                    <span><i class="fas fa-chart-line"></i> +142% Viewing</span>
+                                    <span class="rating">9.2 <i class="fas fa-star"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="trending-card">
+                        <div class="trend-indicator up">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+3</span>
+                        </div>
+                        <div class="card">
+                            <div class="card-img">
+                                <img src="../images/GOW.jpg" alt="God of War Ragnarök">
+                                <span class="badge badge-game">Game</span>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">God of War Ragnarök</h3>
+                                <p class="card-text">New DLC has gamers coming back in droves</p>
+                                <div class="stats-bar">
+                                    <span><i class="fas fa-chart-line"></i> +98% Playing</span>
+                                    <span class="rating">9.3 <i class="fas fa-star"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Leaderboard -->
+        <section class="section bg-light">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Top Contributors</h2>
+                    <p class="section-subtitle">Users with the most valuable reviews and contributions</p>
+                </div>
+                
+                <div class="users-leaderboard">
+                    <div class="user-rank-card" data-rank="1">
+                        <div class="rank-badge gold">1</div>
+                        <div class="user-profile">
+                            <div class="user-avatar">
+                                <img src="../images/Avatar.jpg" alt="User Avatar">
+                                <span class="level">Lv 50</span>
+                            </div>
+                            <div class="user-info">
+                                <h3>Alex Johnson</h3>
+                                <div class="user-stats">
+                                    <span><i class="fas fa-pen"></i> 320 Reviews</span>
+                                    <span><i class="fas fa-comment"></i> 856 Comments</span>
+                                    <span><i class="fas fa-list"></i> 42 Lists</span>
+                                </div>
+                                <div class="user-badges">
+                                    <span class="badge">Expert Critic</span>
+                                    <span class="badge">Film Buff</span>
+                                    <span class="badge">Anime Enthusiast</span>
+                                </div>
+                            </div>
+                            <div class="contribution-score">
+                                <span>9,625</span>
+                                <div class="score-label">points</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="user-rank-card" data-rank="2">
+                        <div class="rank-badge silver">2</div>
+                        <div class="user-profile">
+                            <div class="user-avatar">
+                                <img src="../images/swagspidey.jpg" alt="User Avatar">
+                                <span class="level">Lv 48</span>
+                            </div>
+                            <div class="user-info">
+                                <h3>Mika Zhang</h3>
+                                <div class="user-stats">
+                                    <span><i class="fas fa-pen"></i> 287 Reviews</span>
+                                    <span><i class="fas fa-comment"></i> 723 Comments</span>
+                                    <span><i class="fas fa-list"></i> 35 Lists</span>
+                                </div>
+                                <div class="user-badges">
+                                    <span class="badge">Anime Oracle</span>
+                                    <span class="badge">Manga Maven</span>
+                                    <span class="badge">Rising Star</span>
+                                </div>
+                            </div>
+                            <div class="contribution-score">
+                                <span>8,943</span>
+                                <div class="score-label">points</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="user-rank-card" data-rank="3">
+                        <div class="rank-badge bronze">3</div>
+                        <div class="user-profile">
+                            <div class="user-avatar">
+                                <img src="../images/SwagSonic.jpg" alt="User Avatar">
+                                <span class="level">Lv 47</span>
+                            </div>
+                            <div class="user-info">
+                                <h3>Chris Taylor</h3>
+                                <div class="user-stats">
+                                    <span><i class="fas fa-pen"></i> 245 Reviews</span>
+                                    <span><i class="fas fa-comment"></i> 612 Comments</span>
+                                    <span><i class="fas fa-list"></i> 29 Lists</span>
+                                </div>
+                                <div class="user-badges">
+                                    <span class="badge">Game Guru</span>
+                                    <span class="badge">Tech Expert</span>
+                                    <span class="badge">Community Leader</span>
+                                </div>
+                            </div>
+                            <div class="contribution-score">
+                                <span>8,256</span>
+                                <div class="score-label">points</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="join-community text-center mt-5">
+                    <h3>Want to join the ranks?</h3>
+                    <p>Sign up today and start contributing your reviews and ratings</p>
+                    <a href="signup.html" class="btn btn-primary">Join Our Community</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>Entertainment Hub</h3>
+                    <p>Your ultimate destination for entertainment reviews and discussions.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="anime.html">Anime</a></li>
+                        <li><a href="manga.html">Manga</a></li>
+                        <li><a href="series.html">Series</a></li>
+                        <li><a href="games.html">Games</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top" id="back-to-top-btn" aria-label="Back to top">↑</a>
+    
+    <!-- Scripts -->
+    <script src="../js/common.js"></script>
+    <script src="../js/auth.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Category tabs functionality
+            const categoryTabs = document.querySelectorAll('.category-tab');
+            const tabPanels = document.querySelectorAll('.tab-panel');
+            
+            categoryTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    const targetPanel = document.getElementById(category + '-panel');
+                    
+                    // Update active tab
+                    categoryTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show target panel, hide others
+                    tabPanels.forEach(panel => {
+                        panel.classList.remove('active');
+                    });
+                    targetPanel.classList.add('active');
+                    
+                    // If panel is empty, we could load data here
+                    if (targetPanel.innerHTML.trim() === '') {
+                        loadCategoryData(category, targetPanel);
+                    }
+                });
+            });
+            
+            // Function to load category data (simulated)
+            function loadCategoryData(category, targetPanel) {
+                // In a real application, this would fetch data from an API
+                // For now, we'll simulate loading with placeholder content
+                
+                targetPanel.innerHTML = `
+                    <div class="loading-spinner">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <span>Loading ${category} data...</span>
+                    </div>
+                `;
+                
+                // Simulate network request
+                setTimeout(() => {
+                    targetPanel.innerHTML = `
+                        <div class="leaderboard-table">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Title</th>
+                                        <th>Year</th>
+                                        <th>Genre</th>
+                                        <th>Rating</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span class="rank">1</span></td>
+                                        <td>
+                                            <div class="media">
+                                                <img src="${getCategoryImage(category, 1)}" alt="Top ${category}">
+                                                <div class="media-body">
+                                                    <h4>${getCategoryTitle(category, 1)}</h4>
+                                                    <p>${getCategorySubtitle(category, 1)}</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>${getRandomYear()}</td>
+                                        <td>${getCategoryGenres(category)}</td>
+                                        <td>
+                                            <div class="rating-compact">
+                                                <span>9.${Math.floor(Math.random() * 5) + 1}</span>
+                                                <div class="stars-small">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star-half-alt"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="rank">2</span></td>
+                                        <td>
+                                            <div class="media">
+                                                <img src="${getCategoryImage(category, 2)}" alt="Top ${category}">
+                                                <div class="media-body">
+                                                    <h4>${getCategoryTitle(category, 2)}</h4>
+                                                    <p>${getCategorySubtitle(category, 2)}</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>${getRandomYear()}</td>
+                                        <td>${getCategoryGenres(category)}</td>
+                                        <td>
+                                            <div class="rating-compact">
+                                                <span>9.${Math.floor(Math.random() * 5)}</span>
+                                                <div class="stars-small">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star-half-alt"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="rank">3</span></td>
+                                        <td>
+                                            <div class="media">
+                                                <img src="${getCategoryImage(category, 3)}" alt="Top ${category}">
+                                                <div class="media-body">
+                                                    <h4>${getCategoryTitle(category, 3)}</h4>
+                                                    <p>${getCategorySubtitle(category, 3)}</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>${getRandomYear()}</td>
+                                        <td>${getCategoryGenres(category)}</td>
+                                        <td>
+                                            <div class="rating-compact">
+                                                <span>8.${Math.floor(Math.random() * 5) + 5}</span>
+                                                <div class="stars-small">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star-half-alt"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="view-more text-center mt-4">
+                            <a href="${category}.html" class="btn btn-primary">View All Top ${category.charAt(0).toUpperCase() + category.slice(1)}</a>
+                        </div>
+                    `;
+                }, 1000);
+            }
+            
+            // Helper functions for generating placeholder content
+            function getCategoryImage(category, rank) {
+                const images = {
+                    'series': ['../images/Series.jpg', '../images/Severence.jpg', '../images/LastHorizon.jpg'],
+                    'anime': ['../images/JJK.jpeg', '../images/attack on titan.jpg', '../images/DemonSlayer.jpg'],
+                    'manga': ['../images/OnePiece.jpg', '../images/Chainsaw.jpg', '../images/DemonSlayer.jpg'],
+                    'games': ['../images/EldenRing.jpg', '../images/GOW.jpg', '../images/minecraft.jpg']
+                };
+                
+                return images[category][rank - 1] || '../images/placeholder.jpg';
+            }
+            
+            function getCategoryTitle(category, rank) {
+                const titles = {
+                    'series': ['The Last of Us', 'Severance', 'Last Horizon'],
+                    'anime': ['Jujutsu Kaisen', 'Attack on Titan', 'Demon Slayer'],
+                    'manga': ['One Piece', 'Chainsaw Man', 'Jujutsu Kaisen'],
+                    'games': ['Elden Ring', 'God of War Ragnarök', 'Minecraft']
+                };
+                
+                return titles[category][rank - 1] || `Top ${category} #${rank}`;
+            }
+            
+            function getCategorySubtitle(category, rank) {
+                const subtitles = {
+                    'series': ['HBO', 'Apple TV+', 'Netflix'],
+                    'anime': ['MAPPA', 'MAPPA', 'Ufotable'],
+                    'manga': ['Eiichiro Oda', 'Tatsuki Fujimoto', 'Gege Akutami'],
+                    'games': ['FromSoftware', 'Santa Monica Studio', 'Mojang']
+                };
+                
+                return subtitles[category][rank - 1] || `Creator ${rank}`;
+            }
+            
+            function getCategoryGenres(category) {
+                const genres = {
+                    'series': 'Drama, Thriller',
+                    'anime': 'Action, Fantasy',
+                    'manga': 'Adventure, Action',
+                    'games': 'RPG, Adventure'
+                };
+                
+                return genres[category] || 'Various Genres';
+            }
+            
+            function getRandomYear() {
+                return 2010 + Math.floor(Math.random() * 14);
+            }
+        });
+    </script>
+</body>
+
+</html>

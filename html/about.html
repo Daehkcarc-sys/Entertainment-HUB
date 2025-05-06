@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Entertainment Hub</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        .about-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero-section {
+            position: relative;
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.2) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 3rem;
+        }
+        
+        .hero-title {
+            color: #fff;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-subtitle {
+            color: #fff;
+            font-size: 1.2rem;
+            max-width: 600px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        .section p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .mission-vision {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .mission-vision {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .mission-card, .vision-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: 100%;
+        }
+        
+        .card-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .team-section {
+            margin-top: 2rem;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .team-member {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .member-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .member-info {
+            padding: 1.5rem;
+        }
+        
+        .member-name {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .member-role {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .member-bio {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        
+        .social-links a {
+            margin-right: 0.75rem;
+            color: var(--text-color);
+            font-size: 1.1rem;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .stats-section {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .stat-item {
+            padding: 1rem;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 3rem auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--accent-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -13px;
+            background-color: var(--accent-color);
+            border: 4px solid var(--accent-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .timeline-left {
+            left: 0;
+        }
+        
+        .timeline-right {
+            left: 50%;
+        }
+        
+        .timeline-right::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: var(--card-bg);
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-year {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 18px;
+                right: auto;
+            }
+            
+            .timeline-right {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body data-theme="light">
+    <header>
+        <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="manga.html">Manga</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="discussions.html">Discussions</a></li>
+                <li><a href="watchlist.html">Watchlist</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="signin.html">Sign In / Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="about-container">
+            <div class="hero-section">
+                <img src="../images/Animewallpaper.jpg" alt="Entertainment Hub Team" class="hero-image">
+                <div class="hero-overlay">
+                    <h1 class="hero-title">About Entertainment Hub</h1>
+                    <p class="hero-subtitle">Building the ultimate community for entertainment enthusiasts since 2023</p>
+                </div>
+            </div>
+            
+            <section class="section">
+                <h2 class="section-title">Our Story</h2>
+                <p>Entertainment Hub was founded in 2023 by a group of passionate entertainment enthusiasts who saw a need for a comprehensive platform that brings together fans of various entertainment mediums – from movies and TV shows to anime, manga, and video games.</p>
+                <p>What started as a small community-driven project has since grown into one of the web's most vibrant entertainment communities, with millions of users sharing their thoughts, reviews, and recommendations every day.</p>
+                <p>Our platform was built on the simple belief that entertainment is at its best when it's shared. Whether you're looking for your next favorite movie, trying to keep track of which anime to watch next, or wanting to discuss the latest gaming releases, Entertainment Hub is the place where your entertainment journey begins.</p>
+            </section>
+            
+            <section class="section">
+                <div class="mission-vision">
+                    <div class="mission-card">
+                        <div class="card-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3 class="card-title">Our Mission</h3>
+                        <p>To create the most comprehensive and user-friendly platform for discovering, tracking, and discussing all forms of entertainment, while fostering a vibrant community of enthusiasts.</p>
+                        <p>We strive to make information about entertainment accessible and engaging, helping users make informed choices about what to watch, play, or read next.</p>
+                    </div>
+                    
+                    <div class="vision-card">
+                        <div class="card-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3 class="card-title">Our Vision</h3>
+                        <p>To become the world's leading entertainment platform, connecting people through their shared love of movies, series, anime, manga, and games.</p>
+                        <p>We envision a world where every entertainment enthusiast can find their community, discover content tailored to their tastes, and engage in meaningful conversations about the stories that move them.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">Our Team</h2>
+                <p>Entertainment Hub is powered by a diverse team of entertainment lovers, tech experts, and community builders who are passionate about creating the best possible platform for our users.</p>
+                
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="../images/SwagSonic.jpg" alt="Alex Johnson" class="member-image">
+                        <div class="member-info">
+                            <h3 class="member-name">Alex Johnson</h3>
+                            <p class="member-role">Founder & CEO</p>
+                            <p class="member-bio">Alex founded Entertainment Hub after spending a decade in the entertainment industry as a critic and journalist. His vision drives the platform's continued growth and innovation.</p>
+                            <div class="social-links">
+                                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="../images/swagspidey.jpg" alt="Sarah Chen" class="member-image">
+                        <div class="member-info">
+                            <h3 class="member-name">Sarah Chen</h3>
+                            <p class="member-role">Head of Content</p>
+                            <p class="member-bio">Sarah oversees all content curation and editorial decisions. Her background in film studies and experience as an anime reviewer brings valuable perspective to our platform.</p>
+                            <div class="social-links">
+                                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="../images/Avatar.jpg" alt="Marcus Wilson" class="member-image">
+                        <div class="member-info">
+                            <h3 class="member-name">Marcus Wilson</h3>
+                            <p class="member-role">CTO</p>
+                            <p class="member-bio">Marcus leads our development team, ensuring that Entertainment Hub stays at the cutting edge of web technology while maintaining a user-friendly experience.</p>
+                            <div class="social-links">
+                                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="../images/Levi.jpg" alt="Priya Sharma" class="member-image">
+                        <div class="member-info">
+                            <h3 class="member-name">Priya Sharma</h3>
+                            <p class="member-role">Community Manager</p>
+                            <p class="member-bio">Priya is the heart of our community efforts, fostering engagement and ensuring that Entertainment Hub remains a welcoming space for all entertainment fans.</p>
+                            <div class="social-links">
+                                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">2.5M+</div>
+                        <div class="stat-label">Active Users</div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-number">500K+</div>
+                        <div class="stat-label">Reviews</div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-number">250K+</div>
+                        <div class="stat-label">Movies & Shows</div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-number">100K+</div>
+                        <div class="stat-label">Discussions</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">Our History</h2>
+                <div class="timeline">
+                    <div class="timeline-item timeline-left">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2023</div>
+                            <h3>The Beginning</h3>
+                            <p>Entertainment Hub launches with a focus on movie reviews and recommendations.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-right">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2023</div>
+                            <h3>Anime & Manga Integration</h3>
+                            <p>Expanded to include anime and manga sections, attracting a diverse range of entertainment fans.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-left">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2024</div>
+                            <h3>Community Features</h3>
+                            <p>Added discussion forums, watchlists, and user profiles to enhance community interaction.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-right">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2024</div>
+                            <h3>Gaming Section Launch</h3>
+                            <p>Expanded into video games, providing reviews, news, and discussions for gamers.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-left">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2025</div>
+                            <h3>Mobile App Release</h3>
+                            <p>Launched dedicated mobile applications for iOS and Android, making the platform accessible on the go.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-right">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2025</div>
+                            <h3>Today</h3>
+                            <p>Continuing to grow and evolve, with a focus on enhancing the user experience and expanding our community.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">Join Us</h2>
+                <p>Entertainment Hub is more than just a website – it's a community of passionate fans united by their love of entertainment. Whether you're a movie buff, anime enthusiast, manga reader, TV series binge-watcher, or gaming aficionado, there's a place for you here.</p>
+                <p>Ready to dive in? <a href="signup.html">Create an account</a> today and start exploring, rating, and discussing your favorite entertainment with fellow enthusiasts from around the world.</p>
+                <p>Have questions or feedback? We'd love to hear from you! <a href="contact.html">Contact our team</a> anytime.</p>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Entertainment Hub</h3>
+                <p>Your ultimate destination for entertainment reviews and discussions.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top" id="back-to-top-btn" aria-label="Back to top">↑</a>
+    
+    <script src="../js/common.js"></script>
+</body>
+
+</html>

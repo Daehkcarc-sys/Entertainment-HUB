@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Personalized Recommendations | Entertainment Hub</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="../css/recommendations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Get personalized entertainment recommendations based on your preferences and viewing history.">
+    <meta name="keywords" content="entertainment recommendations, personalized recommendations, movie suggestions, anime recommendations, game recommendations">
+    <meta name="author" content="Entertainment Hub">
+    
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#6C63FF">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+</head>
+
+<body data-theme="light">
+    <a class="skip-link" href="#main">Skip to content</a>
+    
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+            </div>
+            <nav class="main-nav">
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span class="hamburger-icon"></span>
+                </button>
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                    <li class="dropdown">
+                        <a href="community.html">Community <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="discussions.html">Discussions</a></li>
+                            <li><a href="reviews.html">Reviews</a></li>
+                            <li><a href="polls.html">Polls</a></li>
+                            <li><a href="events.html">Events</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="watchlist.html">Watchlist</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li class="auth-links"><a href="signin.html">Sign In / Sign Up</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="recommendations-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="page-title">Your Personalized Recommendations</h1>
+                    <p class="subtitle">Discover content tailored just for you based on your preferences and viewing history</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="recommendation-filters">
+            <div class="container">
+                <div class="filter-container">
+                    <h2>Filter Recommendations</h2>
+                    <div class="filter-controls">
+                        <div class="filter-group">
+                            <label for="content-type">Content Type</label>
+                            <select id="content-type" class="filter-select">
+                                <option value="all">All Content</option>
+                                <option value="movies">Movies</option>
+                                <option value="series">TV Series</option>
+                                <option value="anime">Anime</option>
+                                <option value="manga">Manga</option>
+                                <option value="games">Games</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="genre">Genre</label>
+                            <select id="genre" class="filter-select">
+                                <option value="all">All Genres</option>
+                                <option value="action">Action</option>
+                                <option value="adventure">Adventure</option>
+                                <option value="comedy">Comedy</option>
+                                <option value="drama">Drama</option>
+                                <option value="fantasy">Fantasy</option>
+                                <option value="horror">Horror</option>
+                                <option value="mystery">Mystery</option>
+                                <option value="romance">Romance</option>
+                                <option value="sci-fi">Sci-Fi</option>
+                                <option value="thriller">Thriller</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="release-year">Release Year</label>
+                            <select id="release-year" class="filter-select">
+                                <option value="all">All Years</option>
+                                <option value="2025">2025</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                                <option value="2020">2020</option>
+                                <option value="2010s">2010-2019</option>
+                                <option value="2000s">2000-2009</option>
+                                <option value="1990s">1990-1999</option>
+                                <option value="classic">Before 1990</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="rating">Minimum Rating</label>
+                            <select id="rating" class="filter-select">
+                                <option value="all">Any Rating</option>
+                                <option value="9">9+ Stars</option>
+                                <option value="8">8+ Stars</option>
+                                <option value="7">7+ Stars</option>
+                                <option value="6">6+ Stars</option>
+                                <option value="5">5+ Stars</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group mood-filter">
+                            <label>Mood</label>
+                            <div class="mood-options">
+                                <button class="mood-btn" data-mood="happy"><i class="far fa-smile"></i> Happy</button>
+                                <button class="mood-btn" data-mood="sad"><i class="far fa-sad-tear"></i> Sad</button>
+                                <button class="mood-btn" data-mood="excited"><i class="far fa-grin-stars"></i> Excited</button>
+                                <button class="mood-btn" data-mood="relaxed"><i class="far fa-meh"></i> Relaxed</button>
+                                <button class="mood-btn" data-mood="thoughtful"><i class="far fa-lightbulb"></i> Thoughtful</button>
+                            </div>
+                        </div>
+
+                        <div class="filter-action">
+                            <button id="apply-filters" class="btn btn-primary">Apply Filters</button>
+                            <button id="reset-filters" class="btn btn-outline">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="recommendation-results">
+            <div class="container">
+                <h2>Because you watched <span class="highlight">Blade Runner 2049</span></h2>
+                
+                <div class="recommendation-grid">
+                    <div class="recommendation-card">
+                        <div class="recommendation-image">
+                            <img src="../images/Dune.jpg" alt="Dune">
+                            <div class="recommendation-badge">
+                                <span class="match">98% Match</span>
+                                <span class="rating">8.9 <i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="recommendation-actions">
+                                <button class="action-btn watch-trailer"><i class="fas fa-play"></i> Trailer</button>
+                                <button class="action-btn add-watchlist"><i class="fas fa-plus"></i> Watchlist</button>
+                            </div>
+                        </div>
+                        <div class="recommendation-info">
+                            <h3>Dune</h3>
+                            <p class="meta">2021 | Sci-Fi, Adventure | 2h 35m</p>
+                            <p class="description">Feature adaptation of Frank Herbert's science fiction novel about the son of a noble family entrusted with the protection of the most valuable asset in the galaxy.</p>
+                            <div class="similarity-reasons">
+                                <span class="reason">Sci-Fi Epic</span>
+                                <span class="reason">Denis Villeneuve</span>
+                                <span class="reason">Visual Masterpiece</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recommendation-card">
+                        <div class="recommendation-image">
+                            <img src="../images/Interstellar.jpg" alt="Interstellar">
+                            <div class="recommendation-badge">
+                                <span class="match">95% Match</span>
+                                <span class="rating">8.7 <i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="recommendation-actions">
+                                <button class="action-btn watch-trailer"><i class="fas fa-play"></i> Trailer</button>
+                                <button class="action-btn add-watchlist"><i class="fas fa-plus"></i> Watchlist</button>
+                            </div>
+                        </div>
+                        <div class="recommendation-info">
+                            <h3>Interstellar</h3>
+                            <p class="meta">2014 | Sci-Fi, Adventure | 2h 49m</p>
+                            <p class="description">A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.</p>
+                            <div class="similarity-reasons">
+                                <span class="reason">Space Exploration</span>
+                                <span class="reason">Philosophical Themes</span>
+                                <span class="reason">Visual Effects</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recommendation-card">
+                        <div class="recommendation-image">
+                            <img src="../images/FightClub.jpg" alt="Fight Club">
+                            <div class="recommendation-badge">
+                                <span class="match">92% Match</span>
+                                <span class="rating">8.8 <i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="recommendation-actions">
+                                <button class="action-btn watch-trailer"><i class="fas fa-play"></i> Trailer</button>
+                                <button class="action-btn add-watchlist"><i class="fas fa-plus"></i> Watchlist</button>
+                            </div>
+                        </div>
+                        <div class="recommendation-info">
+                            <h3>Fight Club</h3>
+                            <p class="meta">1999 | Drama, Thriller | 2h 19m</p>
+                            <p class="description">An insomniac office worker and a devil-may-care soapmaker form an underground fight club that evolves into something much, much more.</p>
+                            <div class="similarity-reasons">
+                                <span class="reason">Dystopian Themes</span>
+                                <span class="reason">Identity Crisis</span>
+                                <span class="reason">Visual Storytelling</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="recommendation-results alt-section">
+            <div class="container">
+                <h2>Based on your interest in <span class="highlight">Anime</span></h2>
+                
+                <div class="recommendation-grid">
+                    <div class="recommendation-card">
+                        <div class="recommendation-image">
+                            <img src="../images/JJK.jpeg" alt="Jujutsu Kaisen">
+                            <div class="recommendation-badge">
+                                <span class="match">97% Match</span>
+                                <span class="rating">9.4 <i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="recommendation-actions">
+                                <button class="action-btn watch-trailer"><i class="fas fa-play"></i> Trailer</button>
+                                <button class="action-btn add-watchlist"><i class="fas fa-plus"></i> Watchlist</button>
+                            </div>
+                        </div>
+                        <div class="recommendation-info">
+                            <h3>Jujutsu Kaisen</h3>
+                            <p class="meta">2023 | Action, Supernatural | 24 Episodes</p>
+                            <p class="description">A boy swallows a cursed talisman - the finger of a demon - and becomes cursed himself. He enters a shaman's school to be able to locate the demon's other body parts and thus exorcise himself.</p>
+                            <div class="similarity-reasons">
+                                <span class="reason">Action-Packed</span>
+                                <span class="reason">Supernatural Elements</span>
+                                <span class="reason">Animation Quality</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recommendation-card">
+                        <div class="recommendation-image">
+                            <img src="../images/Chainsaw.jpg" alt="Chainsaw Man">
+                            <div class="recommendation-badge">
+                                <span class="match">94% Match</span>
+                                <span class="rating">8.9 <i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="recommendation-actions">
+                                <button class="action-btn watch-trailer"><i class="fas fa-play"></i> Trailer</button>
+                                <button class="action-btn add-watchlist"><i class="fas fa-plus"></i> Watchlist</button>
+                            </div>
+                        </div>
+                        <div class="recommendation-info">
+                            <h3>Chainsaw Man</h3>
+                            <p class="meta">2022 | Action, Horror | 12 Episodes</p>
+                            <p class="description">Following a betrayal, a young man left for the dead is reborn as a powerful devil-human hybrid after merging with his pet devil and is soon enlisted into an organization dedicated to hunting devils.</p>
+                            <div class="similarity-reasons">
+                                <span class="reason">Dark Fantasy</span>
+                                <span class="reason">Unique Animation</span>
+                                <span class="reason">MAPPA Studio</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recommendation-card">
+                        <div class="recommendation-image">
+                            <img src="../images/FMA.jpg" alt="Fullmetal Alchemist: Brotherhood">
+                            <div class="recommendation-badge">
+                                <span class="match">91% Match</span>
+                                <span class="rating">9.1 <i class="fas fa-star"></i></span>
+                            </div>
+                            <div class="recommendation-actions">
+                                <button class="action-btn watch-trailer"><i class="fas fa-play"></i> Trailer</button>
+                                <button class="action-btn add-watchlist"><i class="fas fa-plus"></i> Watchlist</button>
+                            </div>
+                        </div>
+                        <div class="recommendation-info">
+                            <h3>Fullmetal Alchemist: Brotherhood</h3>
+                            <p class="meta">2009 | Action, Adventure | 64 Episodes</p>
+                            <p class="description">Two brothers search for a Philosopher's Stone after an attempt to revive their deceased mother goes wrong and leaves them in damaged physical forms.</p>
+                            <div class="similarity-reasons">
+                                <span class="reason">Epic Storyline</span>
+                                <span class="reason">Character Development</span>
+                                <span class="reason">Fantasy Elements</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ai-recommendations">
+            <div class="container">
+                <div class="ai-recommendation-header">
+                    <h2>AI-Powered Recommendations</h2>
+                    <p>Our advanced AI analyzes your viewing patterns to find hidden gems you might enjoy</p>
+                </div>
+                
+                <div class="ai-recommendation-cards">
+                    <div class="ai-card">
+                        <div class="ai-card-content">
+                            <div class="ai-card-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h3>Weekly Discoveries</h3>
+                            <p>Fresh content based on your recent activity, updated every Monday</p>
+                            <a href="#" class="btn btn-outline">Explore Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-card">
+                        <div class="ai-card-content">
+                            <div class="ai-card-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>Similar Tastes</h3>
+                            <p>Content enjoyed by users with similar taste profiles to yours</p>
+                            <a href="#" class="btn btn-outline">Explore Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-card">
+                        <div class="ai-card-content">
+                            <div class="ai-card-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <h3>Weekend Watchlist</h3>
+                            <p>Curated content perfect for your weekend binge-watching sessions</p>
+                            <a href="#" class="btn btn-outline">Explore Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="recommendation-feedback">
+            <div class="container">
+                <h2>Help Improve Your Recommendations</h2>
+                <p class="section-subtitle">Rate these suggestions to get more accurate recommendations</p>
+                
+                <div class="feedback-cards">
+                    <div class="feedback-card">
+                        <img src="../images/Interstellar.jpg" alt="Interstellar">
+                        <h3>Interstellar</h3>
+                        <div class="feedback-options">
+                            <button class="feedback-btn love" data-value="love" aria-label="Love it"><i class="fas fa-heart"></i></button>
+                            <button class="feedback-btn like" data-value="like" aria-label="Like it"><i class="fas fa-thumbs-up"></i></button>
+                            <button class="feedback-btn dislike" data-value="dislike" aria-label="Dislike it"><i class="fas fa-thumbs-down"></i></button>
+                            <button class="feedback-btn not-interested" data-value="not-interested" aria-label="Not interested"><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="feedback-card">
+                        <img src="../images/JJK.jpeg" alt="Jujutsu Kaisen">
+                        <h3>Jujutsu Kaisen</h3>
+                        <div class="feedback-options">
+                            <button class="feedback-btn love" data-value="love" aria-label="Love it"><i class="fas fa-heart"></i></button>
+                            <button class="feedback-btn like" data-value="like" aria-label="Like it"><i class="fas fa-thumbs-up"></i></button>
+                            <button class="feedback-btn dislike" data-value="dislike" aria-label="Dislike it"><i class="fas fa-thumbs-down"></i></button>
+                            <button class="feedback-btn not-interested" data-value="not-interested" aria-label="Not interested"><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="feedback-card">
+                        <img src="../images/EldenRing.jpg" alt="Elden Ring">
+                        <h3>Elden Ring</h3>
+                        <div class="feedback-options">
+                            <button class="feedback-btn love" data-value="love" aria-label="Love it"><i class="fas fa-heart"></i></button>
+                            <button class="feedback-btn like" data-value="like" aria-label="Like it"><i class="fas fa-thumbs-up"></i></button>
+                            <button class="feedback-btn dislike" data-value="dislike" aria-label="Dislike it"><i class="fas fa-thumbs-down"></i></button>
+                            <button class="feedback-btn not-interested" data-value="not-interested" aria-label="Not interested"><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 class="footer-title">Entertainment Hub</h3>
+                    <p>Your ultimate destination for movies, TV shows, anime, manga, and games.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Navigation</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="series.html">TV Series</a></li>
+                        <li><a href="anime.html">Anime</a></li>
+                        <li><a href="manga.html">Manga</a></li>
+                        <li><a href="games.html">Games</a></li>
+                        <li><a href="community.html">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Account</h3>
+                    <ul class="footer-links">
+                        <li><a href="profile.html">My Profile</a></li>
+                        <li><a href="watchlist.html">Watchlist</a></li>
+                        <li><a href="recommendations.html">Recommendations</a></li>
+                        <li><a href="settings.html">Account Settings</a></li>
+                        <li><a href="help.html">Help Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="copyright.html">Copyright Notice</a></li>
+                        <li><a href="cookies.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 class="footer-title">Get Our App</h3>
+                    <div class="app-links">
+                        <a href="#"><img src="../images/appstore.jpg" alt="Download on App Store"></a>
+                        <a href="#"><img src="../images/Googleplay.jpg" alt="Download on Google Play"></a>
+                    </div>
+                    <p class="newsletter-text">Subscribe to our newsletter:</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" aria-label="Email for newsletter">
+                        <button type="submit" aria-label="Subscribe"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+                <div class="language-selector">
+                    <select aria-label="Select language">
+                        <option value="en">English</option>
+                        <option value="fr">Français</option>
+                        <option value="es">Español</option>
+                        <option value="de">Deutsch</option>
+                        <option value="ja">日本語</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/theme-switcher.js"></script>
+    <script src="../js/carousel.js"></script>
+    <script src="../js/recommendations.js"></script>
+    <script src="../js/common.js"></script>
+</body>
+
+</html>

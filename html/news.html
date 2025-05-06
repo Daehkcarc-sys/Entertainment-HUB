@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>News</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="manga.html">Manga</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="watchlist.html">Watchlist</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="polls.html">Polls & Contests</a></li>
+                <li><a href="discussions.html">Discussions</a></li>
+                <li><a href="signin.html">Sign In / Sign Up</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="news">
+            <h2>Latest Media Updates</h2>
+            <article>
+                <h3>Movie Release Announcement</h3>
+                <p>Exciting new movie releasing this weekend!</p>
+            </article>
+            <article>
+                <h3>Anime Season Finale</h3>
+                <p>Don't miss the epic conclusion of the popular anime.</p>
+            </article>
+        </section>
+        <!-- Add before the trending-news section -->
+<section class="media-preview">
+    <h2>Latest Trailers</h2>
+    <div class="video-container">
+        <video id="featured-trailer" controls poster="images/trailer-poster.jpg">
+            <source src="videos/sample-trailer.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <h3>New Blockbuster Trailer</h3>
+    </div>
+    
+    <div class="audio-preview">
+        <h3>Podcast: Weekly Entertainment Update</h3>
+        <audio id="podcast-preview" controls>
+            <source src="audio/podcast-sample.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+</section>
+
+        <section class="trending-news">
+            <h2>Trending News</h2>
+            <ul>
+                <li>Top 10 Movies of the Year</li>
+                <li>New Game Trailer Released</li>
+                <li>Manga Series Ending Soon</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <a href="#" class="back-to-top" id="back-to-top-btn">↑</a>
+</body>
+
+</html>

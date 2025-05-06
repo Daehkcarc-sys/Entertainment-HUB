@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Entertainment Hub</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Admin Dashboard for Entertainment Hub">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+
+<body data-theme="light">
+    <a class="skip-link" href="#main">Skip to content</a>
+    
+    <header>
+        <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="manga.html">Manga</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="admin.html" class="active">Admin</a></li>
+            </ul>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="user-menu">
+                <button class="user-menu-toggle" aria-expanded="false" aria-label="User menu">
+                    <i class="fas fa-user-shield"></i>
+                </button>
+                <div class="user-dropdown">
+                    <a href="profile.html" class="dropdown-item">
+                        <i class="fas fa-user"></i> My Profile
+                    </a>
+                    <a href="admin.html" class="dropdown-item">
+                        <i class="fas fa-shield-alt"></i> Admin Dashboard
+                    </a>
+                    <button id="logout-btn" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i> Log Out
+                    </button>
+                </div>
+            </div>
+        </div>
+        <button class="mobile-menu-toggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <main id="main" class="admin-dashboard">
+        <div class="admin-header">
+            <h1>Admin Dashboard</h1>
+            <p class="last-login">Last login: <span id="last-login-date">May 5, 2025</span></p>
+        </div>
+        
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <div class="stat-info">
+                    <h3>Total Users</h3>
+                    <p class="stat-number" id="total-users">5,241</p>
+                    <p class="stat-change positive">+127 this month</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-eye"></i>
+                <div class="stat-info">
+                    <h3>Page Views</h3>
+                    <p class="stat-number" id="page-views">28.4K</p>
+                    <p class="stat-change positive">+12.7% this week</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-star"></i>
+                <div class="stat-info">
+                    <h3>Ratings</h3>
+                    <p class="stat-number" id="total-ratings">47,892</p>
+                    <p class="stat-change positive">+3,456 this month</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-comment"></i>
+                <div class="stat-info">
+                    <h3>Reviews</h3>
+                    <p class="stat-number" id="total-reviews">12,563</p>
+                    <p class="stat-change positive">+843 this month</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-container">
+            <div class="admin-sidebar">
+                <nav class="admin-nav">
+                    <ul>
+                        <li><button class="admin-nav-btn active" data-section="dashboard">
+                            <i class="fas fa-home"></i> Dashboard Overview
+                        </button></li>
+                        <li><button class="admin-nav-btn" data-section="users">
+                            <i class="fas fa-users"></i> User Management
+                        </button></li>
+                        <li><button class="admin-nav-btn" data-section="content">
+                            <i class="fas fa-photo-video"></i> Content Management
+                        </button></li>
+                        <li><button class="admin-nav-btn" data-section="reviews">
+                            <i class="fas fa-star"></i> Reviews & Ratings
+                        </button></li>
+                        <li><button class="admin-nav-btn" data-section="comments">
+                            <i class="fas fa-comments"></i> Comments
+                        </button></li>
+                        <li><button class="admin-nav-btn" data-section="reports">
+                            <i class="fas fa-flag"></i> Reported Content
+                        </button></li>
+                        <li><button class="admin-nav-btn" data-section="analytics">
+                            <i class="fas fa-chart-line"></i> Analytics
+                        </button></li>
+                        <li><button class="admin-nav-btn" data-section="settings">
+                            <i class="fas fa-cog"></i> Site Settings
+                        </button></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="admin-content">
+                <!-- Dashboard Overview Section -->
+                <section id="dashboard-section" class="admin-section active">
+                    <h2><i class="fas fa-tachometer-alt"></i> Dashboard Overview</h2>
+                    
+                    <div class="activity-feed">
+                        <h3>Recent Activity</h3>
+                        <ul class="activity-list">
+                            <li class="activity-item">
+                                <span class="activity-icon user-registered"><i class="fas fa-user-plus"></i></span>
+                                <div class="activity-details">
+                                    <p><strong>New User Registration:</strong> user123 joined the platform</p>
+                                    <span class="activity-time">10 minutes ago</span>
+                                </div>
+                            </li>
+                            <li class="activity-item">
+                                <span class="activity-icon content-added"><i class="fas fa-plus-circle"></i></span>
+                                <div class="activity-details">
+                                    <p><strong>New Content Added:</strong> "Demon Slayer Season 4" added to Anime</p>
+                                    <span class="activity-time">32 minutes ago</span>
+                                </div>
+                            </li>
+                            <li class="activity-item">
+                                <span class="activity-icon review-added"><i class="fas fa-star"></i></span>
+                                <div class="activity-details">
+                                    <p><strong>New Review:</strong> anime_lover123 reviewed "Attack on Titan Final Season"</p>
+                                    <span class="activity-time">1 hour ago</span>
+                                </div>
+                            </li>
+                            <li class="activity-item">
+                                <span class="activity-icon content-reported"><i class="fas fa-flag"></i></span>
+                                <div class="activity-details">
+                                    <p><strong>Content Reported:</strong> Comment on "Chainsaw Man Discussion" reported</p>
+                                    <span class="activity-time">2 hours ago</span>
+                                </div>
+                            </li>
+                            <li class="activity-item">
+                                <span class="activity-icon user-action"><i class="fas fa-user-edit"></i></span>
+                                <div class="activity-details">
+                                    <p><strong>User Updated:</strong> filmlover99 updated their profile</p>
+                                    <span class="activity-time">3 hours ago</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="quick-actions">
+                        <h3>Quick Actions</h3>
+                        <div class="quick-actions-grid">
+                            <button class="quick-action-btn" id="add-content-btn">
+                                <i class="fas fa-plus"></i>
+                                <span>Add New Content</span>
+                            </button>
+                            <button class="quick-action-btn" id="add-user-btn">
+                                <i class="fas fa-user-plus"></i>
+                                <span>Add New User</span>
+                            </button>
+                            <button class="quick-action-btn" id="send-notification-btn">
+                                <i class="fas fa-bell"></i>
+                                <span>Send Notification</span>
+                            </button>
+                            <button class="quick-action-btn" id="backup-btn">
+                                <i class="fas fa-database"></i>
+                                <span>Backup Database</span>
+                            </button>
+                            <button class="quick-action-btn" id="system-status-btn">
+                                <i class="fas fa-server"></i>
+                                <span>System Status</span>
+                            </button>
+                            <button class="quick-action-btn" id="generate-report-btn">
+                                <i class="fas fa-file-alt"></i>
+                                <span>Generate Report</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- User Management Section -->
+                <section id="users-section" class="admin-section">
+                    <h2><i class="fas fa-users"></i> User Management</h2>
+                    
+                    <div class="section-controls">
+                        <div class="search-filter">
+                            <input type="text" id="user-search" placeholder="Search users...">
+                            <select id="user-filter">
+                                <option value="all">All Users</option>
+                                <option value="admin">Admins</option>
+                                <option value="moderator">Moderators</option>
+                                <option value="regular">Regular Users</option>
+                                <option value="banned">Banned Users</option>
+                            </select>
+                            <button class="primary-btn" id="search-user-btn">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                        </div>
+                        <button class="primary-btn" id="add-new-user-btn">
+                            <i class="fas fa-user-plus"></i> Add New User
+                        </button>
+                    </div>
+                    
+                    <div class="data-table-wrapper">
+                        <table class="data-table" id="users-table">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="select-all-users"></th>
+                                    <th>ID <i class="fas fa-sort"></i></th>
+                                    <th>Username <i class="fas fa-sort"></i></th>
+                                    <th>Email <i class="fas fa-sort"></i></th>
+                                    <th>Role <i class="fas fa-sort"></i></th>
+                                    <th>Joined <i class="fas fa-sort"></i></th>
+                                    <th>Status <i class="fas fa-sort"></i></th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox" class="user-select"></td>
+                                    <td>1</td>
+                                    <td>admin</td>
+                                    <td>admin@entertainmenthub.com</td>
+                                    <td><span class="badge admin">Admin</span></td>
+                                    <td>Jan 15, 2023</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-btn view-btn" title="View User"><i class="fas fa-eye"></i></button>
+                                            <button class="action-btn edit-btn" title="Edit User"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete-btn" title="Delete User"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="user-select"></td>
+                                    <td>2</td>
+                                    <td>moderator1</td>
+                                    <td>mod1@entertainmenthub.com</td>
+                                    <td><span class="badge moderator">Moderator</span></td>
+                                    <td>Feb 28, 2023</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-btn view-btn" title="View User"><i class="fas fa-eye"></i></button>
+                                            <button class="action-btn edit-btn" title="Edit User"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete-btn" title="Delete User"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="user-select"></td>
+                                    <td>3</td>
+                                    <td>animecritic42</td>
+                                    <td>animecritic42@example.com</td>
+                                    <td><span class="badge regular">Regular</span></td>
+                                    <td>Mar 15, 2024</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-btn view-btn" title="View User"><i class="fas fa-eye"></i></button>
+                                            <button class="action-btn edit-btn" title="Edit User"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete-btn" title="Delete User"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="user-select"></td>
+                                    <td>4</td>
+                                    <td>moviebuff99</td>
+                                    <td>moviebuff99@example.com</td>
+                                    <td><span class="badge regular">Regular</span></td>
+                                    <td>Apr 2, 2024</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-btn view-btn" title="View User"><i class="fas fa-eye"></i></button>
+                                            <button class="action-btn edit-btn" title="Edit User"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete-btn" title="Delete User"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="user-select"></td>
+                                    <td>5</td>
+                                    <td>spammer123</td>
+                                    <td>spammer123@example.com</td>
+                                    <td><span class="badge regular">Regular</span></td>
+                                    <td>Apr 28, 2025</td>
+                                    <td><span class="status-badge banned">Banned</span></td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-btn view-btn" title="View User"><i class="fas fa-eye"></i></button>
+                                            <button class="action-btn edit-btn" title="Edit User"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete-btn" title="Delete User"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="table-pagination">
+                        <div class="pagination-info">Showing 1-5 of 5,241 users</div>
+                        <div class="pagination-controls">
+                            <button class="pagination-btn" disabled><i class="fas fa-angle-double-left"></i></button>
+                            <button class="pagination-btn" disabled><i class="fas fa-angle-left"></i></button>
+                            <button class="pagination-btn active">1</button>
+                            <button class="pagination-btn">2</button>
+                            <button class="pagination-btn">3</button>
+                            <span class="pagination-ellipsis">...</span>
+                            <button class="pagination-btn">525</button>
+                            <button class="pagination-btn"><i class="fas fa-angle-right"></i></button>
+                            <button class="pagination-btn"><i class="fas fa-angle-double-right"></i></button>
+                        </div>
+                        <div class="pagination-options">
+                            <label>
+                                Show
+                                <select id="users-per-page">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                                per page
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="bulk-actions">
+                        <select id="bulk-action-select">
+                            <option value="">Bulk Actions</option>
+                            <option value="activate">Activate Users</option>
+                            <option value="deactivate">Deactivate Users</option>
+                            <option value="ban">Ban Users</option>
+                            <option value="delete">Delete Users</option>
+                        </select>
+                        <button class="primary-btn" id="apply-bulk-action">Apply</button>
+                    </div>
+                </section>
+
+                <!-- Content Management Section -->
+                <section id="content-section" class="admin-section">
+                    <h2><i class="fas fa-photo-video"></i> Content Management</h2>
+                    
+                    <div class="content-categories">
+                        <button class="category-btn active" data-category="all">All Content</button>
+                        <button class="category-btn" data-category="movies">Movies</button>
+                        <button class="category-btn" data-category="series">Series</button>
+                        <button class="category-btn" data-category="anime">Anime</button>
+                        <button class="category-btn" data-category="manga">Manga</button>
+                        <button class="category-btn" data-category="games">Games</button>
+                    </div>
+                    
+                    <div class="section-controls">
+                        <div class="search-filter">
+                            <input type="text" id="content-search" placeholder="Search content...">
+                            <select id="content-filter">
+                                <option value="all">All Status</option>
+                                <option value="published">Published</option>
+                                <option value="draft">Draft</option>
+                                <option value="pending">Pending Review</option>
+                                <option value="archived">Archived</option>
+                            </select>
+                            <button class="primary-btn" id="search-content-btn">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                        </div>
+                        <button class="primary-btn" id="add-new-content-btn">
+                            <i class="fas fa-plus"></i> Add New Content
+                        </button>
+                    </div>
+                    
+                    <div class="data-table-wrapper">
+                        <table class="data-table" id="content-table">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="select-all-content"></th>
+                                    <th>Thumbnail</th>
+                                    <th>Title <i class="fas fa-sort"></i></th>
+                                    <th>Category <i class="fas fa-sort"></i></th>
+                                    <th>Status <i class="fas fa-sort"></i></th>
+                                    <th>Added By <i class="fas fa-sort"></i></th>
+                                    <th>Date <i class="fas fa-sort"></i></th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox" class="content-select"></td>
+                                    <td><img src="../images/Oppenheimer.jpg" alt="Oppenheimer" class="content-thumbnail"></td>
+                                    <td>Oppenheimer</td>
+                                    <td><span class="badge movies">Movies</span></td>
+                                    <td><span class="status-badge published">Published</span></td>
+                                    <td>admin</td>
+                                    <td>May 1, 2025</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-btn view-btn" title="View Content"><i class="fas fa-eye"></i></button>
+                                            <button class="action-btn edit-btn" title="Edit Content"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete-btn" title="Delete Content"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="content-select"></td>
+                                    <td><img src="../images/DemonSlayer.jpg" alt="Demon Slayer" class="content-thumbnail"></td>
+                                    <td>Demon Slayer: Season 3</td>
+                                    <td><span class="badge anime">Anime</span></td>
+                                    <td><span class="status-badge published">Published</span></td>
+                                    <td>moderator1</td>
+                                    <td>Apr 28, 2025</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-btn view-btn" title="View Content"><i class="fas fa-eye"></i></button>
+                                            <button class="action-btn edit-btn" title="Edit Content"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete-btn" title="Delete Content"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="content-select"></td>
+                                    <td><img src="../images/OnePiece.jpg" alt="One Piece" class="content-thumbnail"></td>
+                                    <td>One Piece: Chapter 1112</td>
+                                    <td><span class="badge manga">Manga</span></td>
+                                    <td><span class="status-badge draft">Draft</span></td>
+                                    <td>moderator1</td>
+                                    <td>May 4, 2025</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-btn view-btn" title="View Content"><i class="fas fa-eye"></i></button>
+                                            <button class="action-btn edit-btn" title="Edit Content"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete-btn" title="Delete Content"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="content-select"></td>
+                                    <td><img src="../images/EldenRing.jpg" alt="Elden Ring" class="content-thumbnail"></td>
+                                    <td>Elden Ring: Shadow of the Erdtree</td>
+                                    <td><span class="badge games">Games</span></td>
+                                    <td><span class="status-badge pending">Pending</span></td>
+                                    <td>gamereview42</td>
+                                    <td>May 3, 2025</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-btn view-btn" title="View Content"><i class="fas fa-eye"></i></button>
+                                            <button class="action-btn edit-btn" title="Edit Content"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete-btn" title="Delete Content"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="content-select"></td>
+                                    <td><img src="../images/Severence.jpg" alt="Severance" class="content-thumbnail"></td>
+                                    <td>Severance: Season 2</td>
+                                    <td><span class="badge series">Series</span></td>
+                                    <td><span class="status-badge published">Published</span></td>
+                                    <td>admin</td>
+                                    <td>Apr 20, 2025</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-btn view-btn" title="View Content"><i class="fas fa-eye"></i></button>
+                                            <button class="action-btn edit-btn" title="Edit Content"><i class="fas fa-edit"></i></button>
+                                            <button class="action-btn delete-btn" title="Delete Content"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="table-pagination">
+                        <div class="pagination-info">Showing 1-5 of 1,245 items</div>
+                        <div class="pagination-controls">
+                            <button class="pagination-btn" disabled><i class="fas fa-angle-double-left"></i></button>
+                            <button class="pagination-btn" disabled><i class="fas fa-angle-left"></i></button>
+                            <button class="pagination-btn active">1</button>
+                            <button class="pagination-btn">2</button>
+                            <button class="pagination-btn">3</button>
+                            <span class="pagination-ellipsis">...</span>
+                            <button class="pagination-btn">125</button>
+                            <button class="pagination-btn"><i class="fas fa-angle-right"></i></button>
+                            <button class="pagination-btn"><i class="fas fa-angle-double-right"></i></button>
+                        </div>
+                        <div class="pagination-options">
+                            <label>
+                                Show
+                                <select id="content-per-page">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                                per page
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="bulk-actions">
+                        <select id="content-bulk-action">
+                            <option value="">Bulk Actions</option>
+                            <option value="publish">Publish</option>
+                            <option value="draft">Save as Draft</option>
+                            <option value="archive">Archive</option>
+                            <option value="delete">Delete</option>
+                        </select>
+                        <button class="primary-btn" id="apply-content-action">Apply</button>
+                    </div>
+                </section>
+
+                <!-- Remaining sections placeholder (these would be expanded in the actual implementation) -->
+                <section id="reviews-section" class="admin-section">
+                    <h2><i class="fas fa-star"></i> Reviews & Ratings</h2>
+                    <p>Reviews management content will be displayed here.</p>
+                </section>
+
+                <section id="comments-section" class="admin-section">
+                    <h2><i class="fas fa-comments"></i> Comments</h2>
+                    <p>Comments management content will be displayed here.</p>
+                </section>
+
+                <section id="reports-section" class="admin-section">
+                    <h2><i class="fas fa-flag"></i> Reported Content</h2>
+                    <p>Reported content management will be displayed here.</p>
+                </section>
+
+                <section id="analytics-section" class="admin-section">
+                    <h2><i class="fas fa-chart-line"></i> Analytics</h2>
+                    <p>Analytics content will be displayed here.</p>
+                </section>
+
+                <section id="settings-section" class="admin-section">
+                    <h2><i class="fas fa-cog"></i> Site Settings</h2>
+                    <p>Site settings content will be displayed here.</p>
+                </section>
+            </div>
+        </div>
+
+        <!-- Modals for admin actions -->
+        <div class="modal" id="user-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="user-modal-title">User Details</h2>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body" id="user-modal-body">
+                    <!-- User form will be inserted here dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="content-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="content-modal-title">Content Details</h2>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body" id="content-modal-body">
+                    <!-- Content form will be inserted here dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="confirm-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Confirm Action</h2>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p id="confirm-message">Are you sure you want to perform this action?</p>
+                    <div class="modal-buttons">
+                        <button class="secondary-btn" id="cancel-action">Cancel</button>
+                        <button class="danger-btn" id="confirm-action">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>About Entertainment Hub</h3>
+                <p>Your all-in-one platform for movies, TV shows, anime, manga, and games. Discover, rate, and discuss your favorite entertainment.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                    <a href="#" aria-label="Reddit"><i class="fab fa-reddit"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-envelope"></i> support@entertainmenthub.com</p>
+                <p><i class="fas fa-phone"></i> +1 (123) 456-7890</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Entertainment St, Media City, CA 90210</p>
+            </div>
+            
+            <div class="footer-section newsletter">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for the latest updates on your favorite entertainment.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" aria-label="Subscribe"><i class="fas fa-paper-plane"></i></button>
+                </form>
+                <div class="app-links">
+                    <a href="#"><img src="../images/appstore.jpg" alt="Download on App Store"></a>
+                    <a href="#"><img src="../images/Googleplay.jpg" alt="Get it on Google Play"></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Back to top button -->
+    <button id="back-to-top-btn" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="../js/common.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin.js"></script>
+</body>
+
+</html>

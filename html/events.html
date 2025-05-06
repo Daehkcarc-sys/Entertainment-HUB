@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entertainment Events | Entertainment Hub</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        .events-calendar {
+            margin: 2rem 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .month-nav {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .month-nav button {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .month-nav button:hover {
+            transform: scale(1.2);
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background-color: var(--bg-light);
+        }
+        
+        .calendar-day-header {
+            text-align: center;
+            font-weight: 600;
+            padding: 0.5rem;
+            background-color: var(--accent-light);
+        }
+        
+        .calendar-day {
+            min-height: 100px;
+            border: 1px solid #e0e0e0;
+            padding: 0.5rem;
+            position: relative;
+        }
+        
+        .calendar-day.has-event {
+            background-color: rgba(var(--primary-rgb), 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .calendar-day.has-event:hover {
+            background-color: rgba(var(--primary-rgb), 0.2);
+        }
+        
+        .day-number {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            line-height: 25px;
+            border-radius: 50%;
+        }
+        
+        .calendar-day.today .day-number {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .event-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        
+        .event-item {
+            margin-top: 25px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 3px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .event-movie {
+            background-color: rgba(255, 99, 71, 0.2);
+            border-left: 3px solid tomato;
+        }
+        
+        .event-anime {
+            background-color: rgba(65, 105, 225, 0.2);
+            border-left: 3px solid royalblue;
+        }
+        
+        .event-game {
+            background-color: rgba(50, 205, 50, 0.2);
+            border-left: 3px solid limegreen;
+        }
+        
+        .event-convention {
+            background-color: rgba(255, 165, 0, 0.2);
+            border-left: 3px solid orange;
+        }
+        
+        .event-other {
+            background-color: rgba(138, 43, 226, 0.2);
+            border-left: 3px solid blueviolet;
+        }
+        
+        .event-tooltip {
+            position: absolute;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            z-index: 100;
+            width: 250px;
+            display: none;
+        }
+        
+        .event-tooltip h4 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        
+        .event-tooltip p {
+            margin: 0.5rem 0;
+        }
+        
+        .event-tooltip-visible {
+            display: block;
+        }
+        
+        .upcoming-events {
+            margin: 3rem 0;
+        }
+        
+        .event-card {
+            display: flex;
+            margin-bottom: 2rem;
+            background: var(--bg-light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .event-card-image {
+            flex: 0 0 30%;
+            min-height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .event-card-content {
+            flex: 1;
+            padding: 1.5rem;
+        }
+        
+        .event-card-date {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .event-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .event-filter button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            background: var(--bg-light);
+            transition: all 0.3s ease;
+        }
+        
+        .event-filter button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .event-location {
+            display: flex;
+            align-items: center;
+            margin: 0.5rem 0;
+        }
+        
+        .event-location i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .event-card {
+                flex-direction: column;
+            }
+            
+            .event-card-image {
+                flex: 0 0 150px;
+            }
+        }
+    </style>
+</head>
+
+<body data-theme="light">
+    <a class="skip-link" href="#main">Skip to content</a>
+    
+    <header>
+        <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="manga.html">Manga</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="discussions.html">Discussions</a></li>
+                <li><a href="watchlist.html">Watchlist</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="signin.html">Sign In / Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main">
+        <section class="hero events-hero">
+            <div class="container">
+                <h1>Entertainment Events</h1>
+                <p class="subtitle">Stay updated on conventions, premieres, releases and more</p>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="section-header">
+                <h2 class="section-title">Events Calendar</h2>
+                <p>Plan your schedule around upcoming entertainment events</p>
+            </div>
+            
+            <div class="event-filter">
+                <button class="active" data-filter="all">All Events</button>
+                <button data-filter="movie">Movie Premieres</button>
+                <button data-filter="anime">Anime Releases</button>
+                <button data-filter="game">Game Launches</button>
+                <button data-filter="convention">Conventions</button>
+                <button data-filter="other">Other Events</button>
+            </div>
+            
+            <div class="events-calendar">
+                <div class="calendar-header">
+                    <div class="month-nav">
+                        <button id="prev-month"><i class="fas fa-chevron-left"></i></button>
+                        <h3 id="current-month">May 2025</h3>
+                        <button id="next-month"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <button id="today-button" class="btn btn-light">Today</button>
+                </div>
+                <div class="calendar-grid">
+                    <div class="calendar-day-header">Sun</div>
+                    <div class="calendar-day-header">Mon</div>
+                    <div class="calendar-day-header">Tue</div>
+                    <div class="calendar-day-header">Wed</div>
+                    <div class="calendar-day-header">Thu</div>
+                    <div class="calendar-day-header">Fri</div>
+                    <div class="calendar-day-header">Sat</div>
+                    
+                    <!-- Calendar days will be generated by JavaScript -->
+                    <!-- Sample structure for a calendar day -->
+                    <div class="calendar-day">
+                        <div class="day-number">1</div>
+                        <div class="event-item event-movie" data-event-id="1">Marvel Movie Premiere</div>
+                    </div>
+                    <!-- More calendar days would be dynamically generated -->
+                </div>
+            </div>
+            
+            <!-- Event tooltip that appears on hover/click -->
+            <div id="event-tooltip" class="event-tooltip">
+                <h4>Event Title</h4>
+                <div class="event-tooltip-date"><i class="far fa-calendar-alt"></i> <span>Date</span></div>
+                <div class="event-tooltip-time"><i class="far fa-clock"></i> <span>Time</span></div>
+                <div class="event-tooltip-location"><i class="fas fa-map-marker-alt"></i> <span>Location</span></div>
+                <p class="event-tooltip-description">Description will appear here</p>
+                <a href="#" class="btn btn-sm btn-primary">More Details</a>
+            </div>
+        </section>
+
+        <section class="upcoming-events container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Events</h2>
+                <p>Don't miss these major upcoming entertainment events</p>
+            </div>
+            
+            <div class="event-cards">
+                <!-- Comic-Con event -->
+                <div class="event-card" data-event-type="convention">
+                    <div class="event-card-image" style="background-image: url('../images/Animewallpaper.jpg');"></div>
+                    <div class="event-card-content">
+                        <span class="event-card-date">July 25-28, 2025</span>
+                        <h3>San Diego Comic-Con International</h3>
+                        <div class="event-location">
+                            <i class="fas fa-map-marker-alt"></i> San Diego Convention Center, CA
+                        </div>
+                        <p>The world's premier comic and pop culture convention returns with exclusive panels, celebrity interviews, and first-look trailers from major studios.</p>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary">Learn More</a>
+                            <button class="btn btn-outline">Add to Calendar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- E3 Gaming Expo -->
+                <div class="event-card" data-event-type="game">
+                    <div class="event-card-image" style="background-image: url('../images/gaming.jp^g.jpeg');"></div>
+                    <div class="event-card-content">
+                        <span class="event-card-date">June 11-13, 2025</span>
+                        <h3>E3 Gaming Expo</h3>
+                        <div class="event-location">
+                            <i class="fas fa-map-marker-alt"></i> Los Angeles Convention Center, CA
+                        </div>
+                        <p>The biggest event in gaming returns with major announcements from leading developers and publishers. Experience hands-on demos of upcoming titles and exclusive gameplay reveals.</p>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary">Learn More</a>
+                            <button class="btn btn-outline">Add to Calendar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Anime Expo -->
+                <div class="event-card" data-event-type="anime">
+                    <div class="event-card-image" style="background-image: url('../images/Mappa.jpg');"></div>
+                    <div class="event-card-content">
+                        <span class="event-card-date">July 3-6, 2025</span>
+                        <h3>Anime Expo 2025</h3>
+                        <div class="event-location">
+                            <i class="fas fa-map-marker-alt"></i> Los Angeles Convention Center, CA
+                        </div>
+                        <p>North America's largest celebration of Japanese pop culture returns with industry panels, exclusive screenings, and appearances by voice actors and creators from Japan and beyond.</p>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary">Learn More</a>
+                            <button class="btn btn-outline">Add to Calendar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cannes Film Festival -->
+                <div class="event-card" data-event-type="movie">
+                    <div class="event-card-image" style="background-image: url('../images/Godfather.jpg');"></div>
+                    <div class="event-card-content">
+                        <span class="event-card-date">May 14-25, 2025</span>
+                        <h3>Cannes Film Festival</h3>
+                        <div class="event-location">
+                            <i class="fas fa-map-marker-alt"></i> Cannes, France
+                        </div>
+                        <p>The world's most prestigious film festival showcases new films from around the globe, including documentaries and shorts from both established and emerging filmmakers.</p>
+                        <div class="event-actions">
+                            <a href="#" class="btn btn-primary">Learn More</a>
+                            <button class="btn btn-outline">Add to Calendar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="virtual-events container">
+            <div class="section-header">
+                <h2 class="section-title">Virtual Events</h2>
+                <p>Participate from anywhere in the world</p>
+            </div>
+            
+            <div class="virtual-events-grid">
+                <div class="virtual-event">
+                    <div class="virtual-event-content">
+                        <h3>Digital Game Festival</h3>
+                        <p class="virtual-event-date">May 20-23, 2025</p>
+                        <p>Join developers and gamers from around the world for online panels, demos, and exclusive interviews about upcoming titles.</p>
+                        <a href="#" class="btn btn-outline">Register for Free</a>
+                    </div>
+                </div>
+                
+                <div class="virtual-event">
+                    <div class="virtual-event-content">
+                        <h3>Global Anime Day</h3>
+                        <p class="virtual-event-date">June 15, 2025</p>
+                        <p>A 24-hour streaming celebration of anime with world premieres, creator interviews, and fan events across multiple platforms.</p>
+                        <a href="#" class="btn btn-outline">Register for Free</a>
+                    </div>
+                </div>
+                
+                <div class="virtual-event">
+                    <div class="virtual-event-content">
+                        <h3>Indie Film Showcase</h3>
+                        <p class="virtual-event-date">July 10-12, 2025</p>
+                        <p>Stream cutting-edge independent films and participate in live Q&A sessions with directors and actors.</p>
+                        <a href="#" class="btn btn-outline">Register for Free</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="organize-event container">
+            <div class="section-header">
+                <h2 class="section-title">Organize Your Own Event</h2>
+                <p>Share your passion with the community</p>
+            </div>
+            
+            <div class="organize-event-content">
+                <div class="organize-event-text">
+                    <p>Whether you're planning a watch party, gaming tournament, or fan meetup, you can promote it on Entertainment Hub.</p>
+                    <p>Community events are a great way to connect with fans who share your interests.</p>
+                    <ul class="organize-event-benefits">
+                        <li><i class="fas fa-check-circle"></i> Free event listing for members</li>
+                        <li><i class="fas fa-check-circle"></i> Built-in RSVP and attendance tracking</li>
+                        <li><i class="fas fa-check-circle"></i> Automatic notifications to interested users</li>
+                        <li><i class="fas fa-check-circle"></i> Integrated discussion threads</li>
+                    </ul>
+                    <a href="community.html#create-event" class="btn btn-primary">Create Event</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h2>About Entertainment Hub</h2>
+                <p>Your one-stop destination for all things entertainment - movies, series, anime, manga, games and more.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section links">
+                <h2>Quick Links</h2>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="support.html">Support</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section newsletter">
+                <h2>Join Our Newsletter</h2>
+                <p>Stay updated with the latest in entertainment.</p>
+                <form action="#" method="post">
+                    <input type="email" name="email" placeholder="Enter your email">
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sample data - in a real implementation, this would come from a database
+            const events = [
+                {
+                    id: 1,
+                    title: "Avengers: Secret Wars Premiere",
+                    date: "2025-05-10",
+                    time: "7:00 PM",
+                    location: "TCL Chinese Theatre, Los Angeles",
+                    description: "World premiere of the latest Marvel blockbuster with red carpet appearances by the cast.",
+                    type: "movie",
+                    url: "movies.html?id=avengers-secret-wars"
+                },
+                {
+                    id: 2,
+                    title: "Attack on Titan Final Exhibition",
+                    date: "2025-05-15",
+                    time: "10:00 AM - 6:00 PM",
+                    location: "Anime NYC, Jacob K. Javits Convention Center",
+                    description: "Special exhibition celebrating the conclusion of the Attack on Titan series with original artwork and props.",
+                    type: "anime",
+                    url: "anime.html?id=attack-on-titan&event=exhibition"
+                },
+                {
+                    id: 3,
+                    title: "The Elder Scrolls VI Launch",
+                    date: "2025-05-20",
+                    time: "12:01 AM",
+                    location: "Global Digital Release",
+                    description: "The long-awaited next installment in the Elder Scrolls series finally arrives.",
+                    type: "game",
+                    url: "games.html?id=elder-scrolls-6"
+                },
+                {
+                    id: 4,
+                    title: "MCM Comic Con London",
+                    date: "2025-05-24",
+                    time: "9:00 AM - 7:00 PM",
+                    location: "ExCeL London",
+                    description: "UK's largest pop culture convention with guests, panels, and exclusive merchandise.",
+                    type: "convention",
+                    url: "events.html?id=mcm-london-2025"
+                }
+            ];
+            
+            // Filter buttons functionality
+            const filterButtons = document.querySelectorAll('.event-filter button');
+            const eventCards = document.querySelectorAll('.event-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const filter = button.getAttribute('data-filter');
+                    
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    // Filter event cards
+                    eventCards.forEach(card => {
+                        if (filter === 'all' || card.getAttribute('data-event-type') === filter) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Calendar functionality (simplified for demo)
+            const currentMonthElement = document.getElementById('current-month');
+            const prevMonthButton = document.getElementById('prev-month');
+            const nextMonthButton = document.getElementById('next-month');
+            const todayButton = document.getElementById('today-button');
+            const calendarGrid = document.querySelector('.calendar-grid');
+            
+            // Simplified calendar generation - in a real implementation this would be more robust
+            function generateCalendar(year, month) {
+                // Clear existing calendar days except headers
+                const headers = document.querySelectorAll('.calendar-day-header');
+                calendarGrid.innerHTML = '';
+                
+                // Re-add headers
+                headers.forEach(header => {
+                    calendarGrid.appendChild(header.cloneNode(true));
+                });
+                
+                const firstDay = new Date(year, month, 1);
+                const lastDay = new Date(year, month + 1, 0);
+                const daysInMonth = lastDay.getDate();
+                const startingDayOfWeek = firstDay.getDay(); // 0 = Sunday
+                
+                // Add empty cells for days before the first of the month
+                for (let i = 0; i < startingDayOfWeek; i++) {
+                    const emptyDay = document.createElement('div');
+                    emptyDay.className = 'calendar-day';
+                    calendarGrid.appendChild(emptyDay);
+                }
+                
+                // Current date for highlighting today
+                const today = new Date();
+                const isCurrentMonth = today.getFullYear() === year && today.getMonth() === month;
+                
+                // Add calendar days
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const calendarDay = document.createElement('div');
+                    calendarDay.className = 'calendar-day';
+                    
+                    // Check if this day is today
+                    if (isCurrentMonth && today.getDate() === day) {
+                        calendarDay.classList.add('today');
+                    }
+                    
+                    // Add day number
+                    const dayNumber = document.createElement('div');
+                    dayNumber.className = 'day-number';
+                    dayNumber.textContent = day;
+                    calendarDay.appendChild(dayNumber);
+                    
+                    // Check if there are events on this day
+                    const currentDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                    const dayEvents = events.filter(event => event.date === currentDate);
+                    
+                    if (dayEvents.length > 0) {
+                        calendarDay.classList.add('has-event');
+                        
+                        // Add events to the day
+                        dayEvents.forEach(event => {
+                            const eventItem = document.createElement('div');
+                            eventItem.className = `event-item event-${event.type}`;
+                            eventItem.textContent = event.title;
+                            eventItem.dataset.eventId = event.id;
+                            calendarDay.appendChild(eventItem);
+                            
+                            // Event click handler to show tooltip
+                            eventItem.addEventListener('click', (e) => {
+                                const tooltip = document.getElementById('event-tooltip');
+                                const eventData = events.find(evt => evt.id === parseInt(eventItem.dataset.eventId));
+                                
+                                if (eventData) {
+                                    tooltip.querySelector('h4').textContent = eventData.title;
+                                    tooltip.querySelector('.event-tooltip-date span').textContent = eventData.date;
+                                    tooltip.querySelector('.event-tooltip-time span').textContent = eventData.time;
+                                    tooltip.querySelector('.event-tooltip-location span').textContent = eventData.location;
+                                    tooltip.querySelector('.event-tooltip-description').textContent = eventData.description;
+                                    tooltip.querySelector('.btn').href = eventData.url;
+                                    
+                                    // Position tooltip
+                                    const rect = eventItem.getBoundingClientRect();
+                                    tooltip.style.top = `${rect.bottom + window.scrollY + 10}px`;
+                                    tooltip.style.left = `${rect.left + window.scrollX}px`;
+                                    tooltip.classList.add('event-tooltip-visible');
+                                    
+                                    e.stopPropagation(); // Prevent bubbling to document click handler
+                                }
+                            });
+                        });
+                    }
+                    
+                    calendarGrid.appendChild(calendarDay);
+                }
+            }
+            
+            // Hide tooltip when clicking elsewhere
+            document.addEventListener('click', () => {
+                document.getElementById('event-tooltip').classList.remove('event-tooltip-visible');
+            });
+            
+            // Initial calendar setup - May 2025
+            let currentYear = 2025;
+            let currentMonth = 4; // May (0-indexed)
+            
+            generateCalendar(currentYear, currentMonth);
+            currentMonthElement.textContent = `${new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long' })} ${currentYear}`;
+            
+            // Month navigation
+            prevMonthButton.addEventListener('click', () => {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                generateCalendar(currentYear, currentMonth);
+                currentMonthElement.textContent = `${new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long' })} ${currentYear}`;
+            });
+            
+            nextMonthButton.addEventListener('click', () => {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                generateCalendar(currentYear, currentMonth);
+                currentMonthElement.textContent = `${new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long' })} ${currentYear}`;
+            });
+            
+            todayButton.addEventListener('click', () => {
+                const now = new Date();
+                currentYear = now.getFullYear();
+                currentMonth = now.getMonth();
+                generateCalendar(currentYear, currentMonth);
+                currentMonthElement.textContent = `${new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long' })} ${currentYear}`;
+            });
+            
+            // Initialize "Add to Calendar" buttons
+            document.querySelectorAll('.btn-outline').forEach(button => {
+                if (button.textContent === 'Add to Calendar') {
+                    button.addEventListener('click', function() {
+                        alert('In a full implementation, this would add the event to your personal calendar.');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

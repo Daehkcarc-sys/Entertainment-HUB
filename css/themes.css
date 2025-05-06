@@ -1,0 +1,769 @@
+/* Unified Theme System for Entertainment Hub
+ * This file organizes all theme-specific styles in a standardized way
+ */
+
+/* Theme Color Variables */
+:root {
+  /* Movie Theme */
+  --movies-primary: #e63946;        
+  --movies-secondary: #1d3557;      
+  --movies-accent: #ffb703;         
+  --movies-light: #f1faee;          
+  --movies-dark: #293241;           
+  --movies-gradient: linear-gradient(135deg, #e63946, #d62828);
+  
+  /* Anime Theme */
+  --anime-primary: #9370DB;        
+  --anime-secondary: #6A5ACD;      
+  --anime-light: #E6E6FA;          
+  --anime-accent: #FF92CE;         
+  --anime-dark: #483D8B;           
+  --anime-gradient: linear-gradient(135deg, #9370DB, #6A5ACD);
+  
+  /* Series Theme */
+  --series-primary: #2a9d8f;        
+  --series-secondary: #264653;      
+  --series-accent: #e9c46a;         
+  --series-light: #f4f4f4;          
+  --series-dark: #1d2d3a;           
+  --series-gradient: linear-gradient(135deg, #2a9d8f, #264653);
+  
+  /* Manga Theme */
+  --manga-primary: #6a5acd;
+  --manga-secondary: #483d8b;
+  --manga-light: #e6e6fa;
+  --manga-accent: #9370db;
+  --manga-dark: #2f2f4f;
+  --manga-gradient: linear-gradient(135deg, #6a5acd, #483d8b);
+  
+  /* Games Theme */
+  --games-primary: #50a7ff;
+  --games-secondary: #2d88ff;
+  --games-light: #e6f2ff;
+  --games-accent: rgba(80, 167, 255, 0.5);
+  --games-dark: #1a1f2c;
+  --games-gradient: linear-gradient(135deg, #50a7ff, #2d88ff);
+  
+  /* Common Elements */
+  --rating-gold: #FFD700;
+  --shadow-soft: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --shadow-strong: 0 8px 25px rgba(0, 0, 0, 0.2);
+  --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Dark Theme Adjustments */
+[data-theme="dark"] {
+  /* Dark theme movie adjustments */
+  --movies-light: #232338;
+  
+  /* Dark theme anime adjustments */
+  --anime-light: #232338;
+  
+  /* Dark theme series adjustments */
+  --series-light: #1a2a2a;
+  
+  /* Dark theme manga adjustments */
+  --manga-light: #232330;
+  
+  /* Dark theme games adjustments */
+  --games-light: #121620;
+}
+
+/*======================
+  COMMON THEME COMPONENTS 
+========================*/
+
+/* Hero Section Template */
+.themed-hero {
+  height: 80vh;
+  min-height: 500px;
+  position: relative;
+  overflow: hidden;
+}
+
+.themed-hero-content {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 0;
+  color: white;
+}
+
+.themed-hero-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 1s ease;
+}
+
+.themed-hero-subtitle {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  animation: fadeIn 1s ease 0.3s both;
+}
+
+.themed-hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  animation: fadeIn 1s ease 0.6s both;
+}
+
+.themed-btn-primary {
+  padding: 0.9rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+}
+
+.themed-btn-secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 0.9rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  transition: var(--transition-smooth);
+}
+
+/* Featured Section Template */
+.themed-featured {
+  padding: 4rem 0;
+}
+
+.themed-section-title {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.themed-section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.themed-carousel {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.themed-carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(29, 53, 87, 0.8);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: var(--transition-smooth);
+}
+
+.themed-carousel-button.prev {
+  left: 10px;
+}
+
+.themed-carousel-button.next {
+  right: 10px;
+}
+
+.themed-card {
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition-smooth);
+}
+
+.themed-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-strong);
+}
+
+.themed-card-image {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+}
+
+.themed-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.themed-card:hover .themed-card-image img {
+  transform: scale(1.05);
+}
+
+.themed-card-content {
+  padding: 1.5rem;
+}
+
+.themed-card-title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.themed-card-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 0.75rem;
+}
+
+.themed-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.themed-tag {
+  padding: 0.2rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  transition: var(--transition-smooth);
+}
+
+/* Tabs System Template */
+.themed-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2rem;
+  gap: 0.5rem;
+}
+
+.themed-tab {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition-smooth);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.themed-tab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.themed-tab-content {
+  display: none;
+  animation: fadeIn 0.5s ease;
+}
+
+.themed-tab-content.active {
+  display: block;
+}
+
+/* Ranking Lists Template */
+.themed-ranking-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.themed-ranking-item {
+  display: grid;
+  grid-template-columns: auto 80px 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  transition: var(--transition-smooth);
+}
+
+.themed-ranking-item:hover {
+  transform: translateX(5px);
+  box-shadow: var(--shadow-soft);
+}
+
+.themed-rank {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+}
+
+.themed-ranking-image {
+  width: 80px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.themed-ranking-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.themed-ranking-title {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.themed-ranking-meta {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.themed-ranking-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--rating-gold);
+  font-weight: 600;
+}
+
+/*======================
+  MOVIES THEME  
+========================*/
+.movies-page header {
+  background-color: var(--movies-secondary);
+  background-image: url('../images/film-pattern.png');
+  background-blend-mode: multiply;
+}
+
+.movies-page nav ul li a.active {
+  background-color: var(--movies-primary);
+  color: white;
+}
+
+.movies-hero {
+  background: #111 url('../images/movies-hero-bg.jpg') center/cover no-repeat;
+}
+
+.movies-hero-title span {
+  color: var(--movies-accent);
+  text-shadow: 0 0 15px rgba(255, 183, 3, 0.5);
+}
+
+.movies-btn-primary {
+  background: var(--movies-gradient);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+}
+
+.movies-btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(230, 57, 70, 0.6);
+}
+
+.movies-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px);
+}
+
+.movies-featured {
+  background-color: var(--movies-light);
+}
+
+.movies-section-title {
+  color: var(--movies-secondary);
+}
+
+.movies-section-title::after {
+  background: var(--movies-primary);
+}
+
+.movies-carousel-button:hover {
+  background-color: var(--movies-primary);
+}
+
+.movies-tab.active {
+  background: var(--movies-gradient);
+  color: white;
+}
+
+.movies-rank {
+  background: var(--movies-gradient);
+}
+
+.movies-tag {
+  background-color: var(--movies-light);
+  color: var(--movies-dark);
+}
+
+.movies-tag:hover {
+  background-color: var(--movies-primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/*======================
+  ANIME THEME  
+========================*/
+.anime-page header {
+  background: var(--anime-gradient);
+  position: relative;
+  overflow: hidden;
+}
+
+.anime-hero {
+  background: #111 url('../images/anime-hero-bg.jpg') center/cover no-repeat;
+}
+
+.anime-hero-title span {
+  color: var(--anime-accent);
+  text-shadow: 0 0 15px rgba(255, 146, 206, 0.5);
+}
+
+.anime-btn-primary {
+  background: var(--anime-gradient);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 15px rgba(147, 112, 219, 0.4);
+}
+
+.anime-btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(147, 112, 219, 0.6);
+}
+
+.anime-featured {
+  background-color: var(--anime-light);
+}
+
+.anime-section-title {
+  color: var(--anime-dark);
+}
+
+.anime-section-title::after {
+  background: var(--anime-gradient);
+}
+
+.anime-carousel-button:hover {
+  background-color: var(--anime-primary);
+}
+
+.anime-tab.active {
+  background: var(--anime-gradient);
+  color: white;
+}
+
+.anime-rank {
+  background: var(--anime-gradient);
+}
+
+.anime-tag {
+  background-color: var(--anime-light);
+  color: var(--anime-dark);
+}
+
+.anime-tag:hover {
+  background: var(--anime-gradient);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(147, 112, 219, 0.4);
+}
+
+/*======================
+  SERIES THEME  
+========================*/
+.series-page header {
+  background: var(--series-gradient);
+  position: relative;
+  overflow: hidden;
+}
+
+.series-hero {
+  background: #111 url('../images/series-hero-bg.jpg') center/cover no-repeat;
+}
+
+.series-hero-title span {
+  color: var(--series-accent);
+  text-shadow: 0 0 15px rgba(233, 196, 106, 0.5);
+}
+
+.series-btn-primary {
+  background: var(--series-gradient);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 15px rgba(42, 157, 143, 0.4);
+}
+
+.series-btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(42, 157, 143, 0.6);
+}
+
+.series-featured {
+  background-color: var(--series-light);
+}
+
+.series-section-title {
+  color: var(--series-dark);
+}
+
+.series-section-title::after {
+  background: var(--series-gradient);
+}
+
+.series-carousel-button:hover {
+  background-color: var(--series-primary);
+}
+
+.series-tab.active {
+  background: var(--series-gradient);
+  color: white;
+}
+
+.series-rank {
+  background: var(--series-gradient);
+}
+
+.series-tag {
+  background-color: var(--series-light);
+  color: var(--series-dark);
+}
+
+.series-tag:hover {
+  background-color: var(--series-primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/*======================
+  MANGA THEME  
+========================*/
+.manga-page header {
+  background: var(--manga-gradient);
+  position: relative;
+}
+
+.manga-hero {
+  background: #111 url('../images/manga-hero-bg.jpg') center/cover no-repeat;
+}
+
+.manga-hero-title span {
+  color: var(--manga-accent);
+  text-shadow: 0 0 15px rgba(147, 112, 219, 0.5);
+}
+
+.manga-btn-primary {
+  background: var(--manga-gradient);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 15px rgba(106, 90, 205, 0.4);
+}
+
+.manga-btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(106, 90, 205, 0.6);
+}
+
+.manga-section-title {
+  color: var(--manga-dark);
+}
+
+.manga-section-title::after {
+  background: var(--manga-gradient);
+}
+
+.manga-featured {
+  background-color: var(--manga-light);
+}
+
+.manga-carousel-button:hover {
+  background-color: var(--manga-primary);
+}
+
+.manga-tab.active {
+  background: var(--manga-gradient);
+  color: white;
+}
+
+.manga-rank {
+  background: var(--manga-gradient);
+}
+
+.manga-tag {
+  background-color: var(--manga-light);
+  color: var(--manga-dark);
+}
+
+.manga-tag:hover {
+  background: var(--manga-gradient);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/*======================
+  GAMES THEME  
+========================*/
+.games-page header {
+  background: var(--games-dark);
+  padding: 1rem 0;
+  border-bottom: 3px solid var(--games-primary);
+}
+
+.games-page header h1 i {
+  color: var(--games-primary);
+}
+
+.games-hero {
+  background: var(--games-dark) url('../images/games-hero-bg.jpg') center/cover no-repeat;
+}
+
+.games-btn-primary {
+  background: linear-gradient(135deg, var(--games-primary) 0%, var(--games-secondary) 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 15px rgba(80, 167, 255, 0.4);
+}
+
+.games-btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(80, 167, 255, 0.6);
+}
+
+.games-section-title {
+  color: var(--games-primary);
+  text-shadow: 0 0 10px var(--games-accent);
+}
+
+.games-section-title::after {
+  background: var(--games-gradient);
+}
+
+.games-card {
+  background: var(--games-dark);
+  border: 1px solid rgba(80, 167, 255, 0.2);
+  color: var(--games-light);
+}
+
+.games-tab.active {
+  background: var(--games-primary);
+  color: white;
+}
+
+.games-rank {
+  background: var(--games-gradient);
+}
+
+.games-tag {
+  background: rgba(80, 167, 255, 0.15);
+  border: 1px solid var(--games-primary);
+  color: var(--games-light);
+}
+
+.games-tag:hover {
+  background: var(--games-secondary);
+  color: white;
+}
+
+/* Responsive styles for all themes */
+@media (max-width: 992px) {
+  .themed-hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .themed-hero {
+    height: 60vh;
+  }
+  
+  .themed-card-image {
+    height: 200px;
+  }
+  
+  .themed-ranking-item {
+    grid-template-columns: auto 60px 1fr auto;
+  }
+  
+  .themed-ranking-image {
+    width: 60px;
+    height: 90px;
+  }
+}
+
+@media (max-width: 768px) {
+  .themed-hero-title {
+    font-size: 2rem;
+  }
+  
+  .themed-hero-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .themed-hero-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .themed-btn-primary, 
+  .themed-btn-secondary {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .themed-ranking-item {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+  }
+  
+  .themed-ranking-image {
+    grid-row: span 2;
+  }
+  
+  .themed-ranking-rating {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 576px) {
+  .themed-hero {
+    height: 50vh;
+  }
+  
+  .themed-hero-title {
+    font-size: 1.8rem;
+  }
+  
+  .themed-tabs {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .themed-tab {
+    width: 100%;
+    text-align: center;
+  }
+}

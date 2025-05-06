@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Hub | Entertainment Portal</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/animes.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/carousel.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Discover and track anime series, read reviews, and connect with other anime fans on our comprehensive anime portal.">
+    <meta name="keywords" content="anime, manga, anime series, anime streaming, anime reviews, anime community">
+    <meta name="author" content="Entertainment Hub">
+    <meta property="og:title" content="Anime Hub | Entertainment Portal">
+    <meta property="og:description" content="Discover and track anime series, read reviews, and connect with other anime fans.">
+    <meta property="og:type" content="website">
+    
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#9370DB">
+    <style>
+        /* Add some styles for the rating link */
+        .action-button.rating-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .action-button.rating-btn:hover {
+            transform: scale(1.1);
+            color: #FFD700;
+        }
+    </style>
+</head>
+
+<body class="anime-page" data-theme="light">
+    <header class="site-header">
+        <div class="container header-container">
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+            </div>
+            <nav class="main-nav">
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span class="hamburger-icon"></span>
+                </button>
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="anime.html" class="active">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                    <li class="dropdown">
+                        <a href="community.html">Community <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="discussions.html">Discussions</a></li>
+                            <li><a href="reviews.html">Reviews</a></li>
+                            <li><a href="polls.html">Polls</a></li>
+                            <li><a href="events.html">Events</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="watchlist.html">Watchlist</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li class="auth-links"><a href="signin.html">Sign In / Sign Up</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Breadcrumbs will be added by common.js -->
+        
+        <!-- Hero Banner Section with Featured Anime Carousel -->
+        <section class="anime-hero">
+            <div class="carousel-container banner carousel-hero overlay" data-autoplay="true" data-loop="true" data-slides-per-view="1" data-autoplay-delay="8000">
+                <div class="carousel-wrapper">
+                    <div class="carousel-item">
+                        <div class="carousel-image">
+                            <img src="../images/attack on titan.jpg" alt="Attack on Titan Final Season" loading="eager">
+                        </div>
+                        <div class="carousel-caption">
+                            <span class="carousel-badge">Highest Rated</span>
+                            <h2>Attack on Titan: Final Season</h2>
+                            <p>The epic conclusion to one of the most critically acclaimed anime series of all time.</p>
+                            <div class="carousel-actions">
+                                <a href="#" class="btn btn-primary">Watch Now</a>
+                                <button class="btn btn-outline add-watchlist" data-id="aot-final">Add to Watchlist</button>
+                                <a href="manga.html?title=attack-on-titan" class="btn btn-outline manga-link">Read Manga</a>
+                            </div>
+                            <div class="carousel-meta">
+                                <span><i class="fas fa-star"></i> 9.6/10</span>
+                                <span><i class="fas fa-film"></i> MAPPA</span>
+                                <span><i class="fas fa-calendar"></i> Winter 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-image">
+                            <img src="../images/JJK.jpeg" alt="Jujutsu Kaisen Season 3" loading="eager">
+                        </div>
+                        <div class="carousel-caption">
+                            <span class="carousel-badge">New Season</span>
+                            <h2>Jujutsu Kaisen: Season 3</h2>
+                            <p>Following the Shibuya Incident, Yuji Itadori and his fellow sorcerers face their greatest challenges yet.</p>
+                            <div class="carousel-actions">
+                                <a href="#" class="btn btn-primary">Watch Trailer</a>
+                                <button class="btn btn-outline add-watchlist" data-id="jjk-s3">Add to Watchlist</button>
+                                <a href="manga.html?title=jujutsu-kaisen" class="btn btn-outline manga-link">Read Manga</a>
+                            </div>
+                            <div class="carousel-meta">
+                                <span><i class="fas fa-star"></i> 9.4/10</span>
+                                <span><i class="fas fa-film"></i> MAPPA</span>
+                                <span><i class="fas fa-calendar"></i> Winter 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-image">
+                            <img src="../images/Chainsaw.jpg" alt="Chainsaw Man Part 2" loading="eager">
+                        </div>
+                        <div class="carousel-caption">
+                            <span class="carousel-badge">Popular</span>
+                            <h2>Chainsaw Man: Part 2</h2>
+                            <p>Denji returns as the infamous Chainsaw Man in this highly anticipated second season.</p>
+                            <div class="carousel-actions">
+                                <a href="#" class="btn btn-primary">Watch Now</a>
+                                <button class="btn btn-outline add-watchlist" data-id="chainsaw-s2">Add to Watchlist</button>
+                                <a href="manga.html?title=chainsaw-man" class="btn btn-outline manga-link">Read Manga</a>
+                            </div>
+                            <div class="carousel-meta">
+                                <span><i class="fas fa-star"></i> 9.2/10</span>
+                                <span><i class="fas fa-film"></i> MAPPA</span>
+                                <span><i class="fas fa-calendar"></i> Winter 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-indicators">
+                    <button class="carousel-indicator active" data-slide="0" aria-label="Go to slide 1"></button>
+                    <button class="carousel-indicator" data-slide="1" aria-label="Go to slide 2"></button>
+                    <button class="carousel-indicator" data-slide="2" aria-label="Go to slide 3"></button>
+                </div>
+                <button class="carousel-control carousel-control-prev" aria-label="Previous slide">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-control carousel-control-next" aria-label="Next slide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Quick Category Navigation -->
+        <section class="category-nav">
+            <div class="container">
+                <div class="nav-cards">
+                    <a href="#seasonal" class="nav-card">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Seasonal Anime</span>
+                    </a>
+                    <a href="#genres" class="nav-card">
+                        <i class="fas fa-tags"></i>
+                        <span>Genres</span>
+                    </a>
+                    <a href="watchlist.html?type=anime" class="nav-card">
+                        <i class="fas fa-bookmark"></i>
+                        <span>My Watchlist</span>
+                    </a>
+                    <a href="#top-anime" class="nav-card">
+                        <i class="fas fa-award"></i>
+                        <span>Top Rated</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search and Filter Section -->
+        <section class="search-filter-section">
+            <div class="container">
+                <div class="filter-sort-container">
+                    <div class="filter-group">
+                        <label for="season-filter">Season:</label>
+                        <select id="season-filter" name="season">
+                            <option value="all">All Seasons</option>
+                            <option value="winter2025">Winter 2025</option>
+                            <option value="fall2024">Fall 2024</option>
+                            <option value="summer2024">Summer 2024</option>
+                            <option value="spring2024">Spring 2024</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="status-filter">Status:</label>
+                        <select id="status-filter" name="status">
+                            <option value="all">All Status</option>
+                            <option value="airing">Currently Airing</option>
+                            <option value="completed">Completed</option>
+                            <option value="upcoming">Upcoming</option>
+                        </select>
+                    </div>
+                    
+                    <div class="sort-group">
+                        <label for="sort-anime">Sort By:</label>
+                        <select id="sort-anime" name="sort">
+                            <option value="popularity">Popularity</option>
+                            <option value="rating">Highest Rating</option>
+                            <option value="newest">Release Date (Newest)</option>
+                            <option value="oldest">Release Date (Oldest)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Genres Section with Icons -->
+        <section class="genres-section" id="genres">
+            <div class="container">
+                <h2>Explore by Genre</h2>
+                <div class="genres-container">
+                    <a href="#" class="genre-card">
+                        <i class="fas fa-dragon"></i>
+                        <span>Fantasy</span>
+                    </a>
+                    <a href="#" class="genre-card">
+                        <i class="fas fa-heart"></i>
+                        <span>Romance</span>
+                    </a>
+                    <a href="#" class="genre-card">
+                        <i class="fas fa-fist-raised"></i>
+                        <span>Action</span>
+                    </a>
+                    <a href="#" class="genre-card">
+                        <i class="fas fa-ghost"></i>
+                        <span>Horror</span>
+                    </a>
+                    <a href="#" class="genre-card">
+                        <i class="fas fa-rocket"></i>
+                        <span>Sci-Fi</span>
+                    </a>
+                    <a href="#" class="genre-card">
+                        <i class="fas fa-school"></i>
+                        <span>School</span>
+                    </a>
+                    <a href="#" class="genre-card">
+                        <i class="fas fa-snowflake"></i>
+                        <span>Slice of Life</span>
+                    </a>
+                    <a href="#" class="genre-card">
+                </a>
+                <a href="#" class="genre-card">
+                    <i class="fas fa-theater-masks"></i>
+                    <span>Comedy</span>
+                </a>
+            </div>
+        </section>
+
+        
+        <section class="seasonal-anime" id="seasonal">
+            <h2>Winter 2025 Anime</h2>
+            <div class="seasonal-container">
+                <div class="season-tabs">
+                    <button class="season-tab active" data-season="winter2025">Winter 2025</button>
+                    <button class="season-tab" data-season="fall2024">Fall 2024</button>
+                    <button class="season-tab" data-season="summer2024">Summer 2024</button>
+                    <button class="season-tab" data-season="spring2024">Spring 2024</button>
+                </div>
+                
+                <div class="seasonal-grid" id="winter2025">
+                    
+                    <div class="anime-card">
+                        <div class="anime-image">
+                            <img src="../images/attack on titan.jpg" alt="Attack on Titan">
+                            <div class="anime-overlay">
+                                <span class="anime-rating">9.2</span>
+                                <div class="anime-actions">
+                                    <button class="action-button" aria-label="Add to watchlist">
+                                        <i class="fas fa-bookmark"></i>
+                                    </button>
+                                    <a href="ratings.html" class="action-button rating-btn" aria-label="Rate anime">
+                                        <i class="fas fa-star"></i>
+                                    </a>
+                                    <button class="action-button" aria-label="More information">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="anime-info">
+                            <h3>Attack on Final Season</h3>
+                            <div class="anime-meta">
+                                <span class="studio">Studio Mappa</span>
+                                <span class="episodes">12 Episodes</span>
+                            </div>
+                            <div class="anime-tags">
+                                <span class="anime-tag action">Action</span>
+                                <span class="anime-tag drama">Drama</span>
+                                <span class="anime-tag fantasy">Fantasy</span>
+                            </div>
+                            <div class="stream-platforms">
+                                <i class="fab fa-netflix" title="Available on Netflix"></i>
+                                <i class="fab fa-amazon" title="Available on Amazon Prime"></i>
+                                <i class="fas fa-play-circle" title="Available on Crunchyroll"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="anime-card">
+                        <div class="anime-image">
+                            <img src="../images/Heroacademia.jpg" alt="My Hero Academia">
+                            <div class="anime-overlay">
+                                <span class="anime-rating">8.7</span>
+                                <div class="anime-actions">
+                                    <button class="action-button" aria-label="Add to watchlist">
+                                        <i class="fas fa-bookmark"></i>
+                                    </button>
+                                    <a href="ratings.html" class="action-button rating-btn" aria-label="Rate anime">
+                                        <i class="fas fa-star"></i>
+                                    </a>
+                                    <button class="action-button" aria-label="More information">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="anime-info">
+                            <h3>My Hero Academia Season 8</h3>
+                            <div class="anime-meta">
+                                <span class="studio">Bones</span>
+                                <span class="episodes">24 Episodes</span>
+                            </div>
+                            <div class="anime-tags">
+                                <span class="anime-tag action">Action</span>
+                                <span class="anime-tag superhero">Superhero</span>
+                                <span class="anime-tag school">School</span>
+                            </div>
+                            <div class="stream-platforms">
+                                <i class="fab fa-hulu" title="Available on Hulu"></i>
+                                <i class="fas fa-play-circle" title="Available on Crunchyroll"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Anime Card 3 -->
+                    <div class="anime-card">
+                        <div class="anime-image">
+                            <img src="../images/Chainsaw.jpg" alt="Chainsaw Man">
+                            <div class="anime-overlay">
+                                <span class="anime-rating">9.5</span>
+                                <div class="anime-actions">
+                                    <button class="action-button" aria-label="Add to watchlist">
+                                        <i class="fas fa-bookmark"></i>
+                                    </button>
+                                    <a href="ratings.html" class="action-button rating-btn" aria-label="Rate anime">
+                                        <i class="fas fa-star"></i>
+                                    </a>
+                                    <button class="action-button manga-link" data-manga="chainsaw-man" aria-label="Read manga">
+                                        <i class="fas fa-book"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="anime-info">
+                            <h3>Chainsaw Man Part 2</h3>
+                            <div class="anime-meta">
+                                <span class="studio">MAPPA</span>
+                                <span class="episodes">12 Episodes</span>
+                            </div>
+                            <div class="anime-tags">
+                                <span class="anime-tag action">Action</span>
+                                <span class="anime-tag horror">Horror</span>
+                                <span class="anime-tag supernatural">Supernatural</span>
+                            </div>
+                            <div class="stream-platforms">
+                                <i class="fab fa-hulu" title="Available on Hulu"></i>
+                                <i class="fab fa-amazon" title="Available on Amazon Prime"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- More anime cards would go here -->
+                </div>
+                
+                <!-- Placeholder for other seasons -->
+                <div class="seasonal-grid" id="fall2024" style="display: none;">
+                    <p>Fall 2024 anime list loading...</p>
+                </div>
+                
+                <div class="seasonal-grid" id="summer2024" style="display: none;">
+                    <p>Summer 2024 anime list loading...</p>
+                </div>
+                
+                <div class="seasonal-grid" id="spring2024" style="display: none;">
+                    <p>Spring 2024 anime list loading...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Anime Terminology Section with Expandable Content -->
+        <section class="anime-terms">
+            <h2>Anime Terminology</h2>
+            <div class="terms-container">
+                <details>
+                    <summary><i class="fas fa-book"></i> Genres and Demographics</summary>
+                    <dl>
+                        <dt>Shonen <span class="term-jp">(少年)</span></dt>
+                        <dd>Anime targeted towards teenage boys, typically featuring action, adventure, and coming-of-age themes. Popular examples include "Naruto," "One Piece," and "Dragon Ball."</dd>
+                        
+                        <dt>Shojo <span class="term-jp">(少女)</span></dt>
+                        <dd>Anime aimed at teenage girls, often focusing on romance, relationships, and emotional growth. Examples include "Fruits Basket," "Sailor Moon," and "Ouran High School Host Club."</dd>
+                        
+                        <dt>Seinen <span class="term-jp">(青年)</span></dt>
+                        <dd>Anime for adult men, usually containing more mature themes, complex characters, and sophisticated storylines. "Berserk," "Monster," and "Vinland Saga" are notable examples.</dd>
+                        
+                        <dt>Josei <span class="term-jp">(女性)</span></dt>
+                        <dd>Anime for adult women, featuring realistic romance and slice-of-life stories with mature themes. Examples include "Nodame Cantabile," "Nana," and "Paradise Kiss."</dd>
+                    </dl>
+                </details>
+                
+                <details>
+                    <summary><i class="fas fa-landmark"></i> Common Tropes & Settings</summary>
+                    <dl>
+                        <dt>Isekai <span class="term-jp">(異世界)</span></dt>
+                        <dd>A genre where characters are transported to or reborn in another world, often a fantasy universe. Examples include "Re:Zero," "Sword Art Online," and "That Time I Got Reincarnated as a Slime."</dd>
+                        
+                        <dt>Mecha <span class="term-jp">(メカ)</span></dt>
+                        <dd>Anime featuring large robots or machines piloted by humans. Famous examples are "Gundam," "Neon Genesis Evangelion," and "Gurren Lagann."</dd>
+                        
+                        <dt>Slice of Life <span class="term-jp">(日常系)</span></dt>
+                        <dd>Anime focusing on everyday experiences and relationships rather than fantastic adventures. "K-On!," "Barakamon," and "Non Non Biyori" are popular examples.</dd>
+                        
+                        <dt>Harem</dt>
+                        <dd>A genre where multiple characters are romantically interested in the protagonist. Examples include "The Quintessential Quintuplets," "Love Hina," and "Monster Musume."</dd>
+                    </dl>
+                </details>
+                
+                <details>
+                    <summary><i class="fas fa-language"></i> Industry Terms</summary>
+                    <dl>
+                        <dt>Cour</dt>
+                        <dd>A unit of TV broadcasting in Japan that refers to a three-month or one-season block of programming. A one-cour anime typically has 10-13 episodes.</dd>
+                        
+                        <dt>OVA/OAV</dt>
+                        <dd>Original Video Animation/Original Animation Video. Anime released directly to home video formats without prior TV broadcast or theatrical release.</dd>
+                        
+                        <dt>Seiyuu <span class="term-jp">(声優)</span></dt>
+                        <dd>Voice actors who perform the voices for anime characters. Many become celebrities in Japan and have dedicated fan followings.</dd>
+                        
+                        <dt>Sakuga</dt>
+                        <dd>A term referring to notably high-quality animation sequences in anime that stand out for their fluid motion and detailed artwork.</dd>
+                    </dl>
+                </details>
+            </div>
+        </section>
+
+        <!-- Top Anime Section with Tabs -->
+        <section class="top-anime">
+            <h2>Top Rated Anime</h2>
+            
+            <div class="tabs-container">
+                <nav class="tabs">
+                    <button class="tab-button active" data-target="all-time">All Time</button>
+                    <button class="tab-button" data-target="this-year">This Year</button>
+                    <button class="tab-button" data-target="by-studio">By Studio</button>
+                    <button class="tab-button" data-target="by-genre">By Genre</button>
+                </nav>
+                
+                <div class="tab-content-container">
+                    <!-- All Time Tab -->
+                    <div id="all-time" class="tab-content active">
+                        <div class="ranking-list">
+                            <div class="ranking-item">
+                                <span class="rank">1</span>
+                                <img src="../images/FMA.jpg" alt="Fullmetal Alchemist: Brotherhood" class="rank-image">
+                                <div class="rank-info">
+                                    <h3>Fullmetal Alchemist: Brotherhood</h3>
+                                    <div class="rank-meta">
+                                        <span class="rank-year">2009</span>
+                                        <span class="rank-episodes">64 Episodes</span>
+                                        <span class="rank-studio">Bones</span>
+                                    </div>
+                                    <div class="rank-score">
+                                        <i class="fas fa-star"></i>
+                                        <span>9.8</span>
+                                        <span class="rank-votes">(324,120 votes)</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="rank-more">Details</a>
+                            </div>
+                            
+                            <div class="ranking-item">
+                                <span class="rank">2</span>
+                                <img src="../images/Steins.jpg" alt="Steins;Gate" class="rank-image">
+                                <div class="rank-info">
+                                    <h3>Steins;Gate</h3>
+                                    <div class="rank-meta">
+                                        <span class="rank-year">2011</span>
+                                        <span class="rank-episodes">24 Episodes</span>
+                                        <span class="rank-studio">White Fox</span>
+                                    </div>
+                                    <div class="rank-score">
+                                        <i class="fas fa-star"></i>
+                                        <span>9.7</span>
+                                        <span class="rank-votes">(289,510 votes)</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="rank-more">Details</a>
+                            </div>
+                            
+                            <div class="ranking-item">
+                                <span class="rank">3</span>
+                                <img src="../images/attack on titan.jpg" alt="Attack on Titan" class="rank-image">
+                                <div class="rank-info">
+                                    <h3>Attack on Titan</h3>
+                                    <div class="rank-meta">
+                                        <span class="rank-year">2013-2023</span
+                                        <span class="rank-episodes">88 Episodes</span>
+                                        <span class="rank-studio">WIT Studio/MAPPA</span>
+                                    </div>
+                                    <div class="rank-score">
+                                        <i class="fas fa-star"></i>
+                                        <span>9.6</span>
+                                        <span class="rank-votes">(278,820 votes)</span>
+                                    </div>
+                                </div>
+                                <a href="manga.html?title=attack-on-titan" class="rank-more manga-link">Read Manga</a>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    <div id="this-year" class="tab-content">
+                        <p class="placeholder-text">This year's top anime loading...</p>
+                    </div>
+                    
+                    <div id="by-studio" class="tab-content">
+                        <p class="placeholder-text">Studio rankings loading...</p>
+                    </div>
+                    
+                    <div id="by-genre" class="tab-content">
+                        <p class="placeholder-text">Genre rankings loading...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section class="featured-anime">
+            <h2>Featured Anime</h2>
+            <div class="featured-container">
+                <div class="featured-image">
+                    <img src="../images/JJK.jpeg" alt="Jujutsu Kaisen">
+                    <div class="featured-badges">
+                        <span class="featured-season">Winter 2025</span>
+                        <span class="featured-type">TV Series</span>
+                    </div>
+                </div>
+                
+                <div class="featured-content">
+                    <h3>Jujutsu Kaisen Season 3</h3>
+                    <div class="featured-meta">
+                        <span class="featured-studio"><i class="fas fa-film"></i> MAPPA</span>
+                        <span class="featured-year"><i class="far fa-calendar-alt"></i> 2025</span>
+                        <span class="featured-episodes"><i class="fas fa-tv"></i> 24 Episodes</span>
+                        <span class="featured-rating"><i class="fas fa-star"></i> 9.4/10</span>
+                    </div>
+                    
+                    <div class="featured-tags">
+                        <span class="featured-tag">Action</span>
+                        <span class="featured-tag">Supernatural</span>
+                        <span class="featured-tag">Horror</span>
+                        <span class="featured-tag">School</span>
+                    </div>
+                    
+                    <div class="featured-synopsis">
+                        <h4>Synopsis</h4>
+                        <p>Following the catastrophic events of the Shibuya Incident, Yuji Itadori and his fellow jujutsu sorcerers face their greatest challenge yet as they confront the aftermath of Geto's plan and prepare for the emergence of new threats.</p>
+                    </div>
+                    
+                    <div class="watch-platforms">
+                        <h4>Where to Watch</h4>
+                        <div class="platform-links">
+                            <a href="https://www.netflix.com/title/81278456" class="platform-link netflix">
+                                <i class="fab fa-netflix"></i> Netflix
+                            </a>
+                            <a href="#" class="platform-link crunchyroll">
+                                <i class="fas fa-play-circle"></i> Crunchyroll
+                            </a>
+                            <a href="#" class="platform-link funimation">
+                                <i class="fas fa-tv"></i> Funimation
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="featured-actions">
+                        <button class="btn-primary">
+                            <i class="fas fa-bookmark"></i> Add to Watchlist
+                        </button>
+                        <a href="ratings.html" class="btn-secondary">
+                            <i class="fas fa-star"></i> Rate
+                        </a>
+                        <a href="manga.html?title=jujutsu-kaisen" class="btn-secondary manga-link">
+                            <i class="fas fa-book"></i> Read Manga
+                        </a>
+                        <button class="btn-secondary">
+                            <i class="fas fa-share-alt"></i> Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section class="character-spotlight">
+            <h2>Character Spotlight</h2>
+            <div class="character-cards">
+                
+                <div class="character-card">
+                    <div class="character-image">
+                        <img src="../images/Levi.jpg" alt="Levi Ackerman">
+                    </div>
+                    <div class="character-info">
+                        <h3>Levi Ackerman</h3>
+                        <p class="character-anime">Attack on Titan</p>
+                        <p class="character-desc">Humanity's strongest soldier, captain of the Special Operations Squad.</p>
+                        <div class="character-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Strength</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 95%;"></div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Intelligence</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 90%;"></div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Popularity</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 98%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Character 2 -->
+                <div class="character-card">
+                    <div class="character-image">
+                        <img src="../images/Makima.jpg" alt="Makima">
+                    </div>
+                    <div class="character-info">
+                        <h3>Makima</h3>
+                        <p class="character-anime">Chainsaw Man</p>
+                        <p class="character-desc">Public Safety Devil Hunter, leader of the Tokyo Special Division 4.</p>
+                        <div class="character-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Strength</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 93%;"></div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Intelligence</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 97%;"></div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Popularity</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 92%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enhanced Rating Form -->
+        <section class="anime-rating">
+            <h2>Rate an Anime</h2>
+            <div class="redirect-message">
+                <p>Our rating system has moved to a dedicated page for a more interactive experience.</p>
+                <a href="ratings.html" class="btn-primary">Go to Ratings Page</a>
+                <p class="small-text">Rate movies, anime, series, manga, and games all in one place!</p>
+            </div>
+        </section>
+
+        <!-- Anime Studio Showcase -->
+        <section class="studio-showcase">
+            <h2>Featured Animation Studios</h2>
+            <div class="studio-grid">
+                <article class="studio-card">
+                    <img src="../images/Ghibli.jpg" alt="Studio Ghibli" class="studio-logo">
+                    <h3>Studio Ghibli</h3>
+                    <p>Known for their breathtaking visuals and emotionally profound storytelling in films like "Spirited Away" and "My Neighbor Totoro".</p>
+                    <div class="studio-stats">
+                        <div class="stat"><strong>Founded:</strong> 1985</div>
+                        <div class="stat"><strong>Top Title:</strong> Spirited Away</div>
+                        <div class="stat"><strong>Avg. Rating:</strong> 9.2/10</div>
+                    </div>
+                    <a href="movies.html?studio=ghibli" class="studio-link">View Films <i class="fas fa-chevron-right"></i></a>
+                </article>
+
+                <article class="studio-card">
+                    <img src="../images/Mappa.jpg" alt="MAPPA" class="studio-logo">
+                    <h3>MAPPA</h3>
+                    <p>Rising star studio known for dynamic action sequences and detailed character animation in "Attack on Titan" and "Jujutsu Kaisen".</p>
+                    <div class="studio-stats">
+                        <div class="stat"><strong>Founded:</strong> 2011</div>
+                        <div class="stat"><strong>Top Title:</strong> Attack on Titan: Final Season</div>
+                        <div class="stat"><strong>Avg. Rating:</strong> 9.0/10</div>
+                    </div>
+                    <a href="#" class="studio-link">View Works <i class="fas fa-chevron-right"></i></a>
+                </article>
+
+                <article class="studio-card">
+                    <img src="../images/Kyoto.jpg" alt="Kyoto Animation" class="studio-logo">
+                    <h3>Kyoto Animation</h3>
+                    <p>Renowned for their exceptional animation quality and emotional storytelling in series like "Violet Evergarden" and "A Silent Voice".</p>
+                    <div class="studio-stats">
+                        <div class="stat"><strong>Founded:</strong> 1981</div>
+                        <div class="stat"><strong>Top Title:</strong> Violet Evergarden</div>
+                        <div class="stat"><strong>Avg. Rating:</strong> 9.1/10</div>
+                    </div>
+                    <a href="#" class="studio-link">View Works <i class="fas fa-chevron-right"></i></a>
+                </article>
+            </div>
+        </section>
+
+        <!-- Interactive Anime Quiz -->
+        <section class="anime-quiz">
+            <h2>Test Your Anime Knowledge</h2>
+            <div class="quiz-container">
+                <form id="anime-quiz-form">
+                    <div class="quiz-question">
+                        <p>Which anime holds the record for most episodes?</p>
+                        <div class="quiz-options">
+                            <label>
+                                <input type="radio" name="q1" value="onepiece"> One Piece
+                            </label>
+                            <label>
+                                <input type="radio" name="q1" value="detective"> Detective Conan
+                            </label>
+                            <label>
+                                <input type="radio" name="q1" value="pokemon"> Pokémon
+                            </label>
+                            <label>
+                                <input type="radio" name="q1" value="doraemon"> Doraemon
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <p>Which of these anime was NOT produced by Studio Ghibli?</p>
+                        <div class="quiz-options">
+                            <label>
+                                <input type="radio" name="q2" value="spirited"> Spirited Away
+                            </label>
+                            <label>
+                                <input type="radio" name="q2" value="yourname"> Your Name
+                            </label>
+                            <label>
+                                <input type="radio" name="q2" value="mononoke"> Princess Mononoke
+                            </label>
+                            <label>
+                                <input type="radio" name="q2" value="totoro"> My Neighbor Totoro
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="quiz-submit">Check Answers</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Seasonal Anime Chart -->
+        <section class="upcoming-anime">
+            <h2>Upcoming Anime Calendar</h2>
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <h3>Winter 2025 Season</h3>
+                    <p>January - March</p>
+                </div>
+                <div class="calendar-grid">
+                    <div class="calendar-item">
+                        <div class="release-date">Jan 5</div>
+                        <div class="anime-title">Chainsaw Man S2</div>
+                        <div class="episode">Episode 1</div>
+                    </div>
+                    <div class="calendar-item">
+                        <div class="release-date">Jan 7</div>
+                        <div class="anime-title">Demon Slayer: New Arc</div>
+                        <div class="episode">Episode 1</div>
+                    </div>
+                    <div class="calendar-item">
+                        <div class="release-date">Jan 12</div>
+                        <div class="anime-title">Spy x Family S3</div>
+                        <div class="episode">Episode 1</div>
+                    </div>
+                    <div class="calendar-item">
+                        <div class="release-date">Jan 14</div>
+                        <div class="anime-title">Jujutsu Kaisen</div>
+                        <div class="episode">Episode 2</div>
+                    </div>
+                    <div class="calendar-item">
+                        <div class="release-date">Jan 21</div>
+                        <div class="anime-title">One Piece</div>
+                        <div class="episode">Episode 1301</div>
+                    </div>
+                </div>
+                <div class="calendar-footer">
+                    <a href="#" class="calendar-link">View Full Schedule <i class="fas fa-calendar-alt"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Anime Recommendations -->
+        <section class="anime-recommendations">
+            <h2>Because You Watched...</h2>
+            <div class="recommendation-container">
+                <div class="watched-anime">
+                    <img src="../images/attack on titan.jpg" alt="Attack on Titan" class="watched-image">
+                    <h3>Attack on Titan</h3>
+                </div>
+                <div class="recommendation-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="recommended-grid">
+                    <div class="recommended-anime">
+                        <img src="../images/Naruto.jpg" alt="Naruto" class="recommended-image">
+                        <h4>Naruto</h4>
+                        <div class="match-score">93% match</div>
+                    </div>
+                    <div class="recommended-anime">
+                        <img src="../images/OnePiece.jpg" alt="One Piece" class="recommended-image">
+                        <h4>One Piece</h4>
+                        <div class="match-score">91% match</div>
+                    </div>
+                    <div class="recommended-anime">
+                        <img src="../images/Chainsaw.jpg" alt="Chainsaw Man" class="recommended-image">
+                        <h4>Chainsaw Man</h4>
+                        <div class="match-score">88% match</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommended For You Section with Multi-Item Carousel -->
+        <section class="recommended-section">
+            <div class="container">
+                <h2>Recommended For You</h2>
+                
+                <div class="carousel-container multi-item card-style" data-slides-per-view="3" data-loop="true" data-spacing="20" 
+                     data-breakpoints='{"1024":{"slidesPerView":3},"768":{"slidesPerView":2},"480":{"slidesPerView":1}}'>
+                    <div class="carousel-wrapper">
+                        <div class="carousel-item">
+                            <div class="carousel-content">
+                                <div class="carousel-image">
+                                    <img src="../images/DemonSlayer.jpg" alt="Demon Slayer">
+                                    <span class="carousel-badge">98% Match</span>
+                                </div>
+                                <div class="carousel-caption">
+                                    <h3>Demon Slayer</h3>
+                                    <p>Action, Supernatural | 2023</p>
+                                    <div class="rec-reason">Because you watched Attack on Titan</div>
+                                    <a href="#" class="btn btn-primary btn-sm">Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-item">
+                            <div class="carousel-content">
+                                <div class="carousel-image">
+                                    <img src="../images/Steins.jpg" alt="Steins;Gate">
+                                    <span class="carousel-badge">95% Match</span>
+                                </div>
+                                <div class="carousel-caption">
+                                    <h3>Steins;Gate</h3>
+                                    <p>Sci-Fi, Thriller | 2011</p>
+                                    <div class="rec-reason">Based on your ratings</div>
+                                    <a href="#" class="btn btn-primary btn-sm">Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-item">
+                            <div class="carousel-content">
+                                <div class="carousel-image">
+                                    <img src="../images/FMA.jpg" alt="Fullmetal Alchemist: Brotherhood">
+                                    <span class="carousel-badge">97% Match</span>
+                                </div>
+                                <div class="carousel-caption">
+                                    <h3>Fullmetal Alchemist: Brotherhood</h3>
+                                    <p>Action, Fantasy | 2009</p>
+                                    <div class="rec-reason">Top rated in your genres</div>
+                                    <a href="#" class="btn btn-primary btn-sm">Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-item">
+                            <div class="carousel-content">
+                                <div class="carousel-image">
+                                    <img src="../images/Heroacademia.jpg" alt="My Hero Academia">
+                                    <span class="carousel-badge">92% Match</span>
+                                </div>
+                                <div class="carousel-caption">
+                                    <h3>My Hero Academia</h3>
+                                    <p>Action, Superhero | 2023</p>
+                                    <div class="rec-reason">Popular in your region</div>
+                                    <a href="#" class="btn btn-primary btn-sm">Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-item">
+                            <div class="carousel-content">
+                                <div class="carousel-image">
+                                    <img src="../images/Dragonball.jpg" alt="Dragon Ball Super">
+                                    <span class="carousel-badge">90% Match</span>
+                                </div>
+                                <div class="carousel-caption">
+                                    <h3>Dragon Ball Super</h3>
+                                    <p>Action, Adventure | 2015</p>
+                                    <div class="rec-reason">Because you watched Naruto</div>
+                                    <a href="#" class="btn btn-primary btn-sm">Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Section -->
+        <section class="anime-community">
+            <h2>Community Discussions</h2>
+            <div class="community-container">
+                <div class="discussion-card">
+                    <div class="discussion-header">
+                        <img src="../images/swagspidey.jpg" alt="User Avatar" class="discussion-avatar">
+                        <div class="discussion-meta">
+                            <h3>Top 10 Anime of All Time</h3>
+                            <div class="discussion-info">
+                                <span class="discussion-author">AnimeGuru123</span>
+                                <span class="discussion-date">Today at 14:32</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="discussion-preview">I've been watching anime for over 15 years, and I think I'm finally ready to share my definitive top 10 list. It wasn't easy narrowing it down, but here goes...</p>
+                    <div class="discussion-stats">
+                        <span><i class="fas fa-comment"></i> 47 replies</span>
+                        <span><i class="fas fa-heart"></i> 123 likes</span>
+                    </div>
+                    <a href="community.html?post=top-10-anime" class="discussion-link">Join Discussion</a>
+                </div>
+                
+                <div class="discussion-card">
+                    <div class="discussion-header">
+                        <img src="../images/Avatar.jpg" alt="User Avatar" class="discussion-avatar">
+                        <div class="discussion-meta">
+                            <h3>Winter 2025 First Impressions</h3>
+                            <div class="discussion-info">
+                                <span class="discussion-author">SakuraChan</span>
+                                <span class="discussion-date">Yesterday at 09:15</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="discussion-preview">The winter season is looking stacked! After watching the first episodes of most shows, here are my thoughts on which ones are worth following...</p>
+                    <div class="discussion-stats">
+                        <span><i class="fas fa-comment"></i> 31 replies</span>
+                        <span><i class="fas fa-heart"></i> 87 likes</span>
+                    </div>
+                    <a href="discussions.html?post=winter-2025" class="discussion-link">Join Discussion</a>
+                </div>
+            </div>
+            <div class="community-action">
+                <a href="discussions.html" class="btn-primary"><i class="fas fa-users"></i> Join the Community</a>
+            </div>
+        </section>
+
+        <!-- Newsletter Signup -->
+        <section class="anime-newsletter">
+            <div class="newsletter-content">
+                <h2><i class="fas fa-envelope"></i> Stay Updated on Anime</h2>
+                <p>Get weekly updates on new releases, reviews, and exclusive anime news!</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit" class="btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <div class="footer-section about">
+                <h3>About Entertainment Hub</h3>
+                <p>Your one-stop destination for movies, anime, manga, series, and games. Join our community of entertainment enthusiasts!</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="support.html">Support</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section newsletter">
+                <h3>Stay Updated</h3>
+                <p>Subscribe to our newsletter for the latest updates and recommendations.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+            <div class="footer-section download">
+                <h3>Get Our App</h3>
+                <p>Download our mobile app for a better experience.</p>
+                <div class="app-links">
+                    <a href="#"><img src="../images/appstore.jpg" alt="App Store"></a>
+                    <a href="#"><img src="../images/Googleplay.jpg" alt="Google Play"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab functionality
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Get target content
+                    const target = this.dataset.target;
+                    
+                    // Hide all content, show only target
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    document.getElementById(target).classList.add('active');
+                    
+                    // Update active state of buttons
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Season tabs functionality
+            const seasonTabs = document.querySelectorAll('.season-tab');
+            const seasonGrids = document.querySelectorAll('.seasonal-grid');
+            
+            seasonTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const season = this.dataset.season;
+                    
+                    // Hide all grids, show selected
+                    seasonGrids.forEach(grid => grid.style.display = 'none');
+                    document.getElementById(season).style.display = 'grid';
+                    
+                    // Update active tab
+                    seasonTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Cross-page linking for manga
+            const mangaLinks = document.querySelectorAll('.manga-link');
+            mangaLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    const mangaTitle = this.dataset.manga || 
+                                      this.closest('.anime-card')?.querySelector('h3').textContent ||
+                                      this.closest('.ranking-item')?.querySelector('h3').textContent;
+                    
+                    if (mangaTitle) {
+                        window.location.href = `manga.html?title=${encodeURIComponent(mangaTitle.toLowerCase().replace(/\s+/g, '-'))}`;
+                    }
+                });
+            });
+            
+            // Initialize rating buttons to link to ratings.html
+            document.querySelectorAll('.action-button:not(.rating-btn)').forEach(button => {
+                if (button.querySelector('i.fa-star')) {
+                    button.classList.add('rating-btn');
+                    // If it's not an anchor element, replace with anchor
+                    if (button.tagName !== 'A') {
+                        const star = button.innerHTML;
+                        const parent = button.parentNode;
+                        const anchor = document.createElement('a');
+                        anchor.href = 'ratings.html';
+                        anchor.className = 'action-button rating-btn';
+                        anchor.innerHTML = star;
+                        parent.replaceChild(anchor, button);
+                    }
+                }
+            });
+            
+            // Update any "Rate" buttons to link to ratings.html
+            document.querySelectorAll('.btn-secondary').forEach(button => {
+                if (button.textContent.trim() === 'Rate' && button.tagName !== 'A') {
+                    const rateText = button.innerHTML;
+                    const parent = button.parentNode;
+                    const anchor = document.createElement('a');
+                    anchor.href = 'ratings.html';
+                    anchor.className = 'btn-secondary';
+                    anchor.innerHTML = rateText;
+                    parent.replaceChild(anchor, button);
+                }
+            });
+        });
+    </script>
+    <script src="../js/script.js"></script>
+    <a href="#" class="back-to-top" id="back-to-top-btn" aria-label="Back to top">↑</a>
+</body>
+
+</html>

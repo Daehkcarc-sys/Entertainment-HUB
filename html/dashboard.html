@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard | Entertainment Hub</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Your personal dashboard for Entertainment Hub">
+</head>
+
+<body data-theme="light">
+    <a class="skip-link" href="#main">Skip to content</a>
+    
+    <header>
+        <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="manga.html">Manga</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+            </ul>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="user-menu">
+                <button class="user-menu-toggle" aria-expanded="false" aria-label="User menu">
+                    <i class="fas fa-user"></i>
+                </button>
+                <div class="user-dropdown">
+                    <a href="profile.html" class="dropdown-item">
+                        <i class="fas fa-user-circle"></i> My Profile
+                    </a>
+                    <a href="dashboard.html" class="dropdown-item">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                    <a href="settings.html" class="dropdown-item">
+                        <i class="fas fa-cog"></i> Settings
+                    </a>
+                    <button id="logout-btn" class="dropdown-item">
+                        <i class="fas fa-sign-out-alt"></i> Log Out
+                    </button>
+                </div>
+            </div>
+            <div class="notification-center">
+                <button class="notification-toggle" aria-expanded="false" aria-label="Notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="notification-dropdown">
+                    <div class="notification-header">
+                        <h3>Notifications</h3>
+                        <button class="mark-all-read">Mark all as read</button>
+                    </div>
+                    <div class="notification-list">
+                        <a href="#" class="notification-item unread">
+                            <div class="notification-icon"><i class="fas fa-comment"></i></div>
+                            <div class="notification-content">
+                                <p>John replied to your comment on "Attack on Titan"</p>
+                                <span class="notification-time">5 minutes ago</span>
+                            </div>
+                        </a>
+                        <a href="#" class="notification-item unread">
+                            <div class="notification-icon"><i class="fas fa-heart"></i></div>
+                            <div class="notification-content">
+                                <p>Mary liked your review of "Oppenheimer"</p>
+                                <span class="notification-time">2 hours ago</span>
+                            </div>
+                        </a>
+                        <a href="#" class="notification-item unread">
+                            <div class="notification-icon"><i class="fas fa-film"></i></div>
+                            <div class="notification-content">
+                                <p>New episodes of "One Piece" are now available</p>
+                                <span class="notification-time">1 day ago</span>
+                            </div>
+                        </a>
+                        <a href="#" class="notification-item">
+                            <div class="notification-icon"><i class="fas fa-user-plus"></i></div>
+                            <div class="notification-content">
+                                <p>Alex started following you</p>
+                                <span class="notification-time">3 days ago</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="notification-footer">
+                        <a href="notifications.html">View all notifications</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="mobile-menu-toggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <main id="main" class="user-dashboard">
+        <div class="dashboard-header animate-fade-in">
+            <div class="user-welcome">
+                <div class="user-avatar">
+                    <img src="../images/Avatar.jpg" alt="User avatar">
+                </div>
+                <div class="welcome-text">
+                    <h1>Welcome back, <span class="username">AnimeUser42</span>!</h1>
+                    <p>Last login: <span class="last-login">May 5, 2025</span></p>
+                </div>
+            </div>
+            <div class="dashboard-actions">
+                <button class="action-btn primary-btn">
+                    <i class="fas fa-pencil-alt"></i> Write a Review
+                </button>
+                <button class="action-btn secondary-btn">
+                    <i class="fas fa-plus"></i> Add to Watchlist
+                </button>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Activity Summary -->
+            <section class="dashboard-section activity-summary animate-fade-in delay-100">
+                <div class="section-header">
+                    <h2><i class="fas fa-chart-line"></i> Activity Summary</h2>
+                    <a href="#" class="view-all">View all <i class="fas fa-angle-right"></i></a>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-eye"></i></div>
+                        <div class="stat-details">
+                            <span class="stat-value">152</span>
+                            <span class="stat-label">Watched</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-star"></i></div>
+                        <div class="stat-details">
+                            <span class="stat-value">84</span>
+                            <span class="stat-label">Reviews</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-comment"></i></div>
+                        <div class="stat-details">
+                            <span class="stat-value">237</span>
+                            <span class="stat-label">Comments</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-bookmark"></i></div>
+                        <div class="stat-details">
+                            <span class="stat-value">45</span>
+                            <span class="stat-label">Watchlist</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Activity -->
+            <section class="dashboard-section recent-activity animate-fade-in delay-200">
+                <div class="section-header">
+                    <h2><i class="fas fa-history"></i> Recent Activity</h2>
+                    <a href="#" class="view-all">View all <i class="fas fa-angle-right"></i></a>
+                </div>
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <div class="activity-icon review"><i class="fas fa-star"></i></div>
+                        <div class="activity-details">
+                            <p>You reviewed <a href="#">One Piece Film: Red</a></p>
+                            <div class="activity-meta">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span>4.5/5</span>
+                                </div>
+                                <span class="activity-time">Today, 2:30 PM</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon watched"><i class="fas fa-eye"></i></div>
+                        <div class="activity-details">
+                            <p>You watched <a href="#">Oppenheimer</a></p>
+                            <div class="activity-meta">
+                                <span class="activity-time">Yesterday, 8:15 PM</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon comment"><i class="fas fa-comment"></i></div>
+                        <div class="activity-details">
+                            <p>You commented on <a href="#">Attack on Titan Final Season</a></p>
+                            <div class="activity-meta">
+                                <span class="comment-preview">"The animation in this final battle was incredible..."</span>
+                                <span class="activity-time">May 3, 2025</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon added"><i class="fas fa-plus"></i></div>
+                        <div class="activity-details">
+                            <p>You added <a href="#">Chainsaw Man Season 2</a> to your watchlist</p>
+                            <div class="activity-meta">
+                                <span class="activity-time">May 2, 2025</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Continue Watching -->
+            <section class="dashboard-section continue-watching full-width animate-fade-in delay-300">
+                <div class="section-header">
+                    <h2><i class="fas fa-play-circle"></i> Continue Watching</h2>
+                    <a href="#" class="view-all">View all <i class="fas fa-angle-right"></i></a>
+                </div>
+                <div class="media-carousel">
+                    <div class="media-item">
+                        <div class="media-poster">
+                            <img src="../images/Darkknight.jpg" alt="The Dark Knight">
+                            <div class="media-progress">
+                                <div class="progress-bar" style="width: 75%"></div>
+                            </div>
+                            <div class="media-actions">
+                                <button class="play-btn" aria-label="Continue watching">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="media-info">
+                            <h3>The Dark Knight</h3>
+                            <p>75% completed</p>
+                        </div>
+                    </div>
+                    <div class="media-item">
+                        <div class="media-poster">
+                            <img src="../images/DemonSlayer.jpg" alt="Demon Slayer">
+                            <div class="media-progress">
+                                <div class="progress-bar" style="width: 40%"></div>
+                            </div>
+                            <div class="media-actions">
+                                <button class="play-btn" aria-label="Continue watching">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="media-info">
+                            <h3>Demon Slayer S3</h3>
+                            <p>E5 - 40% completed</p>
+                        </div>
+                    </div>
+                    <div class="media-item">
+                        <div class="media-poster">
+                            <img src="../images/Severence.jpg" alt="Severance">
+                            <div class="media-progress">
+                                <div class="progress-bar" style="width: 90%"></div>
+                            </div>
+                            <div class="media-actions">
+                                <button class="play-btn" aria-label="Continue watching">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="media-info">
+                            <h3>Severance</h3>
+                            <p>S1E9 - 90% completed</p>
+                        </div>
+                    </div>
+                    <div class="media-item">
+                        <div class="media-poster">
+                            <img src="../images/OnePiece.jpg" alt="One Piece">
+                            <div class="media-progress">
+                                <div class="progress-bar" style="width: 20%"></div>
+                            </div>
+                            <div class="media-actions">
+                                <button class="play-btn" aria-label="Continue watching">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="media-info">
+                            <h3>One Piece</h3>
+                            <p>E1090 - 20% completed</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recommendations -->
+            <section class="dashboard-section recommendations animate-fade-in delay-400">
+                <div class="section-header">
+                    <h2><i class="fas fa-thumbs-up"></i> Recommended for You</h2>
+                    <a href="recommendations.html" class="view-all">View all <i class="fas fa-angle-right"></i></a>
+                </div>
+                <div class="recommendation-list">
+                    <div class="recommendation-item">
+                        <div class="recommendation-media">
+                            <img src="../images/Oppenheimer.jpg" alt="Oppenheimer">
+                            <div class="recommendation-badge movie">Movie</div>
+                        </div>
+                        <div class="recommendation-details">
+                            <h3>Oppenheimer</h3>
+                            <div class="recommendation-meta">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.7</span>
+                                </div>
+                                <span class="year">2023</span>
+                                <span class="duration">3h 10m</span>
+                            </div>
+                            <p class="recommendation-reason">Based on your interest in historical dramas</p>
+                            <div class="recommendation-actions">
+                                <button class="watch-btn"><i class="fas fa-play"></i> Watch</button>
+                                <button class="add-watchlist-btn"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recommendation-item">
+                        <div class="recommendation-media">
+                            <img src="../images/JJK.jpeg" alt="Jujutsu Kaisen">
+                            <div class="recommendation-badge anime">Anime</div>
+                        </div>
+                        <div class="recommendation-details">
+                            <h3>Jujutsu Kaisen</h3>
+                            <div class="recommendation-meta">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.8</span>
+                                </div>
+                                <span class="year">2023</span>
+                                <span class="episodes">S2 • 23 Ep</span>
+                            </div>
+                            <p class="recommendation-reason">Because you watched Demon Slayer</p>
+                            <div class="recommendation-actions">
+                                <button class="watch-btn"><i class="fas fa-play"></i> Watch</button>
+                                <button class="add-watchlist-btn"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Watchlist -->
+            <section class="dashboard-section watchlist animate-fade-in delay-500">
+                <div class="section-header">
+                    <h2><i class="fas fa-bookmark"></i> My Watchlist</h2>
+                    <a href="watchlist.html" class="view-all">View all <i class="fas fa-angle-right"></i></a>
+                </div>
+                <div class="watchlist-grid">
+                    <div class="watchlist-item">
+                        <img src="../images/Dune.jpg" alt="Dune: Part Two">
+                        <div class="watchlist-overlay">
+                            <h3>Dune: Part Two</h3>
+                            <div class="watchlist-actions">
+                                <button aria-label="Watch now"><i class="fas fa-play"></i></button>
+                                <button aria-label="Remove from watchlist"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="watchlist-item">
+                        <img src="../images/Chainsaw.jpg" alt="Chainsaw Man">
+                        <div class="watchlist-overlay">
+                            <h3>Chainsaw Man</h3>
+                            <div class="watchlist-actions">
+                                <button aria-label="Watch now"><i class="fas fa-play"></i></button>
+                                <button aria-label="Remove from watchlist"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="watchlist-item">
+                        <img src="../images/BladeRunner.jpg" alt="Blade Runner 2049">
+                        <div class="watchlist-overlay">
+                            <h3>Blade Runner 2049</h3>
+                            <div class="watchlist-actions">
+                                <button aria-label="Watch now"><i class="fas fa-play"></i></button>
+                                <button aria-label="Remove from watchlist"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="watchlist-item">
+                        <img src="../images/Heroacademia.jpg" alt="My Hero Academia">
+                        <div class="watchlist-overlay">
+                            <h3>My Hero Academia</h3>
+                            <div class="watchlist-actions">
+                                <button aria-label="Watch now"><i class="fas fa-play"></i></button>
+                                <button aria-label="Remove from watchlist"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Community Activity -->
+            <section class="dashboard-section community-activity animate-fade-in delay-600">
+                <div class="section-header">
+                    <h2><i class="fas fa-users"></i> Community Activity</h2>
+                    <a href="community.html" class="view-all">View all <i class="fas fa-angle-right"></i></a>
+                </div>
+                <div class="community-list">
+                    <div class="community-post">
+                        <div class="user-info">
+                            <img src="../images/Avatar.jpg" alt="User avatar" class="user-avatar-small">
+                            <span class="username">MovieFan23</span>
+                            <span class="post-time">2 hours ago</span>
+                        </div>
+                        <div class="post-content">
+                            <p>Just finished watching Dune: Part Two. Absolutely stunning visuals and perfect continuation of the story! What did you all think about the ending?</p>
+                            <div class="post-media">
+                                <img src="../images/Dune.jpg" alt="Dune: Part Two">
+                            </div>
+                            <div class="post-stats">
+                                <div class="likes"><i class="fas fa-heart"></i> 45</div>
+                                <div class="comments"><i class="fas fa-comment"></i> 12</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="community-post">
+                        <div class="user-info">
+                            <img src="../images/Avatar.jpg" alt="User avatar" class="user-avatar-small">
+                            <span class="username">AnimeWatcher99</span>
+                            <span class="post-time">Yesterday</span>
+                        </div>
+                        <div class="post-content">
+                            <p>Weekly discussion: Which anime had the most shocking plot twist this season? For me it's definitely Jujutsu Kaisen's latest episode!</p>
+                            <div class="post-stats">
+                                <div class="likes"><i class="fas fa-heart"></i> 78</div>
+                                <div class="comments"><i class="fas fa-comment"></i> 34</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>About Entertainment Hub</h3>
+                <p>Your all-in-one platform for movies, TV shows, anime, manga, and games. Discover, rate, and discuss your favorite entertainment.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                    <a href="#" aria-label="Reddit"><i class="fab fa-reddit"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-envelope"></i> support@entertainmenthub.com</p>
+                <p><i class="fas fa-phone"></i> +1 (123) 456-7890</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Entertainment St, Media City, CA 90210</p>
+            </div>
+            
+            <div class="footer-section newsletter">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for the latest updates on your favorite entertainment.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" aria-label="Subscribe"><i class="fas fa-paper-plane"></i></button>
+                </form>
+                <div class="app-links">
+                    <a href="#"><img src="../images/appstore.jpg" alt="Download on App Store"></a>
+                    <a href="#"><img src="../images/Googleplay.jpg" alt="Get it on Google Play"></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Back to top button -->
+    <button id="back-to-top-btn" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="../js/common.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+
+</html>

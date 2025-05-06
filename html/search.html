@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Advanced search for Entertainment Hub - find movies, anime, manga, games and more">
+    <title>Advanced Search | Entertainment Hub</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body data-theme="light">
+    <a class="skip-link" href="#main">Skip to content</a>
+    
+    <header>
+        <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="manga.html">Manga</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li class="dropdown">
+                    <a href="community.html">Community <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="discussions.html">Discussions</a></li>
+                        <li><a href="leaderboard.html">Leaderboard</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="polls.html">Polls</a></li>
+                        <li><a href="events.html">Events</a></li>
+                    </ul>
+                </li>
+                <li><a href="watchlist.html">Watchlist</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li class="auth-links"><a href="signin.html">Sign In / Sign Up</a></li>
+            </ul>
+        </nav>
+        <div class="header-controls">
+            <button id="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+            </button>
+            <button id="notifications-toggle" aria-label="Notifications">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+            </button>
+            <div class="search-container">
+                <form action="search.html" method="get">
+                    <input type="search" placeholder="Search..." aria-label="Search" name="q">
+                    <button type="submit" aria-label="Submit search"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+            <button id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="hero search-hero">
+            <div class="container">
+                <h1>Advanced Search</h1>
+                <p class="subtitle">Find exactly what you're looking for across all entertainment categories</p>
+            </div>
+        </section>
+
+        <section class="advanced-search container">
+            <div class="search-form-container">
+                <form id="advanced-search-form" action="search.html" method="get">
+                    <div class="search-main-bar">
+                        <input type="search" id="main-search" name="q" placeholder="Search titles, genres, people..." value="" aria-label="Search term">
+                        <button type="submit" class="primary-btn"><i class="fas fa-search"></i> Search</button>
+                    </div>
+
+                    <div class="search-filters">
+                        <div class="filter-section">
+                            <h3>Content Type</h3>
+                            <div class="filter-options content-type-filters">
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="content_type[]" value="movies" checked>
+                                    <span class="checkmark"></span>
+                                    Movies
+                                </label>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="content_type[]" value="series" checked>
+                                    <span class="checkmark"></span>
+                                    Series
+                                </label>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="content_type[]" value="anime" checked>
+                                    <span class="checkmark"></span>
+                                    Anime
+                                </label>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="content_type[]" value="manga" checked>
+                                    <span class="checkmark"></span>
+                                    Manga
+                                </label>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="content_type[]" value="games" checked>
+                                    <span class="checkmark"></span>
+                                    Games
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="filter-section">
+                            <h3>Genres</h3>
+                            <div class="filter-options genre-filters">
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="genres[]" value="action">
+                                    <span class="checkmark"></span>
+                                    Action
+                                </label>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="genres[]" value="adventure">
+                                    <span class="checkmark"></span>
+                                    Adventure
+                                </label>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="genres[]" value="comedy">
+                                    <span class="checkmark"></span>
+                                    Comedy
+                                </label>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="genres[]" value="drama">
+                                    <span class="checkmark"></span>
+                                    Drama
+                                </label>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="genres[]" value="fantasy">
+                                    <span class="checkmark"></span>
+                                    Fantasy
+                                </label>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="genres[]" value="horror">
+                                    <span class="checkmark"></span>
+                                    Horror
+                                </label>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="genres[]" value="mystery">
+                                    <span class="checkmark"></span>
+                                    Mystery
+                                </label>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="genres[]" value="romance">
+                                    <span class="checkmark"></span>
+                                    Romance
+                                </label>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="genres[]" value="scifi">
+                                    <span class="checkmark"></span>
+                                    Sci-Fi
+                                </label>
+                                <label class="filter-checkbox">
+                                    <input type="checkbox" name="genres[]" value="thriller">
+                                    <span class="checkmark"></span>
+                                    Thriller
+                                </label>
+                                <button type="button" class="toggle-more-genres">Show more genres</button>
+                            </div>
+                        </div>
+
+                        <div class="filter-section">
+                            <h3>Year Range</h3>
+                            <div class="range-filter">
+                                <div class="range-inputs">
+                                    <input type="number" name="year_from" placeholder="From" min="1900" max="2025">
+                                    <span>to</span>
+                                    <input type="number" name="year_to" placeholder="To" min="1900" max="2025" value="2025">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="filter-section">
+                            <h3>Rating</h3>
+                            <div class="rating-filter">
+                                <div class="rating-slider">
+                                    <input type="range" id="min-rating" name="min_rating" min="1" max="10" value="1" step="0.1">
+                                    <div class="rating-display">
+                                        <span id="rating-value">1.0+</span> <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="filter-section">
+                            <h3>Sort By</h3>
+                            <div class="sort-options">
+                                <select name="sort_by" id="sort-by">
+                                    <option value="relevance">Relevance</option>
+                                    <option value="rating_desc">Rating (High to Low)</option>
+                                    <option value="rating_asc">Rating (Low to High)</option>
+                                    <option value="year_desc">Release Year (Newest)</option>
+                                    <option value="year_asc">Release Year (Oldest)</option>
+                                    <option value="title_asc">Title (A-Z)</option>
+                                    <option value="title_desc">Title (Z-A)</option>
+                                    <option value="popularity">Popularity</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="search-actions">
+                        <button type="submit" class="primary-btn large-btn"><i class="fas fa-search"></i> Search</button>
+                        <button type="reset" class="secondary-btn"><i class="fas fa-undo"></i> Reset Filters</button>
+                        <button type="button" id="save-search" class="tertiary-btn"><i class="fas fa-save"></i> Save This Search</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="search-results">
+                <div class="results-header">
+                    <h2>Search Results</h2>
+                    <p><span id="result-count">0</span> results found</p>
+                    <div class="view-options">
+                        <button class="view-btn active" data-view="grid"><i class="fas fa-th"></i></button>
+                        <button class="view-btn" data-view="list"><i class="fas fa-list"></i></button>
+                    </div>
+                </div>
+
+                <div class="results-grid" id="search-results-container">
+                    <!-- Results will be populated dynamically via JavaScript -->
+                    <div class="search-placeholder">
+                        <i class="fas fa-search fa-4x"></i>
+                        <p>Enter your search criteria and press Search</p>
+                    </div>
+                </div>
+
+                <div class="pagination">
+                    <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                    <span class="pagination-info">Page <span id="current-page">1</span> of <span id="total-pages">1</span></span>
+                    <button class="pagination-btn" disabled><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About Us</h4>
+                <ul>
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Help & Support</h4>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="support.html">Support Center</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Community</h4>
+                <ul>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="discussions.html">Discussions</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top" id="back-to-top-btn" aria-label="Back to top">↑</a>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/search.js"></script>
+</body>
+</html>

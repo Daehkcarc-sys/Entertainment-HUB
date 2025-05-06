@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watchlist | Entertainment Hub</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/watchlist.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="watchlist-page">
+    <header>
+        <h1><i class="fas fa-bookmark"></i> Watchlist</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="manga.html">Manga</a></li>
+                <li><a href="series.html">Series</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="discussions.html">Discussions</a></li>
+                <li><a href="watchlist.html" class="active">Watchlist</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="signin.html">Sign In / Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="hero-banner">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h2>Track Your Entertainment <span class="highlight">Journey</span></h2>
+                <p>Never lose track of what you're watching, playing, or reading</p>
+            </div>
+        </div>
+        
+        <div class="watchlist-container">
+            <section class="watchlist-stats">
+                <div class="stat-card">
+                    <span class="stat-number">24</span>
+                    <span class="stat-label">Planned</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">In Progress</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">42</span>
+                    <span class="stat-label">Completed</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">74</span>
+                    <span class="stat-label">Total</span>
+                </div>
+            </section>
+
+            <div class="main-content">
+                <section class="watchlist-filters">
+                    <div class="filter-options">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="movies">Movies</button>
+                        <button class="filter-btn" data-filter="anime">Anime</button>
+                        <button class="filter-btn" data-filter="manga">Manga</button>
+                        <button class="filter-btn" data-filter="series">Series</button>
+                        <button class="filter-btn" data-filter="games">Games</button>
+                    </div>
+                    <div class="sort-options">
+                        <label for="sort-select">Sort by:</label>
+                        <select id="sort-select">
+                            <option value="date-added">Date Added</option>
+                            <option value="title">Title</option>
+                            <option value="status">Status</option>
+                            <option value="rating">Rating</option>
+                        </select>
+                    </div>
+                </section>
+                
+                <section class="watchlist-items">
+                    <div class="watchlist-item" data-type="movies">
+                        <div class="item-image">
+                            <img src="images/movies/dune.jpg" alt="Dune">
+                            <div class="item-type movie-type">Movie</div>
+                        </div>
+                        <div class="item-info">
+                            <h3>Dune: Part Two</h3>
+                            <div class="item-meta">
+                                <span class="year">2024</span>
+                                <span class="dot">•</span>
+                                <span class="rating"><i class="fas fa-star"></i> 8.8</span>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-status planned">Planned</div>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-actions">
+                            <button class="action-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn remove-btn"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="watchlist-item" data-type="anime">
+                        <div class="item-image">
+                            <img src="images/anime/jujutsu-kaisen.jpg" alt="Jujutsu Kaisen">
+                            <div class="item-type anime-type">Anime</div>
+                        </div>
+                        <div class="item-info">
+                            <h3>Jujutsu Kaisen Season 2</h3>
+                            <div class="item-meta">
+                                <span class="year">2023</span>
+                                <span class="dot">•</span>
+                                <span class="rating"><i class="fas fa-star"></i> 9.1</span>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-status watching">Watching • Ep 12/23</div>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 52%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-actions">
+                            <button class="action-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn remove-btn"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="watchlist-item" data-type="series">
+                        <div class="item-image">
+                            <img src="images/series/stranger-things.jpg" alt="Stranger Things">
+                            <div class="item-type series-type">Series</div>
+                        </div>
+                        <div class="item-info">
+                            <h3>Stranger Things Season 4</h3>
+                            <div class="item-meta">
+                                <span class="year">2022</span>
+                                <span class="dot">•</span>
+                                <span class="rating"><i class="fas fa-star"></i> 8.7</span>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-status completed">Completed</div>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-actions">
+                            <button class="action-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn remove-btn"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="watchlist-item" data-type="games">
+                        <div class="item-image">
+                            <img src="images/games/elden-ring.jpg" alt="Elden Ring">
+                            <div class="item-type game-type">Game</div>
+                        </div>
+                        <div class="item-info">
+                            <h3>Elden Ring</h3>
+                            <div class="item-meta">
+                                <span class="year">2022</span>
+                                <span class="dot">•</span>
+                                <span class="rating"><i class="fas fa-star"></i> 9.6</span>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-status playing">In Progress • 37h</div>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 45%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-actions">
+                            <button class="action-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn remove-btn"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="watchlist-item" data-type="manga">
+                        <div class="item-image">
+                            <img src="images/manga/chainsaw-man.jpg" alt="Chainsaw Man">
+                            <div class="item-type manga-type">Manga</div>
+                        </div>
+                        <div class="item-info">
+                            <h3>Chainsaw Man</h3>
+                            <div class="item-meta">
+                                <span class="year">2019</span>
+                                <span class="dot">•</span>
+                                <span class="rating"><i class="fas fa-star"></i> 9.4</span>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-status reading">Reading • Ch 75/130</div>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 58%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-actions">
+                            <button class="action-btn"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn remove-btn"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="watchlist-sidebar">
+                <section class="add-to-watchlist">
+                    <h2>Add to Watchlist</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" id="title" placeholder="Enter title...">
+                        </div>
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            <select id="type">
+                                <option value="movie">Movie</option>
+                                <option value="anime">Anime</option>
+                                <option value="manga">Manga</option>
+                                <option value="series">Series</option>
+                                <option value="game">Game</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select id="status">
+                                <option value="planned">Plan to Watch</option>
+                                <option value="watching">Watching/Playing/Reading</option>
+                                <option value="completed">Completed</option>
+                                <option value="dropped">Dropped</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="progress">Progress</label>
+                            <div class="progress-input">
+                                <input type="number" id="progress" min="0" value="0">
+                                <span class="progress-unit">/ --</span>
+                            </div>
+                        </div>
+                        <button type="submit" class="submit-btn">Add to Watchlist</button>
+                    </form>
+                </section>
+
+                <section class="recent-activity">
+                    <h2>Recent Activity</h2>
+                    <div class="activity-item">
+                        <div class="activity-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="activity-content">
+                            <p>You completed <strong>The Last of Us</strong></p>
+                            <span class="activity-time">2 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon"><i class="fas fa-plus-circle"></i></div>
+                        <div class="activity-content">
+                            <p>You added <strong>Demon Slayer Season 3</strong> to your watchlist</p>
+                            <span class="activity-time">Yesterday</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon"><i class="fas fa-play-circle"></i></div>
+                        <div class="activity-content">
+                            <p>You started watching <strong>The Boys Season 4</strong></p>
+                            <span class="activity-time">3 days ago</span>
+                        </div>
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Entertainment Hub</h3>
+                <p>Your ultimate destination for entertainment reviews and discussions.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="games.html">Games</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="discussions.html">Discussions</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                    <li><a href="news.html">News</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="about.html">About Us</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

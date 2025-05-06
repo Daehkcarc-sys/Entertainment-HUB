@@ -1,0 +1,443 @@
+/* Dark Theme Styles for Entertainment Hub
+ * Applied when body has data-theme="dark"
+ */
+
+[data-theme="dark"] {
+  /* Color scheme overrides */
+  --light-color: #121212;
+  --dark-color: #f8f9fa;
+  --gray-100: #1e1e1e;
+  --gray-200: #2d2d2d;
+  --gray-300: #393939;
+  --gray-400: #494949;
+  --gray-500: #6e6e6e;
+  --gray-600: #a0a0a0;
+  --gray-700: #d0d0d0;
+  --gray-800: #e6e6e6;
+  --gray-900: #f8f8f8;
+  
+  /* Keep accent colors but adjust some for dark mode visibility */
+  --primary-color: #8077ff;
+  --secondary-color: #ff8585;
+  --accent-color: #ffd166;
+  --success-color: #0ac593;
+  --info-color: #26c6da;
+  --warning-color: #ffb74d;
+  --danger-color: #f55a4e;
+  
+  /* Shadow adjustments */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 15px 25px rgba(0, 0, 0, 0.6);
+  
+  /* Specific theme adjustments for different content types */
+  --anime-light: #232338;
+  --manga-light: #232330;
+  --series-light: #1a2a2a;
+  --movie-light: #291e1e;
+  --game-light: #1a1e2e;
+}
+
+/* Header & Navigation - Dark Mode */
+[data-theme="dark"] .unified-header,
+[data-theme="dark"] header {
+  background-color: var(--gray-100);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .logo h1,
+[data-theme="dark"] header h1 {
+  color: var(--primary-color);
+}
+
+[data-theme="dark"] .nav-list li a,
+[data-theme="dark"] nav ul li a {
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .nav-list li a:hover, 
+[data-theme="dark"] .nav-list li a.active,
+[data-theme="dark"] nav ul li a:hover,
+[data-theme="dark"] nav ul li a.active {
+  background-color: rgba(128, 119, 255, 0.2);
+  color: var(--primary-color);
+}
+
+[data-theme="dark"] .search-container input {
+  background: var(--gray-200);
+  border-color: var(--gray-300);
+  color: var(--gray-800);
+}
+
+[data-theme="dark"] .search-container input::placeholder {
+  color: var(--gray-500);
+}
+
+[data-theme="dark"] .search-container button {
+  color: var(--gray-500);
+}
+
+[data-theme="dark"] .theme-toggle,
+[data-theme="dark"] #theme-toggle {
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .theme-toggle:hover,
+[data-theme="dark"] #theme-toggle:hover {
+  background-color: var(--gray-300);
+  color: var(--primary-color);
+}
+
+[data-theme="dark"] .theme-toggle i::before,
+[data-theme="dark"] #theme-toggle i::before {
+  content: "\f185"; /* sun icon */
+}
+
+[data-theme="dark"] .user-menu-toggle {
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .user-dropdown {
+  background-color: var(--gray-100);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--gray-200);
+}
+
+[data-theme="dark"] .dropdown-item {
+  color: var(--gray-700);
+}
+
+[data-theme="dark"] .dropdown-item:hover {
+  background-color: var(--gray-200);
+}
+
+/* Buttons - Dark Mode */
+[data-theme="dark"] .btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .btn-primary:hover, 
+[data-theme="dark"] .btn-primary:focus {
+  background-color: #9188ff;
+  border-color: #9188ff;
+}
+
+[data-theme="dark"] .btn-secondary {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+[data-theme="dark"] .btn-outline {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: var(--gray-600);
+}
+
+[data-theme="dark"] .btn-outline:hover {
+  background-color: var(--primary-color);
+  color: var(--dark-color);
+}
+
+[data-theme="dark"] .btn-link {
+  color: var(--primary-color);
+}
+
+/* Card and Content Elements - Dark Mode */
+[data-theme="dark"] .card,
+[data-theme="dark"] .category-card,
+[data-theme="dark"] .review-card,
+[data-theme="dark"] .trending-item,
+[data-theme="dark"] .anime-card,
+[data-theme="dark"] .manga-card,
+[data-theme="dark"] .game-card,
+[data-theme="dark"] .series-card,
+[data-theme="dark"] .movie-card {
+  background-color: var(--gray-100);
+  box-shadow: var(--shadow-md);
+}
+
+[data-theme="dark"] .card-text,
+[data-theme="dark"] .category-card p,
+[data-theme="dark"] p {
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .card-footer {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Trending Section - Dark Mode */
+[data-theme="dark"] .section-title {
+  color: var(--gray-800);
+}
+
+[data-theme="dark"] .trending-tab,
+[data-theme="dark"] .season-tab,
+[data-theme="dark"] .category-btn:not(.active) {
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .trending-tab.active,
+[data-theme="dark"] .season-tab.active,
+[data-theme="dark"] .category-btn.active {
+  background-color: var(--primary-color);
+  color: var(--gray-100);
+}
+
+[data-theme="dark"] .trending-info h3,
+[data-theme="dark"] h3 {
+  color: var(--gray-800);
+}
+
+[data-theme="dark"] .trending-meta,
+[data-theme="dark"] .meta-text {
+  color: var(--gray-500);
+}
+
+[data-theme="dark"] .carousel-control {
+  background-color: var(--gray-200);
+  border-color: var(--gray-300);
+}
+
+/* Featured Section - Dark Mode */
+[data-theme="dark"] .featured-section {
+  background-color: var(--gray-100);
+}
+
+/* Reviews Section - Dark Mode */
+[data-theme="dark"] .review-title h3 {
+  color: var(--gray-800);
+}
+
+[data-theme="dark"] .review-text {
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .review-footer {
+  border-top: 1px solid var(--gray-300);
+}
+
+/* Community Section - Dark Mode */
+[data-theme="dark"] .community-section {
+  background-color: var(--gray-100);
+}
+
+/* App Section - Dark Mode */
+[data-theme="dark"] .app-text h2,
+[data-theme="dark"] h2 {
+  color: var(--gray-800);
+}
+
+[data-theme="dark"] .app-text p {
+  color: var(--gray-600);
+}
+
+/* Newsletter Section - Dark Mode */
+[data-theme="dark"] .newsletter-section {
+  background-color: var(--gray-100);
+}
+
+[data-theme="dark"] .newsletter-form input {
+  background-color: var(--gray-200);
+  color: var(--gray-800);
+}
+
+/* Footer - Dark Mode */
+[data-theme="dark"] footer {
+  background-color: var(--gray-200);
+  color: var(--gray-700);
+}
+
+[data-theme="dark"] .footer-section h3,
+[data-theme="dark"] .footer-section h4 {
+  color: var(--gray-800);
+}
+
+[data-theme="dark"] .footer-section p {
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .footer-section ul li a {
+  color: var(--gray-600);
+}
+
+[data-theme="dark"] .footer-section ul li a:hover {
+  color: var(--primary-color);
+}
+
+[data-theme="dark"] .social-links a {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--gray-700);
+}
+
+[data-theme="dark"] .social-links a:hover {
+  background-color: var(--primary-color);
+  color: var(--light-color);
+}
+
+[data-theme="dark"] .footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--gray-500);
+}
+
+/* Back to Top Button - Dark Mode */
+[data-theme="dark"] .back-to-top {
+  background-color: var(--primary-color);
+  color: var(--light-color);
+}
+
+/* Toast Notifications - Dark Mode */
+[data-theme="dark"] .toast {
+  background-color: var(--gray-200);
+  color: var(--gray-800);
+}
+
+/* Form Elements - Dark Mode */
+[data-theme="dark"] .form-control,
+[data-theme="dark"] input:not([type="checkbox"]):not([type="radio"]),
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  background-color: var(--gray-200);
+  border-color: var(--gray-300);
+  color: var(--gray-800);
+}
+
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] input:focus:not([type="checkbox"]):not([type="radio"]),
+[data-theme="dark"] select:focus,
+[data-theme="dark"] textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(128, 119, 255, 0.25);
+}
+
+[data-theme="dark"] .form-control::placeholder,
+[data-theme="dark"] input::placeholder {
+  color: var(--gray-500);
+}
+
+/* Modal Styles - Dark Mode */
+[data-theme="dark"] .modal-content {
+  background-color: var(--gray-100);
+}
+
+[data-theme="dark"] .modal-header {
+  border-bottom-color: var(--gray-300);
+}
+
+[data-theme="dark"] .modal-footer {
+  border-top-color: var(--gray-300);
+}
+
+/* Content Specific - For content type sections */
+[data-theme="dark"] .anime-light,
+[data-theme="dark"] .anime-section,
+[data-theme="dark"] .seasonal-anime {
+  background-color: var(--anime-light);
+}
+
+[data-theme="dark"] .manga-light,
+[data-theme="dark"] .manga-section {
+  background-color: var(--manga-light);
+}
+
+[data-theme="dark"] .series-light,
+[data-theme="dark"] .series-section {
+  background-color: var(--series-light);
+}
+
+[data-theme="dark"] .movie-light,
+[data-theme="dark"] .movie-section {
+  background-color: var(--movie-light);
+}
+
+[data-theme="dark"] .game-light,
+[data-theme="dark"] .game-section {
+  background-color: var(--game-light);
+}
+
+/* Tables - Dark Mode */
+[data-theme="dark"] table {
+  color: var(--gray-700);
+}
+
+[data-theme="dark"] thead th {
+  background-color: var(--gray-200);
+}
+
+[data-theme="dark"] tbody tr {
+  border-bottom-color: var(--gray-300);
+}
+
+[data-theme="dark"] tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Tabs - Dark Mode */
+[data-theme="dark"] .tab-btn, 
+[data-theme="dark"] .detail-tab {
+  background-color: var(--gray-200);
+  border-color: var(--gray-300);
+}
+
+[data-theme="dark"] .tab-btn.active, 
+[data-theme="dark"] .detail-tab.active {
+  background-color: var(--primary-color);
+  color: var(--gray-100);
+}
+
+/* Mobile Menu - Dark Mode */
+[data-theme="dark"] .mobile-menu-toggle span {
+  background-color: var(--gray-700);
+}
+
+[data-theme="dark"] .mobile-nav {
+  background-color: var(--gray-100);
+}
+
+/* Pagination - Dark Mode */
+[data-theme="dark"] .pagination-btn {
+  background-color: var(--gray-200);
+  border-color: var(--gray-300);
+}
+
+[data-theme="dark"] .pagination-btn.active {
+  background-color: var(--primary-color);
+  color: var(--gray-100);
+}
+
+/* Fixes for specific page types */
+[data-theme="dark"] .hero-carousel img,
+[data-theme="dark"] .featured-poster img,
+[data-theme="dark"] .carousel-image img {
+  filter: brightness(0.8);
+}
+
+/* Fix for search inputs on dark mode */
+[data-theme="dark"] .search-filter input, 
+[data-theme="dark"] .search-filter select {
+  background-color: var(--gray-200);
+  color: var(--gray-800);
+  border-color: var(--gray-300);
+}
+
+/* Fix for activity feeds on dark mode */
+[data-theme="dark"] .activity-feed {
+  background-color: var(--gray-100);
+}
+
+[data-theme="dark"] .activity-item {
+  border-bottom-color: var(--gray-300);
+}
+
+/* Fix for content overlays on dark mode */
+[data-theme="dark"] .category-overlay,
+[data-theme="dark"] .featured-overlay {
+  background: linear-gradient(to top, rgba(30, 30, 30, 0.9), rgba(30, 30, 30, 0.3));
+}
+
+/* Fix for badges on dark mode */
+[data-theme="dark"] .badge {
+  background-color: var(--gray-200);
+}
