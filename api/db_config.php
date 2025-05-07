@@ -25,13 +25,12 @@ function getDbConnection() {
         
         return new PDO($dsn, DB_USER, DB_PASS, $options);
     } catch (PDOException $e) {
-        // In production, log error instead of displaying
-        if (DEBUG_MODE) {
-            echo "Connection error: " . $e->getMessage();
-        }
-        http_response_code(500);
-        echo json_encode(['error' => 'Database connection failed']);
-        exit;
+        // Log the error for debugging
+        error_log("Database connection error: " . $e->getMessage());
+        
+        // Throw the exception back to the caller instead of handling it here
+        // This allows the main error handler to properly format the response
+        throw new PDOException("Database connection failed: " . $e->getMessage(), $e->getCode());
     }
 }
 

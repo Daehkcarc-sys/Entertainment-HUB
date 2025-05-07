@@ -101,6 +101,28 @@ $isLoggedIn = isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
     <script>
     // Notification handling
     document.addEventListener('DOMContentLoaded', function() {
+        // User menu dropdown functionality
+        const userMenuToggle = document.querySelector('.user-menu-toggle');
+        const userDropdown = document.querySelector('.user-dropdown');
+        
+        if (userMenuToggle && userDropdown) {
+            // Handle click on user avatar/icon to show dropdown
+            userMenuToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', !isExpanded);
+                userDropdown.style.display = isExpanded ? 'none' : 'block';
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (userMenuToggle && userDropdown && !userMenuToggle.contains(e.target) && !userDropdown.contains(e.target)) {
+                    userMenuToggle.setAttribute('aria-expanded', 'false');
+                    userDropdown.style.display = 'none';
+                }
+            });
+        }
+        
         const markAllReadBtn = document.querySelector('[data-action="mark-all-read"]');
         if (markAllReadBtn) {
             markAllReadBtn.addEventListener('click', function(e) {

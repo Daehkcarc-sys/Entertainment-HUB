@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS comments (
 );
 
 -- Example admin user (For demonstration only - remove in production)
--- Password: Admin123! (bcrypt hash)
+-- Password: Admin123! (bcrypt hash);
 INSERT INTO users (username, email, password_hash, created_at, role) VALUES 
 ('admin', 'admin@example.com', '$2y$10$6SsXYWL6azbRRGkK1aPwjuzYjoIw0H7RChLI7g1e2PD4ICyFXN6de', NOW(), 'admin');
 

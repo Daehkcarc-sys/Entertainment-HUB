@@ -1028,3 +1028,80 @@ function saveQuizAttempt(quizType, score) {
     
     localStorage.setItem('quiz-attempts', JSON.stringify(attempts));
 }
+
+/**
+ * Lazy Loading for Images
+ * Improves page load performance by loading images only when they're about to enter the viewport
+ */
+function setupLazyLoading() {
+    // Check if Intersection Observer API is supported
+    if ('IntersectionObserver' in window) {
+        const lazyImages = document.querySelectorAll('img[data-src]');
+        
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    
+                    // Optional: Load higher resolution image if available
+                    if (img.dataset.srcset) {
+                        img.srcset = img.dataset.srcset;
+                    }
+                    
+                    // Add a fade-in animation
+                    img.classList.add('fade-in');
+                    
+                    // Remove from observation after loading
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '50px 0px',
+            threshold: 0.01
+        });
+        
+        lazyImages.forEach(img => {
+            imageObserver.observe(img);
+        });
+        
+    } else {
+        // Fallback for browsers that don't support Intersection Observer
+        // Simple scroll-based lazy loading
+        const lazyImages = document.querySelectorAll('img[data-src]');
+        
+        function lazyLoadImages() {
+            const windowHeight = window.innerHeight;
+            
+            lazyImages.forEach(img => {
+                const rect = img.getBoundingClientRect();
+                const inView = rect.top <= windowHeight + 100 && rect.bottom >= 0;
+                
+                if (inView && !img.src) {
+                    img.src = img.dataset.src;
+                    
+                    if (img.dataset.srcset) {
+                        img.srcset = img.dataset.srcset;
+                    }
+                    
+                    img.classList.add('fade-in');
+                }
+            });
+        }
+        
+        // Initial check
+        lazyLoadImages();
+        
+        // Add event listener for scroll
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            // Throttle the scroll event
+            if (!scrollTimeout) {
+                scrollTimeout = setTimeout(() => {
+                    lazyLoadImages();
+                    scrollTimeout = null;
+                }, 100);
+            }
+        });
+    }
+}

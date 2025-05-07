@@ -1,0 +1,587 @@
+/* Settings Page Styles */
+
+.settings-page {
+    padding: 20px 0;
+}
+
+.page-title {
+    margin-bottom: 30px;
+    color: var(--text-color);
+}
+
+/* Settings Layout */
+.settings-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 30px;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .settings-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Settings Navigation */
+.settings-nav {
+    background-color: var(--bg-light);
+    padding: 20px 0;
+    border-right: 1px solid var(--border-color);
+}
+
+.settings-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.settings-nav li {
+    margin-bottom: 5px;
+}
+
+.settings-nav a {
+    display: block;
+    padding: 12px 20px;
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s;
+    position: relative;
+}
+
+.settings-nav a:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--primary-color);
+}
+
+.settings-nav li.active a {
+    background-color: rgba(108, 99, 255, 0.1);
+    color: var(--primary-color);
+    border-left: 3px solid var(--primary-color);
+}
+
+.settings-nav li.danger-section a {
+    color: #ff6b6b;
+}
+
+.settings-nav li.danger-section a:hover {
+    background-color: rgba(255, 107, 107, 0.1);
+}
+
+.settings-nav li.admin-section a {
+    color: #4dabf7;
+}
+
+.settings-nav li.admin-section a:hover {
+    background-color: rgba(77, 171, 247, 0.1);
+}
+
+/* Settings Content */
+.settings-content {
+    padding: 30px;
+}
+
+.settings-section {
+    display: none;
+}
+
+.settings-section.active {
+    display: block;
+}
+
+.settings-section h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.section-desc {
+    color: var(--text-color-secondary);
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+}
+
+.settings-section h3 {
+    margin: 25px 0 15px;
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+/* Avatar Section */
+.avatar-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.current-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 20px;
+}
+
+.current-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Form Styles */
+.settings-form {
+    width: 100%;
+    max-width: 600px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.form-hint {
+    font-size: 0.85rem;
+    color: var(--text-color-secondary);
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.form-actions {
+    margin-top: 30px;
+}
+
+/* Tags Input */
+.tags-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.tags-input input {
+    flex: 1;
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 5px;
+}
+
+.tag {
+    background-color: var(--bg-light);
+    color: var(--text-color);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    user-select: none;
+}
+
+.tag .remove-tag {
+    margin-left: 5px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.tag .remove-tag:hover {
+    opacity: 1;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    cursor: pointer;
+    position: relative;
+    padding-left: 55px;
+    user-select: none;
+    color: var(--text-color);
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.toggle-slider {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 46px;
+    height: 24px;
+    background-color: #ccc;
+    border-radius: 24px;
+    transition: 0.4s;
+}
+
+.toggle-slider:before {
+    content: "";
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+input:checked + .toggle-slider {
+    background-color: var(--primary-color);
+}
+
+input:checked + .toggle-slider:before {
+    transform: translateX(22px);
+}
+
+.setting-desc {
+    font-size: 0.85rem;
+    color: var(--text-color-secondary);
+    margin: 0 0 15px 55px;
+}
+
+/* Settings Group */
+.settings-group {
+    margin-bottom: 30px;
+}
+
+/* Theme Selector */
+.theme-options {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.theme-option {
+    cursor: pointer;
+}
+
+.theme-option input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.theme-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 80px;
+    border-radius: 8px;
+    padding: 15px;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.theme-option input:checked + .theme-preview {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.3);
+}
+
+.theme-preview i {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.light-theme {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.dark-theme {
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
+.system-theme {
+    background: linear-gradient(to right, #f8f9fa 50%, #343a40 50%);
+    color: #212529;
+}
+
+.system-theme i, .system-theme span {
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+/* Dividers */
+.settings-divider {
+    margin: 30px 0;
+    border: none;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Linked Accounts */
+.linked-accounts {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+}
+
+.linked-account {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 15px;
+    border-radius: 8px;
+    background-color: var(--bg-light);
+    transition: transform 0.2s;
+}
+
+.linked-account:hover {
+    transform: translateY(-2px);
+}
+
+.account-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-color);
+}
+
+.account-info i {
+    font-size: 20px;
+    width: 24px;
+    text-align: center;
+}
+
+/* Danger Zone */
+.danger-zone {
+    margin-top: 40px;
+}
+
+.danger-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: rgba(255, 107, 107, 0.1);
+    border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+.danger-info h3 {
+    margin: 0 0 5px;
+    color: #ff6b6b;
+}
+
+.danger-info p {
+    margin: 0;
+    color: var(--text-color-secondary);
+    font-size: 0.9rem;
+}
+
+.btn-danger {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #fa5252;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    margin: 10% auto;
+    padding: 25px;
+    border-radius: 10px;
+    max-width: 500px;
+    position: relative;
+    animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--text-color-secondary);
+}
+
+.modal-close:hover {
+    color: var(--text-color);
+}
+
+.modal h2 {
+    margin-top: 0;
+    color: var(--text-color);
+}
+
+.modal p {
+    color: var(--text-color);
+}
+
+.modal ul {
+    color: var(--text-color);
+    padding-left: 20px;
+}
+
+.modal ul li {
+    margin-bottom: 5px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Checkbox Container */
+.checkbox-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    user-select: none;
+    color: var(--text-color);
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.checkbox-container:hover input ~ .checkmark {
+    border-color: var(--primary-color);
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.checkbox-container .checkmark:after {
+    left: 7px;
+    top: 3px;
+    width: 4px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .settings-content {
+        padding: 20px;
+    }
+    
+    .danger-action {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .avatar-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .current-avatar {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+}
+
+/* Dark Theme Adjustments */
+[data-theme="dark"] .danger-action {
+    background-color: rgba(255, 107, 107, 0.05);
+}

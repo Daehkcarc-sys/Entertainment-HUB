@@ -8,7 +8,7 @@ const Auth = {
      * Base API URL for authentication endpoints
      * Change this if your backend is hosted elsewhere
      */
-    apiUrl: '../api/auth.php',
+    apiUrl: 'http://localhost/Projet/api/auth.php',
     
     /**
      * Login with email and password
@@ -67,7 +67,17 @@ const Auth = {
                 })
             });
             
-            const data = await response.json();
+            let data;
+            // Check if the response is valid JSON
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.indexOf("application/json") !== -1) {
+                data = await response.json();
+            } else {
+                // Handle HTML error responses (PHP errors)
+                const htmlError = await response.text();
+                console.error('Server returned non-JSON response:', htmlError);
+                throw new Error('The server encountered an error. Please try again later.');
+            }
             
             if (!response.ok) {
                 throw new Error(data.error || 'Registration failed');
@@ -80,10 +90,10 @@ const Auth = {
             
             // Store authentication data if immediate login is allowed
             if (data.token) {
-                this.setSession(data.token, data.user, data.tokenExpires);
+                this.setSession(data.token, data.user, data.expires_at);
             }
             
-            return data;   
+            return data;
         } catch (error) {
             console.error('Registration failed:', error);
             throw error;

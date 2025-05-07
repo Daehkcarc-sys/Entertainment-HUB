@@ -8,8 +8,45 @@ header("X-Content-Type-Options: nosniff");
 header("X-Frame-Options: SAMEORIGIN");
 header("Content-Security-Policy: default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://via.placeholder.com;");
 
+// Check for persistent login via remember token
+if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_token'])) {
+    try {
+        require_once 'db_config.php';
+        $db = getDbConnection();
+        
+        // Verify token and get user
+        $stmt = $db->prepare("
+            SELECT u.id, u.username, u.email, u.role, u.avatar, u.last_login 
+            FROM user_sessions s
+            JOIN users u ON s.user_id = u.id
+            WHERE s.token = ? AND s.expires_at > NOW()
+        ");
+        $stmt->execute([$_COOKIE['remember_token']]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($user) {
+            // Set session variables
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['avatar'] = $user['avatar'];
+            $_SESSION['role'] = $user['role'];
+            
+            // Update last activity timestamp
+            $stmt = $db->prepare("UPDATE users SET last_activity = NOW() WHERE id = ?");
+            $stmt->execute([$user['id']]);
+        }
+    } catch (PDOException $e) {
+        // Failed to restore session from cookie
+    }
+}
+
 // Database connection
-require_once 'includes/db_connect.php';
+if (file_exists('includes/db_connect.php')) {
+    require_once 'includes/db_connect.php';
+} else if (file_exists('api/db_config.php')) {
+    require_once 'api/db_config.php';
+}
 
 // CSRF protection
 if (!isset($_SESSION['csrf_token'])) {
@@ -21,14 +58,28 @@ $isLoggedIn = isset($_SESSION['user_id']);
 $currentUser = null;
 
 if ($isLoggedIn) {
-    // Get user data from database
-    $stmt = $pdo->prepare("SELECT id, username, email, role, avatar, last_login FROM users WHERE id = ?");
-    $stmt->execute([$_SESSION['user_id']]);
-    $currentUser = $stmt->fetch(PDO::FETCH_ASSOC);
+    // Get user data from session
+    $currentUser = [
+        'id' => $_SESSION['user_id'],
+        'username' => $_SESSION['username'],
+        'email' => $_SESSION['email'],
+        'role' => $_SESSION['role'] ?? 'user',
+        'avatar' => $_SESSION['avatar'] ?? 'Avatar.jpg',
+    ];
     
-    // Update last activity timestamp
-    $stmt = $pdo->prepare("UPDATE users SET last_activity = NOW() WHERE id = ?");
-    $stmt->execute([$_SESSION['user_id']]);
+    try {
+        // Update last activity timestamp if we have database connection
+        if (isset($pdo)) {
+            $stmt = $pdo->prepare("UPDATE users SET last_activity = NOW() WHERE id = ?");
+            $stmt->execute([$_SESSION['user_id']]);
+        } else if (function_exists('getDbConnection')) {
+            $db = getDbConnection();
+            $stmt = $db->prepare("UPDATE users SET last_activity = NOW() WHERE id = ?");
+            $stmt->execute([$_SESSION['user_id']]);
+        }
+    } catch (PDOException $e) {
+        // Failed to update last activity
+    }
 }
 
 // Theme preference
@@ -41,53 +92,141 @@ function hasPermission($permission) {
     
     if ($currentUser['role'] === 'admin') return true;
     
-    // Check specific permissions from user_permissions table
-    global $pdo;
-    $stmt = $pdo->prepare("SELECT 1 FROM user_permissions WHERE user_id = ? AND permission = ?");
-    $stmt->execute([$currentUser['id'], $permission]);
-    return $stmt->fetchColumn() !== false;
+    try {
+        // Check specific permissions from user_permissions table
+        if (isset($GLOBALS['pdo'])) {
+            $pdo = $GLOBALS['pdo'];
+            $stmt = $pdo->prepare("SELECT 1 FROM user_permissions WHERE user_id = ? AND permission = ?");
+            $stmt->execute([$currentUser['id'], $permission]);
+            return $stmt->fetchColumn() !== false;
+        } else if (function_exists('getDbConnection')) {
+            $db = getDbConnection();
+            $stmt = $db->prepare("SELECT 1 FROM user_permissions WHERE user_id = ? AND permission = ?");
+            $stmt->execute([$currentUser['id'], $permission]);
+            return $stmt->fetchColumn() !== false;
+        }
+    } catch (PDOException $e) {
+        return false;
+    }
+    
+    return false;
 }
 
 // Get notifications for logged-in users
 $notifications = [];
 if ($isLoggedIn) {
-    $stmt = $pdo->prepare("
-        SELECT n.id, n.type, n.content, n.created_at, n.is_read, n.related_id, n.related_type 
-        FROM notifications n 
-        WHERE n.user_id = ? 
-        ORDER BY n.created_at DESC 
-        LIMIT 5
-    ");
-    $stmt->execute([$_SESSION['user_id']]);
-    $notifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    try {
+        if (isset($pdo)) {
+            $stmt = $pdo->prepare("
+                SELECT n.id, n.type, n.content, n.created_at, n.is_read, n.related_id, n.related_type 
+                FROM notifications n 
+                WHERE n.user_id = ? 
+                ORDER BY n.created_at DESC 
+                LIMIT 5
+            ");
+            $stmt->execute([$_SESSION['user_id']]);
+            $notifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else if (function_exists('getDbConnection')) {
+            $db = getDbConnection();
+            $stmt = $db->prepare("
+                SELECT n.id, n.type, n.content, n.created_at, n.is_read, n.related_id, n.related_type 
+                FROM notifications n 
+                WHERE n.user_id = ? 
+                ORDER BY n.created_at DESC 
+                LIMIT 5
+            ");
+            $stmt->execute([$_SESSION['user_id']]);
+            $notifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+    } catch (PDOException $e) {
+        // Failed to get notifications
+    }
+}
+
+// Helper functions for notifications
+function getNotificationIcon($type) {
+    switch ($type) {
+        case 'comment': return 'comment';
+        case 'like': return 'heart';
+        case 'follow': return 'user-plus';
+        case 'mention': return 'at';
+        case 'system': return 'bell';
+        default: return 'bell';
+    }
+}
+
+function getNotificationUrl($notification) {
+    $baseUrl = '';
+    switch ($notification['related_type']) {
+        case 'post':
+            return $baseUrl . 'post.php?id=' . $notification['related_id'];
+        case 'comment':
+            return $baseUrl . 'comment.php?id=' . $notification['related_id'];
+        case 'user':
+            return $baseUrl . 'profile.php?id=' . $notification['related_id'];
+        default:
+            return $baseUrl . 'notifications.php';
+    }
+}
+
+function formatTimeAgo($datetime) {
+    $time = strtotime($datetime);
+    $diff = time() - $time;
+    
+    if ($diff < 60) {
+        return 'Just now';
+    } elseif ($diff < 3600) {
+        $mins = round($diff / 60);
+        return $mins . ' minute' . ($mins > 1 ? 's' : '') . ' ago';
+    } elseif ($diff < 86400) {
+        $hours = round($diff / 3600);
+        return $hours . ' hour' . ($hours > 1 ? 's' : '') . ' ago';
+    } elseif ($diff < 604800) {
+        $days = round($diff / 86400);
+        return $days . ' day' . ($days > 1 ? 's' : '') . ' ago';
+    } elseif ($diff < 2592000) {
+        $weeks = round($diff / 604800);
+        return $weeks . ' week' . ($weeks > 1 ? 's' : '') . ' ago';
+    } else {
+        return date('M j, Y', $time);
+    }
 }
 ?>
-&lt;!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo isset($pageTitle) ? htmlspecialchars($pageTitle) . ' | ' : ''; ?>Entertainment Hub</title>
     
-    &lt;!-- Preconnect for performance -->
+    <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     
-    &lt;!-- Stylesheets -->
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/common.css">
-    <link rel="stylesheet" href="/css/dark-theme.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/dark-theme.css">
     <?php if (isset($pageStyles)): ?>
         <?php foreach ($pageStyles as $style): ?>
-            <link rel="stylesheet" href="<?php echo htmlspecialchars($style); ?>">
+            <link rel="stylesheet" href="<?php echo htmlspecialchars(str_replace('/css/', 'css/', $style)); ?>">
         <?php endforeach; ?>
     <?php endif; ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    &lt;!-- Google Fonts -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    &lt;!-- Meta tags -->
+    <!-- Scripts -->
+    <script src="js/common.js"></script>
+    <script src="js/components/user-menu.js"></script>
+    <?php if (isset($pageScripts)): ?>
+        <?php foreach ($pageScripts as $script): ?>
+            <script src="<?php echo htmlspecialchars(str_replace('/js/', 'js/', $script)); ?>"></script>
+        <?php endforeach; ?>
+    <?php endif; ?>
+    
+    <!-- Meta tags -->
     <?php if (isset($pageDescription)): ?>
         <meta name="description" content="<?php echo htmlspecialchars($pageDescription); ?>">
     <?php endif; ?>
@@ -96,15 +235,44 @@ if ($isLoggedIn) {
     <?php endif; ?>
     <meta name="author" content="Entertainment Hub">
     
-    &lt;!-- Theme Color for Mobile Browsers -->
+    <!-- Theme Color for Mobile Browsers -->
     <meta name="theme-color" content="#6C63FF">
     
-    &lt;!-- Favicon -->
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     
-    &lt;!-- Set data-theme attribute based on user preference -->
+    <!-- Set data-theme attribute based on user preference -->
     <script>
         document.documentElement.setAttribute('data-theme', '<?php echo $theme; ?>');
+        
+        // Direct user menu toggle implementation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Find the user menu toggle button and dropdown
+            const userMenuToggle = document.querySelector('.user-menu-toggle');
+            const userDropdown = document.querySelector('.user-dropdown');
+            
+            if (userMenuToggle && userDropdown) {
+                // Add click event to toggle dropdown
+                userMenuToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Toggle visibility
+                    if (userDropdown.style.display === 'block') {
+                        userDropdown.style.display = 'none';
+                    } else {
+                        userDropdown.style.display = 'block';
+                    }
+                });
+                
+                // Close when clicking elsewhere
+                document.addEventListener('click', function(e) {
+                    if (userDropdown.style.display === 'block' && !e.target.closest('.user-menu')) {
+                        userDropdown.style.display = 'none';
+                    }
+                });
+            }
+        });
     </script>
 </head>
 
@@ -137,23 +305,18 @@ if ($isLoggedIn) {
                             <li><a href="events.php" <?php echo ($currentPage === 'events') ? 'class="active"' : ''; ?>>Events</a></li>
                         </ul>
                     </li>
-                    <li><a href="watchlist.php" <?php echo ($currentPage === 'watchlist') ? 'class="active"' : ''; ?>>Watchlist</a></li>
                     <?php if ($isLoggedIn): ?>
-                        <li><a href="profile.php" <?php echo ($currentPage === 'profile') ? 'class="active"' : ''; ?>>Profile</a></li>
-                        <?php if (hasPermission('admin_access')): ?>
-                            <li><a href="admin.php" <?php echo ($currentPage === 'admin') ? 'class="active"' : ''; ?>>Admin</a></li>
-                        <?php endif; ?>
-                    <?php else: ?>
-                        <li class="auth-links"><a href="signin.php">Sign In / Sign Up</a></li>
+                        <li><a href="watchlist.php" <?php echo ($currentPage === 'watchlist') ? 'class="active"' : ''; ?>>Watchlist</a></li>
                     <?php endif; ?>
                 </ul>
             </nav>
             
-            <?php if ($isLoggedIn): ?>
             <div class="header-controls">
                 <button id="theme-toggle" aria-label="Toggle dark mode">
                     <i class="fas fa-<?php echo $theme === 'dark' ? 'sun' : 'moon'; ?>"></i>
                 </button>
+                
+                <?php if ($isLoggedIn): ?>
                 <div class="notification-center">
                     <button class="notification-toggle" aria-expanded="false" aria-label="Notifications">
                         <i class="fas fa-bell"></i>
@@ -177,7 +340,7 @@ if ($isLoggedIn) {
                                 <div class="notification-empty">No notifications yet</div>
                             <?php else: ?>
                                 <?php foreach ($notifications as $notification): ?>
-                                    <a href="<?php echo getNotificationUrl($notification); ?>" class="notification-item <?php echo $notification['is_read'] ? '' : 'unread'; ?>" data-id="<?php echo $notification['id']; ?>">
+                                    <a href="<?php echo str_replace('/', '', getNotificationUrl($notification)); ?>" class="notification-item <?php echo $notification['is_read'] ? '' : 'unread'; ?>" data-id="<?php echo $notification['id']; ?>">
                                         <div class="notification-icon"><i class="fas fa-<?php echo getNotificationIcon($notification['type']); ?>"></i></div>
                                         <div class="notification-content">
                                             <p><?php echo htmlspecialchars($notification['content']); ?></p>
@@ -195,12 +358,25 @@ if ($isLoggedIn) {
                 <div class="user-menu">
                     <button class="user-menu-toggle" aria-expanded="false" aria-label="User menu">
                         <?php if (!empty($currentUser['avatar'])): ?>
-                            <img src="<?php echo htmlspecialchars($currentUser['avatar']); ?>" alt="Profile" class="user-avatar-small">
+                            <img src="<?php echo file_exists('images/' . $currentUser['avatar']) ? 'images/' . htmlspecialchars($currentUser['avatar']) : 'https://via.placeholder.com/40/6C63FF/FFFFFF?text=U'; ?>" alt="Profile" class="user-avatar-small">
                         <?php else: ?>
                             <i class="fas fa-user"></i>
                         <?php endif; ?>
                     </button>
                     <div class="user-dropdown">
+                        <div class="user-info">
+                            <div class="user-avatar">
+                                <?php if (!empty($currentUser['avatar'])): ?>
+                                    <img src="<?php echo file_exists('images/' . $currentUser['avatar']) ? 'images/' . htmlspecialchars($currentUser['avatar']) : 'https://via.placeholder.com/80/6C63FF/FFFFFF?text=User'; ?>" alt="<?php echo htmlspecialchars($currentUser['username']); ?>">
+                                <?php else: ?>
+                                    <i class="fas fa-user-circle"></i>
+                                <?php endif; ?>
+                            </div>
+                            <div class="user-details">
+                                <h4><?php echo htmlspecialchars($currentUser['username']); ?></h4>
+                                <p class="user-role"><?php echo ucfirst(htmlspecialchars($currentUser['role'])); ?></p>
+                            </div>
+                        </div>
                         <a href="profile.php" class="dropdown-item">
                             <i class="fas fa-user-circle"></i> My Profile
                         </a>
@@ -210,6 +386,11 @@ if ($isLoggedIn) {
                         <a href="settings.php" class="dropdown-item">
                             <i class="fas fa-cog"></i> Settings
                         </a>
+                        <?php if ($currentUser['role'] === 'admin'): ?>
+                            <a href="admin.php" class="dropdown-item admin-link">
+                                <i class="fas fa-user-shield"></i> Admin Panel
+                            </a>
+                        <?php endif; ?>
                         <form action="logout.php" method="post" class="logout-form">
                             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                             <button type="submit" class="dropdown-item">
@@ -218,8 +399,13 @@ if ($isLoggedIn) {
                         </form>
                     </div>
                 </div>
+                <?php else: ?>
+                <div class="auth-buttons">
+                    <a href="signin.php" class="btn btn-outline">Sign In</a>
+                    <a href="signin.php?register=true" class="btn btn-primary">Sign Up</a>
+                </div>
+                <?php endif; ?>
             </div>
-            <?php endif; ?>
         </div>
     </header>
 
