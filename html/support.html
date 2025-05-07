@@ -2,18 +2,52 @@
 <html lang="en">
 
 <head>
+    <!-- Document character encoding and viewport configuration for responsive design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Support | Entertainment Hub</title>
     
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="../css/styles.css">
+    <!-- Preconnect to external resources to improve performance by establishing early connections -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- CSS imports in a standardized order to maintain consistent styling across the site -->
+    <!-- Master stylesheet includes global styles used across all pages -->
+    <link rel="stylesheet" href="../css/master.css">
+    <!-- Common styles for shared components -->
     <link rel="stylesheet" href="../css/common.css">
+    <!-- Dark theme styles for the site-wide dark mode feature -->
     <link rel="stylesheet" href="../css/dark-theme.css">
+    <!-- Animation effects for loading elements and transitions -->
+    <link rel="stylesheet" href="../css/animations.css">
+    <!-- Audio player styles for background music functionality -->
+    <link rel="stylesheet" href="../css/audio-player.css">
+    <!-- Interactive component styles for buttons, tooltips, etc. -->
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    
+    <!-- Font Awesome icons library used throughout the site for visual cues and buttons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts import for typography consistency -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- SEO meta tags to improve search engine visibility -->
+    <meta name="description" content="Get help and support for Entertainment Hub services, troubleshooting, and account management.">
+    <meta name="keywords" content="entertainment hub support, help center, customer service, technical support">
+    <meta property="og:title" content="Customer Support | Entertainment Hub">
+    <meta property="og:description" content="Get help and support for all Entertainment Hub services.">
+    <meta property="og:url" content="https://entertainment-hub.com/support.html">
+    
+    <!-- Theme color for mobile browsers' address bar -->
+    <meta name="theme-color" content="#6C63FF">
+    
+    <!-- Favicon for browser tab icon -->
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    
+    <!-- Audio player element for background music -->
+    <audio id="background-music" loop preload="none">
+        <source src="../Morning-Routine-Lofi-Study-Music(chosic.com).mp3" type="audio/mpeg">
+    </audio>
     
     <style>
         .support-container {
@@ -272,28 +306,97 @@
     </style>
 </head>
 
-<body data-theme="light">
-    <header>
-        <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="movies.html">Movies</a></li>
-                <li><a href="anime.html">Anime</a></li>
-                <li><a href="manga.html">Manga</a></li>
-                <li><a href="series.html">Series</a></li>
-                <li><a href="games.html">Games</a></li>
-                <li><a href="leaderboard.html">Leaderboard</a></li>
-                <li><a href="community.html">Community</a></li>
-                <li><a href="discussions.html">Discussions</a></li>
-                <li><a href="watchlist.html">Watchlist</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="signin.html">Sign In / Sign Up</a></li>
-            </ul>
-        </nav>
+<body class="support-page">
+    <!-- Loading spinner container that shows during page load -->
+    <div class="loader-container" id="pageLoader">
+        <div class="loader"></div>
+    </div>
+    
+    <!-- Accessibility skip link for keyboard users to bypass navigation -->
+    <a class="skip-link" href="#main">Skip to content</a>
+    
+    <!-- Main site header with navigation -->
+    <header class="site-header unified-header">
+        <div class="container header-container">
+            <!-- Site logo and branding -->
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+            </div>
+            
+            <!-- Main navigation menu -->
+            <nav class="main-nav">
+                <!-- Mobile menu toggle button -->
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span class="hamburger-icon"></span>
+                </button>
+                
+                <!-- Navigation links -->
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                    <!-- Dropdown menu for community section -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Community <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="discussions.html" class="dropdown-item">Discussions</a></li>
+                            <li><a href="reviews.html" class="dropdown-item">Reviews</a></li>
+                            <li><a href="polls.html" class="dropdown-item">Polls</a></li>
+                            <li><a href="events.html" class="dropdown-item">Events</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="watchlist.html">Watchlist</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="support.html" class="active">Support</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Header action buttons (search, audio, theme, user) -->
+            <div class="header-actions">
+                <!-- Search container with input field and button -->
+                <div class="search-container">
+                    <input type="text" placeholder="Search..." aria-label="Search">
+                    <button type="button" aria-label="Submit search"><i class="fas fa-search"></i></button>
+                    <div class="search-results custom-scrollbar"></div>
+                </div>
+                
+                <!-- Audio toggle button for background music -->
+                <button class="audio-btn" id="audio-toggle" aria-label="Play background music">
+                    <i class="fas fa-volume-mute"></i>
+                </button>
+                
+                <!-- Theme toggle button for switching between light/dark mode -->
+                <button class="theme-toggle tooltip" data-tooltip="Switch theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+                <!-- User menu dropdown for account actions -->
+                <div class="user-menu dropdown">
+                    <button class="user-menu-toggle" aria-label="User menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="user-dropdown dropdown-menu">
+                        <a href="signin.html" class="dropdown-item"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                        <a href="signup.html" class="dropdown-item"><i class="fas fa-user-plus"></i> Sign Up</a>
+                    </div>
+                </div>
+                
+                <!-- Quiz trigger button for entertainment quizzes -->
+                <button class="quiz-trigger btn-interactive" data-quiz-type="entertainment" data-tooltip="Take a quiz!">
+                    <i class="fas fa-question-circle"></i> Quiz
+                </button>
+            </div>
+        </div>
     </header>
 
-    <main>
+    <!-- Main content section with id for skip-link target -->
+    <main id="main">
         <div class="support-container">
             <div class="support-header">
                 <h1>How Can We Help You?</h1>

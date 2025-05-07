@@ -6,15 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | Entertainment Hub</title>
     
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="../css/styles.css">
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Master Stylesheet - includes all CSS files -->
+    <link rel="stylesheet" href="../css/master.css">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="../css/audio-player.css">
+    <link rel="stylesheet" href="../css/quiz.css">
+    
+    <!-- New interactive CSS files -->
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    <link rel="stylesheet" href="../css/notifications.css">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- About page specific styles -->
     <style>
         .about-container {
             max-width: 1100px;
@@ -301,31 +315,458 @@
                 left: 0;
             }
         }
+        
+        /* Audio player styling */
+        .audio-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--card-bg);
+            padding: 10px 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            z-index: 100;
+            max-width: 300px;
+        }
+        
+        .audio-player audio {
+            width: 200px;
+            height: 30px;
+        }
+        
+        .audio-label {
+            margin-right: 10px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        
+        /* Video section styling */
+        .video-section {
+            margin: 3rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .video-container:hover .video-overlay {
+            opacity: 1;
+        }
+        
+        .play-button {
+            font-size: 4rem;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .video-controls {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 5px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--accent-color);
+            width: 0;
+            transition: width 0.1s;
+        }
+        
+        .control-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .control-buttons button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .control-buttons button:hover {
+            color: var(--accent-color);
+        }
+        
+        .volume-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        #volume {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            outline: none;
+            margin-left: 10px;
+        }
+        
+        #volume::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        #volume::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .time-display {
+            color: white;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .video-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .control-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            
+            .volume-container {
+                width: 100%;
+                margin-top: 5px;
+            }
+        }
+        
+        /* Audio section styling */
+        .audio-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .audio-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .audio-player {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            background-color: var(--bg-color);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .audio-button {
+            background: none;
+            border: none;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-right: 1rem;
+            transition: color 0.3s;
+        }
+        
+        .audio-button:hover {
+            color: var(--accent-color-hover);
+        }
+        
+        .audio-progress-container {
+            flex-grow: 1;
+            height: 5px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+        
+        .audio-progress-bar {
+            height: 100%;
+            background-color: var(--accent-color);
+            width: 0;
+            transition: width 0.1s;
+        }
+        
+        .audio-time {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            margin-right: 1rem;
+        }
+        
+        .volume-control {
+            display: flex;
+            align-items: center;
+        }
+        
+        #audio-volume {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            outline: none;
+            margin-left: 10px;
+        }
+        
+        #audio-volume::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        #audio-volume::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        /* Video Section */
+        .video-section {
+            margin: 3rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .play-button-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            color: white;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .video-controls {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 10;
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 5px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--accent-color);
+            width: 0;
+            transition: width 0.1s;
+        }
+        
+        .time-display {
+            color: white;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+        
+        /* Description styling */
+        .video-description {
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        .video-description h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+        
+        .video-description p {
+            font-size: 1rem;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .video-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .control-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            
+            .volume-container {
+                width: 100%;
+                margin-top: 5px;
+            }
+        }
     </style>
 </head>
 
 <body data-theme="light">
-    <header>
-        <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="movies.html">Movies</a></li>
-                <li><a href="anime.html">Anime</a></li>
-                <li><a href="manga.html">Manga</a></li>
-                <li><a href="series.html">Series</a></li>
-                <li><a href="games.html">Games</a></li>
-                <li><a href="leaderboard.html">Leaderboard</a></li>
-                <li><a href="community.html">Community</a></li>
-                <li><a href="discussions.html">Discussions</a></li>
-                <li><a href="watchlist.html">Watchlist</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="signin.html">Sign In / Sign Up</a></li>
-            </ul>
-        </nav>
+    <!-- Loading spinner element -->
+    <div class="loader-container" id="pageLoader">
+        <div class="loader"></div>
+    </div>
+    
+    <a class="skip-link" href="#main">Skip to content</a>
+    
+    <header class="site-header unified-header">
+        <div class="container header-container">
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+            </div>
+            <nav class="main-nav">
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span class="hamburger-icon"></span>
+                </button>
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Community <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="discussions.html" class="dropdown-item">Discussions</a></li>
+                            <li><a href="reviews.html" class="dropdown-item">Reviews</a></li>
+                            <li><a href="polls.html" class="dropdown-item">Polls</a></li>
+                            <li><a href="events.html" class="dropdown-item">Events</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="watchlist.html">Watchlist</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="search-container">
+                    <input type="text" placeholder="Search..." aria-label="Search">
+                    <button type="button" aria-label="Submit search"><i class="fas fa-search"></i></button>
+                    <div class="search-results custom-scrollbar"></div>
+                </div>
+                <button class="theme-toggle tooltip" data-tooltip="Switch theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-menu dropdown">
+                    <button class="user-menu-toggle" aria-label="User menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="user-dropdown dropdown-menu">
+                        <a href="signin.html" class="dropdown-item"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                        <a href="signup.html" class="dropdown-item"><i class="fas fa-user-plus"></i> Sign Up</a>
+                    </div>
+                </div>
+                <button class="quiz-trigger btn-interactive" data-quiz-type="general" data-tooltip="Take a quiz!">
+                    <i class="fas fa-question-circle"></i> Quiz
+                </button>
+            </div>
+        </div>
     </header>
 
-    <main>
+    <main id="main">
         <div class="about-container">
             <div class="hero-section">
                 <img src="../images/Animewallpaper.jpg" alt="Entertainment Hub Team" class="hero-image">
@@ -334,6 +775,35 @@
                     <p class="hero-subtitle">Building the ultimate community for entertainment enthusiasts since 2023</p>
                 </div>
             </div>
+            
+            <!-- Video introduction section -->
+            <section class="video-section">
+                <div class="video-container">
+                    <video id="about-video" poster="../images/AboutBanner.jpg">
+                        <source src="../7914786-hd_1920_1080_30fps.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="play-button-overlay" id="play-button">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <div class="video-controls">
+                        <button id="play-control"><i class="fas fa-play"></i></button>
+                        <div class="progress-container">
+                            <div id="progress-bar" class="progress-bar"></div>
+                        </div>
+                        <div class="time-display">
+                            <span id="current-time">0:00</span> / <span id="duration">0:00</span>
+                        </div>
+                        <button id="mute-control"><i class="fas fa-volume-up"></i></button>
+                        <input type="range" id="volume" min="0" max="1" step="0.1" value="1">
+                        <button id="fullscreen-control"><i class="fas fa-expand"></i></button>
+                    </div>
+                </div>
+                <div class="video-description">
+                    <h3>About CineVerse</h3>
+                    <p>Welcome to CineVerse - your ultimate destination for all things entertainment. We're passionate about bringing the best content to our users from across the globe.</p>
+                </div>
+            </section>
             
             <section class="section">
                 <h2 class="section-title">Our Story</h2>
@@ -370,11 +840,11 @@
                 
                 <div class="team-grid">
                     <div class="team-member">
-                        <img src="../images/SwagSonic.jpg" alt="Alex Johnson" class="member-image">
+                        <img src="../images/swagspidey.jpg" alt="Ahmed Amine Essid" class="member-image">
                         <div class="member-info">
-                            <h3 class="member-name">Alex Johnson</h3>
-                            <p class="member-role">Founder & CEO</p>
-                            <p class="member-bio">Alex founded Entertainment Hub after spending a decade in the entertainment industry as a critic and journalist. His vision drives the platform's continued growth and innovation.</p>
+                            <h3 class="member-name">Ahmed Amine Essid</h3>
+                            <p class="member-role">Co-founder & CEO</p>
+                            <p class="member-bio">Ahmed co-founded Entertainment Hub, bringing his extensive experience as a critic and journalist in the entertainment industry. His strategic vision drives the platform's continuous growth and innovation.</p>
                             <div class="social-links">
                                 <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                                 <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -384,11 +854,11 @@
                     </div>
                     
                     <div class="team-member">
-                        <img src="../images/swagspidey.jpg" alt="Sarah Chen" class="member-image">
+                        <img src="../images/SwagSonic.jpg" alt="Mourad Kraiem" class="member-image">
                         <div class="member-info">
-                            <h3 class="member-name">Sarah Chen</h3>
-                            <p class="member-role">Head of Content</p>
-                            <p class="member-bio">Sarah oversees all content curation and editorial decisions. Her background in film studies and experience as an anime reviewer brings valuable perspective to our platform.</p>
+                            <h3 class="member-name">Mourad Kraiem</h3>
+                            <p class="member-role">Co-founder & CEO</p>
+                            <p class="member-bio">Mourad co-founded Entertainment Hub with a background in film studies and extensive experience as an anime reviewer. He brings valuable creative direction and content expertise to the platform.</p>
                             <div class="social-links">
                                 <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                                 <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -398,11 +868,11 @@
                     </div>
                     
                     <div class="team-member">
-                        <img src="../images/Avatar.jpg" alt="Marcus Wilson" class="member-image">
+                        <img src="../images/Avatar.jpg" alt="Ahmed Zribi" class="member-image">
                         <div class="member-info">
-                            <h3 class="member-name">Marcus Wilson</h3>
-                            <p class="member-role">CTO</p>
-                            <p class="member-bio">Marcus leads our development team, ensuring that Entertainment Hub stays at the cutting edge of web technology while maintaining a user-friendly experience.</p>
+                            <h3 class="member-name">Ahmed Zribi</h3>
+                            <p class="member-role">Co-founder & CEO</p>
+                            <p class="member-bio">Ahmed co-founded Entertainment Hub and leads technical innovation, ensuring the platform remains at the cutting edge of web technology while delivering an exceptional user experience.</p>
                             <div class="social-links">
                                 <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                                 <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -410,20 +880,29 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="team-member">
-                        <img src="../images/Levi.jpg" alt="Priya Sharma" class="member-image">
-                        <div class="member-info">
-                            <h3 class="member-name">Priya Sharma</h3>
-                            <p class="member-role">Community Manager</p>
-                            <p class="member-bio">Priya is the heart of our community efforts, fostering engagement and ensuring that Entertainment Hub remains a welcoming space for all entertainment fans.</p>
-                            <div class="social-links">
-                                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                            </div>
+                </div>
+            </section>
+            
+            <!-- Audio section with background music -->
+            <section class="audio-section">
+                <div class="audio-container">
+                    <h3>Background Music</h3>
+                    <audio id="background-music">
+                        <source src="../Morning-Routine-Lofi-Study-Music(chosic.com).mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <div class="audio-controls">
+                        <button id="audio-play-control"><i class="fas fa-play"></i></button>
+                        <div class="audio-progress-container">
+                            <div id="audio-progress-bar" class="progress-bar"></div>
                         </div>
+                        <div class="audio-time-display">
+                            <span id="audio-current-time">0:00</span> / <span id="audio-duration">0:00</span>
+                        </div>
+                        <button id="audio-mute-control"><i class="fas fa-volume-up"></i></button>
+                        <input type="range" id="audio-volume" min="0" max="1" step="0.1" value="0.5">
                     </div>
+                    <p class="audio-description">Enjoy this calming lofi music while exploring our site!</p>
                 </div>
             </section>
             
@@ -512,44 +991,223 @@
             </section>
         </div>
     </main>
-
+    
     <footer>
-        <div class="footer-container">
+        <div class="footer-content">
             <div class="footer-section">
                 <h3>Entertainment Hub</h3>
-                <p>Your ultimate destination for entertainment reviews and discussions.</p>
+                <p>Your one-stop destination for all things entertainment.</p>
             </div>
             <div class="footer-section">
-                <h4>Quick Links</h4>
+                <h3>Quick Links</h3>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="movies.html">Movies</a></li>
-                    <li><a href="anime.html">Anime</a></li>
-                    <li><a href="manga.html">Manga</a></li>
-                    <li><a href="series.html">Series</a></li>
-                    <li><a href="games.html">Games</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                     <li><a href="privacy.html">Privacy Policy</a></li>
                     <li><a href="terms.html">Terms of Service</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>Connect With Us</h4>
+                <h3>Connect With Us</h3>
                 <div class="social-links">
                     <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
                     <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                     <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+            <p>&copy; 2023-2025 Entertainment Hub. All rights reserved.</p>
         </div>
     </footer>
-
-    <a href="#" class="back-to-top" id="back-to-top-btn" aria-label="Back to top">↑</a>
     
-    <script src="../js/common.js"></script>
+    <!-- Audio player that follows the user -->
+    <div class="audio-player" id="background-audio-player">
+        <span class="audio-label">Ambience:</span>
+        <audio id="background-audio" loop>
+            <source src="../Morning-Routine-Lofi-Study-Music(chosic.com).mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+        <button id="audio-toggle" class="audio-button">
+            <i class="fas fa-play"></i>
+        </button>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                if (body.getAttribute('data-theme') === 'light') {
+                    body.setAttribute('data-theme', 'dark');
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    body.setAttribute('data-theme', 'light');
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            });
+        }
+
+        // Video player functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('about-video');
+            const playButton = document.getElementById('play-button');
+            const playControl = document.getElementById('play-control');
+            const muteControl = document.getElementById('mute-control');
+            const volumeSlider = document.getElementById('volume');
+            const progressBar = document.getElementById('progress-bar');
+            const fullscreenControl = document.getElementById('fullscreen-control');
+            const currentTimeDisplay = document.getElementById('current-time');
+            const durationDisplay = document.getElementById('duration');
+
+            // Hide controls initially, show on hover
+            const videoContainer = document.querySelector('.video-container');
+            const videoControls = document.querySelector('.video-controls');
+
+            let controlsTimeout;
+
+            if (videoContainer && videoControls) {
+                videoContainer.addEventListener('mouseenter', () => {
+                    videoControls.style.opacity = '1';
+                    clearTimeout(controlsTimeout);
+                });
+
+                videoContainer.addEventListener('mouseleave', () => {
+                    if (!video.paused) {
+                        controlsTimeout = setTimeout(() => {
+                            videoControls.style.opacity = '0';
+                        }, 2000);
+                    }
+                });
+            }
+
+            // Initialize video player
+            if (video) {
+                // Play/pause functionality
+                function togglePlay() {
+                    if (video.paused || video.ended) {
+                        video.play();
+                        playButton.style.display = 'none';
+                        playControl.innerHTML = '<i class="fas fa-pause"></i>';
+                    } else {
+                        video.pause();
+                        playButton.style.display = 'flex';
+                        playControl.innerHTML = '<i class="fas fa-play"></i>';
+                    }
+                }
+
+                if (playButton) {
+                    playButton.addEventListener('click', togglePlay);
+                }
+
+                if (playControl) {
+                    playControl.addEventListener('click', togglePlay);
+                }
+
+                // Click anywhere on video to play/pause
+                video.addEventListener('click', togglePlay);
+
+                // Update progress bar
+                video.addEventListener('timeupdate', () => {
+                    const percentage = (video.currentTime / video.duration) * 100;
+                    if (progressBar) {
+                        progressBar.style.width = `${percentage}%`;
+                    }
+                    
+                    // Update time display
+                    if (currentTimeDisplay) {
+                        const currentMinutes = Math.floor(video.currentTime / 60);
+                        const currentSeconds = Math.floor(video.currentTime % 60);
+                        currentTimeDisplay.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds}`;
+                    }
+                });
+
+                // Set duration display once metadata is loaded
+                video.addEventListener('loadedmetadata', () => {
+                    if (durationDisplay) {
+                        const durationMinutes = Math.floor(video.duration / 60);
+                        const durationSeconds = Math.floor(video.duration % 60);
+                        durationDisplay.textContent = `${durationMinutes}:${durationSeconds < 10 ? '0' : ''}${durationSeconds}`;
+                    }
+                });
+
+                // Mute/unmute
+                if (muteControl) {
+                    muteControl.addEventListener('click', () => {
+                        video.muted = !video.muted;
+                        muteControl.innerHTML = video.muted 
+                            ? '<i class="fas fa-volume-mute"></i>' 
+                            : '<i class="fas fa-volume-up"></i>';
+                    });
+                }
+
+                // Volume control
+                if (volumeSlider) {
+                    volumeSlider.addEventListener('input', () => {
+                        video.volume = volumeSlider.value;
+                        // Update icon based on volume level
+                        if (video.volume === 0) {
+                            muteControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                        } else if (video.volume < 0.5) {
+                            muteControl.innerHTML = '<i class="fas fa-volume-down"></i>';
+                        } else {
+                            muteControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+                        }
+                    });
+                }
+
+                // Progress bar click to seek
+                const progressContainer = document.querySelector('.progress-container');
+                if (progressContainer) {
+                    progressContainer.addEventListener('click', (event) => {
+                        const rect = progressContainer.getBoundingClientRect();
+                        const pos = (event.clientX - rect.left) / progressContainer.offsetWidth;
+                        video.currentTime = pos * video.duration;
+                    });
+                }
+
+                // Fullscreen toggle
+                if (fullscreenControl && videoContainer) {
+                    fullscreenControl.addEventListener('click', () => {
+                        if (document.fullscreenElement) {
+                            document.exitFullscreen();
+                            fullscreenControl.innerHTML = '<i class="fas fa-expand"></i>';
+                        } else {
+                            videoContainer.requestFullscreen();
+                            fullscreenControl.innerHTML = '<i class="fas fa-compress"></i>';
+                        }
+                    });
+                }
+                
+                // Reset controls when video ends
+                video.addEventListener('ended', () => {
+                    playButton.style.display = 'flex';
+                    playControl.innerHTML = '<i class="fas fa-play"></i>';
+                });
+            }
+
+            // Audio player functionality
+            const backgroundAudio = document.getElementById('background-audio');
+            const audioToggle = document.getElementById('audio-toggle');
+
+            if (backgroundAudio && audioToggle) {
+                audioToggle.addEventListener('click', () => {
+                    if (backgroundAudio.paused) {
+                        backgroundAudio.play();
+                        audioToggle.innerHTML = '<i class="fas fa-pause"></i>';
+                    } else {
+                        backgroundAudio.pause();
+                        audioToggle.innerHTML = '<i class="fas fa-play"></i>';
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

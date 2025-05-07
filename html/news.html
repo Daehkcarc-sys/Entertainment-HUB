@@ -2,82 +2,593 @@
 <html lang="en">
 
 <head>
+    <!-- Document character encoding and viewport configuration for responsive design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Entertainment News | Entertainment Hub</title>
+    
+    <!-- Preconnect to external resources to improve performance by establishing early connections -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- CSS imports in a standardized order to maintain consistent styling across the site -->
+    <!-- Master stylesheet includes global styles used across all pages -->
+    <link rel="stylesheet" href="../css/master.css">
+    <!-- Common styles for shared components -->
+    <link rel="stylesheet" href="../css/common.css">
+    <!-- Dark theme styles for the site-wide dark mode feature -->
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <!-- Animation effects for loading elements and transitions -->
+    <link rel="stylesheet" href="../css/animations.css">
+    <!-- Quiz-specific styles for the interactive quiz component -->
+    <link rel="stylesheet" href="../css/quiz.css">
+    <!-- Audio player styles for background music functionality -->
+    <link rel="stylesheet" href="../css/audio-player.css">
+    <!-- Interactive component styles for buttons, tooltips, etc. -->
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    
+    <!-- Font Awesome icons library used throughout the site for visual cues and buttons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts import for typography consistency -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- SEO meta tags to improve search engine visibility -->
+    <meta name="description" content="Stay up-to-date with the latest entertainment news, including movies, anime, manga, series, and games.">
+    <meta name="keywords" content="entertainment news, movie updates, anime news, manga releases, series updates, gaming news">
+    <meta property="og:title" content="Entertainment News | Entertainment Hub">
+    <meta property="og:description" content="Latest news and updates from the entertainment world.">
+    <meta property="og:url" content="https://entertainment-hub.com/news.html">
+    
+    <!-- Theme color for mobile browsers' address bar -->
+    <meta name="theme-color" content="#6C63FF">
+    
+    <!-- Favicon for browser tab icon -->
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    
+    <!-- Audio player element for background music -->
+    <audio id="background-music" loop preload="none">
+        <source src="../Morning-Routine-Lofi-Study-Music(chosic.com).mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- Page-specific styles -->
+    <style>
+        /* News grid layout styling */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        /* News article card styling */
+        .news-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* News image styling */
+        .news-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        /* News content container styling */
+        .news-content {
+            padding: 1.5rem;
+        }
+        
+        /* News article title styling */
+        .news-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            color: var(--heading-color);
+        }
+        
+        /* News article metadata styling (date, author, category) */
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* News excerpt styling */
+        .news-excerpt {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        /* Read more button styling */
+        .read-more {
+            color: var(--accent-color);
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .read-more i {
+            margin-left: 0.25rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .read-more:hover i {
+            transform: translateX(3px);
+        }
+        
+        /* Trending news section styling */
+        .trending-news {
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: var(--accent-light);
+            border-radius: 8px;
+        }
+        
+        /* Media preview section styling for videos and audio */
+        .media-preview {
+            margin-top: 3rem;
+        }
+        
+        /* Video container styling */
+        .video-container {
+            margin-bottom: 2rem;
+        }
+        
+        /* Video element styling */
+        #featured-trailer {
+            width: 100%;
+            max-height: 500px;
+            border-radius: 8px;
+        }
+        
+        /* Audio preview container styling */
+        .audio-preview {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        
+        /* Audio player styling */
+        #podcast-preview {
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        /* Newsletter subscription form styling */
+        .newsletter-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        /* Email input field styling */
+        .email-input {
+            display: flex;
+            max-width: 500px;
+            margin: 1.5rem auto;
+        }
+        
+        /* Email input field styling */
+        .email-input input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px 0 0 4px;
+            font-family: inherit;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+        }
+        
+        /* Subscribe button styling */
+        .email-input button {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .email-input button:hover {
+            background-color: var(--accent-hover);
+        }
+        
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .email-input {
+                flex-direction: column;
+            }
+            
+            .email-input input,
+            .email-input button {
+                width: 100%;
+                border-radius: 4px;
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
 </head>
 
-<body>
-    <header>
-        <h1>News</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="movies.html">Movies</a></li>
-                <li><a href="anime.html">Anime</a></li>
-                <li><a href="manga.html">Manga</a></li>
-                <li><a href="series.html">Series</a></li>
-                <li><a href="games.html">Games</a></li>
-                <li><a href="leaderboard.html">Leaderboard</a></li>
-                <li><a href="watchlist.html">Watchlist</a></li>
-                <li><a href="news.html">News</a></li>
-                <li><a href="polls.html">Polls & Contests</a></li>
-                <li><a href="discussions.html">Discussions</a></li>
-                <li><a href="signin.html">Sign In / Sign Up</a></li>
-
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section class="news">
-            <h2>Latest Media Updates</h2>
-            <article>
-                <h3>Movie Release Announcement</h3>
-                <p>Exciting new movie releasing this weekend!</p>
-            </article>
-            <article>
-                <h3>Anime Season Finale</h3>
-                <p>Don't miss the epic conclusion of the popular anime.</p>
-            </article>
-        </section>
-        <!-- Add before the trending-news section -->
-<section class="media-preview">
-    <h2>Latest Trailers</h2>
-    <div class="video-container">
-        <video id="featured-trailer" controls poster="images/trailer-poster.jpg">
-            <source src="videos/sample-trailer.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <h3>New Blockbuster Trailer</h3>
+<body class="news-page">
+    <!-- Loading spinner container that shows during page load -->
+    <div class="loader-container" id="pageLoader">
+        <div class="loader"></div>
     </div>
     
-    <div class="audio-preview">
-        <h3>Podcast: Weekly Entertainment Update</h3>
-        <audio id="podcast-preview" controls>
-            <source src="audio/podcast-sample.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
-    </div>
-</section>
+    <!-- Accessibility skip link for keyboard users to bypass navigation -->
+    <a class="skip-link" href="#main">Skip to content</a>
+    
+    <!-- Main site header with navigation -->
+    <header class="site-header unified-header">
+        <div class="container header-container">
+            <!-- Site logo and branding -->
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+            </div>
+            
+            <!-- Main navigation menu -->
+            <nav class="main-nav">
+                <!-- Mobile menu toggle button -->
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span class="hamburger-icon"></span>
+                </button>
+                
+                <!-- Navigation links -->
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                    <!-- Dropdown menu for community section -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Community <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="discussions.html" class="dropdown-item">Discussions</a></li>
+                            <li><a href="reviews.html" class="dropdown-item">Reviews</a></li>
+                            <li><a href="polls.html" class="dropdown-item">Polls</a></li>
+                            <li><a href="events.html" class="dropdown-item">Events</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="watchlist.html">Watchlist</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="news.html" class="active">News</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Header action buttons (search, audio, theme, user) -->
+            <div class="header-actions">
+                <!-- Search container with input field and button -->
+                <div class="search-container">
+                    <input type="text" placeholder="Search..." aria-label="Search">
+                    <button type="button" aria-label="Submit search"><i class="fas fa-search"></i></button>
+                    <div class="search-results custom-scrollbar"></div>
+                </div>
+                
+                <!-- Audio toggle button for background music -->
+                <button class="audio-btn" id="audio-toggle" aria-label="Play background music">
+                    <i class="fas fa-volume-mute"></i>
+                </button>
+                
+                <!-- Theme toggle button for switching between light/dark mode -->
+                <button class="theme-toggle tooltip" data-tooltip="Switch theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+                <!-- User menu dropdown for account actions -->
+                <div class="user-menu dropdown">
+                    <button class="user-menu-toggle" aria-label="User menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="user-dropdown dropdown-menu">
+                        <a href="signin.html" class="dropdown-item"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                        <a href="signup.html" class="dropdown-item"><i class="fas fa-user-plus"></i> Sign Up</a>
+                    </div>
+                </div>
+                
+                <!-- Quiz trigger button for entertainment quizzes -->
+                <button class="quiz-trigger btn-interactive" data-quiz-type="entertainment" data-tooltip="Take a quiz!">
+                    <i class="fas fa-question-circle"></i> Quiz
+                </button>
+            </div>
+        </div>
+    </header>
 
-        <section class="trending-news">
-            <h2>Trending News</h2>
-            <ul>
-                <li>Top 10 Movies of the Year</li>
-                <li>New Game Trailer Released</li>
-                <li>Manga Series Ending Soon</li>
-            </ul>
+    <!-- Main content section with id for skip-link target -->
+    <main id="main">
+        <!-- Hero section for featured news story -->
+        <section class="hero news-hero">
+            <div class="container">
+                <h1>Entertainment News</h1>
+                <p class="subtitle">Stay updated with the latest news from the entertainment world</p>
+            </div>
         </section>
+        
+        <div class="container">
+            <!-- Filter tabs for news categories -->
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">All News</button>
+                <button class="filter-tab" data-filter="movies">Movies</button>
+                <button class="filter-tab" data-filter="anime">Anime</button>
+                <button class="filter-tab" data-filter="manga">Manga</button>
+                <button class="filter-tab" data-filter="series">Series</button>
+                <button class="filter-tab" data-filter="games">Games</button>
+            </div>
+            
+            <!-- Latest news section with grid layout -->
+            <section class="news">
+                <h2>Latest Updates</h2>
+                <div class="news-grid">
+                    <!-- News article card 1 -->
+                    <article class="news-card" data-category="movies">
+                        <img src="../images/news-movie.jpg" alt="New movie release" class="news-image">
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span>May 7, 2025</span>
+                                <span>Movies</span>
+                            </div>
+                            <h3 class="news-title">Movie Release Announcement</h3>
+                            <p class="news-excerpt">Exciting new movie releasing this weekend! The highly anticipated sequel to last year's blockbuster hit is finally arriving in theaters.</p>
+                            <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    
+                    <!-- News article card 2 -->
+                    <article class="news-card" data-category="anime">
+                        <img src="../images/news-anime.jpg" alt="Anime season finale" class="news-image">
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span>May 6, 2025</span>
+                                <span>Anime</span>
+                            </div>
+                            <h3 class="news-title">Anime Season Finale</h3>
+                            <p class="news-excerpt">Don't miss the epic conclusion of the popular anime. Fans are eagerly anticipating the climactic battle in this season's finale.</p>
+                            <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    
+                    <!-- News article card 3 -->
+                    <article class="news-card" data-category="games">
+                        <img src="../images/news-game.jpg" alt="New game announcement" class="news-image">
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span>May 5, 2025</span>
+                                <span>Games</span>
+                            </div>
+                            <h3 class="news-title">New Game Trailer Released</h3>
+                            <p class="news-excerpt">The developer just dropped a stunning new trailer for their upcoming open-world RPG, showcasing breathtaking environments and gameplay mechanics.</p>
+                            <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                    
+                    <!-- News article card 4 -->
+                    <article class="news-card" data-category="manga">
+                        <img src="../images/news-manga.jpg" alt="Manga series ending" class="news-image">
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span>May 4, 2025</span>
+                                <span>Manga</span>
+                            </div>
+                            <h3 class="news-title">Manga Series Ending Soon</h3>
+                            <p class="news-excerpt">After a decade-long run, the popular manga series has announced it will conclude in the next three chapters, bringing the epic story to its final resolution.</p>
+                            <a href="#" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+            
+            <!-- Media preview section for trailers and podcasts -->
+            <section class="media-preview">
+                <h2>Latest Trailers</h2>
+                <!-- Video container with poster image fallback -->
+                <div class="video-container">
+                    <video id="featured-trailer" controls poster="../images/trailer-poster.jpg">
+                        <source src="../7914786-hd_1920_1080_30fps.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <h3>New Blockbuster Trailer</h3>
+                </div>
+                
+                <!-- Audio preview for podcast content -->
+                <div class="audio-preview">
+                    <h3>Podcast: Weekly Entertainment Update</h3>
+                    <audio id="podcast-preview" controls>
+                        <source src="../Morning-Routine-Lofi-Study-Music(chosic.com).mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </section>
+
+            <!-- Trending news section with list of popular topics -->
+            <section class="trending-news">
+                <h2>Trending News</h2>
+                <ul>
+                    <li><i class="fas fa-fire"></i> Top 10 Movies of the Year</li>
+                    <li><i class="fas fa-fire"></i> New Game Trailer Released</li>
+                    <li><i class="fas fa-fire"></i> Manga Series Ending Soon</li>
+                    <li><i class="fas fa-fire"></i> Surprise Casting Announcement for Upcoming Series</li>
+                    <li><i class="fas fa-fire"></i> Anime Studio Announces Three New Original Projects</li>
+                </ul>
+            </section>
+            
+            <!-- Newsletter subscription section -->
+            <section class="newsletter-section">
+                <h2>Stay Updated</h2>
+                <p>Subscribe to our newsletter to receive the latest news directly in your inbox.</p>
+                <form class="email-input">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+                <p class="form-note">We respect your privacy and will never share your email.</p>
+            </section>
+        </div>
     </main>
 
+    <!-- Site footer with links and copyright information -->
     <footer>
-        <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+        <div class="footer-container">
+            <!-- Footer branding section -->
+            <div class="footer-section">
+                <h3>Entertainment Hub</h3>
+                <p>Your ultimate destination for entertainment reviews and discussions.</p>
+            </div>
+            
+            <!-- Quick links navigation -->
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            
+            <!-- Social media links section -->
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Copyright information -->
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+        </div>
     </footer>
 
-    <script src="script.js"></script>
-    <a href="#" class="back-to-top" id="back-to-top-btn">↑</a>
+    <!-- Back to top button for easy navigation -->
+    <a href="#" class="back-to-top" id="back-to-top-btn" aria-label="Back to top">↑</a>
+    
+    <!-- JavaScript imports -->
+    <!-- Common.js handles shared functionality like dark mode toggle, audio player, and navigation -->
+    <script src="../js/common.js"></script>
+    
+    <!-- Page-specific JavaScript -->
+    <script>
+        // Wait for DOM content to be fully loaded before executing JS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize the news filter functionality
+            initNewsFilter();
+            
+            // Simulate loading completion by hiding the page loader
+            setTimeout(function() {
+                document.getElementById('pageLoader').style.display = 'none';
+            }, 500);
+            
+            /**
+             * News filter functionality
+             * Allows users to filter news articles by category
+             */
+            function initNewsFilter() {
+                // Get all filter tabs and news cards
+                const filterTabs = document.querySelectorAll('.filter-tab');
+                const newsCards = document.querySelectorAll('.news-card');
+                
+                // Add click event listeners to each filter tab
+                filterTabs.forEach(tab => {
+                    tab.addEventListener('click', function() {
+                        // Get the selected filter category
+                        const filter = this.getAttribute('data-filter');
+                        
+                        // Update active tab styling
+                        filterTabs.forEach(tab => tab.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Filter the news cards
+                        newsCards.forEach(card => {
+                            // If filter is 'all' or card category matches filter, show card
+                            if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                                card.style.display = 'block';
+                                // Add animation for smooth appearance
+                                setTimeout(() => {
+                                    card.style.opacity = '1';
+                                }, 50);
+                            } else {
+                                // Hide cards that don't match the filter
+                                card.style.opacity = '0';
+                                setTimeout(() => {
+                                    card.style.display = 'none';
+                                }, 300);
+                            }
+                        });
+                    });
+                });
+            }
+            
+            /**
+             * Newsletter subscription form handler
+             * Validates email input and simulates form submission
+             */
+            const newsletterForm = document.querySelector('.newsletter-section form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const emailInput = this.querySelector('input[type="email"]');
+                    
+                    // Simple email validation
+                    if (emailInput.value.trim() !== '') {
+                        // Show success message (in real app, would send to server)
+                        alert('Thank you for subscribing to our newsletter!');
+                        emailInput.value = ''; // Clear the input field
+                    }
+                });
+            }
+            
+            /**
+             * Featured trailer video functionality
+             * Handles video playback and tracking
+             */
+            const featuredTrailer = document.getElementById('featured-trailer');
+            if (featuredTrailer) {
+                // Pause background music when video plays
+                featuredTrailer.addEventListener('play', function() {
+                    const backgroundMusic = document.getElementById('background-music');
+                    if (backgroundMusic && !backgroundMusic.paused) {
+                        backgroundMusic.pause();
+                    }
+                });
+                
+                // Track video completion for analytics (simulation)
+                featuredTrailer.addEventListener('ended', function() {
+                    console.log('Video completed - would send analytics in production');
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -2,64 +2,936 @@
 <html lang="en">
 
 <head>
+    <!-- Document character encoding and viewport configuration for responsive design -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polls & Contests</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Polls & Contests | Entertainment Hub</title>
+    
+    <!-- Preconnect to external resources to improve performance by establishing early connections -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- CSS imports in a standardized order to maintain consistent styling across the site -->
+    <!-- Master stylesheet includes global styles used across all pages -->
+    <link rel="stylesheet" href="../css/master.css">
+    <!-- Common styles for shared components -->
+    <link rel="stylesheet" href="../css/common.css">
+    <!-- Dark theme styles for the site-wide dark mode feature -->
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <!-- Animation effects for loading elements and transitions -->
+    <link rel="stylesheet" href="../css/animations.css">
+    <!-- Quiz-specific styles for the interactive quiz component -->
+    <link rel="stylesheet" href="../css/quiz.css">
+    <!-- Audio player styles for background music functionality -->
+    <link rel="stylesheet" href="../css/audio-player.css">
+    <!-- Interactive component styles for buttons, tooltips, etc. -->
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    
+    <!-- Font Awesome icons library used throughout the site for visual cues and buttons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts import for typography consistency -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- SEO meta tags to improve search engine visibility -->
+    <meta name="description" content="Participate in polls and contests about your favorite movies, anime, manga, series, and games on Entertainment Hub.">
+    <meta name="keywords" content="entertainment polls, anime contests, movie polls, manga contests, series polls, gaming contests">
+    <meta property="og:title" content="Polls & Contests | Entertainment Hub">
+    <meta property="og:description" content="Vote in polls and participate in contests on Entertainment Hub.">
+    <meta property="og:url" content="https://entertainment-hub.com/polls.html">
+    
+    <!-- Theme color for mobile browsers' address bar -->
+    <meta name="theme-color" content="#6C63FF">
+    
+    <!-- Favicon for browser tab icon -->
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    
+    <!-- Audio player element for background music -->
+    <audio id="background-music" loop preload="none">
+        <source src="../Morning-Routine-Lofi-Study-Music(chosic.com).mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- Page-specific styles for polls and contests -->
+    <style>
+        /* Polls section styling with cards and interactive elements */
+        .polls-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        /* Poll card styling */
+        .poll-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .poll-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Poll title styling */
+        .poll-title {
+            margin-bottom: 1.5rem;
+            color: var(--heading-color);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        /* Poll option container styling */
+        .poll-options {
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Custom radio button styling */
+        .poll-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+        }
+        
+        /* Radio input styling (hidden but accessible) */
+        .poll-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        /* Custom radio button indicator */
+        .radio-indicator {
+            position: relative;
+            height: 20px;
+            width: 20px;
+            background-color: var(--input-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        /* Radio button checked state */
+        .poll-option input[type="radio"]:checked ~ .radio-indicator {
+            border-color: var(--accent-color);
+        }
+        
+        /* Radio button inner dot for selected state */
+        .poll-option input[type="radio"]:checked ~ .radio-indicator:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-color);
+        }
+        
+        /* Vote button styling */
+        .vote-btn {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .vote-btn:hover {
+            background-color: var(--accent-hover);
+        }
+        
+        /* Poll results styling (shown after voting) */
+        .poll-results {
+            margin-top: 1.5rem;
+            display: none;
+        }
+        
+        /* Poll results display toggle class */
+        .show-results .poll-results {
+            display: block;
+        }
+        
+        /* Progress bar container styling */
+        .progress-container {
+            margin-bottom: 1rem;
+        }
+        
+        /* Progress bar label styling */
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.4rem;
+        }
+        
+        /* Progress bar styling */
+        .progress-bar {
+            height: 10px;
+            border-radius: 5px;
+            background-color: var(--border-color);
+            overflow: hidden;
+        }
+        
+        /* Progress bar fill styling */
+        .progress-fill {
+            height: 100%;
+            background-color: var(--accent-color);
+            border-radius: 5px;
+            transition: width 0.8s ease;
+        }
+        
+        /* Contest section styling */
+        .contests {
+            margin-top: 3rem;
+        }
+        
+        /* Contest cards container styling */
+        .contest-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        /* Contest card styling */
+        .contest-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .contest-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Contest image styling */
+        .contest-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        /* Contest content container styling */
+        .contest-content {
+            padding: 1.5rem;
+        }
+        
+        /* Contest title styling */
+        .contest-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            color: var(--heading-color);
+        }
+        
+        /* Contest metadata styling */
+        .contest-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Contest description styling */
+        .contest-description {
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+        
+        /* Contest prize details styling */
+        .prize-details {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .prize-icon {
+            margin-right: 0.75rem;
+            color: gold;
+            font-size: 1.5rem;
+        }
+        
+        /* Enter contest button styling */
+        .enter-btn {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .enter-btn i {
+            margin-left: 0.5rem;
+        }
+        
+        .enter-btn:hover {
+            background-color: var(--accent-hover);
+        }
+        
+        /* Past polls section styling */
+        .past-polls {
+            margin-top: 3rem;
+        }
+        
+        /* Archive section styling */
+        .archive-section {
+            margin-top: 3rem;
+        }
+        
+        /* Responsive styles for smaller screens */
+        @media (max-width: 768px) {
+            .polls-container, 
+            .contest-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
-<body>
-    <header>
-        <h1>Polls & Contests</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="movies.html">Movies</a></li>
-                <li><a href="anime.html">Anime</a></li>
-                <li><a href="manga.html">Manga</a></li>
-                <li><a href="series.html">Series</a></li>
-                <li><a href="games.html">Games</a></li>
-                <li><a href="leaderboard.html">Leaderboard</a></li>
-                <li><a href="watchlist.html">Watchlist</a></li>
-                <li><a href="news.html">News</a></li>
-                <li><a href="polls.html">Polls & Contests</a></li>
-                <li><a href="discussions.html">Discussions</a></li>
-                <li><a href="signin.html">Sign In / Sign Up</a></li>
-
-            </ul>
-        </nav>
+<body class="polls-page">
+    <!-- Loading spinner container that shows during page load -->
+    <div class="loader-container" id="pageLoader">
+        <div class="loader"></div>
+    </div>
+    
+    <!-- Accessibility skip link for keyboard users to bypass navigation -->
+    <a class="skip-link" href="#main">Skip to content</a>
+    
+    <!-- Main site header with navigation -->
+    <header class="site-header unified-header">
+        <div class="container header-container">
+            <!-- Site logo and branding -->
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+            </div>
+            
+            <!-- Main navigation menu -->
+            <nav class="main-nav">
+                <!-- Mobile menu toggle button -->
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span class="hamburger-icon"></span>
+                </button>
+                
+                <!-- Navigation links -->
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                    <!-- Dropdown menu for community section -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Community <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="discussions.html" class="dropdown-item">Discussions</a></li>
+                            <li><a href="reviews.html" class="dropdown-item">Reviews</a></li>
+                            <li><a href="polls.html" class="dropdown-item active">Polls</a></li>
+                            <li><a href="events.html" class="dropdown-item">Events</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="watchlist.html">Watchlist</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Header action buttons (search, audio, theme, user) -->
+            <div class="header-actions">
+                <!-- Search container with input field and button -->
+                <div class="search-container">
+                    <input type="text" placeholder="Search..." aria-label="Search">
+                    <button type="button" aria-label="Submit search"><i class="fas fa-search"></i></button>
+                    <div class="search-results custom-scrollbar"></div>
+                </div>
+                
+                <!-- Audio toggle button for background music -->
+                <button class="audio-btn" id="audio-toggle" aria-label="Play background music">
+                    <i class="fas fa-volume-mute"></i>
+                </button>
+                
+                <!-- Theme toggle button for switching between light/dark mode -->
+                <button class="theme-toggle tooltip" data-tooltip="Switch theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+                <!-- User menu dropdown for account actions -->
+                <div class="user-menu dropdown">
+                    <button class="user-menu-toggle" aria-label="User menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="user-dropdown dropdown-menu">
+                        <a href="signin.html" class="dropdown-item"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                        <a href="signup.html" class="dropdown-item"><i class="fas fa-user-plus"></i> Sign Up</a>
+                    </div>
+                </div>
+                
+                <!-- Quiz trigger button for entertainment quizzes -->
+                <button class="quiz-trigger btn-interactive" data-quiz-type="entertainment" data-tooltip="Take a quiz!">
+                    <i class="fas fa-question-circle"></i> Quiz
+                </button>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <section class="polls">
-            <h2>Current Polls</h2>
-            <article>
-                <h3>Best Anime of the Season</h3>
-                <form>
-                    <input type="radio" name="anime" value="anime1"> Anime 1<br>
-                    <input type="radio" name="anime" value="anime2"> Anime 2<br>
-                    <input type="radio" name="anime" value="anime3"> Anime 3<br>
-                    <button type="submit">Vote</button>
+    <!-- Main content section with id for skip-link target -->
+    <main id="main">
+        <!-- Hero section for polls page -->
+        <section class="hero polls-hero">
+            <div class="container">
+                <h1>Polls & Contests</h1>
+                <p class="subtitle">Share your opinions and participate in exciting contests</p>
+            </div>
+        </section>
+        
+        <div class="container">
+            <!-- Current polls section with multiple poll options -->
+            <section class="current-polls">
+                <h2>Current Polls <i class="fas fa-chart-bar"></i></h2>
+                <p>Vote in our community polls and see what others think!</p>
+                
+                <!-- Grid container for multiple polls -->
+                <div class="polls-container">
+                    <!-- Poll card 1: Anime poll -->
+                    <div class="poll-card" id="anime-poll">
+                        <h3 class="poll-title">Best Anime of the Season</h3>
+                        <form class="poll-form">
+                            <!-- Poll options with custom radio buttons -->
+                            <div class="poll-options">
+                                <label class="poll-option">
+                                    <input type="radio" name="anime" value="anime1">
+                                    <span class="radio-indicator"></span>
+                                    <span>Attack on Titan: Final Season</span>
+                                </label>
+                                <label class="poll-option">
+                                    <input type="radio" name="anime" value="anime2">
+                                    <span class="radio-indicator"></span>
+                                    <span>My Hero Academia</span>
+                                </label>
+                                <label class="poll-option">
+                                    <input type="radio" name="anime" value="anime3">
+                                    <span class="radio-indicator"></span>
+                                    <span>Jujutsu Kaisen</span>
+                                </label>
+                                <label class="poll-option">
+                                    <input type="radio" name="anime" value="anime4">
+                                    <span class="radio-indicator"></span>
+                                    <span>Demon Slayer</span>
+                                </label>
+                                <label class="poll-option">
+                                    <input type="radio" name="anime" value="anime5">
+                                    <span class="radio-indicator"></span>
+                                    <span>Other (specify in comments)</span>
+                                </label>
+                            </div>
+                            
+                            <!-- Vote submission button -->
+                            <button type="submit" class="vote-btn">Vote Now</button>
+                            
+                            <!-- Results display (hidden until voting) -->
+                            <div class="poll-results">
+                                <h4>Results</h4>
+                                
+                                <!-- Progress bars showing vote distribution -->
+                                <div class="progress-container">
+                                    <div class="progress-label">
+                                        <span>Attack on Titan: Final Season</span>
+                                        <span>45%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 45%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="progress-container">
+                                    <div class="progress-label">
+                                        <span>My Hero Academia</span>
+                                        <span>20%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 20%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="progress-container">
+                                    <div class="progress-label">
+                                        <span>Jujutsu Kaisen</span>
+                                        <span>25%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 25%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="progress-container">
+                                    <div class="progress-label">
+                                        <span>Demon Slayer</span>
+                                        <span>8%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 8%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="progress-container">
+                                    <div class="progress-label">
+                                        <span>Other</span>
+                                        <span>2%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 2%"></div>
+                                    </div>
+                                </div>
+                                
+                                <p class="total-votes">Total votes: 1,246</p>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Poll card 2: Movie poll -->
+                    <div class="poll-card" id="movie-poll">
+                        <h3 class="poll-title">Most Anticipated Movie of 2025</h3>
+                        <form class="poll-form">
+                            <!-- Poll options with custom radio buttons -->
+                            <div class="poll-options">
+                                <label class="poll-option">
+                                    <input type="radio" name="movie" value="movie1">
+                                    <span class="radio-indicator"></span>
+                                    <span>Avengers: Secret Wars</span>
+                                </label>
+                                <label class="poll-option">
+                                    <input type="radio" name="movie" value="movie2">
+                                    <span class="radio-indicator"></span>
+                                    <span>Star Wars: New Republic</span>
+                                </label>
+                                <label class="poll-option">
+                                    <input type="radio" name="movie" value="movie3">
+                                    <span class="radio-indicator"></span>
+                                    <span>Dune: Messiah</span>
+                                </label>
+                                <label class="poll-option">
+                                    <input type="radio" name="movie" value="movie4">
+                                    <span class="radio-indicator"></span>
+                                    <span>Matrix: Resurrection 2</span>
+                                </label>
+                            </div>
+                            
+                            <!-- Vote submission button -->
+                            <button type="submit" class="vote-btn">Vote Now</button>
+                            
+                            <!-- Results display (hidden until voting) -->
+                            <div class="poll-results">
+                                <h4>Results</h4>
+                                
+                                <!-- Progress bars showing vote distribution -->
+                                <div class="progress-container">
+                                    <div class="progress-label">
+                                        <span>Avengers: Secret Wars</span>
+                                        <span>37%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 37%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="progress-container">
+                                    <div class="progress-label">
+                                        <span>Star Wars: New Republic</span>
+                                        <span>24%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 24%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="progress-container">
+                                    <div class="progress-label">
+                                        <span>Dune: Messiah</span>
+                                        <span>28%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 28%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="progress-container">
+                                    <div class="progress-label">
+                                        <span>Matrix: Resurrection 2</span>
+                                        <span>11%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 11%"></div>
+                                    </div>
+                                </div>
+                                
+                                <p class="total-votes">Total votes: 3,782</p>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Poll card 3: Game poll -->
+                    <div class="poll-card" id="game-poll">
+                        <h3 class="poll-title">Best Game Platform</h3>
+                        <form class="poll-form">
+                            <!-- Poll options with custom radio buttons -->
+                            <div class="poll-options">
+                                <label class="poll-option">
+                                    <input type="radio" name="platform" value="ps5">
+                                    <span class="radio-indicator"></span>
+                                    <span>PlayStation 5</span>
+                                </label>
+                                <label class="poll-option">
+                                    <input type="radio" name="platform" value="xbox">
+                                    <span class="radio-indicator"></span>
+                                    <span>Xbox Series X</span>
+                                </label>
+                                <label class="poll-option">
+                                    <input type="radio" name="platform" value="pc">
+                                    <span class="radio-indicator"></span>
+                                    <span>PC</span>
+                                </label>
+                                <label class="poll-option">
+                                    <input type="radio" name="platform" value="switch">
+                                    <span class="radio-indicator"></span>
+                                    <span>Nintendo Switch</span>
+                                </label>
+                                <label class="poll-option">
+                                    <input type="radio" name="platform" value="mobile">
+                                    <span class="radio-indicator"></span>
+                                    <span>Mobile Gaming</span>
+                                </label>
+                            </div>
+                            
+                            <!-- Vote submission button -->
+                            <button type="submit" class="vote-btn">Vote Now</button>
+                            
+                            <!-- Results display (hidden until voting) -->
+                            <div class="poll-results">
+                                <h4>Results</h4>
+                                
+                                <!-- Progress bars showing vote distribution -->
+                                <div class="progress-container">
+                                    <div class="progress-label">
+                                        <span>PlayStation 5</span>
+                                        <span>30%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 30%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="progress-container">
+                                    <div class="progress-label">
+                                        <span>Xbox Series X</span>
+                                        <span>22%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 22%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="progress-container">
+                                    <div class="progress-label">
+                                        <span>PC</span>
+                                        <span>35%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 35%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="progress-container">
+                                    <div class="progress-label">
+                                        <span>Nintendo Switch</span>
+                                        <span>10%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 10%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="progress-container">
+                                    <div class="progress-label">
+                                        <span>Mobile Gaming</span>
+                                        <span>3%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 3%"></div>
+                                    </div>
+                                </div>
+                                
+                                <p class="total-votes">Total votes: 5,127</p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Contests section with featured contests -->
+            <section class="contests">
+                <h2>Ongoing Contests <i class="fas fa-trophy"></i></h2>
+                <p>Participate and win exciting prizes!</p>
+                
+                <div class="contest-cards">
+                    <!-- Contest card 1 -->
+                    <div class="contest-card">
+                        <img src="../images/fan-art-contest.jpg" alt="Fan Art Contest" class="contest-img">
+                        <div class="contest-content">
+                            <div class="contest-meta">
+                                <span>Ends: June 15, 2025</span>
+                                <span>Art & Design</span>
+                            </div>
+                            <h3 class="contest-title">Fan Art Contest: Fantasy Worlds</h3>
+                            <p class="contest-description">Create artwork featuring your favorite fantasy world from any movie, anime, game, or series. Show your creativity and win amazing prizes!</p>
+                            <div class="prize-details">
+                                <i class="fas fa-medal prize-icon"></i>
+                                <span>Grand Prize: $500 + Digital Art Tablet</span>
+                            </div>
+                            <a href="#" class="enter-btn">Enter Contest <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Contest card 2 -->
+                    <div class="contest-card">
+                        <img src="../images/cosplay-contest.jpg" alt="Cosplay Contest" class="contest-img">
+                        <div class="contest-content">
+                            <div class="contest-meta">
+                                <span>Ends: July 10, 2025</span>
+                                <span>Cosplay</span>
+                            </div>
+                            <h3 class="contest-title">Cosplay Competition: Favorite Character</h3>
+                            <p class="contest-description">Showcase your cosplay skills by dressing up as your favorite character from any entertainment medium. Submit photos and videos of your costume!</p>
+                            <div class="prize-details">
+                                <i class="fas fa-medal prize-icon"></i>
+                                <span>Grand Prize: VIP Convention Tickets + $300</span>
+                            </div>
+                            <a href="#" class="enter-btn">Enter Contest <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Contest card 3 -->
+                    <div class="contest-card">
+                        <img src="../images/short-film-contest.jpg" alt="Short Film Contest" class="contest-img">
+                        <div class="contest-content">
+                            <div class="contest-meta">
+                                <span>Ends: August 5, 2025</span>
+                                <span>Video</span>
+                            </div>
+                            <h3 class="contest-title">Short Film Contest: New Worlds</h3>
+                            <p class="contest-description">Create a 2-5 minute short film set in an original sci-fi or fantasy world. Show your filmmaking and storytelling skills!</p>
+                            <div class="prize-details">
+                                <i class="fas fa-medal prize-icon"></i>
+                                <span>Grand Prize: Professional Camera Kit + Online Festival Showcase</span>
+                            </div>
+                            <a href="#" class="enter-btn">Enter Contest <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Past polls results archive -->
+            <section class="past-polls">
+                <h2>Past Poll Results <i class="fas fa-history"></i></h2>
+                <p>Check out the results from our previous community polls</p>
+                
+                <div class="archive-list">
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chart-pie"></i> Best Anime Studio of 2024 <span class="date">April 2025</span></a></li>
+                        <li><a href="#"><i class="fas fa-chart-pie"></i> Most Emotional Series Finale <span class="date">March 2025</span></a></li>
+                        <li><a href="#"><i class="fas fa-chart-pie"></i> Characters Most Deserving of Their Own Show <span class="date">February 2025</span></a></li>
+                        <li><a href="#"><i class="fas fa-chart-pie"></i> Best Manga of 2024 <span class="date">January 2025</span></a></li>
+                        <li><a href="#"><i class="fas fa-chart-pie"></i> Most Anticipated Game Sequel <span class="date">December 2024</span></a></li>
+                    </ul>
+                </div>
+                
+                <a href="#" class="btn-secondary">View All Past Polls <i class="fas fa-arrow-right"></i></a>
+            </section>
+            
+            <!-- Poll suggestion section -->
+            <section class="suggest-poll">
+                <h2>Suggest a Poll</h2>
+                <p>Have an idea for a poll? Let us know what you'd like the community to vote on!</p>
+                
+                <form class="suggestion-form">
+                    <div class="form-group">
+                        <label for="poll-topic">Poll Topic</label>
+                        <input type="text" id="poll-topic" placeholder="Suggest a poll topic" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="poll-options">Suggested Options</label>
+                        <textarea id="poll-options" placeholder="List some suggested options (one per line)" rows="4" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="poll-category">Category</label>
+                        <select id="poll-category" required>
+                            <option value="">-- Select a category --</option>
+                            <option value="movies">Movies</option>
+                            <option value="anime">Anime</option>
+                            <option value="manga">Manga</option>
+                            <option value="series">TV Series</option>
+                            <option value="games">Games</option>
+                            <option value="general">General Entertainment</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Submit Suggestion</button>
                 </form>
-            </article>
-        </section>
-
-        <section class="contests">
-            <h2>Ongoing Contests</h2>
-            <p>Participate and win exciting prizes!</p>
-            <ul>
-                <li>Fan Art Contest - Theme: Fantasy World</li>
-                <li>Cosplay Competition - Favorite Character</li>
-            </ul>
-        </section>
+            </section>
+        </div>
     </main>
 
+    <!-- Site footer with links and copyright information -->
     <footer>
-        <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+        <div class="footer-container">
+            <!-- Footer branding section -->
+            <div class="footer-section">
+                <h3>Entertainment Hub</h3>
+                <p>Your ultimate destination for entertainment reviews and discussions.</p>
+            </div>
+            
+            <!-- Quick links navigation -->
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            
+            <!-- Social media links section -->
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Copyright information -->
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+        </div>
     </footer>
 
-    <script src="script.js"></script>
-    <a href="#" class="back-to-top" id="back-to-top-btn">↑</a>
+    <!-- Back to top button for easy navigation -->
+    <a href="#" class="back-to-top" id="back-to-top-btn" aria-label="Back to top">↑</a>
+
+    <!-- JavaScript imports -->
+    <!-- Common.js handles shared functionality like dark mode toggle, audio player, and navigation -->
+    <script src="../js/common.js"></script>
+    
+    <!-- Page-specific JavaScript -->
+    <script>
+        // Wait for DOM content to be fully loaded before executing JS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize the polls functionality
+            initPolls();
+            
+            // Simulate loading completion by hiding the page loader
+            setTimeout(function() {
+                document.getElementById('pageLoader').style.display = 'none';
+            }, 500);
+            
+            /**
+             * Initialize the polls functionality
+             * Handles vote submission and result display
+             */
+            function initPolls() {
+                // Get all poll forms
+                const pollForms = document.querySelectorAll('.poll-form');
+                
+                // Add event listeners to each poll form
+                pollForms.forEach(form => {
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault(); // Prevent form submission
+                        
+                        // Check if an option is selected
+                        const selectedOption = form.querySelector('input[type="radio"]:checked');
+                        if (!selectedOption) {
+                            alert('Please select an option to vote!');
+                            return;
+                        }
+                        
+                        // Show vote results section
+                        const pollCard = this.closest('.poll-card');
+                        pollCard.classList.add('show-results');
+                        
+                        // Disable form inputs after voting
+                        const inputs = form.querySelectorAll('input');
+                        inputs.forEach(input => {
+                            input.disabled = true;
+                        });
+                        
+                        // Change button text to "Voted"
+                        const button = form.querySelector('.vote-btn');
+                        button.textContent = 'Voted!';
+                        button.disabled = true;
+                        
+                        // In a real application, this would send the vote data to a server
+                        console.log('Vote submitted: ', selectedOption.value);
+                    });
+                });
+            }
+            
+            // Contest entry click handler
+            const enterButtons = document.querySelectorAll('.enter-btn');
+            enterButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // This would open a contest entry form or page
+                    // For now, just show an alert
+                    const contestName = this.closest('.contest-card').querySelector('.contest-title').textContent;
+                    alert(`You are now entering: ${contestName}. In a complete application, this would take you to the contest entry form.`);
+                });
+            });
+            
+            // Poll suggestion form handler
+            const suggestionForm = document.querySelector('.suggestion-form');
+            if (suggestionForm) {
+                suggestionForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const topic = document.getElementById('poll-topic').value;
+                    const category = document.getElementById('poll-category').value;
+                    
+                    // In a real application, this would send the suggestion to a server
+                    alert(`Thank you for your poll suggestion: "${topic}" in the ${category} category. We'll consider it for future polls!`);
+                    
+                    // Reset form
+                    this.reset();
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

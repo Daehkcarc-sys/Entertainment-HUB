@@ -5,10 +5,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Games | Entertainment Hub</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Master Stylesheet - includes all CSS files -->
+    <link rel="stylesheet" href="../css/master.css">
+    <link rel="stylesheet" href="../css/images.css">
+    <link rel="stylesheet" href="../css/audio-player.css">
+    <link rel="stylesheet" href="../css/quiz.css">
     <link rel="stylesheet" href="../css/games.css">
     <link rel="stylesheet" href="../css/carousel.css">
+    
+    <!-- New interactive CSS files -->
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    <link rel="stylesheet" href="../css/notifications.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Discover, review, and track video games across all platforms. Join our gaming community at Entertainment Hub.">
+    <meta name="keywords" content="games, gaming, video games, PC games, console games, game reviews">
+    <meta name="author" content="Entertainment Hub">
+    
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#9370DB">
+    
+    <!-- Audio Player -->
+    <audio id="background-music" loop preload="none">
+        <source src="../Morning-Routine-Lofi-Study-Music(chosic.com).mp3" type="audio/mpeg">
+    </audio>
     <style>
         /* Add some styles for the rating link */
         .action-button.rating-btn,
@@ -21,243 +54,455 @@
             transform: scale(1.1);
             color: #FFD700;
         }
+        
+        /* Featured video section */
+        .featured-video-section {
+            background-color: var(--bg-secondary, #1a1a1a);
+            padding: 2rem 0;
+            margin: 2rem 0;
+        }
+        
+        .featured-video-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .featured-video-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .featured-video-header h2 {
+            color: var(--text-primary, #ffffff);
+            font-size: 1.8rem;
+            position: relative;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        .video-wrapper video {
+            width: 100%;
+            display: block;
+            border-radius: 12px;
+        }
+        
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .video-wrapper:hover .video-controls {
+            opacity: 1;
+        }
+        
+        .video-controls .control-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            margin: 0 10px;
+        }
+        
+        .video-controls .control-button:hover {
+            transform: scale(1.2);
+        }
+        
+        .video-info {
+            margin-top: 1.5rem;
+        }
+        
+        .video-title {
+            font-size: 1.4rem;
+            color: var(--text-primary, #ffffff);
+            margin-bottom: 0.5rem;
+        }
+        
+        .video-description {
+            color: var(--text-secondary, #b0b0b0);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .video-meta {
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+            color: var(--text-secondary, #b0b0b0);
+            font-size: 0.9rem;
+        }
+        
+        .video-meta span {
+            display: flex;
+            align-items: center;
+            margin-right: 1.5rem;
+        }
+        
+        .video-meta i {
+            margin-right: 0.5rem;
+        }
+        
+        .video-error {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .video-error i {
+            font-size: 2.5rem;
+            color: #ff4757;
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
 
 <body class="games-page">
-    <header>
-        <div class="header-container">
+    <!-- Loading spinner element -->
+    <div class="loader-container" id="pageLoader">
+        <div class="loader"></div>
+    </div>
+    
+    <a class="skip-link" href="#main">Skip to content</a>
+    
+    <header class="site-header unified-header">
+        <div class="container header-container">
             <div class="logo">
                 <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
             </div>
-            <nav>
-                <ul>
+            <nav class="main-nav">
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span class="hamburger-icon"></span>
+                </button>
+                <ul class="nav-list">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="movies.html">Movies</a></li>
                     <li><a href="anime.html">Anime</a></li>
                     <li><a href="manga.html">Manga</a></li>
                     <li><a href="series.html">Series</a></li>
                     <li><a href="games.html" class="active">Games</a></li>
-                    <li><a href="community.html">Community</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Community <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="discussions.html" class="dropdown-item">Discussions</a></li>
+                            <li><a href="reviews.html" class="dropdown-item">Reviews</a></li>
+                            <li><a href="polls.html" class="dropdown-item">Polls</a></li>
+                            <li><a href="events.html" class="dropdown-item">Events</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="watchlist.html">Watchlist</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
-                <a href="watchlist.html" class="action-button"><i class="fas fa-bookmark"></i> Watchlist</a>
-                <a href="leaderboard.html" class="action-button"><i class="fas fa-trophy"></i> Leaderboard</a>
-                <a href="signin.html" class="action-button"><i class="fas fa-user"></i> Sign In</a>
                 <div class="search-container">
-                    <input type="text" placeholder="Search...">
-                    <button type="submit"><i class="fas fa-search"></i></button>
+                    <input type="text" placeholder="Search..." aria-label="Search">
+                    <button type="button" aria-label="Submit search"><i class="fas fa-search"></i></button>
+                    <div class="search-results custom-scrollbar"></div>
                 </div>
+                <button class="audio-btn" id="audio-toggle" aria-label="Play background music">
+                    <i class="fas fa-volume-mute"></i>
+                </button>
+                <button class="theme-toggle tooltip" data-tooltip="Switch theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-menu dropdown">
+                    <button class="user-menu-toggle" aria-label="User menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="user-dropdown dropdown-menu">
+                        <a href="signin.html" class="dropdown-item"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                        <a href="signup.html" class="dropdown-item"><i class="fas fa-user-plus"></i> Sign Up</a>
+                    </div>
+                </div>
+                <button class="quiz-trigger btn-interactive" data-quiz-type="games" data-tooltip="Take a quiz!">
+                    <i class="fas fa-question-circle"></i> Quiz
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- Hero Banner Carousel Section -->
-    <section class="games-hero">
-        <div class="carousel-container banner carousel-hero overlay" data-autoplay="true" data-loop="true"
-            data-slides-per-view="1" data-autoplay-delay="8000">
-            <div class="carousel-wrapper">
-                <div class="carousel-item">
-                    <div class="carousel-image">
-                        <img src="../images/EldenRing.jpg" alt="Elden Ring" loading="eager">
-                    </div>
-                    <div class="carousel-caption">
-                        <span class="carousel-badge">Game of the Year</span>
-                        <h2>Elden Ring</h2>
-                        <p>A vast and seamless world awaits in this action RPG from FromSoftware and George R. R. Martin.
-                        </p>
-                        <div class="carousel-actions">
-                            <a href="#" class="btn btn-primary">View Details</a>
-                            <button class="btn btn-outline add-wishlist" data-id="elden-ring">Add to Wishlist</button>
+    <main id="main">
+        <!-- Hero Banner Carousel Section -->
+        <section class="games-hero">
+            <div class="carousel-container banner carousel-hero overlay" data-autoplay="true" data-loop="true"
+                data-slides-per-view="1" data-autoplay-delay="8000">
+                <div class="carousel-wrapper">
+                    <div class="carousel-item">
+                        <div class="carousel-image">
+                            <img src="../images/EldenRing.jpg" alt="Elden Ring" loading="eager" class="standardized-image">
                         </div>
-                        <div class="carousel-meta">
-                            <span><i class="fas fa-star"></i> 9.6/10</span>
-                            <span><i class="fas fa-gamepad"></i> FromSoftware</span>
-                            <span><i class="fab fa-steam"></i> PC, PS5, Xbox</span>
+                        <div class="carousel-caption">
+                            <span class="carousel-badge">Game of the Year</span>
+                            <h2>Elden Ring</h2>
+                            <p>A vast and seamless world awaits in this action RPG from FromSoftware and George R. R. Martin.
+                            </p>
+                            <div class="carousel-actions">
+                                <a href="#" class="btn btn-primary">View Details</a>
+                                <button class="btn btn-outline add-wishlist" data-id="elden-ring">Add to Wishlist</button>
+                            </div>
+                            <div class="carousel-meta">
+                                <span><i class="fas fa-star"></i> 9.6/10</span>
+                                <span><i class="fas fa-gamepad"></i> FromSoftware</span>
+                                <span><i class="fab fa-steam"></i> PC, PS5, Xbox</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-image">
+                            <img src="../images/GOW.jpg" alt="God of War Ragnarök" loading="eager" class="standardized-image">
+                        </div>
+                        <div class="carousel-caption">
+                            <span class="carousel-badge">Featured</span>
+                            <h2>God of War Ragnarök</h2>
+                            <p>Join Kratos and Atreus on their epic journey through the nine realms as they face the cataclysmic
+                                event known as Ragnarök.</p>
+                            <div class="carousel-actions">
+                                <a href="#" class="btn btn-primary">Watch Trailer</a>
+                                <button class="btn btn-outline add-wishlist" data-id="gow-ragnarok">Add to Wishlist</button>
+                            </div>
+                            <div class="carousel-meta">
+                                <span><i class="fas fa-star"></i> 9.5/10</span>
+                                <span><i class="fas fa-gamepad"></i> Santa Monica Studio</span>
+                                <span><i class="fab fa-playstation"></i> PlayStation</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-image">
+                            <img src="../images/minecraft.jpg" alt="Minecraft" loading="eager" class="standardized-image">
+                        </div>
+                        <div class="carousel-caption">
+                            <span class="carousel-badge">Most Popular</span>
+                            <h2>Minecraft</h2>
+                            <p>Explore, build, and survive in an infinitely generated world of blocks with limitless
+                                possibilities.</p>
+                            <div class="carousel-actions">
+                                <a href="#" class="btn btn-primary">View Details</a>
+                                <button class="btn btn-outline add-wishlist" data-id="minecraft">Add to Wishlist</button>
+                            </div>
+                            <div class="carousel-meta">
+                                <span><i class="fas fa-star"></i> 9.4/10</span>
+                                <span><i class="fas fa-gamepad"></i> Mojang Studios</span>
+                                <span><i class="fas fa-globe"></i> All Platforms</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div class="carousel-image">
-                        <img src="../images/GOW.jpg" alt="God of War Ragnarök" loading="eager">
+                <div class="carousel-indicators">
+                    <button class="carousel-indicator active" data-slide="0" aria-label="Go to slide 1"></button>
+                    <button class="carousel-indicator" data-slide="1" aria-label="Go to slide 2"></button>
+                    <button class="carousel-indicator" data-slide="2" aria-label="Go to slide 3"></button>
+                </div>
+                <button class="carousel-control carousel-control-prev" aria-label="Previous slide">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-control carousel-control-next" aria-label="Next slide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Featured Video Section -->
+        <section class="featured-video-section">
+            <div class="featured-video-container">
+                <div class="featured-video-header">
+                    <h2>Featured Gameplay</h2>
+                    <div class="video-actions">
+                        <a href="#" class="btn btn-outline-primary">More Videos</a>
                     </div>
-                    <div class="carousel-caption">
-                        <span class="carousel-badge">Featured</span>
-                        <h2>God of War Ragnarök</h2>
-                        <p>Join Kratos and Atreus on their epic journey through the nine realms as they face the cataclysmic
-                            event known as Ragnarök.</p>
-                        <div class="carousel-actions">
-                            <a href="#" class="btn btn-primary">Watch Trailer</a>
-                            <button class="btn btn-outline add-wishlist" data-id="gow-ragnarok">Add to Wishlist</button>
+                </div>
+                
+                <div class="video-wrapper">
+                    <video id="featured-gameplay" poster="../images/video-thumbnail.jpg" controls>
+                        <source src="../7914786-hd_1920_1080_30fps.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    
+                    <div class="video-controls">
+                        <div class="left-controls">
+                            <button class="control-button" id="fullscreen-video" aria-label="Fullscreen">
+                                <i class="fas fa-expand"></i>
+                            </button>
                         </div>
-                        <div class="carousel-meta">
-                            <span><i class="fas fa-star"></i> 9.5/10</span>
-                            <span><i class="fas fa-gamepad"></i> Santa Monica Studio</span>
-                            <span><i class="fab fa-playstation"></i> PlayStation</span>
+                        <div class="right-controls">
+                            <button class="control-button" id="picture-in-picture" aria-label="Picture in Picture">
+                                <i class="fas fa-external-link-alt"></i>
+                            </button>
+                            <button class="control-button" id="share-video" aria-label="Share">
+                                <i class="fas fa-share"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div class="carousel-image">
-                        <img src="../images/minecraft.jpg" alt="Minecraft" loading="eager">
-                    </div>
-                    <div class="carousel-caption">
-                        <span class="carousel-badge">Most Popular</span>
-                        <h2>Minecraft</h2>
-                        <p>Explore, build, and survive in an infinitely generated world of blocks with limitless
-                            possibilities.</p>
-                        <div class="carousel-actions">
-                            <a href="#" class="btn btn-primary">View Details</a>
-                            <button class="btn btn-outline add-wishlist" data-id="minecraft">Add to Wishlist</button>
-                        </div>
-                        <div class="carousel-meta">
-                            <span><i class="fas fa-star"></i> 9.4/10</span>
-                            <span><i class="fas fa-gamepad"></i> Mojang Studios</span>
-                            <span><i class="fas fa-globe"></i> All Platforms</span>
-                        </div>
+                
+                <div class="video-info">
+                    <h3 class="video-title">Elden Ring: Boss Battle Walkthrough</h3>
+                    <p class="video-description">
+                        Watch this epic boss battle in Elden Ring as our player takes on one of the toughest challenges
+                        in the game. This walkthrough showcases advanced combat techniques and strategy.
+                    </p>
+                    <div class="video-meta">
+                        <span><i class="fas fa-eye"></i> 45.2K views</span>
+                        <span><i class="fas fa-thumbs-up"></i> 8.7K likes</span>
+                        <span><i class="fas fa-calendar"></i> May 5, 2025</span>
                     </div>
                 </div>
             </div>
-            <div class="carousel-indicators">
-                <button class="carousel-indicator active" data-slide="0" aria-label="Go to slide 1"></button>
-                <button class="carousel-indicator" data-slide="1" aria-label="Go to slide 2"></button>
-                <button class="carousel-indicator" data-slide="2" aria-label="Go to slide 3"></button>
+        </section>
+
+        <!-- Quick Category Navigation -->
+        <section class="category-nav">
+            <div class="container">
+                <div class="nav-cards">
+                    <a href="#top-rated" class="nav-card">
+                        <i class="fas fa-award"></i>
+                        <span>Top Rated</span>
+                    </a>
+                    <a href="#genres" class="nav-card">
+                        <i class="fas fa-tags"></i>
+                        <span>Genres</span>
+                    </a>
+                    <a href="watchlist.html?type=games" class="nav-card">
+                        <i class="fas fa-bookmark"></i>
+                        <span>My Wishlist</span>
+                    </a>
+                    <a href="#upcoming" class="nav-card">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Upcoming</span>
+                    </a>
+                </div>
             </div>
-            <button class="carousel-control carousel-control-prev" aria-label="Previous slide">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="carousel-control carousel-control-next" aria-label="Next slide">
-                <i class="fas fa-chevron-right"></i>
-            </button>
+        </section>
+
+        <div class="explore-section">
+            <div class="explore-header">
+                <h2>Explore Games by Genre</h2>
+                <div class="genre-grid">
+                    <a href="#" class="genre-card rpg">
+                        <i class="fas fa-sword"></i>
+                        <span>RPG</span>
+                        <span class="game-count">1.2K Games</span>
+                    </a>
+                    <a href="#" class="genre-card action">
+                        <i class="fas fa-gun"></i>
+                        <span>Action</span>
+                        <span class="game-count">2.3K Games</span>
+                    </a>
+                    <a href="#" class="genre-card strategy">
+                        <i class="fas fa-chess"></i>
+                        <span>Strategy</span>
+                        <span class="game-count">856 Games</span>
+                    </a>
+                    <a href="#" class="genre-card sports">
+                        <i class="fas fa-football-ball"></i>
+                        <span>Sports</span>
+                        <span class="game-count">445 Games</span>
+                    </a>
+                    <a href="#" class="genre-card horror">
+                        <i class="fas fa-ghost"></i>
+                        <span>Horror</span>
+                        <span class="game-count">667 Games</span>
+                    </a>
+                    <a href="#" class="genre-card racing">
+                        <i class="fas fa-car-side"></i>
+                        <span>Racing</span>
+                        <span class="game-count">334 Games</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="advanced-search">
+                <div class="search-filters">
+                    <div class="search-input-container">
+                        <input type="text" placeholder="Search games..." class="search-input">
+                        <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+                    </div>
+
+                    <div class="advanced-filters">
+                        <div class="filter-group">
+                            <label for="platform-filter">Platform:</label>
+                            <select id="platform-filter" class="cyber-select">
+                                <option value="all">All Platforms</option>
+                                <option value="pc">PC</option>
+                                <option value="ps5">PlayStation 5</option>
+                                <option value="xbox">Xbox Series X</option>
+                                <option value="switch">Nintendo Switch</option>
+                                <option value="mobile">Mobile</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="release-filter">Release Year:</label>
+                            <select id="release-filter" class="cyber-select">
+                                <option value="all">All Years</option>
+                                <option value="2025">2025</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="older">2021 & Older</option>
+                            </select>
+                        </div>
+
+                        <div class="sort-options">
+                            <label for="sort-select">Sort By:</label>
+                            <select id="sort-select" class="cyber-select">
+                                <option value="popular">Most Popular</option>
+                                <option value="recent">Recently Added</option>
+                                <option value="rating">Highest Rated</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="filter-tags">
+                        <span class="filter-tag active">All</span>
+                        <span class="filter-tag">Single Player</span>
+                        <span class="filter-tag">Multiplayer</span>
+                        <span class="filter-tag">Co-op</span>
+                        <span class="filter-tag">Free to Play</span>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
 
-    <!-- Quick Category Navigation -->
-    <section class="category-nav">
-        <div class="container">
-            <div class="nav-cards">
-                <a href="#top-rated" class="nav-card">
-                    <i class="fas fa-award"></i>
-                    <span>Top Rated</span>
-                </a>
-                <a href="#genres" class="nav-card">
-                    <i class="fas fa-tags"></i>
-                    <span>Genres</span>
-                </a>
-                <a href="watchlist.html?type=games" class="nav-card">
-                    <i class="fas fa-bookmark"></i>
-                    <span>My Wishlist</span>
-                </a>
-                <a href="#upcoming" class="nav-card">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>Upcoming</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <div class="explore-section">
-        <div class="explore-header">
-            <h2>Explore Games by Genre</h2>
-            <div class="genre-grid">
-                <a href="#" class="genre-card rpg">
-                    <i class="fas fa-sword"></i>
-                    <span>RPG</span>
-                    <span class="game-count">1.2K Games</span>
-                </a>
-                <a href="#" class="genre-card action">
-                    <i class="fas fa-gun"></i>
-                    <span>Action</span>
-                    <span class="game-count">2.3K Games</span>
-                </a>
-                <a href="#" class="genre-card strategy">
-                    <i class="fas fa-chess"></i>
-                    <span>Strategy</span>
-                    <span class="game-count">856 Games</span>
-                </a>
-                <a href="#" class="genre-card sports">
-                    <i class="fas fa-football-ball"></i>
-                    <span>Sports</span>
-                    <span class="game-count">445 Games</span>
-                </a>
-                <a href="#" class="genre-card horror">
-                    <i class="fas fa-ghost"></i>
-                    <span>Horror</span>
-                    <span class="game-count">667 Games</span>
-                </a>
-                <a href="#" class="genre-card racing">
-                    <i class="fas fa-car-side"></i>
-                    <span>Racing</span>
-                    <span class="game-count">334 Games</span>
-                </a>
-            </div>
+        <div class="quick-filters">
+            <button class="filter-pill active">Trending</button>
+            <button class="filter-pill">New Releases</button>
+            <button class="filter-pill">Coming Soon</button>
+            <button class="filter-pill">Specials</button>
+            <button class="filter-pill">Free Games</button>
         </div>
 
-        <div class="advanced-search">
-            <div class="search-filters">
-                <div class="search-input-container">
-                    <input type="text" placeholder="Search games..." class="search-input">
-                    <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
-                </div>
-
-                <div class="advanced-filters">
-                    <div class="filter-group">
-                        <label for="platform-filter">Platform:</label>
-                        <select id="platform-filter" class="cyber-select">
-                            <option value="all">All Platforms</option>
-                            <option value="pc">PC</option>
-                            <option value="ps5">PlayStation 5</option>
-                            <option value="xbox">Xbox Series X</option>
-                            <option value="switch">Nintendo Switch</option>
-                            <option value="mobile">Mobile</option>
-                        </select>
-                    </div>
-
-                    <div class="filter-group">
-                        <label for="release-filter">Release Year:</label>
-                        <select id="release-filter" class="cyber-select">
-                            <option value="all">All Years</option>
-                            <option value="2025">2025</option>
-                            <option value="2024">2024</option>
-                            <option value="2023">2023</option>
-                            <option value="2022">2022</option>
-                            <option value="older">2021 & Older</option>
-                        </select>
-                    </div>
-
-                    <div class="sort-options">
-                        <label for="sort-select">Sort By:</label>
-                        <select id="sort-select" class="cyber-select">
-                            <option value="popular">Most Popular</option>
-                            <option value="recent">Recently Added</option>
-                            <option value="rating">Highest Rated</option>
-                            <option value="price-low">Price: Low to High</option>
-                            <option value="price-high">Price: High to Low</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="filter-tags">
-                    <span class="filter-tag active">All</span>
-                    <span class="filter-tag">Single Player</span>
-                    <span class="filter-tag">Multiplayer</span>
-                    <span class="filter-tag">Co-op</span>
-                    <span class="filter-tag">Free to Play</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="quick-filters">
-        <button class="filter-pill active">Trending</button>
-        <button class="filter-pill">New Releases</button>
-        <button class="filter-pill">Coming Soon</button>
-        <button class="filter-pill">Specials</button>
-        <button class="filter-pill">Free Games</button>
-    </div>
-
-    <main>
         <!-- Game categories with tabs -->
         <section class="game-categories">
             <h2>Browse Games by Category</h2>
@@ -272,7 +517,7 @@
                 <div class="game-grid">
                     <article class="game-card">
                         <div class="game-thumbnail">
-                            <img src="../images/EldenRing.jpg" alt="Elden Ring">
+                            <img src="../images/EldenRing.jpg" alt="Elden Ring" class="standardized-image">
                             <div class="game-platform-icons">
                                 <i class="fas fa-desktop" title="PC"></i>
                                 <i class="fab fa-playstation" title="PlayStation 5"></i>
@@ -296,7 +541,7 @@
 
                     <article class="game-card">
                         <div class="game-thumbnail">
-                            <img src="../images/GOW.jpg" alt="Civilization 6">
+                            <img src="../images/GOW.jpg" alt="Civilization 6" class="standardized-image">
                             <div class="game-platform-icons">
                                 <i class="fas fa-desktop" title="PC"></i>
                                 <i class="fab fa-playstation" title="PlayStation 5"></i>
@@ -321,7 +566,7 @@
 
                     <article class="game-card">
                         <div class="game-thumbnail">
-                            <img src="../images/SpiritedAway.jpg" alt="Phasmophobia">
+                            <img src="../images/SpiritedAway.jpg" alt="Phasmophobia" class="standardized-image">
                             <div class="game-platform-icons">
                                 <i class="fas fa-desktop" title="PC"></i>
                             </div>
@@ -343,7 +588,7 @@
 
                     <article class="game-card">
                         <div class="game-thumbnail">
-                            <img src="../images/Avatar.jpg" alt="Marvel Rivals">
+                            <img src="../images/Avatar.jpg" alt="Marvel Rivals" class="standardized-image">
                             <div class="game-platform-icons">
                                 <i class="fas fa-desktop" title="PC"></i>
                                 <i class="fab fa-playstation" title="PlayStation 5"></i>
@@ -367,7 +612,7 @@
 
                     <article class="game-card">
                         <div class="game-thumbnail">
-                            <img src="../images/Darkknight.jpg" alt="BattleTech: First Succession War">
+                            <img src="../images/Darkknight.jpg" alt="BattleTech: First Succession War" class="standardized-image">
                             <div class="game-platform-icons">
                                 <i class="fas fa-desktop" title="PC"></i>
                             </div>
@@ -402,6 +647,14 @@
             <div id="indie" class="tab-content">
                 <!-- Indie games content would go here -->
                 <p class="placeholder-text">Indie games would be displayed here.</p>
+            </div>
+        </section>
+
+        <!-- Add quiz section -->
+        <section class="game-quiz-section">
+            <h2>Test Your Gaming Knowledge</h2>
+            <div id="game-quiz" class="quiz-container" data-quiz-type="games">
+                <!-- Quiz will be dynamically inserted here by the quiz.js script -->
             </div>
         </section>
 
@@ -447,7 +700,7 @@
                         <h4>Gameplay Trailer</h4>
                         <div class="video-container">
                             <video controls poster="../images/EldenRing.jpg">
-                                <source src="#" type="video/mp4">
+                                <source src="../7914786-hd_1920_1080_30fps.mp4" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
                         </div>
@@ -707,5 +960,58 @@
     <script src="../js/carousel.js"></script>
     <script src="../js/games.js"></script>
     <script src="../js/auth.js"></script>
+    <script src="../js/quiz.js"></script>
+    <script src="../js/audio-player.js"></script>
+    <script src="../js/video-player.js"></script>
+    <script>
+        // Video player enhancements
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('featured-gameplay');
+            const fullscreenBtn = document.getElementById('fullscreen-video');
+            const pipBtn = document.getElementById('picture-in-picture');
+            const shareBtn = document.getElementById('share-video');
+            
+            // Fullscreen functionality
+            fullscreenBtn.addEventListener('click', () => {
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.webkitRequestFullscreen) { /* Safari */
+                    video.webkitRequestFullscreen();
+                } else if (video.msRequestFullscreen) { /* IE11 */
+                    video.msRequestFullscreen();
+                }
+            });
+            
+            // Picture-in-Picture functionality
+            pipBtn.addEventListener('click', () => {
+                if (document.pictureInPictureEnabled && !video.disablePictureInPicture) {
+                    if (document.pictureInPictureElement) {
+                        document.exitPictureInPicture();
+                    } else {
+                        video.requestPictureInPicture()
+                            .catch(error => {
+                                console.error('PiP failed:', error);
+                            });
+                    }
+                } else {
+                    alert('Picture-in-Picture is not supported in your browser.');
+                }
+            });
+            
+            // Share functionality
+            shareBtn.addEventListener('click', () => {
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Awesome Game Footage',
+                        text: 'Check out this amazing gameplay video!',
+                        url: window.location.href
+                    })
+                    .catch(error => console.log('Error sharing:', error));
+                } else {
+                    alert('Share functionality is not supported on this browser. You can copy the page URL instead.');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

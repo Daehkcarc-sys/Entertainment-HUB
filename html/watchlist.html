@@ -5,33 +5,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Watchlist | Entertainment Hub</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Master Stylesheet - includes all CSS files -->
+    <link rel="stylesheet" href="../css/master.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
     <link rel="stylesheet" href="../css/watchlist.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/quiz.css">
+    <link rel="stylesheet" href="../css/audio-player.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Keep track of your entertainment watchlist with Entertainment Hub.">
+    <meta property="og:title" content="Watchlist | Entertainment Hub">
+    <meta property="og:description" content="Track movies, anime, manga, series, and games you want to watch, read, or play.">
+    <meta property="og:url" content="https://entertainment-hub.com/watchlist.html">
+    
+    <!-- Audio Player -->
+    <audio id="background-music" loop preload="none">
+        <source src="../Morning-Routine-Lofi-Study-Music(chosic.com).mp3" type="audio/mpeg">
+    </audio>
 </head>
 
 <body class="watchlist-page">
-    <header>
-        <h1><i class="fas fa-bookmark"></i> Watchlist</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="movies.html">Movies</a></li>
-                <li><a href="anime.html">Anime</a></li>
-                <li><a href="manga.html">Manga</a></li>
-                <li><a href="series.html">Series</a></li>
-                <li><a href="games.html">Games</a></li>
-                <li><a href="leaderboard.html">Leaderboard</a></li>
-                <li><a href="community.html">Community</a></li>
-                <li><a href="discussions.html">Discussions</a></li>
-                <li><a href="watchlist.html" class="active">Watchlist</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="signin.html">Sign In / Sign Up</a></li>
-            </ul>
-        </nav>
+    <!-- Loading spinner element -->
+    <div class="loader-container" id="pageLoader">
+        <div class="loader"></div>
+    </div>
+    
+    <a class="skip-link" href="#main">Skip to content</a>
+    
+    <header class="site-header unified-header">
+        <div class="container header-container">
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+            </div>
+            <nav class="main-nav">
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span class="hamburger-icon"></span>
+                </button>
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Community <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="discussions.html" class="dropdown-item">Discussions</a></li>
+                            <li><a href="reviews.html" class="dropdown-item">Reviews</a></li>
+                            <li><a href="polls.html" class="dropdown-item">Polls</a></li>
+                            <li><a href="events.html" class="dropdown-item">Events</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="watchlist.html" class="active">Watchlist</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="search-container">
+                    <input type="text" placeholder="Search..." aria-label="Search">
+                    <button type="button" aria-label="Submit search"><i class="fas fa-search"></i></button>
+                    <div class="search-results custom-scrollbar"></div>
+                </div>
+                <button class="audio-btn" id="audio-toggle" aria-label="Play background music">
+                    <i class="fas fa-volume-mute"></i>
+                </button>
+                <button class="theme-toggle tooltip" data-tooltip="Switch theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-menu dropdown">
+                    <button class="user-menu-toggle" aria-label="User menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="user-dropdown dropdown-menu">
+                        <a href="signin.html" class="dropdown-item"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                        <a href="signup.html" class="dropdown-item"><i class="fas fa-user-plus"></i> Sign Up</a>
+                    </div>
+                </div>
+                <button class="quiz-trigger btn-interactive" data-quiz-type="entertainment" data-tooltip="Take a quiz!">
+                    <i class="fas fa-question-circle"></i> Quiz
+                </button>
+            </div>
+        </div>
     </header>
 
-    <main>
+    <main id="main">
         <div class="hero-banner">
             <div class="hero-overlay"></div>
             <div class="hero-content">

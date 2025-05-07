@@ -1,1183 +1,522 @@
 /**
- * Entertainment Hub - Main JavaScript
- * This file contains shared functionality across the entire site
- * April 2025
+ * Main JavaScript
+ * 
+ * Core functionality for the Entertainment Hub website
  */
 
+// Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Load common components from common.js
-    if (typeof createUnifiedHeader === 'function') {
-        createUnifiedHeader();
-    }
-    if (typeof createUnifiedFooter === 'function') {
-        createUnifiedFooter();
-    }
-    if (typeof createBreadcrumbs === 'function') {
-        createBreadcrumbs();
-    }
-    if (typeof setupSearchSystem === 'function') {
-        setupSearchSystem();
-    }
-    if (typeof initializeRecommendationLinks === 'function') {
-        initializeRecommendationLinks();
-    }
-
-    // Initialize components
-    initializeDarkMode();
-    initializePageLoader();
-    initializeScrollTopButton();
-    initializeMobileMenu();
+    // Initialize all components
+    initializeThemeToggle();
     initializeCarousels();
-    initializeAnimations();
-    initializeCounters();
+    initializeTabs();
+    initializeDropdowns();
     initializeTooltips();
-    initializePopups();
-    initializeNotifications();
-    initializeForms();
-    initializeTrendingFilters();
-    initializeSmoothScrolling();
-    initializeCardAnimations(); // Added new card animations function
-    initializeAnimeNotifications(); // Initialize anime notifications
+    initializeScrollAnimations();
+    initializeSearch();
+    initializeMobileMenu();
+    initializeBackToTop();
+    initializeAccordions();
     
-    // Set up event listeners for common UI elements
-    setupEventListeners();
-
-    // Animate recommendation cards on page load
-    const recommendationCards = document.querySelectorAll('.recommendation-card');
-    
-    if (recommendationCards.length) {
-        recommendationCards.forEach((card, index) => {
+    // Hide page loader when everything is ready
+    setTimeout(() => {
+        const loader = document.getElementById('pageLoader');
+        if (loader) {
+            loader.classList.add('fade-out');
             setTimeout(() => {
-                card.classList.add('animate-in');
-            }, 100 * index);
-        });
-    }
-    
-    // Add animation for user cards
-    const userCards = document.querySelectorAll('.user-card');
-    
-    if (userCards.length) {
-        userCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.querySelector('.connect-btn').classList.add('pulse-animation');
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.querySelector('.connect-btn').classList.remove('pulse-animation');
-            });
-        });
-    }
-    
-    // Handle connect button clicks
-    const connectButtons = document.querySelectorAll('.connect-btn');
-    if (connectButtons.length) {
-        connectButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const currentText = this.textContent;
-                if (currentText === 'Connect') {
-                    this.textContent = 'Connected';
-                    this.classList.add('connected');
-                    // We could add notification logic here
-                } else {
-                    this.textContent = 'Connect';
-                    this.classList.remove('connected');
-                }
-            });
-        });
-    }
+                loader.style.display = 'none';
+            }, 500);
+        }
+    }, 300);
 });
 
-// Add smooth scrolling for recommendation sections
-const scrollContainers = document.querySelectorAll('.users-scroll, .recommendations-container');
-if (scrollContainers.length) {
-    scrollContainers.forEach(container => {
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-
-        container.addEventListener('mousedown', (e) => {
-            isDown = true;
-            container.classList.add('active');
-            startX = e.pageX - container.offsetLeft;
-            scrollLeft = container.scrollLeft;
-        });
-
-        container.addEventListener('mouseleave', () => {
-            isDown = false;
-            container.classList.remove('active');
-        });
-
-        container.addEventListener('mouseup', () => {
-            isDown = false;
-            container.classList.remove('active');
-        });
-
-        container.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - container.offsetLeft;
-            const walk = (x - startX) * 2; // Scroll speed
-            container.scrollLeft = scrollLeft - walk;
-        });
+/**
+ * Theme Toggle Functionality
+ * Handles switching between light and dark themes
+ */
+function initializeThemeToggle() {
+    const themeToggleBtn = document.querySelector('.theme-toggle');
+    if (!themeToggleBtn) return;
+    
+    // Check for saved theme preference or respect OS preference
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme)) {
+        document.body.setAttribute('data-theme', 'dark');
+    } else {
+        document.body.setAttribute('data-theme', 'light');
+    }
+    
+    // Handle theme toggle click
+    themeToggleBtn.addEventListener('click', () => {
+        const currentTheme = document.body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Add animation effect on theme change
+        document.body.classList.add('theme-transition');
+        setTimeout(() => {
+            document.body.classList.remove('theme-transition');
+        }, 500);
     });
 }
 
-// NEW FUNCTION: Initialize card animations and interactions
-function initializeCardAnimations() {
-    // All types of content cards across the site
-    const contentCards = document.querySelectorAll('.reco-card, .movie-card, .series-card, .anime-card, .game-card, .manga-card, .recommendation-item, .trending-item');
-    
-    if (contentCards.length) {
-        // Add parallax hover effect to cards
-        contentCards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                // Get position of mouse relative to card
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left; // x position within the element
-                const y = e.clientY - rect.top; // y position within the element
-                
-                // Calculate rotation based on mouse position
-                // Divide by small numbers to limit rotation angle
-                const rotateY = (x - rect.width / 2) / 15;
-                const rotateX = (rect.height / 2 - y) / 15;
-                
-                // Apply transform
-                card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-                card.style.transition = 'transform 0.1s ease';
-                
-                // Add reflection effect
-                const image = card.querySelector('img');
-                if (image) {
-                    const shine = x / rect.width * 100;
-                    image.style.filter = `brightness(1.05) contrast(1.05)`;
-                }
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                // Reset transform on mouse leave
-                card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-                card.style.transition = 'transform 0.5s ease';
-                
-                // Remove reflection effect
-                const image = card.querySelector('img');
-                if (image) {
-                    image.style.filter = '';
-                }
-            });
-        });
-    }
-    
-    // Handle horizontal card scrolling for all card containers
-    const cardContainers = document.querySelectorAll('.scrollable-cards, .similar-users, .reco-grid, .recommendations-row');
-    
-    if (cardContainers.length) {
-        cardContainers.forEach(container => {
-            // Add scroll buttons if not already present
-            if (!container.querySelector('.scroll-btn-left') && !container.classList.contains('no-scroll-buttons')) {
-                // Create scroll buttons
-                const leftButton = document.createElement('button');
-                leftButton.className = 'scroll-btn scroll-btn-left';
-                leftButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
-                
-                const rightButton = document.createElement('button');
-                rightButton.className = 'scroll-btn scroll-btn-right';
-                rightButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
-                
-                // Add buttons to container
-                container.appendChild(leftButton);
-                container.appendChild(rightButton);
-                
-                // Get scroll amount based on first child width
-                const firstChild = container.querySelector('.reco-card, .movie-card, .series-card, .user-card, .anime-card, .game-card, .recommendation-item');
-                const scrollAmount = firstChild ? (firstChild.offsetWidth + 20) : 300;
-                
-                // Scroll left
-                leftButton.addEventListener('click', () => {
-                    container.scrollBy({
-                        left: -scrollAmount,
-                        behavior: 'smooth'
-                    });
-                });
-                
-                // Scroll right
-                rightButton.addEventListener('click', () => {
-                    container.scrollBy({
-                        left: scrollAmount,
-                        behavior: 'smooth'
-                    });
-                });
-                
-                // Show/hide buttons based on scroll position
-                container.addEventListener('scroll', () => {
-                    if (container.scrollLeft <= 10) {
-                        leftButton.classList.add('hidden');
-                    } else {
-                        leftButton.classList.remove('hidden');
-                    }
-                    
-                    if (container.scrollLeft >= (container.scrollWidth - container.clientWidth - 10)) {
-                        rightButton.classList.add('hidden');
-                    } else {
-                        rightButton.classList.remove('hidden');
-                    }
-                });
-                
-                // Initial state
-                leftButton.classList.add('hidden');
-            }
-            
-            // Add horizontal wheel scrolling for card containers
-            container.addEventListener('wheel', (e) => {
-                // If user is holding shift key or this is a horizontal scroll device
-                if (e.deltaX !== 0 || e.shiftKey) return;
-                
-                e.preventDefault();
-                container.scrollLeft += e.deltaY;
-            }, { passive: false });
-        });
-    }
-    
-    // Add lazy loading functionality
-    const cardImages = document.querySelectorAll('.reco-image img, .movie-card img, .series-card img, .anime-card img, .game-card img, .manga-card img');
-    
-    if (cardImages.length && 'IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    const src = img.getAttribute('data-src');
-                    
-                    if (src) {
-                        img.src = src;
-                        img.classList.add('loaded');
-                        imageObserver.unobserve(img);
-                    }
-                }
-            });
-        }, {
-            rootMargin: '50px 0px'
-        });
-        
-        cardImages.forEach(img => {
-            // Only observe images with data-src
-            if (img.getAttribute('data-src')) {
-                imageObserver.observe(img);
-            }
-        });
-    }
-}
-
-// NEW FUNCTION: Anime Notification System
 /**
- * Anime Notification System - NEW FEATURE
- * Tracks and notifies users about new anime releases and updates
- */
-function initializeAnimeNotifications() {
-    // Check if user has opted in to notifications
-    const notificationsEnabled = localStorage.getItem('animeNotificationsEnabled') === 'true';
-    
-    // Create toggle switch in anime pages
-    const animeContent = document.querySelector('.anime-content');
-    if (animeContent && !document.querySelector('.anime-notification-toggle')) {
-        const toggleContainer = document.createElement('div');
-        toggleContainer.className = 'notification-toggle-container';
-        toggleContainer.innerHTML = `
-            <label class="notification-toggle">
-                <input type="checkbox" id="anime-notification-toggle" ${notificationsEnabled ? 'checked' : ''}>
-                <span class="notification-toggle-slider"></span>
-            </label>
-            <span>Notify me about new episodes and releases</span>
-        `;
-        
-        animeContent.insertBefore(toggleContainer, animeContent.firstChild);
-        
-        // Add event listener to toggle
-        const toggle = document.getElementById('anime-notification-toggle');
-        toggle.addEventListener('change', function() {
-            localStorage.setItem('animeNotificationsEnabled', this.checked);
-            
-            if (this.checked) {
-                showNotification('You will now receive notifications about new anime releases!', 'success');
-                registerAnimeNotificationTopics();
-            } else {
-                showNotification('Anime notifications have been disabled.', 'info');
-                unregisterAnimeNotificationTopics();
-            }
-        });
-    }
-    
-    // Check for new releases on page load (if enabled)
-    if (notificationsEnabled) {
-        checkForNewAnimeReleases();
-    }
-}
-
-/**
- * Checks for new anime releases and notifies the user
- */
-function checkForNewAnimeReleases() {
-    // In a production environment, this would fetch from an API
-    // For demo purposes, we'll simulate some new releases
-    const lastCheck = localStorage.getItem('lastAnimeCheck');
-    const now = new Date().getTime();
-    
-    // Only check once per day to avoid spamming notifications
-    if (!lastCheck || (now - parseInt(lastCheck) > 24 * 60 * 60 * 1000)) {
-        // Simulate new releases (in production would come from API)
-        const newReleases = [
-            { title: 'Demon Slayer', episode: 'Season 4, Episode 3', releaseDate: '2025-04-19' },
-            { title: 'Chainsaw Man', episode: 'Season 2, Episode 1', releaseDate: '2025-04-20' },
-            { title: 'Jujutsu Kaisen', episode: 'Season 3, Episode 5', releaseDate: '2025-04-18' }
-        ];
-        
-        // Get user's followed anime from localStorage
-        const userFollowing = JSON.parse(localStorage.getItem('userFollowedAnime') || '[]');
-        
-        // Notify about new episodes for anime the user follows
-        newReleases.forEach(anime => {
-            // Only notify if this is for an anime the user follows
-            if (userFollowing.includes(anime.title)) {
-                // Check if we've already notified about this specific episode
-                const notificationKey = `${anime.title}-${anime.episode}`;
-                if (!localStorage.getItem(notificationKey)) {
-                    // Create notification
-                    showNotification(`New episode available: ${anime.title} - ${anime.episode}`, 'anime');
-                    
-                    // Mark as notified
-                    localStorage.setItem(notificationKey, 'true');
-                }
-            }
-        });
-        
-        // Update last check time
-        localStorage.setItem('lastAnimeCheck', now.toString());
-    }
-}
-
-/**
- * Register user preferences for anime notification topics
- */
-function registerAnimeNotificationTopics() {
-    // In production, this would register with a push notification service
-    // For now, we'll just save to localStorage
-    let followedAnime = JSON.parse(localStorage.getItem('userFollowedAnime') || '[]');
-    
-    // Add default popular anime if user hasn't selected any
-    if (followedAnime.length === 0) {
-        followedAnime = ['Demon Slayer', 'Attack on Titan', 'Jujutsu Kaisen', 'One Piece', 'Chainsaw Man'];
-        localStorage.setItem('userFollowedAnime', JSON.stringify(followedAnime));
-    }
-}
-
-/**
- * Unregister from anime notification topics
- */
-function unregisterAnimeNotificationTopics() {
-    // In production, this would unregister with a push notification service
-    // We'll keep the user's preferences but disable notifications
-}
-
-/**
- * Allows user to follow/unfollow specific anime for notifications
- */
-function toggleAnimeFollow(animeTitle) {
-    let followedAnime = JSON.parse(localStorage.getItem('userFollowedAnime') || '[]');
-    
-    if (followedAnime.includes(animeTitle)) {
-        // Unfollow
-        followedAnime = followedAnime.filter(title => title !== animeTitle);
-        showNotification(`You'll no longer receive updates for ${animeTitle}`, 'info');
-    } else {
-        // Follow
-        followedAnime.push(animeTitle);
-        showNotification(`You'll now receive updates for ${animeTitle}`, 'success');
-    }
-    
-    localStorage.setItem('userFollowedAnime', JSON.stringify(followedAnime));
-}
-
-/**
- * Initialize all carousels on the page
+ * Carousel Functionality
+ * Powers the various carousels/sliders throughout the site
  */
 function initializeCarousels() {
-    // Hero carousel
-    const heroCarousel = document.querySelector('.hero-carousel');
-    if (heroCarousel) {
-        const slides = heroCarousel.querySelectorAll('.carousel-slide');
-        const indicators = heroCarousel.querySelectorAll('.carousel-indicators .indicator');
-        const prevBtn = heroCarousel.querySelector('.carousel-button.prev');
-        const nextBtn = heroCarousel.querySelector('.carousel-button.next');
-        let currentSlide = 0;
-        let slideInterval;
+    const carousels = document.querySelectorAll('.carousel');
+    
+    carousels.forEach(carousel => {
+        const container = carousel.querySelector('.carousel-container');
+        const items = carousel.querySelectorAll('.carousel-item');
+        const prevButton = carousel.querySelector('.carousel-prev');
+        const nextButton = carousel.querySelector('.carousel-next');
+        const indicators = carousel.querySelector('.carousel-indicators');
         
-        function showSlide(index) {
-            // Hide all slides
-            slides.forEach(slide => slide.classList.remove('active'));
-            indicators.forEach(indicator => indicator.classList.remove('active'));
+        if (!container || items.length === 0) return;
+        
+        let currentIndex = 0;
+        let autoplayInterval = null;
+        const autoplay = carousel.getAttribute('data-autoplay') === 'true';
+        const interval = parseInt(carousel.getAttribute('data-interval')) || 5000;
+        const slidesPerView = parseInt(carousel.getAttribute('data-slides-per-view')) || 1;
+        
+        // Create indicators if they don't exist
+        if (indicators && !indicators.children.length) {
+            items.forEach((_, index) => {
+                const indicator = document.createElement('button');
+                indicator.classList.add('carousel-indicator');
+                indicator.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                indicator.setAttribute('data-slide', index);
+                if (index === 0) indicator.classList.add('active');
+                
+                indicator.addEventListener('click', () => goToSlide(index));
+                indicators.appendChild(indicator);
+            });
+        }
+        
+        // Navigation functions
+        function goToSlide(index) {
+            // Ensure index is within bounds
+            if (index < 0) index = items.length - 1;
+            if (index >= items.length) index = 0;
             
-            // Show selected slide
-            slides[index].classList.add('active');
-            indicators[index].classList.add('active');
-            currentSlide = index;
+            currentIndex = index;
+            
+            // Calculate scroll position
+            const slideWidth = items[0].offsetWidth;
+            const scrollPosition = slideWidth * currentIndex;
+            
+            // Smooth scroll to new position
+            container.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+            });
+            
+            // Update indicators
+            const activeIndicator = indicators ? indicators.querySelector('.active') : null;
+            const newIndicator = indicators ? indicators.querySelector(`[data-slide="${currentIndex}"]`) : null;
+            
+            if (activeIndicator) activeIndicator.classList.remove('active');
+            if (newIndicator) newIndicator.classList.add('active');
+            
+            // Reset autoplay timer
+            if (autoplay) {
+                clearInterval(autoplayInterval);
+                startAutoplay();
+            }
         }
         
         function nextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
+            goToSlide(currentIndex + 1);
         }
         
         function prevSlide() {
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            showSlide(currentSlide);
+            goToSlide(currentIndex - 1);
         }
         
-        // Event listeners
-        if (prevBtn) prevBtn.addEventListener('click', prevSlide);
-        if (nextBtn) nextBtn.addEventListener('click', nextSlide);
-        
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => showSlide(index));
-        });
-        
-        // Auto slide
-        function startSlideShow() {
-            slideInterval = setInterval(nextSlide, 5000);
+        function startAutoplay() {
+            if (autoplay) {
+                autoplayInterval = setInterval(nextSlide, interval);
+            }
         }
         
-        function pauseSlideShow() {
-            clearInterval(slideInterval);
-        }
+        // Add event listeners
+        if (prevButton) prevButton.addEventListener('click', prevSlide);
+        if (nextButton) nextButton.addEventListener('click', nextSlide);
         
-        // Start autoplay and pause on hover
-        startSlideShow();
+        // Start autoplay if enabled
+        startAutoplay();
         
-        heroCarousel.addEventListener('mouseenter', pauseSlideShow);
-        heroCarousel.addEventListener('mouseleave', startSlideShow);
+        // Pause autoplay on hover
+        carousel.addEventListener('mouseenter', () => clearInterval(autoplayInterval));
+        carousel.addEventListener('mouseleave', startAutoplay);
         
-        // Swipe support for mobile
+        // Handle swipe gestures for mobile
         let touchStartX = 0;
         let touchEndX = 0;
         
-        heroCarousel.addEventListener('touchstart', e => {
+        container.addEventListener('touchstart', e => {
             touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
+        });
         
-        heroCarousel.addEventListener('touchend', e => {
+        container.addEventListener('touchend', e => {
             touchEndX = e.changedTouches[0].screenX;
-            if (touchStartX - touchEndX > 50) {
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchEndX < touchStartX - swipeThreshold) {
                 nextSlide();
-            } else if (touchEndX - touchStartX > 50) {
+            } else if (touchEndX > touchStartX + swipeThreshold) {
                 prevSlide();
             }
-        }, { passive: true });
-    }
-    
-    // Testimonial slider
-    const testimonialSlider = document.querySelector('.testimonial-slider');
-    if (testimonialSlider) {
-        const track = testimonialSlider.querySelector('.testimonial-track');
-        const items = testimonialSlider.querySelectorAll('.testimonial-item');
-        const indicators = testimonialSlider.querySelectorAll('.testimonial-indicators .indicator');
-        let currentIndex = 0;
-        
-        function showTestimonial(index) {
-            indicators.forEach(ind => ind.classList.remove('active'));
-            indicators[index].classList.add('active');
-            
-            track.style.transform = `translateX(-${index * 100}%)`;
-            currentIndex = index;
         }
-        
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => showTestimonial(index));
-        });
-        
-        // Auto rotate testimonials
-        setInterval(() => {
-            currentIndex = (currentIndex + 1) % items.length;
-            showTestimonial(currentIndex);
-        }, 8000);
-    }
-    
-    // Trending slider
-    const trendingSlider = document.querySelector('.trending-slider');
-    if (trendingSlider) {
-        const prevBtn = document.querySelector('.trending-prev');
-        const nextBtn = document.querySelector('.trending-next');
-        const items = trendingSlider.querySelectorAll('.trending-item');
-        const itemWidth = items[0]?.offsetWidth + 20; // including margin
-        let currentPosition = 0;
-        let maxPosition = Math.max(0, items.length * itemWidth - trendingSlider.offsetWidth);
-        
-        function slide(direction) {
-            if (direction === 'next') {
-                currentPosition = Math.min(currentPosition + itemWidth * 2, maxPosition);
-            } else {
-                currentPosition = Math.max(currentPosition - itemWidth * 2, 0);
-            }
-            
-            trendingSlider.style.transform = `translateX(-${currentPosition}px)`;
-            
-            // Update button states
-            prevBtn.disabled = currentPosition === 0;
-            nextBtn.disabled = currentPosition >= maxPosition;
-        }
-        
-        if (prevBtn) prevBtn.addEventListener('click', () => slide('prev'));
-        if (nextBtn) nextBtn.addEventListener('click', () => slide('next'));
-        
-        // Update on resize
-        window.addEventListener('resize', () => {
-            // Recalculate dimensions
-            maxPosition = Math.max(0, items.length * itemWidth - trendingSlider.offsetWidth);
-            
-            // Reset position if needed
-            if (currentPosition > maxPosition) {
-                currentPosition = maxPosition;
-                trendingSlider.style.transform = `translateX(-${currentPosition}px)`;
-            }
-            
-            // Update button states
-            if (prevBtn) prevBtn.disabled = currentPosition === 0;
-            if (nextBtn) nextBtn.disabled = currentPosition >= maxPosition;
-        });
-    }
+    });
 }
 
 /**
- * Initialize AOS animations
+ * Tab Navigation
+ * Handles tab switching for tabbed content
  */
-function initializeAnimations() {
-    // Check if AOS is loaded
-    if (typeof AOS !== 'undefined') {
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true,
-            offset: 100
-        });
-    }
-}
-
-/**
- * Initialize counter animations for stats
- */
-function initializeCounters() {
-    const stats = document.querySelectorAll('.stat-number');
+function initializeTabs() {
+    const tabContainers = document.querySelectorAll('.tabs');
     
-    if (stats.length) {
-        const options = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.5
-        };
+    tabContainers.forEach(tabContainer => {
+        const tabNavItems = tabContainer.querySelectorAll('.tab-nav-item');
         
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const target = entry.target;
-                    const countTo = parseInt(target.getAttribute('data-count'), 10);
-                    let currentCount = 0;
-                    const increment = Math.ceil(countTo / 50);
-                    const duration = 1500;
-                    const interval = duration / (countTo / increment);
-                    
-                    const counter = setInterval(() => {
-                        currentCount += increment;
-                        if (currentCount >= countTo) {
-                            target.textContent = countTo;
-                            clearInterval(counter);
-                        } else {
-                            target.textContent = currentCount;
-                        }
-                    }, interval);
-                    
-                    observer.unobserve(target);
+        tabNavItems.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Get the target tab content ID
+                const targetId = tab.getAttribute('data-tab-target');
+                
+                // Remove active class from all tabs
+                tabNavItems.forEach(item => item.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Find all tab content sections
+                const tabContents = document.querySelectorAll('.tab-content');
+                
+                // Hide all tab contents
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Show the target tab content
+                const targetContent = document.getElementById(targetId);
+                if (targetContent) {
+                    targetContent.classList.add('active');
                 }
             });
-        }, options);
-        
-        stats.forEach(stat => {
-            observer.observe(stat);
         });
-    }
+    });
 }
 
 /**
- * Initialize tooltips
+ * Dropdown Menus
+ * Controls the behavior of dropdown menus
+ */
+function initializeDropdowns() {
+    const dropdowns = document.querySelectorAll('.dropdown');
+    
+    dropdowns.forEach(dropdown => {
+        const toggle = dropdown.querySelector('.dropdown-toggle');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        
+        if (!toggle || !menu) return;
+        
+        toggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Close all other dropdowns
+            dropdowns.forEach(other => {
+                if (other !== dropdown && other.classList.contains('active')) {
+                    other.classList.remove('active');
+                }
+            });
+            
+            // Toggle the dropdown
+            dropdown.classList.toggle('active');
+        });
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+        dropdowns.forEach(dropdown => {
+            const isClickInside = dropdown.contains(e.target);
+            if (!isClickInside && dropdown.classList.contains('active')) {
+                dropdown.classList.remove('active');
+            }
+        });
+    });
+}
+
+/**
+ * Tooltip Functionality
+ * Shows tooltips on hover for elements with data-tooltip attribute
  */
 function initializeTooltips() {
-    const tooltipTriggers = document.querySelectorAll('[data-tooltip]');
+    const tooltips = document.querySelectorAll('[data-tooltip]');
     
-    tooltipTriggers.forEach(trigger => {
-        const tooltipText = trigger.getAttribute('data-tooltip');
-        const tooltip = document.createElement('div');
-        tooltip.className = 'tooltip';
-        tooltip.textContent = tooltipText;
-        document.body.appendChild(tooltip);
-        
-        function positionTooltip(event) {
-            const rect = trigger.getBoundingClientRect();
-            tooltip.style.top = `${rect.top - tooltip.offsetHeight - 10}px`;
-            tooltip.style.left = `${rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2)}px`;
-        }
-        
-        trigger.addEventListener('mouseenter', () => {
-            positionTooltip();
-            tooltip.style.opacity = '1';
-        });
-        
-        trigger.addEventListener('mouseleave', () => {
-            tooltip.style.opacity = '0';
-        });
+    tooltips.forEach(tooltip => {
+        // Handle positioning if specified
+        const position = tooltip.getAttribute('data-position') || 'top';
+        tooltip.setAttribute('data-position', position);
     });
 }
 
 /**
- * Initialize popup system
+ * Scroll Animation
+ * Triggers animations when elements come into view
  */
-function initializePopups() {
-    // Create popup container if it doesn't exist
-    let popupContainer = document.querySelector('.popup-container');
-    if (!popupContainer) {
-        popupContainer = document.createElement('div');
-        popupContainer.className = 'popup-container';
+function initializeScrollAnimations() {
+    const animatedElements = document.querySelectorAll('[data-scroll]');
+    
+    if (animatedElements.length > 0) {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
         
-        const popupOverlay = document.createElement('div');
-        popupOverlay.className = 'popup-overlay';
-        
-        popupContainer.appendChild(popupOverlay);
-        document.body.appendChild(popupContainer);
-        
-        // Close popup when clicking overlay
-        popupOverlay.addEventListener('click', () => {
-            closePopup();
-        });
-    }
-    
-    // Setup trigger elements
-    const popupTriggers = document.querySelectorAll('[data-popup]');
-    
-    popupTriggers.forEach(trigger => {
-        trigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            const popupType = trigger.getAttribute('data-popup');
-            const content = trigger.getAttribute('data-content');
-            
-            if (popupType === 'image' && content) {
-                showImagePopup(content);
-            } else if (popupType === 'video' && content) {
-                showVideoPopup(content);
-            } else if (popupType === 'iframe' && content) {
-                showIframePopup(content);
-            }
-        });
-    });
-}
-
-/**
- * Show image in popup
- */
-function showImagePopup(imageUrl) {
-    const popupContainer = document.querySelector('.popup-container');
-    
-    // Create content if it doesn't exist
-    let popupContent = popupContainer.querySelector('.popup-content');
-    if (!popupContent) {
-        popupContent = document.createElement('div');
-        popupContent.className = 'popup-content';
-        popupContainer.appendChild(popupContent);
-        
-        // Add close button
-        const closeButton = document.createElement('button');
-        closeButton.className = 'popup-close';
-        closeButton.innerHTML = '<i class="fas fa-times"></i>';
-        closeButton.addEventListener('click', closePopup);
-        popupContent.appendChild(closeButton);
-    }
-    
-    // Show loading spinner
-    popupContent.innerHTML = '<div class="popup-loading"><div class="spinner"></div></div>';
-    
-    // Load image
-    const img = new Image();
-    img.className = 'popup-image';
-    img.onload = function() {
-        popupContent.innerHTML = '';
-        popupContent.appendChild(img);
-        
-        // Add close button again
-        const closeButton = document.createElement('button');
-        closeButton.className = 'popup-close';
-        closeButton.innerHTML = '<i class="fas fa-times"></i>';
-        closeButton.addEventListener('click', closePopup);
-        popupContent.appendChild(closeButton);
-    };
-    
-    img.src = imageUrl;
-    
-    // Show popup
-    popupContainer.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-/**
- * Show video in popup
- */
-function showVideoPopup(videoUrl) {
-    const popupContainer = document.querySelector('.popup-container');
-    
-    // Create content if it doesn't exist
-    let popupContent = popupContainer.querySelector('.popup-content');
-    if (!popupContent) {
-        popupContent = document.createElement('div');
-        popupContent.className = 'popup-content';
-        popupContainer.appendChild(popupContent);
-    }
-    
-    // Create video container
-    const videoContainer = document.createElement('div');
-    videoContainer.className = 'video-container';
-    
-    // Check if it's a YouTube URL
-    if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
-        // Extract YouTube video ID
-        let videoId = '';
-        if (videoUrl.includes('youtube.com/watch')) {
-            videoId = new URL(videoUrl).searchParams.get('v');
-        } else if (videoUrl.includes('youtu.be/')) {
-            videoId = videoUrl.split('youtu.be/')[1];
-        }
-        
-        if (videoId) {
-            const iframe = document.createElement('iframe');
-            iframe.width = '100%';
-            iframe.height = '100%';
-            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-            iframe.frameBorder = '0';
-            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-            iframe.allowFullscreen = true;
-            
-            videoContainer.appendChild(iframe);
-        }
-    } else {
-        // Regular video file
-        const video = document.createElement('video');
-        video.controls = true;
-        video.autoplay = true;
-        
-        const source = document.createElement('source');
-        source.src = videoUrl;
-        source.type = `video/${videoUrl.split('.').pop()}`;
-        
-        video.appendChild(source);
-        videoContainer.appendChild(video);
-    }
-    
-    // Add close button
-    const closeButton = document.createElement('button');
-    closeButton.className = 'popup-close';
-    closeButton.innerHTML = '<i class="fas fa-times"></i>';
-    closeButton.addEventListener('click', closePopup);
-    
-    // Clear and set content
-    popupContent.innerHTML = '';
-    popupContent.appendChild(closeButton);
-    popupContent.appendChild(videoContainer);
-    
-    // Show popup
-    popupContainer.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-/**
- * Show iframe in popup
- */
-function showIframePopup(iframeUrl) {
-    const popupContainer = document.querySelector('.popup-container');
-    
-    // Create content if it doesn't exist
-    let popupContent = popupContainer.querySelector('.popup-content');
-    if (!popupContent) {
-        popupContent = document.createElement('div');
-        popupContent.className = 'popup-content';
-        popupContainer.appendChild(popupContent);
-    }
-    
-    // Create iframe
-    const iframe = document.createElement('iframe');
-    iframe.width = '100%';
-    iframe.height = '80vh';
-    iframe.src = iframeUrl;
-    iframe.frameBorder = '0';
-    iframe.allowFullscreen = true;
-    
-    // Add close button
-    const closeButton = document.createElement('button');
-    closeButton.className = 'popup-close';
-    closeButton.innerHTML = '<i class="fas fa-times"></i>';
-    closeButton.addEventListener('click', closePopup);
-    
-    // Clear and set content
-    popupContent.innerHTML = '';
-    popupContent.appendChild(closeButton);
-    popupContent.appendChild(iframe);
-    
-    // Show popup
-    popupContainer.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-/**
- * Close popup
- */
-function closePopup() {
-    const popupContainer = document.querySelector('.popup-container');
-    const popupContent = popupContainer.querySelector('.popup-content');
-    
-    // Hide popup
-    popupContainer.classList.remove('active');
-    document.body.style.overflow = '';
-    
-    // Clear content after animation
-    setTimeout(() => {
-        if (popupContent) {
-            const closeButton = popupContent.querySelector('.popup-close');
-            popupContent.innerHTML = '';
-            if (closeButton) popupContent.appendChild(closeButton);
-        }
-    }, 300);
-}
-
-/**
- * Initialize notification system
- */
-function initializeNotifications() {
-    // Create notification container if it doesn't exist
-    let notificationsContainer = document.querySelector('.notifications-container');
-    if (!notificationsContainer) {
-        notificationsContainer = document.createElement('div');
-        notificationsContainer.className = 'notifications-container';
-        document.body.appendChild(notificationsContainer);
-    }
-}
-
-/**
- * Show a notification
- * @param {string} message - The notification message
- * @param {string} type - Type of notification: 'info', 'success', 'warning', 'error'
- * @param {number} duration - Duration in ms before auto-close
- */
-function showNotification(message, type = 'info', duration = 5000) {
-    const container = document.querySelector('.notifications-container');
-    
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    
-    const content = document.createElement('div');
-    content.className = 'notification-content';
-    content.textContent = message;
-    
-    const closeBtn = document.createElement('button');
-    closeBtn.className = 'notification-close';
-    closeBtn.innerHTML = '&times;';
-    closeBtn.addEventListener('click', () => {
-        notification.classList.add('hide');
-        setTimeout(() => {
-            container.removeChild(notification);
-        }, 300);
-    });
-    
-    notification.appendChild(content);
-    notification.appendChild(closeBtn);
-    container.appendChild(notification);
-    
-    // Trigger animation
-    setTimeout(() => {
-        notification.classList.add('show');
-    }, 10);
-    
-    // Auto-close
-    if (duration) {
-        setTimeout(() => {
-            if (notification.parentElement) {
-                notification.classList.add('hide');
-                setTimeout(() => {
-                    if (notification.parentElement) {
-                        container.removeChild(notification);
-                    }
-                }, 300);
-            }
-        }, duration);
-    }
-}
-
-/**
- * Initialize form handling
- */
-function initializeForms() {
-    const forms = document.querySelectorAll('form');
-    
-    forms.forEach(form => {
-        form.addEventListener('submit', function(e) {
-            // Demo form handling - in a real app, you'd submit this to a server
-            const formType = form.getAttribute('data-form-type');
-            
-            // For demo newsletter form
-            if (form.classList.contains('newsletter-form')) {
-                e.preventDefault();
-                
-                // Simulate submission
-                const email = form.querySelector('input[type="email"]').value;
-                if (email) {
-                    // Success message
-                    showNotification('Thank you for subscribing to our newsletter!', 'success');
-                    form.reset();
-                } else {
-                    showNotification('Please enter a valid email address.', 'error');
-                }
-            }
-            
-            // For demo poll form
-            if (form.classList.contains('poll-options')) {
-                e.preventDefault();
-                
-                // Check if an option is selected
-                const selected = form.querySelector('input[name="poll"]:checked');
-                if (selected) {
-                    showNotification('Thank you for voting!', 'success');
-                    form.querySelector('.poll-submit').disabled = true;
-                    form.querySelector('.poll-submit').textContent = 'Voted';
-                } else {
-                    showNotification('Please select an option before voting.', 'warning');
-                }
-            }
-            
-            // For demo discovery form
-            if (form.classList.contains('discovery-form')) {
-                e.preventDefault();
-                
-                const placeholder = document.querySelector('.discovery-placeholder');
-                const items = document.querySelector('.discovery-items');
-                
-                if (placeholder && items) {
-                    placeholder.style.display = 'none';
-                    items.style.display = 'grid';
-                    items.innerHTML = `
-                        <div class="discovery-loading">
-                            <div class="spinner"></div>
-                            <p>Generating personalized recommendations...</p>
-                        </div>
-                    `;
+        const intersectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    element.classList.add('visible');
                     
-                    // Simulate API call with delay
-                    setTimeout(() => {
-                        // In a real app, this would be dynamic based on user's selections
-                        items.innerHTML = `
-                            <div class="recommendation-item">
-                                <div class="recommendation-poster">
-                                    <img src="Interstellar.jpg" alt="Interstellar">
-                                    <div class="recommendation-type">Movie</div>
-                                </div>
-                                <div class="recommendation-details">
-                                    <h3>Interstellar</h3>
-                                    <div class="recommendation-meta">
-                                        <span><i class="fas fa-star"></i> 9.3</span>
-                                        <span>2014</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="recommendation-item">
-                                <div class="recommendation-poster">
-                                    <img src="Steins.jpg" alt="Steins;Gate">
-                                    <div class="recommendation-type">Anime</div>
-                                </div>
-                                <div class="recommendation-details">
-                                    <h3>Steins;Gate</h3>
-                                    <div class="recommendation-meta">
-                                        <span><i class="fas fa-star"></i> 9.5</span>
-                                        <span>2011</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="recommendation-item">
-                                <div class="recommendation-poster">
-                                    <img src="LastHorizon.jpg" alt="Last Horizon">
-                                    <div class="recommendation-type">Game</div>
-                                </div>
-                                <div class="recommendation-details">
-                                    <h3>Last Horizon</h3>
-                                    <div class="recommendation-meta">
-                                        <span><i class="fas fa-star"></i> 9.1</span>
-                                        <span>2024</span>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                        
-                        showNotification('Recommendations generated based on your preferences!', 'success');
-                    }, 2000);
+                    // If the animation should only happen once, stop observing
+                    if (element.getAttribute('data-scroll-once') !== 'false') {
+                        intersectionObserver.unobserve(element);
+                    }
+                } else {
+                    // If the animation should repeat when out of view
+                    const element = entry.target;
+                    if (element.getAttribute('data-scroll-once') === 'false') {
+                        element.classList.remove('visible');
+                    }
                 }
-            }
-        });
-    });
-}
-
-/**
- * Initialize trending filters
- */
-function initializeTrendingFilters() {
-    const filterButtons = document.querySelectorAll('.trend-filter');
-    
-    if (filterButtons.length) {
-        filterButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Update active state
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                
-                const filter = this.getAttribute('data-filter');
-                
-                // In a real app, you'd fetch different data here
-                // For this demo, we'll just show a notification
-                showNotification(`Showing trending content for: ${filter}`, 'info');
             });
+        }, observerOptions);
+        
+        animatedElements.forEach(element => {
+            // Apply any delay if specified
+            const delay = element.getAttribute('data-delay');
+            if (delay) {
+                element.style.transitionDelay = `${delay}s`;
+            }
+            
+            intersectionObserver.observe(element);
         });
     }
 }
 
 /**
- * Set up smooth scrolling for anchor links
+ * Search Functionality
+ * Powers the site search with dynamic results
  */
-function initializeSmoothScrolling() {
-    document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
+function initializeSearch() {
+    const searchContainers = document.querySelectorAll('.search-container');
+    
+    searchContainers.forEach(container => {
+        const searchInput = container.querySelector('input');
+        const searchButton = container.querySelector('button');
+        const resultsContainer = container.querySelector('.search-results');
+        
+        if (!searchInput || !resultsContainer) return;
+        
+        // Sample search results - in a real implementation this would fetch from an API
+        const sampleResults = [
+            { title: 'Oppenheimer', type: 'Movie', url: 'movies.html?id=oppenheimer' },
+            { title: 'Attack on Titan', type: 'Anime', url: 'anime.html?id=aot' },
+            { title: 'The Dark Knight', type: 'Movie', url: 'movies.html?id=dark-knight' },
+            { title: 'Elden Ring', type: 'Game', url: 'games.html?id=elden-ring' },
+            { title: 'Breaking Bad', type: 'Series', url: 'series.html?id=breaking-bad' },
+            { title: 'One Piece', type: 'Manga', url: 'manga.html?id=onepiece' },
+            { title: 'Dune', type: 'Movie', url: 'movies.html?id=dune' },
+            { title: 'God of War', type: 'Game', url: 'games.html?id=gow' }
+        ];
+        
+        let debounceTimer;
+        
+        function performSearch() {
+            const query = searchInput.value.trim().toLowerCase();
             
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
+            // Clear previous results
+            resultsContainer.innerHTML = '';
             
-            if (targetElement) {
-                const headerHeight = document.querySelector('header').offsetHeight;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                
-                window.scrollTo({
-                    top: targetPosition - headerHeight - 20,
-                    behavior: 'smooth'
+            if (query.length < 2) {
+                resultsContainer.style.display = 'none';
+                return;
+            }
+            
+            // Filter results based on query
+            const filteredResults = sampleResults.filter(result => 
+                result.title.toLowerCase().includes(query)
+            );
+            
+            if (filteredResults.length > 0) {
+                filteredResults.forEach(result => {
+                    const resultItem = document.createElement('a');
+                    resultItem.href = result.url;
+                    resultItem.className = 'search-result-item';
+                    resultItem.innerHTML = `
+                        <div class="search-result-title">${highlightMatch(result.title, query)}</div>
+                        <div class="search-result-type">${result.type}</div>
+                    `;
+                    resultsContainer.appendChild(resultItem);
                 });
                 
-                // Update URL
-                history.pushState(null, null, targetId);
+                resultsContainer.style.display = 'block';
+            } else {
+                const noResults = document.createElement('div');
+                noResults.className = 'no-results';
+                noResults.textContent = 'No results found';
+                resultsContainer.appendChild(noResults);
+                resultsContainer.style.display = 'block';
+            }
+        }
+        
+        function highlightMatch(text, query) {
+            const regex = new RegExp(`(${query})`, 'gi');
+            return text.replace(regex, '<span class="highlight">$1</span>');
+        }
+        
+        searchInput.addEventListener('input', () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(performSearch, 300);
+        });
+        
+        searchButton.addEventListener('click', performSearch);
+        
+        // Close search results when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!container.contains(e.target)) {
+                resultsContainer.style.display = 'none';
+            }
+        });
+        
+        // Handle keyboard navigation in search results
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                resultsContainer.style.display = 'none';
+            } else if (e.key === 'Enter') {
+                performSearch();
             }
         });
     });
 }
 
 /**
- * Set up event listeners for common UI elements
+ * Mobile Menu Toggle
+ * Controls the mobile navigation menu
  */
-function setupEventListeners() {
-    // Initialize click listeners for buttons that show notifications
-    document.querySelectorAll('[data-notification]').forEach(element => {
-        element.addEventListener('click', function() {
-            const message = this.getAttribute('data-notification-message') || 'Action completed!';
-            const type = this.getAttribute('data-notification-type') || 'info';
-            showNotification(message, type);
-        });
-    });
+function initializeMobileMenu() {
+    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+    const navList = document.querySelector('.nav-list');
     
-    // Rating system
-    document.querySelectorAll('.rating-system').forEach(ratingSystem => {
-        const stars = ratingSystem.querySelectorAll('.rating-star');
-        stars.forEach((star, index) => {
-            star.addEventListener('click', () => {
-                // Set the rating value
-                ratingSystem.setAttribute('data-rating', index + 1);
-                
-                // Update visual state
-                stars.forEach((s, i) => {
-                    if (i <= index) {
-                        s.classList.add('active');
-                    } else {
-            
-            countSpan.textContent = count;
-            
-            // In a real app, you'd send this to a server
-        });
+    if (!mobileToggle || !navList) return;
+    
+    mobileToggle.addEventListener('click', () => {
+        navList.classList.toggle('active');
+        mobileToggle.classList.toggle('active');
+        document.body.classList.toggle('menu-open');
     });
 }
 
-// Utility functions
-
 /**
- * Throttle function to limit how often a function can be called
- * @param {Function} func - The function to throttle
- * @param {number} limit - Time limit in milliseconds
+ * Back to Top Button
+ * Shows a button to scroll back to top when scrolled down
  */
-function throttle(func, limit) {
-    let lastFunc;
-    let lastRan;
-    return function() {
-        const context = this;
-        const args = arguments;
-        if (!lastRan) {
-            func.apply(context, args);
-            lastRan = Date.now();
+function initializeBackToTop() {
+    const backToTopButton = document.querySelector('.back-to-top');
+    
+    if (!backToTopButton) return;
+    
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
         } else {
-            clearTimeout(lastFunc);
-            lastFunc = setTimeout(function() {
-                if ((Date.now() - lastRan) >= limit) {
-                    func.apply(context, args);
-                    lastRan = Date.now();
-                }
-            }, limit - (Date.now() - lastRan));
+            backToTopButton.classList.remove('visible');
         }
-    };
+    });
+    
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
 }
 
 /**
- * Debounce function to prevent a function from being called too frequently
- * @param {Function} func - The function to debounce
- * @param {number} delay - Delay in milliseconds
+ * Accordion Functionality
+ * Controls expandable/collapsible accordion elements
  */
-function debounce(func, delay) {
-    let timeoutId;
+function initializeAccordions() {
+    const accordionItems = document.querySelectorAll('.accordion-item');
+    
+    accordionItems.forEach(item => {
+        const header = item.querySelector('.accordion-header');
+        if (!header) return;
+        
+        header.addEventListener('click', () => {
+            // Check if this accordion allows multiple open items
+            const accordion = item.closest('.accordion');
+            const allowMultiple = accordion ? 
+                accordion.getAttribute('data-allow-multiple') === 'true' : false;
+            
+            if (!allowMultiple) {
+                // Close other items
+                accordionItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.closest('.accordion') === accordion) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Toggle this item
+            item.classList.toggle('active');
+        });
+    });
+}
+
+/**
+ * Utility Functions
+ */
+
+// Check if an element is in viewport
+function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
+
+// Format date helper
+function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+}
+
+// Debounce function to limit function calls
+function debounce(func, wait) {
+    let timeout;
     return function() {
         const context = this;
         const args = arguments;
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => func.apply(context, args), delay);
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            func.apply(context, args);
+        }, wait);
     };
-}
-
-/**
- * Format relative time from a date
- * @param {Date|string|number} date - The date to format
- */
-function formatRelativeTime(date) {
-    const now = new Date();
-    const then = new Date(date);
-    const seconds = Math.round((now - then) / 1000);
-    const minutes = Math.round(seconds / 60);
-    const hours = Math.round(minutes / 60);
-    const days = Math.round(hours / 24);
-    const weeks = Math.round(days / 7);
-    const months = Math.round(days / 30.4);
-    const years = Math.round(days / 365);
-    
-    if (seconds < 60) {
-        return 'just now';
-    } else if (minutes < 60) {
-        return `${minutes} minute${minutes === 1 ? '' : 's'} ago`;
-    } else if (hours < 24) {
-        return `${hours} hour${hours === 1 ? '' : 's'} ago`;
-    } else if (days < 7) {
-        return `${days} day${days === 1 ? '' : 's'} ago`;
-    } else if (weeks < 4) {
-        return `${weeks} week${weeks === 1 ? '' : 's'} ago`;
-    } else if (months < 12) {
-        return `${months} month${months === 1 ? '' : 's'} ago`;
-    } else {
-        return `${years} year${years === 1 ? '' : 's'} ago`;
-    }
 }

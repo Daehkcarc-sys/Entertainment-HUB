@@ -1,0 +1,226 @@
+/* Video Section Styles */
+.video-section {
+    position: relative;
+    margin: 40px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    background-color: #000;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#about-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+.video-title {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+#play-button {
+    font-size: 64px;
+    color: #fff;
+    cursor: pointer;
+    background: none;
+    border: none;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+#play-button:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.9);
+}
+
+/* Visual feedback when video is playing */
+.video-container.playing .video-overlay {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.video-container.playing:hover .video-overlay {
+    opacity: 0.5;
+    pointer-events: all;
+}
+
+/* Audio Player Styles */
+.audio-player {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin: 30px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.audio-player:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.audio-label {
+    color: #fff;
+    font-weight: 500;
+    margin-right: 15px;
+    font-size: 16px;
+}
+
+.audio-player audio {
+    flex-grow: 1;
+    height: 40px;
+    filter: brightness(1.1);
+    transition: all 0.3s ease;
+}
+
+.audio-player audio:focus {
+    outline: none;
+    filter: brightness(1.2);
+}
+
+/* Team section enhancements */
+.team-section {
+    margin-top: 60px;
+}
+
+.team-section h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+}
+
+.team-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, #3498db, #9b59b6);
+    border-radius: 2px;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.team-member {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.member-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.member-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.member-name {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #2c3e50;
+}
+
+.member-role {
+    font-size: 16px;
+    color: #7f8c8d;
+    margin-bottom: 15px;
+}
+
+.member-bio {
+    color: #34495e;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-links a {
+    color: #3498db;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #2980b9;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .video-title {
+        font-size: 22px;
+    }
+    
+    #play-button {
+        font-size: 48px;
+    }
+    
+    .team-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .audio-player {
+        flex-direction: column;
+    }
+    
+    .audio-label {
+        margin-bottom: 10px;
+    }
+}

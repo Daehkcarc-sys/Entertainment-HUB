@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Document character encoding and viewport configuration for responsive design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Series Details | Entertainment Hub</title>
+    
+    <!-- Preconnect to external resources to improve performance by establishing early connections -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- CSS imports in a standardized order to maintain consistent styling across the site -->
+    <!-- Master stylesheet includes global styles used across all pages -->
+    <link rel="stylesheet" href="../css/master.css">
+    <!-- Common styles for shared components -->
+    <link rel="stylesheet" href="../css/common.css">
+    <!-- Theme styles for light/dark mode and other theme variations -->
+    <link rel="stylesheet" href="../css/themes.css">
+    <!-- Series-specific styling for content display -->
+    <link rel="stylesheet" href="../css/series.css">
+    <!-- Content detail page styling for consistent display of media details -->
+    <link rel="stylesheet" href="../css/content-pages.css">
+    <!-- Dark theme styles for the site-wide dark mode feature -->
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <!-- Animation effects for loading elements and transitions -->
+    <link rel="stylesheet" href="../css/animations.css">
+    <!-- Audio player styles for background music functionality -->
+    <link rel="stylesheet" href="../css/audio-player.css">
+    <!-- Interactive component styles for buttons, tooltips, etc. -->
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    
+    <!-- Font Awesome icons library used throughout the site for visual cues and buttons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts import for typography consistency -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- SEO meta tags to improve search engine visibility -->
+    <meta name="description" content="Explore TV series details, episodes, cast, and reviews on Entertainment Hub.">
+    <meta name="keywords" content="TV series, episodes, cast, reviews, streaming, entertainment">
+    <meta property="og:title" content="Series Details | Entertainment Hub">
+    <meta property="og:description" content="Explore TV series details, episodes, cast, and reviews on Entertainment Hub.">
+    <meta property="og:url" content="https://entertainment-hub.com/series-detail.html">
+    
+    <!-- Theme color for mobile browsers' address bar -->
+    <meta name="theme-color" content="#6C63FF">
+    
+    <!-- Favicon for browser tab icon -->
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    
+    <!-- Audio player element for background music -->
+    <audio id="background-music" loop preload="none">
+        <source src="../Morning-Routine-Lofi-Study-Music(chosic.com).mp3" type="audio/mpeg">
+    </audio>
+</head>
+
+<body class="series-page detail-page">
+    <!-- Loading spinner container that shows during page load -->
+    <div class="loader-container" id="pageLoader">
+        <div class="loader"></div>
+    </div>
+    
+    <!-- Accessibility skip link for keyboard users to bypass navigation -->
+    <a class="skip-link" href="#main">Skip to content</a>
+    
+    <!-- Main site header with navigation -->
+    <header class="site-header unified-header">
+        <div class="container header-container">
+            <!-- Site logo and branding -->
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
+            </div>
+            
+            <!-- Main navigation menu -->
+            <nav class="main-nav">
+                <!-- Mobile menu toggle button -->
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span class="hamburger-icon"></span>
+                </button>
+                
+                <!-- Navigation links -->
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="series.html" class="active">Series</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                    <!-- Dropdown menu for community section -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Community <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="discussions.html" class="dropdown-item">Discussions</a></li>
+                            <li><a href="reviews.html" class="dropdown-item">Reviews</a></li>
+                            <li><a href="polls.html" class="dropdown-item">Polls</a></li>
+                            <li><a href="events.html" class="dropdown-item">Events</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="watchlist.html">Watchlist</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="support.html">Support</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Header action buttons (search, audio, theme, user) -->
+            <div class="header-actions">
+                <!-- Search container with input field and button -->
+                <div class="search-container">
+                    <input type="text" placeholder="Search..." aria-label="Search">
+                    <button type="button" aria-label="Submit search"><i class="fas fa-search"></i></button>
+                    <div class="search-results custom-scrollbar"></div>
+                </div>
+                
+                <!-- Audio toggle button for background music -->
+                <button class="audio-btn" id="audio-toggle" aria-label="Play background music">
+                    <i class="fas fa-volume-mute"></i>
+                </button>
+                
+                <!-- Theme toggle button for switching between light/dark mode -->
+                <button class="theme-toggle tooltip" data-tooltip="Switch theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                
+                <!-- User menu dropdown for account actions -->
+                <div class="user-menu dropdown">
+                    <button class="user-menu-toggle" aria-label="User menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="user-dropdown dropdown-menu">
+                        <a href="signin.html" class="dropdown-item"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                        <a href="signup.html" class="dropdown-item"><i class="fas fa-user-plus"></i> Sign Up</a>
+                    </div>
+                </div>
+                
+                <!-- Quiz trigger button for entertainment quizzes -->
+                <button class="quiz-trigger btn-interactive" data-quiz-type="entertainment" data-tooltip="Take a quiz!">
+                    <i class="fas fa-question-circle"></i> Quiz
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
+        <!-- Series Detail Hero - Will be populated by JS -->
+        <section class="content-hero series-hero" id="series-hero">
+            <div class="content-hero-backdrop">
+                <!-- Backdrop image will be inserted by JS -->
+                <div class="backdrop-overlay"></div>
+            </div>
+            <div class="content-hero-container">
+                <div class="content-poster">
+                    <!-- Poster image will be inserted by JS -->
+                </div>
+                <div class="content-info">
+                    <div class="content-title-container">
+                        <h1 class="content-title">
+                            <!-- Series title will be inserted by JS -->
+                        </h1>
+                        <div class="content-year-network">
+                            <!-- Year and network will be inserted by JS -->
+                        </div>
+                    </div>
+                    
+                    <div class="content-meta">
+                        <span class="content-rating">
+                            <i class="fas fa-star"></i>
+                            <!-- Rating will be inserted by JS -->
+                        </span>
+                        <span class="content-seasons">
+                            <!-- Seasons count will be inserted by JS -->
+                        </span>
+                        <span class="content-status">
+                            <!-- Status will be inserted by JS -->
+                        </span>
+                    </div>
+                    
+                    <div class="content-genres">
+                        <!-- Genres will be inserted by JS -->
+                    </div>
+                    
+                    <div class="content-actions">
+                        <button class="action-button watchlist-button" aria-label="Add to watchlist">
+                            <i class="far fa-bookmark"></i>
+                            <span>Add to Watchlist</span>
+                        </button>
+                        <button class="action-button rate-button" aria-label="Rate series">
+                            <i class="far fa-star"></i>
+                            <span>Rate</span>
+                        </button>
+                        <button class="action-button share-button" aria-label="Share">
+                            <i class="fas fa-share-alt"></i>
+                            <span>Share</span>
+                        </button>
+                    </div>
+                    
+                    <div class="content-overview">
+                        <!-- Overview will be inserted by JS -->
+                    </div>
+                    
+                    <div class="content-details">
+                        <div class="content-detail">
+                            <span class="detail-label">Created By</span>
+                            <span class="detail-value creators-list">
+                                <!-- Creators will be inserted by JS -->
+                            </span>
+                        </div>
+                        
+                        <div class="content-detail">
+                            <span class="detail-label">First Aired</span>
+                            <span class="detail-value first-air-date">
+                                <!-- First air date will be inserted by JS -->
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Navigation -->
+        <nav class="content-nav">
+            <div class="container">
+                <ul class="content-nav-links">
+                    <li><a href="#episodes" class="active">Episodes</a></li>
+                    <li><a href="#cast">Cast</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                    <li><a href="#related">Related</a></li>
+                    <li><a href="#discussions">Discussions</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Episodes Section -->
+        <section id="episodes" class="content-section episodes-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Episodes</h2>
+                    <div class="season-selector">
+                        <label for="season-select">Season:</label>
+                        <select id="season-select" class="themed-select">
+                            <!-- Season options will be inserted by JS -->
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="episodes-list" id="episodes-list">
+                    <!-- Episodes will be inserted by JS -->
+                    <div class="loading-indicator">
+                        <div class="spinner"></div>
+                        <p>Loading episodes...</p>
+                    </div>
+                </div>
+                
+                <div class="watch-progress-summary" id="watch-progress-summary">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <p class="progress-text">0 of 0 episodes watched</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cast Section -->
+        <section id="cast" class="content-section cast-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Cast</h2>
+                    <a href="#" class="view-all">View All</a>
+                </div>
+                
+                <div class="cast-list" id="cast-list">
+                    <!-- Cast will be inserted by JS -->
+                    <div class="loading-indicator">
+                        <div class="spinner"></div>
+                        <p>Loading cast...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews Section -->
+        <section id="reviews" class="content-section reviews-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Reviews</h2>
+                    <a href="reviews.html" class="write-review">Write a Review</a>
+                </div>
+                
+                <div class="reviews-list" id="reviews-list">
+                    <!-- Reviews will be inserted by JS -->
+                    <div class="review-placeholder">
+                        <p>No reviews yet. Be the first to review!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Content Section -->
+        <section id="related" class="content-section related-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>You May Also Like</h2>
+                </div>
+                
+                <div class="related-content-tabs">
+                    <button class="tab-button active" data-tab="similar-series">Similar Series</button>
+                    <button class="tab-button" data-tab="from-network">From Same Network</button>
+                    <button class="tab-button" data-tab="related-movies">Related Movies</button>
+                </div>
+                
+                <div class="related-content-container">
+                    <div class="related-content-tab active" id="similar-series">
+                        <div class="content-grid">
+                            <!-- Similar series will be inserted by JS -->
+                            <div class="loading-indicator">
+                                <div class="spinner"></div>
+                                <p>Finding similar series...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="related-content-tab" id="from-network">
+                        <div class="content-grid">
+                            <!-- Series from the same network will be inserted by JS -->
+                        </div>
+                    </div>
+                    
+                    <div class="related-content-tab" id="related-movies">
+                        <div class="content-grid">
+                            <!-- Related movies will be inserted by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Discussions Section -->
+        <section id="discussions" class="content-section discussions-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Community Discussions</h2>
+                    <a href="discussions.html" class="start-discussion">Start a Discussion</a>
+                </div>
+                
+                <div class="discussions-list" id="discussions-list">
+                    <!-- Discussions will be inserted by JS -->
+                    <div class="discussion-placeholder">
+                        <p>No discussions yet. Start a conversation!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Episode Watch Modal -->
+        <div class="episode-modal" id="episode-modal">
+            <div class="episode-modal-content">
+                <button class="close-modal" id="close-episode-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+                
+                <div class="episode-player-container">
+                    <div class="episode-info-bar">
+                        <h3 class="episode-title"></h3>
+                        <div class="episode-meta">
+                            <span class="episode-number"></span>
+                            <span class="episode-runtime"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="episode-player">
+                        <div class="player-placeholder">
+                            <i class="fas fa-play-circle"></i>
+                            <p>Preview not available. Sign up to watch full episodes.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="watch-controls">
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="control-buttons">
+                            <button class="mark-watched">
+                                <i class="fas fa-check"></i>
+                                <span>Mark as Watched</span>
+                            </button>
+                            <button class="add-to-list">
+                                <i class="fas fa-bookmark"></i>
+                                <span>Add to My List</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="episode-details">
+                    <div class="air-date">
+                        <span>Air Date:</span>
+                        <span class="date-value"></span>
+                    </div>
+                    
+                    <div class="episode-synopsis"></div>
+                    
+                    <div class="episode-images">
+                        <h4>Episode Images</h4>
+                        <div class="image-gallery">
+                            <!-- Images will be inserted by JS -->
+                            <p class="no-images">No images available for this episode.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rating Modal -->
+        <div class="rating-modal" id="rating-modal">
+            <div class="rating-modal-content">
+                <button class="close-modal" id="close-rating-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+                
+                <h3>Rate this Series</h3>
+                
+                <div class="star-rating">
+                    <i class="far fa-star" data-rating="1"></i>
+                    <i class="far fa-star" data-rating="2"></i>
+                    <i class="far fa-star" data-rating="3"></i>
+                    <i class="far fa-star" data-rating="4"></i>
+                    <i class="far fa-star" data-rating="5"></i>
+                    <i class="far fa-star" data-rating="6"></i>
+                    <i class="far fa-star" data-rating="7"></i>
+                    <i class="far fa-star" data-rating="8"></i>
+                    <i class="far fa-star" data-rating="9"></i>
+                    <i class="far fa-star" data-rating="10"></i>
+                </div>
+                
+                <p class="rating-label">Click to rate</p>
+                
+                <div class="rating-comment">
+                    <textarea placeholder="Write your review (optional)"></textarea>
+                </div>
+                
+                <button class="submit-rating" disabled>Submit Rating</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-section about-section">
+                <h3>Entertainment Hub</h3>
+                <p>Your ultimate destination for entertainment reviews and discussions.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <div class="footer-section links-section">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="games.html">Games</a></li>
+                </ul>
+            </div>
+            <div class="footer-section links-section">
+                <h4>Community</h4>
+                <ul>
+                    <li><a href="discussions.html">Discussions</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="events.html">Events</a></li>
+                </ul>
+            </div>
+            <div class="footer-section links-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section subscribe-section">
+                <h4>Subscribe</h4>
+                <p>Get weekly updates on the latest entertainment news</p>
+                <form class="subscribe-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+                <div class="app-badges">
+                    <a href="#"><img src="../images/appstore.jpg" alt="Download on App Store"></a>
+                    <a href="#"><img src="../images/Googleplay.jpg" alt="Get it on Google Play"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart"></i> for entertainment fans everywhere</p>
+        </div>
+    </footer>
+
+    <script src="../js/common.js"></script>
+    <script src="../js/series-detail.js"></script>
+    <script src="../js/audio-player.js"></script>
+    <a href="#" class="back-to-top" id="back-to-top-btn" aria-label="Back to top">↑</a>
+</body>
+
+</html>

@@ -2,19 +2,28 @@
 <html lang="en">
 
 <head>
+    <!-- Document metadata -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Terms of Service for Entertainment Hub - Your one-stop platform for movies, anime, manga, TV series, and games">
+    <meta name="keywords" content="terms of service, legal, entertainment hub, user agreement, conditions">
+    <meta name="author" content="Entertainment Hub Team">
+    
+    <!-- Page title -->
     <title>Terms of Service | Entertainment Hub</title>
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/dark-theme.css">
+    
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Page-specific styles -->
     <style>
         .terms-container {
             max-width: 1000px;
@@ -56,26 +65,70 @@
 </head>
 
 <body data-theme="light">
-    <header>
-        <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="movies.html">Movies</a></li>
-                <li><a href="anime.html">Anime</a></li>
-                <li><a href="manga.html">Manga</a></li>
-                <li><a href="series.html">Series</a></li>
-                <li><a href="games.html">Games</a></li>
-                <li><a href="leaderboard.html">Leaderboard</a></li>
-                <li><a href="community.html">Community</a></li>
-                <li><a href="discussions.html">Discussions</a></li>
-                <li><a href="watchlist.html">Watchlist</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="signin.html">Sign In / Sign Up</a></li>
+    <!-- Main Header -->
+    <header class="main-header">
+        <!-- Logo and Site Title -->
+        <div class="logo-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-film"></i>
+                <span>Entertainment Hub</span>
+            </a>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="main-nav">
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle"><i class="fas fa-list"></i> Categories <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="movies.html"><i class="fas fa-film"></i> Movies</a></li>
+                        <li><a href="anime.html"><i class="fas fa-tv"></i> Anime</a></li>
+                        <li><a href="manga.html"><i class="fas fa-book"></i> Manga</a></li>
+                        <li><a href="series.html"><i class="fas fa-video"></i> Series</a></li>
+                        <li><a href="games.html"><i class="fas fa-gamepad"></i> Games</a></li>
+                    </ul>
+                </li>
+                <li><a href="community.html"><i class="fas fa-users"></i> Community</a></li>
+                <li><a href="discussions.html"><i class="fas fa-comments"></i> Discussions</a></li>
+                <li><a href="leaderboard.html"><i class="fas fa-trophy"></i> Leaderboard</a></li>
             </ul>
         </nav>
+
+        <!-- User Actions -->
+        <div class="user-actions">
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" placeholder="Search..." class="search-input">
+                <button class="search-button"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <!-- User Menu -->
+            <div class="user-menu">
+                <a href="watchlist.html" class="icon-button" title="Watchlist"><i class="fas fa-bookmark"></i></a>
+                <a href="notifications.html" class="icon-button" title="Notifications"><i class="fas fa-bell"></i></a>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle profile-button">
+                        <img src="../images/default-avatar.png" alt="User Avatar" class="avatar">
+                        <span class="username">Guest</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+                        <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                        <li><a href="signin.html"><i class="fas fa-sign-in-alt"></i> Sign In</a></li>
+                        <li><a href="signup.html"><i class="fas fa-user-plus"></i> Sign Up</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Theme Toggle -->
+            <button id="theme-toggle" class="icon-button" title="Toggle Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
     </header>
 
+    <!-- Main Content -->
     <main>
         <div class="terms-container">
             <h1>Terms of Service</h1>

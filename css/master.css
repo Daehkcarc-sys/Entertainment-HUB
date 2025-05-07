@@ -20,11 +20,234 @@
 @import url('recommendations.css');
 @import url('admin.css');
 @import url('dashboard.css');
+@import url('signin.css');
+@import url('notifications.css');
+@import url('discussions.css');
+@import url('leaderboard.css');
 
-/* Note: The following files have been consolidated into themes.css
- * - animes.css
- * - movies.css
- * - manga.css
- * - series.css
- * - games.css
- */
+/* Content-Specific Styles */
+@import url('movies.css');
+@import url('series.css');
+@import url('animes.css');
+@import url('manga.css');
+@import url('games.css');
+
+/* Component Styles */
+@import url('carousel.css'); 
+
+/* Enhanced Responsive Design */
+@media (max-width: 1200px) {
+  .container {
+    max-width: var(--container-lg);
+  }
+  
+  .hero-content h1 {
+    font-size: var(--fs-4xl);
+  }
+  
+  .hero-content p {
+    font-size: var(--fs-lg);
+  }
+  
+  .grid-4-cols {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .container {
+    max-width: var(--container-md);
+  }
+  
+  .hero-content h1 {
+    font-size: var(--fs-3xl);
+  }
+  
+  .grid-4-cols, 
+  .grid-3-cols {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .desktop-only {
+    display: none;
+  }
+  
+  .mobile-visible {
+    display: block;
+  }
+  
+  /* Adjust spacing */
+  .section {
+    padding: var(--space-lg) 0;
+  }
+  
+  /* Adjust card sizes */
+  .card {
+    height: auto;
+  }
+  
+  /* Improve tap target sizes for mobile */
+  .nav-link, 
+  .btn, 
+  .dropdown-item,
+  .menu-item {
+    padding: var(--space-sm) var(--space-md);
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: var(--container-sm);
+    padding: 0 var(--space-md);
+  }
+  
+  .row {
+    flex-direction: column;
+  }
+  
+  .col {
+    width: 100%;
+    margin-bottom: var(--space-md);
+  }
+  
+  .hero-content h1 {
+    font-size: var(--fs-2xl);
+  }
+  
+  .hero-content p {
+    font-size: var(--fs-md);
+  }
+  
+  .grid-4-cols, 
+  .grid-3-cols, 
+  .grid-2-cols {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Stack items in mobile view */
+  .flex-row {
+    flex-direction: column;
+  }
+  
+  .section-title {
+    font-size: var(--fs-xl);
+  }
+  
+  /* Hide certain elements on mobile */
+  .hide-on-mobile {
+    display: none;
+  }
+  
+  /* Adjust forms for better mobile experience */
+  input, 
+  select, 
+  textarea,
+  .form-control {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+  
+  /* Enhance readability on mobile */
+  p, li {
+    font-size: var(--fs-md);
+  }
+  
+  /* Make modals full-screen on mobile */
+  .modal-content {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    height: 100vh;
+    max-height: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding: 0 var(--space-sm);
+  }
+  
+  .hero-content h1 {
+    font-size: var(--fs-xl);
+  }
+  
+  .btn {
+    width: 100%;
+    margin-bottom: var(--space-sm);
+  }
+  
+  /* Further reduce padding */
+  .card, 
+  .section {
+    padding: var(--space-sm);
+  }
+  
+  /* Simplify complex layouts */
+  .tabs {
+    flex-wrap: wrap;
+  }
+  
+  .tab-btn {
+    flex: 1 0 auto;
+    margin-bottom: var(--space-xs);
+  }
+  
+  /* Stack buttons in mobile */
+  .btn-group {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  /* Enhance mobile navigation */
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--light);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: var(--space-xs) 0;
+  }
+  
+  .bottom-nav-item {
+    flex: 1;
+    text-align: center;
+    padding: var(--space-xs);
+  }
+  
+  /* Dark mode adjustments for mobile */
+  [data-theme="dark"] .bottom-nav {
+    background-color: var(--gray-100);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    font-size: 12pt;
+    background: #fff !important;
+    color: #000 !important;
+  }
+  
+  header, footer, nav, aside, .no-print {
+    display: none !important;
+  }
+  
+  .container, .content {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  a {
+    text-decoration: none !important;
+    color: #000 !important;
+  }
+  
+  img {
+    max-width: 500px !important;
+  }
+}

@@ -767,3 +767,406 @@
     text-align: center;
   }
 }
+
+/*======================
+  SERIES THEME COMPONENTS 
+========================*/
+
+/* Series Theme Specific Styles */
+.series-page {
+  --theme-primary: var(--series-primary);
+  --theme-secondary: var(--series-secondary);
+  --theme-light: var(--series-light);
+  --theme-dark: var(--series-dark);
+  --theme-accent: var(--series-accent);
+  --theme-gradient: var(--series-gradient);
+}
+
+/* Series Hero Section */
+.series-hero {
+  background-image: var(--series-gradient), url('../images/Series.jpg');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+  position: relative;
+}
+
+.series-hero .hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(38, 70, 83, 0.7), rgba(42, 157, 143, 0.5));
+}
+
+/* Series Theme Buttons */
+.series-btn-primary {
+  background: var(--series-primary);
+  color: white;
+  border: none;
+  box-shadow: var(--shadow-soft);
+}
+
+.series-btn-primary:hover {
+  background: var(--series-secondary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-strong);
+}
+
+.series-btn-secondary {
+  padding: 0.9rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+}
+
+.series-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Series Cards */
+.series-card {
+  border-radius: 8px;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+  box-shadow: var(--shadow-soft);
+  background: var(--series-light);
+  height: 100%;
+}
+
+.series-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-strong);
+}
+
+.series-image {
+  position: relative;
+  overflow: hidden;
+  height: 260px;
+}
+
+.series-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.series-card:hover .series-image img {
+  transform: scale(1.05);
+}
+
+.series-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem;
+  color: white;
+}
+
+.series-card:hover .series-overlay {
+  opacity: 1;
+}
+
+.series-rating {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--series-primary);
+  color: white;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.series-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.action-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.series-info {
+  padding: 1.2rem;
+}
+
+.series-info h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  color: var(--series-secondary);
+}
+
+.series-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.8rem;
+}
+
+.series-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.series-tag {
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  background: var(--series-accent);
+  color: var(--series-secondary);
+  font-weight: 500;
+}
+
+/* Series Rankings */
+.series-ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.series-ranking-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: var(--series-light);
+  border-radius: 8px;
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition-smooth);
+}
+
+.series-ranking-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-strong);
+}
+
+.series-rank {
+  font-size: 1.5rem;
+  font-weight: 800;
+  min-width: 40px;
+  color: var(--series-primary);
+}
+
+.series-ranking-image {
+  width: 80px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 1rem;
+}
+
+.series-ranking-info {
+  flex-grow: 1;
+}
+
+.series-ranking-title {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--series-secondary);
+}
+
+.series-ranking-meta {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.3rem;
+}
+
+.series-ranking-rating {
+  font-weight: bold;
+  color: #333;
+}
+
+.series-ranking-rating i {
+  color: var(--rating-gold);
+}
+
+/* Series Theme Specific Styles */
+.series-page .themed-hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                      url('../images/series-banner.jpg');
+    background-position: center;
+}
+
+.series-hero .themed-hero-title span {
+    color: #5C6BC0;
+}
+
+/* Series Cards */
+.series-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.series-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.series-card .card-image {
+    height: 250px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.series-card .card-content {
+    padding: 15px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6), transparent);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: #fff;
+}
+
+.series-card .card-title {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.series-card .card-meta {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.series-card .card-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 600;
+}
+
+.series-card .card-rating i {
+    color: #FFD700;
+}
+
+/* Series Grid */
+.series-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+    padding: 20px 0;
+}
+
+/* Series Rating Section */
+.series-rating {
+    background-color: #1a1a2e;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+}
+
+.series-rating .redirect-message {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.series-rating .rating-btn {
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    background-color: #5C6BC0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.series-rating .rating-btn:hover {
+    background-color: #3F51B5;
+    transform: scale(1.05);
+}
+
+/* Series Tabs for Trending */
+.series-tabs {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 50px;
+    padding: 5px;
+    margin-bottom: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.series-tabs .tab-button {
+    flex: 1;
+    padding: 10px 20px;
+    border: none;
+    background: none;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 50px;
+    outline: none;
+}
+
+.series-tabs .tab-button.active {
+    background-color: #5C6BC0;
+}
+
+/* Series Ranking */
+.series-ranking-item {
+    border-left: 4px solid #5C6BC0;
+}
+
+.series-rank {
+    background-color: #5C6BC0;
+}
+
+/* Action buttons for series */
+.action-button.rating-btn,
+.btn.rating-btn {
+    transition: all 0.3s ease;
+}
+
+.action-button.rating-btn:hover,
+.btn.rating-btn:hover {
+    transform: scale(1.1);
+    color: #FFD700;
+}

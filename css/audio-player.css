@@ -1,0 +1,208 @@
+/**
+ * Audio Player CSS
+ * 
+ * Styling for the audio player component that appears on all pages
+ */
+
+/* Container for the audio player */
+.audio-player-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(25, 25, 40, 0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 60px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    max-width: 350px;
+}
+
+/* Expanded state on hover */
+.audio-player-container:hover {
+    background-color: rgba(35, 35, 50, 0.95);
+}
+
+/* Audio toggle button */
+.audio-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #5d4aff 0%, #33ccff 100%);
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    margin-right: 10px;
+}
+
+.audio-toggle:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #6a57ff 0%, #45d6ff 100%);
+}
+
+.audio-toggle:active {
+    transform: scale(0.95);
+}
+
+.audio-toggle i {
+    font-size: 1.2rem;
+    position: absolute;
+    transition: opacity 0.2s;
+}
+
+.audio-on, .audio-off {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Audio controls section */
+.audio-controls {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    padding: 0 10px;
+    gap: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.audio-player-container:hover .audio-controls {
+    opacity: 1;
+}
+
+/* Track info */
+.track-info {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 5px;
+}
+
+.track-name {
+    max-width: 100%;
+    display: inline-block;
+}
+
+/* Audio progress bar */
+.audio-progress {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.progress-bar {
+    height: 5px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 2.5px;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #5d4aff 0%, #33ccff 100%);
+    border-radius: 2.5px;
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+.time-display {
+    color: #ccc;
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Volume control */
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #ccc;
+    font-size: 12px;
+}
+
+.volume-control i {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.7rem;
+}
+
+.volume-slider {
+    -webkit-appearance: none;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    width: 80%;
+    cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #5d4aff;
+    cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #5d4aff;
+    cursor: pointer;
+    border: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .audio-player-container {
+        bottom: 15px;
+        right: 15px;
+        max-width: 300px;
+    }
+    
+    .audio-controls {
+        width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .audio-player-container {
+        bottom: 10px;
+        right: 10px;
+        padding: 8px;
+        max-width: 50px;
+        overflow: hidden;
+    }
+    
+    .audio-player-container:hover,
+    .audio-player-container:focus,
+    .audio-player-container.expanded {
+        max-width: 280px;
+    }
+    
+    .audio-controls {
+        width: 180px;
+    }
+}

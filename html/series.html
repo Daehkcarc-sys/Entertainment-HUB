@@ -5,11 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TV Series | Entertainment Hub</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Master Stylesheet - includes all CSS files -->
+    <link rel="stylesheet" href="../css/master.css">
+    <link rel="stylesheet" href="../css/themes.css">
     <link rel="stylesheet" href="../css/series.css">
-    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/images.css">
+    <link rel="stylesheet" href="../css/audio-player.css">
+    <link rel="stylesheet" href="../css/quiz.css">
+    
+    <!-- New interactive CSS files -->
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    <link rel="stylesheet" href="../css/notifications.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <meta name="description" content="Discover, rate, and discuss the best TV series from around the world on Entertainment Hub.">
+    
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#6C63FF">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    
     <style>
         /* Add some styles for the rating link */
         .action-button.rating-btn,
@@ -26,81 +54,97 @@
 </head>
 
 <body class="series-page">
-    <header class="main-header">
-        <div class="header-top">
-            <div class="logo-container">
-                <a href="index.html" class="logo">Entertainment Hub</a>
+    <!-- Loading spinner element -->
+    <div class="loader-container" id="pageLoader">
+        <div class="loader"></div>
+    </div>
+    
+    <a class="skip-link" href="#main">Skip to content</a>
+    
+    <header class="site-header unified-header">
+        <div class="container header-container">
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
             </div>
-            <div class="search-container">
-                <form action="search.html" method="get">
-                    <input type="search" name="query" placeholder="Search for movies, series, anime..." aria-label="Search">
-                    <button type="submit"><i class="fas fa-search"></i></button>
-                </form>
-            </div>
-            <div class="user-actions">
-                <a href="watchlist.html" class="user-action-icon" aria-label="Your watchlist"><i class="fas fa-bookmark"></i></a>
-                <a href="notifications.html" class="user-action-icon" aria-label="Notifications"><i class="fas fa-bell"></i></a>
-                <a href="profile.html" class="user-action-icon user-profile" aria-label="User profile"><i class="fas fa-user-circle"></i></a>
-                <a href="signin.html" class="sign-in-btn">Sign In</a>
+            <nav class="main-nav">
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span class="hamburger-icon"></span>
+                </button>
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="anime.html">Anime</a></li>
+                    <li><a href="manga.html">Manga</a></li>
+                    <li><a href="series.html" class="active">Series</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Community <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="discussions.html" class="dropdown-item">Discussions</a></li>
+                            <li><a href="reviews.html" class="dropdown-item">Reviews</a></li>
+                            <li><a href="polls.html" class="dropdown-item">Polls</a></li>
+                            <li><a href="events.html" class="dropdown-item">Events</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="watchlist.html">Watchlist</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="search-container">
+                    <input type="text" placeholder="Search..." aria-label="Search">
+                    <button type="button" aria-label="Submit search"><i class="fas fa-search"></i></button>
+                    <div class="search-results custom-scrollbar"></div>
+                </div>
+                <button class="theme-toggle tooltip" data-tooltip="Switch theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-menu dropdown">
+                    <button class="user-menu-toggle" aria-label="User menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="user-dropdown dropdown-menu">
+                        <a href="signin.html" class="dropdown-item"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                        <a href="signup.html" class="dropdown-item"><i class="fas fa-user-plus"></i> Sign Up</a>
+                    </div>
+                </div>
+                <button class="quiz-trigger btn-interactive" data-quiz-type="series" data-tooltip="Take a quiz!">
+                    <i class="fas fa-question-circle"></i> Quiz
+                </button>
             </div>
         </div>
-        <nav class="main-nav">
-            <button class="menu-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="movies.html">Movies</a></li>
-                <li><a href="series.html" class="active">Series</a></li>
-                <li><a href="anime.html">Anime</a></li>
-                <li><a href="manga.html">Manga</a></li>
-                <li><a href="games.html">Games</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle">Community <i class="fas fa-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="discussions.html">Discussions</a></li>
-                        <li><a href="reviews.html">Reviews</a></li>
-                        <li><a href="leaderboard.html">Leaderboard</a></li>
-                        <li><a href="events.html">Events</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle">More <i class="fas fa-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="news.html">News</a></li>
-                        <li><a href="recommendations.html">Recommendations</a></li>
-                        <li><a href="polls.html">Polls</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
     </header>
 
-    <main>
+    <main id="main">
         <!-- Hero Banner Section -->
-        <section class="series-hero">
+        <section class="themed-hero series-hero">
             <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <h2>Discover the World of <span>Series</span></h2>
-                <p>Explore thousands of TV series from gripping dramas to hilarious comedies</p>
-                <div class="hero-buttons">
-                    <a href="#popular" class="btn-primary">Popular Series</a>
-                    <a href="#watchlist" class="btn-secondary">Create Watchlist</a>
+            <div class="themed-hero-content">
+                <h2 class="themed-hero-title">Discover the World of <span>Series</span></h2>
+                <p class="themed-hero-subtitle">Explore thousands of TV series from gripping dramas to hilarious comedies
+                </p>
+                <div class="themed-hero-buttons">
+                    <a href="#popular" class="themed-btn-primary series-btn-primary">Popular Series</a>
+                    <a href="#watchlist" class="themed-btn-secondary series-btn-secondary">Create Watchlist</a>
                 </div>
             </div>
         </section>
 
         <!-- Search and Filter Section -->
-        <section class="search-filter-section">
-            <div class="search-container">
+        <section class="themed-search-filter series-search-filter">
+            <div class="themed-search-container">
                 <form action="#" method="get" role="search">
-                    <input type="search" name="series-search" id="series-search" placeholder="Search series by title, genre, actor..." aria-label="Search for series">
-                    <button type="submit"><i class="fas fa-search"></i></button>
+                    <input type="search" name="series-search" id="series-search" placeholder="Search series by title, genre, actor..."
+                        aria-label="Search for series" class="themed-search-input series-search-input">
+                    <button type="submit" class="themed-search-button series-search-button"><i class="fas fa-search"></i></button>
                 </form>
             </div>
 
-            <div class="filter-sort-container">
-                <div class="filter-group">
-                    <label for="genre-filter">Genre:</label>
-                    <select id="genre-filter" name="genre">
+            <div class="themed-filter-sort-container">
+                <div class="themed-filter-group">
+                    <label for="genre-filter" class="themed-filter-label">Genre:</label>
+                    <select id="genre-filter" name="genre" class="themed-select series-select">
                         <option value="all">All Genres</option>
                         <option value="drama">Drama</option>
                         <option value="comedy">Comedy</option>
@@ -110,18 +154,18 @@
                     </select>
                 </div>
 
-                <div class="filter-group">
-                    <label for="status-filter">Status:</label>
-                    <select id="status-filter" name="status">
+                <div class="themed-filter-group">
+                    <label for="status-filter" class="themed-filter-label">Status:</label>
+                    <select id="status-filter" name="status" class="themed-select series-select">
                         <option value="all">All Status</option>
                         <option value="ongoing">Ongoing</option>
                         <option value="completed">Completed</option>
                     </select>
                 </div>
 
-                <div class="sort-group">
-                    <label for="sort-series">Sort By:</label>
-                    <select id="sort-series" name="sort">
+                <div class="themed-sort-group">
+                    <label for="sort-series" class="themed-filter-label">Sort By:</label>
+                    <select id="sort-series" name="sort" class="themed-select series-select">
                         <option value="popularity">Popularity</option>
                         <option value="rating">Highest Rating</option>
                         <option value="newest">Release Date (Newest)</option>
@@ -132,15 +176,15 @@
         </section>
 
         <!-- Top Series Section -->
-        <section class="top-series" id="popular">
-            <h2>Top Series</h2>
+        <section class="themed-featured top-series" id="popular">
+            <h2 class="themed-section-title">Top Series</h2>
             <div class="series-grid">
                 <!-- Series Card 1 -->
-                <div class="series-card">
-                    <div class="series-image">
-                        <img src="../images/Severence.jpg" alt="Breaking Bad">
+                <div class="themed-card series-card">
+                    <div class="themed-card-image series-image">
+                        <img src="../images/Severence.jpg" alt="Severance">
                         <div class="series-overlay">
-                            <span class="series-rating">9.2</span>
+                            <span class="series-rating">9.5</span>
                             <div class="series-actions">
                                 <button class="action-button" aria-label="Add to watchlist">
                                     <i class="fas fa-bookmark"></i>
@@ -154,23 +198,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="series-info">
-                        <h3>Breaking Bad</h3>
-                        <div class="series-meta">
-                            <span class="seasons">5 Seasons</span>
-                            <span class="episodes">62 Episodes</span>
+                    <div class="themed-card-content series-info">
+                        <h3 class="themed-card-title">Severance</h3>
+                        <div class="themed-card-meta series-meta">
+                            <span class="seasons">2 Seasons</span>
+                            <span class="episodes">18 Episodes</span>
                         </div>
-                        <div class="series-tags">
-                            <span class="series-tag drama">Drama</span>
-                            <span class="series-tag crime">Crime</span>
-                            <span class="series-tag thriller">Thriller</span>
+                        <div class="themed-tags series-tags">
+                            <span class="themed-tag series-tag thriller">Thriller</span>
+                            <span class="themed-tag series-tag sci-fi">Sci-Fi</span>
+                            <span class="themed-tag series-tag drama">Drama</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Series Card 2 -->
-                <div class="series-card">
-                    <div class="series-image">
+                <div class="themed-card series-card">
+                    <div class="themed-card-image series-image">
                         <img src="../images/Series.jpg" alt="Game of Thrones">
                         <div class="series-overlay">
                             <span class="series-rating">8.9</span>
@@ -187,16 +231,82 @@
                             </div>
                         </div>
                     </div>
-                    <div class="series-info">
-                        <h3>Game of Thrones</h3>
-                        <div class="series-meta">
+                    <div class="themed-card-content series-info">
+                        <h3 class="themed-card-title">Game of Thrones</h3>
+                        <div class="themed-card-meta series-meta">
                             <span class="seasons">8 Seasons</span>
                             <span class="episodes">73 Episodes</span>
                         </div>
-                        <div class="series-tags">
-                            <span class="series-tag fantasy">Fantasy</span>
-                            <span class="series-tag drama">Drama</span>
-                            <span class="series-tag action">Action</span>
+                        <div class="themed-tags series-tags">
+                            <span class="themed-tag series-tag fantasy">Fantasy</span>
+                            <span class="themed-tag series-tag drama">Drama</span>
+                            <span class="themed-tag series-tag action">Action</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Series Card 3 -->
+                <div class="themed-card series-card">
+                    <div class="themed-card-image series-image">
+                        <img src="../images/Darkknight.jpg" alt="Breaking Bad">
+                        <div class="series-overlay">
+                            <span class="series-rating">9.2</span>
+                            <div class="series-actions">
+                                <button class="action-button" aria-label="Add to watchlist">
+                                    <i class="fas fa-bookmark"></i>
+                                </button>
+                                <a href="ratings.html" class="action-button rating-btn" aria-label="Rate series">
+                                    <i class="fas fa-star"></i>
+                                </a>
+                                <button class="action-button" aria-label="More information">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="themed-card-content series-info">
+                        <h3 class="themed-card-title">Breaking Bad</h3>
+                        <div class="themed-card-meta series-meta">
+                            <span class="seasons">5 Seasons</span>
+                            <span class="episodes">62 Episodes</span>
+                        </div>
+                        <div class="themed-tags series-tags">
+                            <span class="themed-tag series-tag drama">Drama</span>
+                            <span class="themed-tag series-tag crime">Crime</span>
+                            <span class="themed-tag series-tag thriller">Thriller</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Series Card 4 -->
+                <div class="themed-card series-card">
+                    <div class="themed-card-image series-image">
+                        <img src="../images/Dune.jpg" alt="The Mandalorian">
+                        <div class="series-overlay">
+                            <span class="series-rating">8.7</span>
+                            <div class="series-actions">
+                                <button class="action-button" aria-label="Add to watchlist">
+                                    <i class="fas fa-bookmark"></i>
+                                </button>
+                                <a href="ratings.html" class="action-button rating-btn" aria-label="Rate series">
+                                    <i class="fas fa-star"></i>
+                                </a>
+                                <button class="action-button" aria-label="More information">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="themed-card-content series-info">
+                        <h3 class="themed-card-title">The Mandalorian</h3>
+                        <div class="themed-card-meta series-meta">
+                            <span class="seasons">3 Seasons</span>
+                            <span class="episodes">24 Episodes</span>
+                        </div>
+                        <div class="themed-tags series-tags">
+                            <span class="themed-tag series-tag sci-fi">Sci-Fi</span>
+                            <span class="themed-tag series-tag action">Action</span>
+                            <span class="themed-tag series-tag adventure">Adventure</span>
                         </div>
                     </div>
                 </div>
@@ -204,15 +314,246 @@
         </section>
 
         <!-- Rating section replacement -->
-        <section class="series-rating">
-            <h2>Rate a Series</h2>
+        <section class="themed-featured series-rating">
+            <h2 class="themed-section-title">Rate a Series</h2>
             <div class="redirect-message">
                 <p>Our rating system has moved to a dedicated page for a more interactive experience.</p>
-                <a href="ratings.html" class="btn-primary">Go to Ratings Page</a>
+                <a href="ratings.html" class="themed-btn-primary series-btn-primary">Go to Ratings Page</a>
                 <p class="small-text">Rate movies, anime, series, manga, and games all in one place!</p>
             </div>
         </section>
+        
+        <!-- Trending Series Section -->
+        <section class="themed-featured trending-series">
+            <h2 class="themed-section-title">Trending Now</h2>
+            
+            <div class="themed-tabs series-tabs">
+                <button class="themed-tab series-tab active" data-tab="new">New Releases</button>
+                <button class="themed-tab series-tab" data-tab="popular">Most Watched</button>
+                <button class="themed-tab series-tab" data-tab="acclaimed">Critically Acclaimed</button>
+            </div>
+            
+            <div class="tab-content">
+                <div class="themed-tab-content series-tab-content active" id="new-content">
+                    <div class="themed-ranking-list series-ranking-list">
+                        <div class="themed-ranking-item series-ranking-item">
+                            <div class="themed-rank series-rank">1</div>
+                            <img src="../images/Series.jpg" alt="The Last of Us" class="themed-ranking-image">
+                            <div class="themed-ranking-info">
+                                <h3 class="themed-ranking-title">The Last of Us</h3>
+                                <div class="themed-ranking-meta">
+                                    <span>2023</span> • <span>HBO</span> • <span>Drama, Action</span>
+                                </div>
+                            </div>
+                            <div class="themed-ranking-rating">
+                                <i class="fas fa-star"></i> 9.2
+                            </div>
+                        </div>
+                        
+                        <div class="themed-ranking-item series-ranking-item">
+                            <div class="themed-rank series-rank">2</div>
+                            <img src="../images/Severence.jpg" alt="Severance Season 2" class="themed-ranking-image">
+                            <div class="themed-ranking-info">
+                                <h3 class="themed-ranking-title">Severance Season 2</h3>
+                                <div class="themed-ranking-meta">
+                                    <span>2025</span> • <span>Apple TV+</span> • <span>Thriller, Sci-Fi</span>
+                                </div>
+                            </div>
+                            <div class="themed-ranking-rating">
+                                <i class="fas fa-star"></i> 9.0
+                            </div>
+                        </div>
+                        
+                        <div class="themed-ranking-item series-ranking-item">
+                            <div class="themed-rank series-rank">3</div>
+                            <img src="../images/Darkknight.jpg" alt="True Detective: Night Country" class="themed-ranking-image">
+                            <div class="themed-ranking-info">
+                                <h3 class="themed-ranking-title">True Detective: Night Country</h3>
+                                <div class="themed-ranking-meta">
+                                    <span>2024</span> • <span>HBO</span> • <span>Crime, Mystery</span>
+                                </div>
+                            </div>
+                            <div class="themed-ranking-rating">
+                                <i class="fas fa-star"></i> 8.7
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Most Watched Tab Content -->
+                <div class="themed-tab-content series-tab-content" id="popular-content">
+                    <div class="themed-ranking-list series-ranking-list">
+                        <div class="themed-ranking-item series-ranking-item">
+                            <div class="themed-rank series-rank">1</div>
+                            <img src="../images/Series.jpg" alt="Game of Thrones" class="themed-ranking-image">
+                            <div class="themed-ranking-info">
+                                <h3 class="themed-ranking-title">Game of Thrones</h3>
+                                <div class="themed-ranking-meta">
+                                    <span>2011-2019</span> • <span>HBO</span> • <span>Fantasy, Drama</span>
+                                </div>
+                            </div>
+                            <div class="themed-ranking-rating">
+                                <i class="fas fa-star"></i> 8.9
+                            </div>
+                        </div>
+                        
+                        <div class="themed-ranking-item series-ranking-item">
+                            <div class="themed-rank series-rank">2</div>
+                            <img src="../images/Darkknight.jpg" alt="Breaking Bad" class="themed-ranking-image">
+                            <div class="themed-ranking-info">
+                                <h3 class="themed-ranking-title">Breaking Bad</h3>
+                                <div class="themed-ranking-meta">
+                                    <span>2008-2013</span> • <span>AMC</span> • <span>Crime, Thriller</span>
+                                </div>
+                            </div>
+                            <div class="themed-ranking-rating">
+                                <i class="fas fa-star"></i> 9.2
+                            </div>
+                        </div>
+                        
+                        <div class="themed-ranking-item series-ranking-item">
+                            <div class="themed-rank series-rank">3</div>
+                            <img src="../images/Dune.jpg" alt="Stranger Things" class="themed-ranking-image">
+                            <div class="themed-ranking-info">
+                                <h3 class="themed-ranking-title">Stranger Things</h3>
+                                <div class="themed-ranking-meta">
+                                    <span>2016-Present</span> • <span>Netflix</span> • <span>Sci-Fi, Horror</span>
+                                </div>
+                            </div>
+                            <div class="themed-ranking-rating">
+                                <i class="fas fa-star"></i> 8.6
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Critically Acclaimed Tab Content -->
+                <div class="themed-tab-content series-tab-content" id="acclaimed-content">
+                    <div class="themed-ranking-list series-ranking-list">
+                        <div class="themed-ranking-item series-ranking-item">
+                            <div class="themed-rank series-rank">1</div>
+                            <img src="../images/Darkknight.jpg" alt="The Wire" class="themed-ranking-image">
+                            <div class="themed-ranking-info">
+                                <h3 class="themed-ranking-title">The Wire</h3>
+                                <div class="themed-ranking-meta">
+                                    <span>2002-2008</span> • <span>HBO</span> • <span>Crime, Drama</span>
+                                </div>
+                            </div>
+                            <div class="themed-ranking-rating">
+                                <i class="fas fa-star"></i> 9.3
+                            </div>
+                        </div>
+                        
+                        <div class="themed-ranking-item series-ranking-item">
+                            <div class="themed-rank series-rank">2</div>
+                            <img src="../images/Severence.jpg" alt="Better Call Saul" class="themed-ranking-image">
+                            <div class="themed-ranking-info">
+                                <h3 class="themed-ranking-title">Better Call Saul</h3>
+                                <div class="themed-ranking-meta">
+                                    <span>2015-2022</span> • <span>AMC</span> • <span>Crime, Drama</span>
+                                </div>
+                            </div>
+                            <div class="themed-ranking-rating">
+                                <i class="fas fa-star"></i> 9.0
+                            </div>
+                        </div>
+                        
+                        <div class="themed-ranking-item series-ranking-item">
+                            <div class="themed-rank series-rank">3</div>
+                            <img src="../images/Series.jpg" alt="The Sopranos" class="themed-ranking-image">
+                            <div class="themed-ranking-info">
+                                <h3 class="themed-ranking-title">The Sopranos</h3>
+                                <div class="themed-ranking-meta">
+                                    <span>1999-2007</span> • <span>HBO</span> • <span>Crime, Drama</span>
+                                </div>
+                            </div>
+                            <div class="themed-ranking-rating">
+                                <i class="fas fa-star"></i> 9.1
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <!-- Add Series Quiz Section -->
+    <section class="themed-featured series-quiz-section">
+        <div class="container">
+            <h2 class="themed-section-title">Test Your Series Knowledge</h2>
+            <p class="quiz-description">How well do you know your favorite TV shows? Take our quiz to find out!</p>
+            
+            <div class="quiz-container" data-quiz-type="series" id="series-quiz">
+                <button class="quiz-trigger themed-btn-primary" data-quiz-id="series-quiz">Start Quiz</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Content Navigation Section -->
+    <section class="related-content-nav">
+        <h2 class="themed-section-title">Continue Your Series Journey</h2>
+        <div class="related-links-container">
+            <a href="ratings.html?content=series" class="related-link">
+                <i class="fas fa-star"></i>
+                <span>Rate Your Favorite Series</span>
+            </a>
+            <a href="discussions.html?category=series" class="related-link">
+                <i class="fas fa-comments"></i>
+                <span>Join Series Discussions</span>
+            </a>
+            <a href="recommendations.html?from=series" class="related-link">
+                <i class="fas fa-thumbs-up"></i>
+                <span>Get Personalized Recommendations</span>
+            </a>
+            <a href="watchlist.html?content=series" class="related-link">
+                <i class="fas fa-list"></i>
+                <span>Manage Your Series Watchlist</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Cross Content Navigation -->
+    <section class="cross-content-nav">
+        <h2 class="themed-section-title">Explore Other Entertainment</h2>
+        <div class="cross-content-container">
+            <a href="movies.html" class="cross-content-item">
+                <div class="cross-content-icon">
+                    <i class="fas fa-film"></i>
+                </div>
+                <div class="cross-content-details">
+                    <h3>Movies</h3>
+                    <p>Explore films related to your favorite TV shows</p>
+                </div>
+                <div class="cross-content-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+            <a href="anime.html" class="cross-content-item">
+                <div class="cross-content-icon">
+                    <i class="fas fa-dragon"></i>
+                </div>
+                <div class="cross-content-details">
+                    <h3>Anime</h3>
+                    <p>Discover animated series you might enjoy</p>
+                </div>
+                <div class="cross-content-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+            <a href="games.html" class="cross-content-item">
+                <div class="cross-content-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <div class="cross-content-details">
+                    <h3>Games</h3>
+                    <p>Find games based on popular TV series</p>
+                </div>
+                <div class="cross-content-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+        </div>
+    </section>
 
     <footer class="site-footer">
         <div class="footer-container">
@@ -276,6 +617,8 @@
     </footer>
 
     <script src="../js/common.js"></script>
+    <script src="../js/quiz.js"></script>
+    <script src="../js/audio-player.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Initialize rating buttons to link to ratings.html
@@ -292,6 +635,28 @@
                     anchor.innerHTML = rateText;
                     parent.replaceChild(anchor, button);
                 }
+            });
+
+            // Tab switching functionality for Trending Now section
+            const tabs = document.querySelectorAll('.series-tab');
+            const tabContents = document.querySelectorAll('.series-tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+                    
+                    // Display corresponding tab content
+                    const tabId = tab.getAttribute('data-tab');
+                    const activeContent = document.getElementById(`${tabId}-content`);
+                    if (activeContent) {
+                        activeContent.classList.add('active');
+                    }
+                });
             });
         });
     </script>

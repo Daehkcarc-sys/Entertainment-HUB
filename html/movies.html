@@ -6,18 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movies | Entertainment Hub</title>
     
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
     <!-- Master Stylesheet - includes all CSS files -->
     <link rel="stylesheet" href="../css/master.css">
+    <link rel="stylesheet" href="../css/images.css">
+    <link rel="stylesheet" href="../css/audio-player.css">
+    <link rel="stylesheet" href="../css/quiz.css">
+    
+    <!-- New interactive CSS files -->
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    <link rel="stylesheet" href="../css/notifications.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <meta name="description" content="Discover, rate, and discuss the best movies on Entertainment Hub.">
+    
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#6C63FF">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
 </head>
 
 <body class="movies-page">
-    <header class="site-header">
+    <!-- Loading spinner element -->
+    <div class="loader-container" id="pageLoader">
+        <div class="loader"></div>
+    </div>
+    
+    <a class="skip-link" href="#main">Skip to content</a>
+    
+    <header class="site-header unified-header">
         <div class="container header-container">
             <div class="logo">
                 <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
@@ -33,25 +61,46 @@
                     <li><a href="manga.html">Manga</a></li>
                     <li><a href="series.html">Series</a></li>
                     <li><a href="games.html">Games</a></li>
+                    <li><a href="about.html">About</a></li>
                     <li><a href="leaderboard.html">Leaderboard</a></li>
                     <li class="dropdown">
-                        <a href="community.html">Community <i class="fas fa-caret-down"></i></a>
+                        <a href="#" class="dropdown-toggle">Community <i class="fas fa-caret-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="discussions.html">Discussions</a></li>
-                            <li><a href="reviews.html">Reviews</a></li>
-                            <li><a href="polls.html">Polls</a></li>
-                            <li><a href="events.html">Events</a></li>
+                            <li><a href="discussions.html" class="dropdown-item">Discussions</a></li>
+                            <li><a href="reviews.html" class="dropdown-item">Reviews</a></li>
+                            <li><a href="polls.html" class="dropdown-item">Polls</a></li>
+                            <li><a href="events.html" class="dropdown-item">Events</a></li>
                         </ul>
                     </li>
                     <li><a href="watchlist.html">Watchlist</a></li>
-                    <li><a href="profile.html">Profile</a></li>
-                    <li class="auth-links"><a href="signin.html">Sign In / Sign Up</a></li>
                 </ul>
             </nav>
+            <div class="header-actions">
+                <div class="search-container">
+                    <input type="text" placeholder="Search..." aria-label="Search">
+                    <button type="button" aria-label="Submit search"><i class="fas fa-search"></i></button>
+                    <div class="search-results custom-scrollbar"></div>
+                </div>
+                <button class="theme-toggle tooltip" data-tooltip="Switch theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-menu dropdown">
+                    <button class="user-menu-toggle" aria-label="User menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="user-dropdown dropdown-menu">
+                        <a href="signin.html" class="dropdown-item"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                        <a href="signup.html" class="dropdown-item"><i class="fas fa-user-plus"></i> Sign Up</a>
+                    </div>
+                </div>
+                <button class="quiz-trigger btn-interactive" data-quiz-type="movies" data-tooltip="Take a quiz!">
+                    <i class="fas fa-question-circle"></i> Quiz
+                </button>
+            </div>
         </div>
     </header>
 
-    <main>
+    <main id="main">
         
         <section class="movie-hero">
             <div class="hero-overlay"></div>
@@ -131,7 +180,7 @@
                     <i class="fas fa-ghost"></i>
                     <span>Horror</span>
                 </a>
-                <a href="#" class
+                <a href="#" class="genre-card">
                     <i class="fas fa-rocket"></i>
                     <span>Sci-Fi</span>
                 </a>
@@ -163,7 +212,7 @@
                         <li class="carousel-slide">
                             <figure class="movie-card featured-card">
                                 <div class="movie-poster">
-                                    <img src="../images/Lalaland.jpg" alt="Movie 1 Poster">
+                                    <img src="../images/Lalaland.jpg" alt="Movie 1 Poster" width="300" height="450">
                                     <div class="movie-overlay">
                                         <span class="movie-rating">9.5</span>
                                         <div class="movie-actions">
@@ -190,7 +239,7 @@
                         <li class="carousel-slide">
                             <figure class="movie-card featured-card">
                                 <div class="movie-poster">
-                                    <img src="../images/AvengersInfinity.jpg" alt="Movie 2 Poster">
+                                    <img src="../images/AvengersInfinity.jpg" alt="Movie 2 Poster" width="300" height="450">
                                     <div class="movie-overlay">
                                         <span class="movie-rating">9.2</span>
                                         <div class="movie-actions">
@@ -218,7 +267,7 @@
                         <li class="carousel-slide">
                             <figure class="movie-card featured-card">
                                 <div class="movie-poster">
-                                    <img src="../images/Godfather.jpg" alt="Movie 3 Poster">
+                                    <img src="../images/Godfather.jpg" alt="Movie 3 Poster" width="300" height="450">
                                     <div class="movie-overlay">
                                         <span class="movie-rating">9.0</span>
                                         <div class="movie-actions">
@@ -267,7 +316,7 @@
                            
                             <figure class="movie-card">
                                 <div class="movie-poster">
-                                    <img src="../images/Interstellar.jpg" alt="Movie 4 Poster">
+                                    <img src="../images/Interstellar.jpg" alt="Movie 4 Poster" width="240" height="360">
                                     <div class="movie-overlay">
                                         <meter class="rating-meter" value="9.5" min="0" max="10" optimum="10" high="8" low="4">9.5/10</meter>
                                         <div class="movie-actions">
@@ -289,7 +338,7 @@
 
                             <figure class="movie-card">
                                 <div class="movie-poster">
-                                    <img src="../images/Darkknight.jpg" alt="Movie 5 Poster">
+                                    <img src="../images/Darkknight.jpg" alt="Movie 5 Poster" width="240" height="360">
                                     <div class="movie-overlay">
                                         <meter class="rating-meter" value="9.2" min="0" max="10" optimum="10" high="8" low="4">9.2/10</meter>
                                         <div class="movie-actions">
@@ -311,7 +360,7 @@
 
                             <figure class="movie-card">
                                 <div class="movie-poster">
-                                    <img src="../images/FightClub.jpg" alt="Movie 6 Poster">
+                                    <img src="../images/FightClub.jpg" alt="Movie 6 Poster" width="240" height="360">
                                     <div class="movie-overlay">
                                         <meter class="rating-meter" value="9.0" min="0" max="10" optimum="10" high="8" low="4">9.0/10</meter>
                                         <div class="movie-actions">
@@ -333,7 +382,7 @@
 
                             <figure class="movie-card">
                                 <div class="movie-poster">
-                                    <img src="../images/GoodFellas.jpg" alt="Movie 7 Poster">
+                                    <img src="../images/GoodFellas.jpg" alt="Movie 7 Poster" width="240" height="360">
                                     <div class="movie-overlay">
                                         <meter class="rating-meter" value="8.9" min="0" max="10" optimum="10" high="8" low="4">8.9/10</meter>
                                         <div class="movie-actions">
@@ -357,25 +406,99 @@
                     
                     <div id="new-releases" class="tab-content">
                         <div class="movies-grid">
+                            <!-- New releases content to be added -->
+                            <figure class="movie-card">
+                                <div class="movie-poster">
+                                    <img src="../images/Oppenheimer.jpg" alt="Oppenheimer" width="240" height="360">
+                                    <div class="movie-overlay">
+                                        <meter class="rating-meter" value="9.3" min="0" max="10" optimum="10" high="8" low="4">9.3/10</meter>
+                                        <div class="movie-actions">
+                                            <button class="action-button"><i class="fas fa-bookmark"></i></button>
+                                            <a href="ratings.html" class="action-button rating-btn"><i class="fas fa-star"></i></a>
+                                            <button class="action-button"><i class="fas fa-info-circle"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <figcaption>
+                                    <h3>Oppenheimer</h3>
+                                    <div class="movie-meta">
+                                        <span class="movie-year">2023</span>
+                                        <span class="movie-rating">9.3</span>
+                                    </div>
+                                </figcaption>
+                            </figure>
                             
-
-                            <p class="placeholder-text">New releases content loading...</p>
+                            <figure class="movie-card">
+                                <div class="movie-poster">
+                                    <img src="../images/Dune.jpg" alt="Dune" width="240" height="360">
+                                    <div class="movie-overlay">
+                                        <meter class="rating-meter" value="8.9" min="0" max="10" optimum="10" high="8" low="4">8.9/10</meter>
+                                        <div class="movie-actions">
+                                            <button class="action-button"><i class="fas fa-bookmark"></i></button>
+                                            <a href="ratings.html" class="action-button rating-btn"><i class="fas fa-star"></i></a>
+                                            <button class="action-button"><i class="fas fa-info-circle"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <figcaption>
+                                    <h3>Dune</h3>
+                                    <div class="movie-meta">
+                                        <span class="movie-year">2021</span>
+                                        <span class="movie-rating">8.9</span>
+                                    </div>
+                                </figcaption>
+                            </figure>
                         </div>
                     </div>
                     
                     <div id="coming-soon" class="tab-content">
                         <div class="movies-grid">
-                            
-
-                            <p class="placeholder-text">Coming soon content loading...</p>
+                            <!-- Coming soon content to be added -->
+                            <figure class="movie-card">
+                                <div class="movie-poster">
+                                    <img src="../images/Dune.jpg" alt="Dune Part Two" width="240" height="360">
+                                    <div class="movie-overlay">
+                                        <span class="coming-soon-badge">Coming Soon</span>
+                                        <div class="movie-actions">
+                                            <button class="action-button"><i class="fas fa-bell"></i></button>
+                                            <a href="#" class="action-button"><i class="fas fa-info-circle"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <figcaption>
+                                    <h3>Dune: Part Two</h3>
+                                    <div class="movie-meta">
+                                        <span class="movie-year">2025</span>
+                                        <span class="movie-anticipation">High Anticipation</span>
+                                    </div>
+                                </figcaption>
+                            </figure>
                         </div>
                     </div>
                     
                     <div id="classics" class="tab-content">
                         <div class="movies-grid">
-                            
-
-                            <p class="placeholder-text">Classics content loading...</p>
+                            <!-- Classics content to be added -->
+                            <figure class="movie-card">
+                                <div class="movie-poster">
+                                    <img src="../images/Godfather.jpg" alt="The Godfather" width="240" height="360">
+                                    <div class="movie-overlay">
+                                        <meter class="rating-meter" value="9.2" min="0" max="10" optimum="10" high="8" low="4">9.2/10</meter>
+                                        <div class="movie-actions">
+                                            <button class="action-button"><i class="fas fa-bookmark"></i></button>
+                                            <a href="ratings.html" class="action-button rating-btn"><i class="fas fa-star"></i></a>
+                                            <button class="action-button"><i class="fas fa-info-circle"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <figcaption>
+                                    <h3>The Godfather</h3>
+                                    <div class="movie-meta">
+                                        <span class="movie-year">1972</span>
+                                        <span class="movie-rating">9.2</span>
+                                    </div>
+                                </figcaption>
+                            </figure>
                         </div>
                     </div>
                 </div>
@@ -387,7 +510,7 @@
             <h2>Movie Spotlight</h2>
             <div class="spotlight-container">
                 <div class="spotlight-image">
-                    <img src="../images/Interstellar.jpg" alt="Spotlight Movie">
+                    <img src="../images/Interstellar.jpg" alt="Spotlight Movie" width="500" height="750">
                 </div>
                 <div class="spotlight-content">
                     <h3>Interstellar</h3>
@@ -425,6 +548,9 @@
                         <button class="btn-secondary">
                             <i class="fas fa-bookmark"></i> Add to Watchlist
                         </button>
+                        <a href="https://www.netflix.com/title/70305903" target="_blank" class="btn-outline">
+                            <i class="fas fa-play"></i> Watch Now
+                        </a>
                     </div>
                 </div>
             </div>
@@ -621,7 +747,7 @@
                 
                 <article class="user-review">
                     <header class="review-header">
-                        <img src="../images/SwagSonic.jpg" alt="User Avatar" class="review-avatar">
+                        <img src="../images/SwagSonic.jpg" alt="User Avatar" class="review-avatar" width="50" height="50">
                         <div class="review-meta">
                             <h3 class="review-username">MovieBuff42</h3>
                             <div class="review-rating">
@@ -650,7 +776,7 @@
 
                 <article class="user-review">
                     <header class="review-header">
-                        <img src="../images/Abousen.jpg" alt="User Avatar" class="review-avatar">
+                        <img src="../images/Abousen.jpg" alt="User Avatar" class="review-avatar" width="50" height="50">
                         <div class="review-meta">
                             <h3 class="review-username">FilmCritic2000</h3>
                             <div class="review-rating">
@@ -685,9 +811,9 @@
             <h2>You Might Also Like</h2>
             <div class="related-grid">
                 <a href="#" class="related-movie">
-                    <img src="../images/Starwars.jpg" alt="Related Movie 1" class="related-poster">
+                    <img src="../images/Starwars.jpg" alt="Related Movie 1" class="related-poster" width="180" height="270">
                     <div class="related-info">
-                        <h4>Starwars:The Empire Strikes back</h4>
+                        <h4>Star Wars: The Empire Strikes Back</h4>
                         <div class="related-rating">
                             <i class="fas fa-star"></i>
                             <span>8.3/10</span>
@@ -695,7 +821,7 @@
                     </div>
                 </a>
                 <a href="#" class="related-movie">
-                    <img src="../images/BladeRunner.jpg" alt="Related Movie 2" class="related-poster">
+                    <img src="../images/BladeRunner.jpg" alt="Related Movie 2" class="related-poster" width="180" height="270">
                     <div class="related-info">
                         <h4>Blade Runner 2049</h4>
                         <div class="related-rating">
@@ -705,9 +831,9 @@
                     </div>
                 </a>
                 <a href="#" class="related-movie">
-                    <img src="../images/SpiritedAway.jpg" alt="Related Movie 3" class="related-poster">
+                    <img src="../images/SpiritedAway.jpg" alt="Related Movie 3" class="related-poster" width="180" height="270">
                     <div class="related-info">
-                        <h4>SpiritedAway</h4>
+                        <h4>Spirited Away</h4>
                         <div class="related-rating">
                             <i class="fas fa-star"></i>
                             <span>7.8/10</span>
@@ -715,7 +841,7 @@
                     </div>
                 </a>
                 <a href="#" class="related-movie">
-                    <img src="../images/Dune.jpg" alt="Related Movie 4" class="related-poster">
+                    <img src="../images/Dune.jpg" alt="Related Movie 4" class="related-poster" width="180" height="270">
                     <div class="related-info">
                         <h4>Dune</h4>
                         <div class="related-rating">
@@ -730,46 +856,75 @@
         
         <section class="movie-quiz">
             <h2>Test Your Movie Knowledge</h2>
-            <div class="quiz-container">
-                <form id="movie-quiz-form">
-                    <div class="quiz-question">
-                        <p>Which director is known as the "Master of Suspense"?</p>
-                        <div class="quiz-options">
-                            <label>
-                                <input type="radio" name="q1" value="spielberg"> Steven Spielberg
-                            </label>
-                            <label>
-                                <input type="radio" name="q1" value="hitchcock"> Alfred Hitchcock
-                            </label>
-                            <label>
-                                <input type="radio" name="q1" value="kubrick"> Stanley Kubrick
-                            </label>
-                            <label>
-                                <input type="radio" name="q1" value="cameron"> James Cameron
-                            </label>
-                        </div>
-                    </div>
+            <p class="quiz-description">How well do you know your favorite films? Take our quiz to find out!</p>
+            <div class="quiz-container" data-quiz-type="movies" id="movies-quiz">
+                <button class="quiz-trigger btn-primary" data-quiz-id="movies-quiz">Start Quiz</button>
+            </div>
+        </section>
+        
+        <!-- Related Content Navigation Section -->
+        <section class="related-content-nav">
+            <h2 class="section-title">Continue Your Movie Journey</h2>
+            <div class="related-links-container">
+                <a href="ratings.html?content=movies" class="related-link">
+                    <i class="fas fa-star"></i>
+                    <span>Rate Your Favorite Movies</span>
+                </a>
+                <a href="discussions.html?category=movies" class="related-link">
+                    <i class="fas fa-comments"></i>
+                    <span>Join Movie Discussions</span>
+                </a>
+                <a href="recommendations.html?from=movies" class="related-link">
+                    <i class="fas fa-thumbs-up"></i>
+                    <span>Get Similar Movie Recommendations</span>
+                </a>
+                <a href="watchlist.html?content=movies" class="related-link">
+                    <i class="fas fa-list"></i>
+                    <span>Add to Your Watchlist</span>
+                </a>
+            </div>
+        </section>
 
-                    <div class="quiz-question">
-                        <p>Which film won the Academy Award for Best Picture in 2020?</p>
-                        <div class="quiz-options">
-                            <label>
-                                <input type="radio" name="q2" value="1917"> 1917
-                            </label>
-                            <label>
-                                <input type="radio" name="q2" value="parasite"> Parasite
-                            </label>
-                            <label>
-                                <input type="radio" name="q2" value="joker"> Joker
-                            </label>
-                            <label>
-                                <input type="radio" name="q2" value="irishman"> The Irishman
-                            </label>
-                        </div>
+        <!-- Cross Content Navigation -->
+        <section class="cross-content-nav">
+            <h2 class="section-title">Explore Related Entertainment</h2>
+            <div class="cross-content-container">
+                <a href="series.html" class="cross-content-item">
+                    <div class="cross-content-icon">
+                        <i class="fas fa-tv"></i>
                     </div>
-                    
-                    <button type="submit" class="quiz-submit">Submit Answers</button>
-                </form>
+                    <div class="cross-content-details">
+                        <h3>TV Series</h3>
+                        <p>Explore TV shows related to your favorite movies</p>
+                    </div>
+                    <div class="cross-content-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </a>
+                <a href="anime.html" class="cross-content-item">
+                    <div class="cross-content-icon">
+                        <i class="fas fa-dragon"></i>
+                    </div>
+                    <div class="cross-content-details">
+                        <h3>Anime</h3>
+                        <p>Discover animated features and series</p>
+                    </div>
+                    <div class="cross-content-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </a>
+                <a href="games.html" class="cross-content-item">
+                    <div class="cross-content-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="cross-content-details">
+                        <h3>Games</h3>
+                        <p>Find games based on popular film franchises</p>
+                    </div>
+                    <div class="cross-content-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </a>
             </div>
         </section>
     </main>
@@ -808,6 +963,112 @@
 
     <script src="../js/common.js"></script>
     <script src="../js/movies.js"></script>
+    <script src="../js/quiz.js"></script>
+    <script src="../js/audio-player.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Quiz functionality
+            const quizSubmit = document.getElementById('quiz-submit');
+            const quizResults = document.getElementById('quiz-results');
+            const scoreValue = document.getElementById('score-value');
+            const quizFeedback = document.getElementById('quiz-feedback');
+            const retryQuiz = document.getElementById('retry-quiz');
+            
+            const correctAnswers = {
+                q1: 'hitchcock',
+                q2: 'parasite',
+                q3: 'downey'
+            };
+            
+            if (quizSubmit) {
+                quizSubmit.addEventListener('click', function() {
+                    let score = 0;
+                    let feedback = '';
+                    
+                    // Question 1
+                    const q1Selected = document.querySelector('input[name="q1"]:checked');
+                    if (q1Selected) {
+                        if (q1Selected.value === correctAnswers.q1) {
+                            score++;
+                            feedback += '<p class="correct">✓ You correctly identified Alfred Hitchcock as the "Master of Suspense".</p>';
+                        } else {
+                            feedback += '<p class="incorrect">✗ The "Master of Suspense" was Alfred Hitchcock.</p>';
+                        }
+                    } else {
+                        feedback += '<p class="missed">You didn\'t answer the first question.</p>';
+                    }
+                    
+                    // Question 2
+                    const q2Selected = document.querySelector('input[name="q2"]:checked');
+                    if (q2Selected) {
+                        if (q2Selected.value === correctAnswers.q2) {
+                            score++;
+                            feedback += '<p class="correct">✓ You correctly identified "Parasite" as the 2020 Best Picture winner.</p>';
+                        } else {
+                            feedback += '<p class="incorrect">✗ "Parasite" won the Academy Award for Best Picture in 2020.</p>';
+                        }
+                    } else {
+                        feedback += '<p class="missed">You didn\'t answer the second question.</p>';
+                    }
+                    
+                    // Question 3
+                    const q3Selected = document.querySelector('input[name="q3"]:checked');
+                    if (q3Selected) {
+                        if (q3Selected.value === correctAnswers.q3) {
+                            score++;
+                            feedback += '<p class="correct">✓ You correctly identified Robert Downey Jr. as the actor who played Tony Stark/Iron Man.</p>';
+                        } else {
+                            feedback += '<p class="incorrect">✗ Robert Downey Jr. played Tony Stark/Iron Man in the Marvel Cinematic Universe.</p>';
+                        }
+                    } else {
+                        feedback += '<p class="missed">You didn\'t answer the third question.</p>';
+                    }
+                    
+                    // Display results
+                    scoreValue.textContent = score;
+                    quizFeedback.innerHTML = feedback;
+                    quizResults.style.display = 'block';
+                    quizSubmit.style.display = 'none';
+                    
+                    // Scroll to results
+                    quizResults.scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+            
+            if (retryQuiz) {
+                retryQuiz.addEventListener('click', function() {
+                    // Reset form
+                    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                        radio.checked = false;
+                    });
+                    
+                    // Hide results
+                    quizResults.style.display = 'none';
+                    quizSubmit.style.display = 'block';
+                });
+            }
+            
+            // Tab functionality
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Hide all tab content
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Show target content
+                    const targetId = this.getAttribute('data-target');
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+        });
+    </script>
     <a href="#" class="back-to-top" id="back-to-top-btn" aria-label="Back to top">↑</a>
 </body>
 

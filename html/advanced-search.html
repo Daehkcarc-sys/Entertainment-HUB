@@ -10,11 +10,17 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="../css/styles.css">
+    <!-- Master Stylesheet - includes all CSS files -->
+    <link rel="stylesheet" href="../css/master.css">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/dark-theme.css">
     <link rel="stylesheet" href="../css/search.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/quiz.css">
+    <link rel="stylesheet" href="../css/audio-player.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- Google Fonts -->
@@ -23,19 +29,31 @@
     <!-- Meta tags -->
     <meta name="description" content="Advanced search page for Entertainment Hub - find movies, TV series, anime, manga, and games with powerful filters and sorting options.">
     <meta name="keywords" content="entertainment, advanced search, movies, TV shows, anime, manga, games, filters">
-    <meta name="author" content="Entertainment Hub">
+    <meta property="og:title" content="Advanced Search | Entertainment Hub">
+    <meta property="og:description" content="Find exactly what you're looking for with our powerful search tools.">
+    <meta property="og:url" content="https://entertainment-hub.com/advanced-search.html">
     
     <!-- Theme Color for Mobile Browsers -->
     <meta name="theme-color" content="#6C63FF">
     
     <!-- Favicon -->
     <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    
+    <!-- Audio Player -->
+    <audio id="background-music" loop preload="none">
+        <source src="../Morning-Routine-Lofi-Study-Music(chosic.com).mp3" type="audio/mpeg">
+    </audio>
 </head>
 
-<body data-theme="light">
+<body class="search-page">
+    <!-- Loading spinner element -->
+    <div class="loader-container" id="pageLoader">
+        <div class="loader"></div>
+    </div>
+    
     <a class="skip-link" href="#main">Skip to content</a>
     
-    <header class="site-header">
+    <header class="site-header unified-header">
         <div class="container header-container">
             <div class="logo">
                 <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
@@ -51,21 +69,46 @@
                     <li><a href="manga.html">Manga</a></li>
                     <li><a href="series.html">Series</a></li>
                     <li><a href="games.html">Games</a></li>
+                    <li><a href="about.html">About</a></li>
                     <li><a href="leaderboard.html">Leaderboard</a></li>
                     <li class="dropdown">
-                        <a href="community.html">Community <i class="fas fa-caret-down"></i></a>
+                        <a href="#" class="dropdown-toggle">Community <i class="fas fa-caret-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="discussions.html">Discussions</a></li>
-                            <li><a href="reviews.html">Reviews</a></li>
-                            <li><a href="polls.html">Polls</a></li>
-                            <li><a href="events.html">Events</a></li>
+                            <li><a href="discussions.html" class="dropdown-item">Discussions</a></li>
+                            <li><a href="reviews.html" class="dropdown-item">Reviews</a></li>
+                            <li><a href="polls.html" class="dropdown-item">Polls</a></li>
+                            <li><a href="events.html" class="dropdown-item">Events</a></li>
                         </ul>
                     </li>
                     <li><a href="watchlist.html">Watchlist</a></li>
                     <li><a href="profile.html">Profile</a></li>
-                    <li class="auth-links"><a href="signin.html">Sign In / Sign Up</a></li>
                 </ul>
             </nav>
+            <div class="header-actions">
+                <div class="search-container">
+                    <input type="text" placeholder="Search..." aria-label="Search">
+                    <button type="button" aria-label="Submit search"><i class="fas fa-search"></i></button>
+                    <div class="search-results custom-scrollbar"></div>
+                </div>
+                <button class="audio-btn" id="audio-toggle" aria-label="Play background music">
+                    <i class="fas fa-volume-mute"></i>
+                </button>
+                <button class="theme-toggle tooltip" data-tooltip="Switch theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-menu dropdown">
+                    <button class="user-menu-toggle" aria-label="User menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="user-dropdown dropdown-menu">
+                        <a href="signin.html" class="dropdown-item"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                        <a href="signup.html" class="dropdown-item"><i class="fas fa-user-plus"></i> Sign Up</a>
+                    </div>
+                </div>
+                <button class="quiz-trigger btn-interactive" data-quiz-type="entertainment" data-tooltip="Take a quiz!">
+                    <i class="fas fa-question-circle"></i> Quiz
+                </button>
+            </div>
         </div>
     </header>
 

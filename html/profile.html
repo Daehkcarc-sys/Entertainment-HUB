@@ -5,12 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile | Entertainment Hub</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/profile.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <meta name="description" content="Manage your personal profile, reviews, and preferences on Entertainment Hub.">
+    
+    <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Master Stylesheet - includes all CSS files -->
+    <link rel="stylesheet" href="../css/master.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/quiz.css">
+    <link rel="stylesheet" href="../css/audio-player.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Manage your personal profile, reviews, and preferences on Entertainment Hub.">
+    <meta property="og:title" content="Profile | Entertainment Hub">
+    <meta property="og:description" content="Manage your profile and see your entertainment history, reviews, and recommendations.">
+    <meta property="og:url" content="https://entertainment-hub.com/profile.html">
+    
+    <!-- Audio Player -->
+    <audio id="background-music" loop preload="none">
+        <source src="../Morning-Routine-Lofi-Study-Music(chosic.com).mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- JavaScript for user profile -->
+    <script src="../js/user.js" defer></script>
+    
     <style>
         /* Profile page specific styles with manga-inspired elements */
         .profile-header {
@@ -701,512 +730,559 @@
 </head>
 
 <body class="profile-page">
-    <header>
-        <h1><i class="fas fa-user"></i> Profile</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="movies.html">Movies</a></li>
-                <li><a href="anime.html">Anime</a></li>
-                <li><a href="manga.html">Manga</a></li>
-                <li><a href="series.html">Series</a></li>
-                <li><a href="games.html">Games</a></li>
-                <li><a href="leaderboard.html">Leaderboard</a></li>
-                <li><a href="community.html">Community</a></li>
-                <li><a href="discussions.html">Discussions</a></li>
-                <li><a href="watchlist.html">Watchlist</a></li>
-                <li><a href="profile.html" class="active">Profile</a></li>
-                <li><a href="signin.html">Sign In / Sign Up</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="profile-header">
-        <div class="profile-header-content">
-            <div class="profile-avatar">
-                <img src="../images/Avatar.jpg" alt="User profile picture">
-            </div>
-            <div class="profile-info">
-                <h1>FilmFanatic42</h1>
-                <p>Member since April 2023</p>
-                <div class="profile-stats">
-                    <div class="stat-item">
-                        <span class="stat-number">247</span>
-                        <span class="stat-label">Reviews</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">89</span>
-                        <span class="stat-label">Lists</span>
-                    </div>
-                    <div class="stat-item">
-                        <a href="ratings.html" style="color:inherit;text-decoration:none;">
-                            <span class="stat-number">1,256</span>
-                            <span class="stat-label">Ratings</span>
-                        </a>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">352</span>
-                        <span class="stat-label">Following</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">189</span>
-                        <span class="stat-label">Followers</span>
-                    </div>
-                </div>
-            </div>
-            <div class="profile-actions">
-                <a href="edit-profile.html" class="btn btn-secondary">Edit Profile</a>
-            </div>
-        </div>
+    <!-- Loading spinner element -->
+    <div class="loader-container" id="pageLoader">
+        <div class="loader"></div>
     </div>
-
-    <main class="main-profile">
-        <aside class="profile-sidebar">
-            <nav class="profile-nav">
-                <ul>
-                    <li><a href="#activity" class="active"><i class="fas fa-chart-line"></i> Activity</a></li>
-                    <li><a href="#reviews"><i class="fas fa-star"></i> Reviews</a></li>
-                    <li><a href="#lists"><i class="fas fa-list"></i> Lists</a></li>
-                    <li><a href="#watchlist"><i class="fas fa-bookmark"></i> Watchlist</a></li>
-                    <li><a href="#history"><i class="fas fa-history"></i> History</a></li>
-                    <li><a href="#manga-shelf"><i class="fas fa-book-open"></i> Manga Shelf</a></li>
-                    <li><a href="#badges"><i class="fas fa-award"></i> Badges</a></li>
-                    <li><a href="#stats"><i class="fas fa-chart-bar"></i> Stats</a></li>
-                    <li><a href="#following"><i class="fas fa-users"></i> Following</a></li>
-                    <li><a href="#preferences"><i class="fas fa-cog"></i> Preferences</a></li>
-                    <li><a href="ratings.html"><i class="fas fa-star-half-alt"></i> Ratings</a></li>
-                </ul>
-            </nav>
-        </aside>
-
-        <div class="profile-content">
-            <div id="activity" class="profile-section">
-                <div class="section-header">
-                    <h2>Recent Activity</h2>
-                    <a href="activity.html" class="view-all">View All</a>
-                </div>
-
-                <div class="activity-feed">
-                    <div class="activity-item">
-                        <div class="activity-avatar">
-                            <img src="../images/Avatar.jpg" alt="User avatar">
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-header">
-                                <span class="activity-user">You</span>
-                                <span class="activity-action">rated</span>
-                                <span class="activity-time">2 hours ago</span>
-                            </div>
-                            <div class="activity-body">
-                                <a href="#" class="activity-title">Oppenheimer - 9.2/10</a>
-                                <p>"A mesmerizing historical drama with outstanding performances. Nolan delivers another masterpiece that will be remembered for years to come."</p>
-                            </div>
-                            <div class="activity-footer">
-                                <div class="activity-reactions">
-                                    <button><i class="fas fa-heart"></i> <span>24</span></button>
-                                    <button><i class="fas fa-comment"></i> <span>8</span></button>
-                                    <button><i class="fas fa-share"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="activity-item">
-                        <div class="activity-avatar">
-                            <img src="../images/Avatar.jpg" alt="User avatar">
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-header">
-                                <span class="activity-user">You</span>
-                                <span class="activity-action">added to manga collection</span>
-                                <span class="activity-time">Yesterday</span>
-                            </div>
-                            <div class="activity-body">
-                                <a href="#" class="activity-title">Chainsaw Man - Volume 14</a>
-                                <p>Latest volume in Tatsuki Fujimoto's critically acclaimed dark fantasy series.</p>
-                            </div>
-                            <div class="activity-footer">
-                                <div class="activity-reactions">
-                                    <button><i class="fas fa-heart"></i> <span>31</span></button>
-                                    <button><i class="fas fa-comment"></i> <span>5</span></button>
-                                    <button><i class="fas fa-share"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="activity-item">
-                        <div class="activity-avatar">
-                            <img src="../images/Avatar.jpg" alt="User avatar">
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-header">
-                                <span class="activity-user">You</span>
-                                <span class="activity-action">created a list</span>
-                                <span class="activity-time">3 days ago</span>
-                            </div>
-                            <div class="activity-body">
-                                <a href="#" class="activity-title">Top 10 Sci-Fi Movies of the Last Decade</a>
-                                <p>My personal selection of the best science fiction films released between 2015-2025.</p>
-                            </div>
-                            <div class="activity-footer">
-                                <div class="activity-reactions">
-                                    <button><i class="fas fa-heart"></i> <span>42</span></button>
-                                    <button><i class="fas fa-comment"></i> <span>15</span></button>
-                                    <button><i class="fas fa-share"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    
+    <a class="skip-link" href="#main">Skip to content</a>
+    
+    <header class="site-header unified-header">
+        <div class="container header-container">
+            <div class="logo">
+                <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
             </div>
-
-            <!-- New Manga Shelf Section -->
-            <div id="manga-shelf" class="profile-section">
-                <div class="section-header">
-                    <h2>Your Manga Shelf</h2>
-                    <a href="#" class="view-all">View All</a>
-                </div>
-
-                <div class="content-grid">
-                    <div class="manga-shelf-item">
-                        <div class="manga-cover">
-                            <img src="../images/Chainsaw.jpg" alt="Chainsaw Man">
-                            <div class="manga-progress-badge">Vol. 14</div>
-                        </div>
-                        <div class="manga-shelf-info">
-                            <h3>Chainsaw Man</h3>
-                            <div class="manga-author">by Tatsuki Fujimoto</div>
-                            <div class="progress-stats">
-                                <span>14/14 volumes</span>
-                                <span>100% complete</span>
-                            </div>
-                            <div class="manga-actions">
-                                <button class="btn-sm">Read</button>
-                                <button class="btn-sm btn-outline">Rate</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="manga-shelf-item">
-                        <div class="manga-cover">
-                            <img src="../images/JJK.jpeg" alt="Jujutsu Kaisen">
-                            <div class="manga-progress-badge">Vol. 18</div>
-                        </div>
-                        <div class="manga-shelf-info">
-                            <h3>Jujutsu Kaisen</h3>
-                            <div class="manga-author">by Gege Akutami</div>
-                            <div class="progress-stats">
-                                <span>18/22 volumes</span>
-                                <span>82% complete</span>
-                            </div>
-                            <div class="manga-actions">
-                                <button class="btn-sm">Read</button>
-                                <button class="btn-sm btn-outline">Rate</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="manga-shelf-item">
-                        <div class="manga-cover">
-                            <img src="../images/OnePiece.jpg" alt="One Piece">
-                            <div class="manga-progress-badge">Vol. 105</div>
-                        </div>
-                        <div class="manga-shelf-info">
-                            <h3>One Piece</h3>
-                            <div class="manga-author">by Eiichiro Oda</div>
-                            <div class="progress-stats">
-                                <span>105/107 volumes</span>
-                                <span>98% complete</span>
-                            </div>
-                            <div class="manga-actions">
-                                <button class="btn-sm">Read</button>
-                                <button class="btn-sm btn-outline">Rate</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="manga-shelf-item">
-                        <div class="manga-cover">
-                            <img src="../images/DemonSlayer.jpg" alt="Demon Slayer">
-                            <div class="manga-progress-badge">Complete</div>
-                        </div>
-                        <div class="manga-shelf-info">
-                            <h3>Demon Slayer</h3>
-                            <div class="manga-author">by Koyoharu Gotouge</div>
-                            <div class="progress-stats">
-                                <span>23/23 volumes</span>
-                                <span>100% complete</span>
-                            </div>
-                            <div class="manga-actions">
-                                <button class="btn-sm">Read</button>
-                                <button class="btn-sm btn-outline">Rate</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- New Personalized Recommendations section -->
-            <div id="recommendations" class="profile-section">
-                <div class="section-header">
-                    <h2>Your Recommendations</h2>
-                    <a href="recommendations.html" class="view-all">See All Recommendations</a>
-                </div>
-
-                <div class="recommendations-preview">
-                    <div class="reco-stats">
-                        <div class="reco-stat">
-                            <div class="reco-stat-number">87%</div>
-                            <div class="reco-stat-label">Match Accuracy</div>
-                        </div>
-                        <div class="reco-stat">
-                            <div class="reco-stat-number">325</div>
-                            <div class="reco-stat-label">New Recommendations</div>
-                        </div>
-                        <div class="reco-stat">
-                            <div class="reco-stat-number">42</div>
-                            <div class="reco-stat-label">Added to Watchlist</div>
-                        </div>
-                    </div>
-                    
-                    <div class="reco-preview-grid">
-                        <div class="reco-preview-item">
-                            <img src="../images/Interstellar.jpg" alt="Interstellar">
-                            <div class="reco-preview-content">
-                                <span class="reco-match">98% Match</span>
-                                <h4>Interstellar</h4>
-                                <span class="reco-type">Movie • Sci-Fi</span>
-                                <a href="recommendations.html" class="reco-action">View Details</a>
-                            </div>
-                        </div>
-                        <div class="reco-preview-item">
-                            <img src="../images/Steins.jpg" alt="Steins;Gate">
-                            <div class="reco-preview-content">
-                                <span class="reco-match">95% Match</span>
-                                <h4>Steins;Gate</h4>
-                                <span class="reco-type">Anime • Sci-Fi</span>
-                                <a href="recommendations.html" class="reco-action">View Details</a>
-                            </div>
-                        </div>
-                        <div class="reco-preview-item">
-                            <img src="../images/JJK.jpeg" alt="Jujutsu Kaisen">
-                            <div class="reco-preview-content">
-                                <span class="reco-match">93% Match</span>
-                                <h4>Jujutsu Kaisen</h4>
-                                <span class="reco-type">Manga • Action</span>
-                                <a href="recommendations.html" class="reco-action">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="reco-preferences-summary">
-                        <div class="reco-preferences-title">Based on your preferences:</div>
-                        <div class="reco-preferences-tags">
-                            <span class="reco-preference">Sci-Fi</span>
-                            <span class="reco-preference">Drama</span>
-                            <span class="reco-preference">Fantasy</span>
-                            <span class="reco-preference">Horror</span>
-                            <span class="reco-preference">Seinen</span>
-                        </div>
-                        <a href="recommendations.html" class="btn btn-primary-outline btn-sm">Edit Preferences</a>
-                    </div>
-                </div>
-            </div>
-
-            <div id="history" class="profile-section">
-                <div class="section-header">
-                    <h2>Recently Watched</h2>
-                    <a href="history.html" class="view-all">View All</a>
-                </div>
-
-                <div class="content-grid">
-                    <div class="history-item">
-                        <img src="../images/Oppenheimer.jpg" alt="Oppenheimer">
-                        <div class="history-info">
-                            <h3>Oppenheimer</h3>
-                            <div class="history-meta">
-                                <span>Movie</span>
-                                <span>3 hours ago</span>
-                            </div>
-                            <div class="history-progress">
-                                <div class="history-progress-bar" style="width: 100%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="history-item">
-                        <img src="../images/DemonSlayer.jpg" alt="Demon Slayer">
-                        <div class="history-info">
-                            <h3>Demon Slayer S3E5</h3>
-                            <div class="history-meta">
-                                <span>Anime</span>
-                                <span>Yesterday</span>
-                            </div>
-                            <div class="history-progress">
-                                <div class="history-progress-bar" style="width: 100%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="history-item">
-                        <img src="../images/FightClub.jpg" alt="Fight Club">
-                        <div class="history-info">
-                            <h3>Fight Club</h3>
-                            <div class="history-meta">
-                                <span>Movie</span>
-                                <span>3 days ago</span>
-                            </div>
-                            <div class="history-progress">
-                                <div class="history-progress-bar" style="width: 100%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="history-item">
-                        <img src="../images/BladeRunner.jpg" alt="Blade Runner 2049">
-                        <div class="history-info">
-                            <h3>Blade Runner 2049</h3>
-                            <div class="history-meta">
-                                <span>Movie</span>
-                                <span>Last week</span>
-                            </div>
-                            <div class="history-progress">
-                                <div class="history-progress-bar" style="width: 100%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>Entertainment Hub</h3>
-                <p>Your ultimate destination for entertainment reviews and discussions.</p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul>
+            <nav class="main-nav">
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span class="hamburger-icon"></span>
+                </button>
+                <ul class="nav-list">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="movies.html">Movies</a></li>
                     <li><a href="anime.html">Anime</a></li>
                     <li><a href="manga.html">Manga</a></li>
-                    <li><a href="mangareader.html">Manga Reader</a></li>
-                    <li><a href="community.html">Community</a></li>
-                    <li><a href="privacy.html">Privacy Policy</a></li>
-                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Community <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="discussions.html" class="dropdown-item">Discussions</a></li>
+                            <li><a href="reviews.html" class="dropdown-item">Reviews</a></li>
+                            <li><a href="polls.html" class="dropdown-item">Polls</a></li>
+                            <li><a href="events.html" class="dropdown-item">Events</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="watchlist.html">Watchlist</a></li>
+                    <li><a href="profile.html" class="active">Profile</a></li>
                 </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="search-container">
+                    <input type="text" placeholder="Search..." aria-label="Search">
+                    <button type="button" aria-label="Submit search"><i class="fas fa-search"></i></button>
+                    <div class="search-results custom-scrollbar"></div>
+                </div>
+                <button class="audio-btn" id="audio-toggle" aria-label="Play background music">
+                    <i class="fas fa-volume-mute"></i>
+                </button>
+                <button class="theme-toggle tooltip" data-tooltip="Switch theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-menu dropdown">
+                    <button class="user-menu-toggle" aria-label="User menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="user-dropdown dropdown-menu">
+                        <a href="signin.html" class="dropdown-item"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                        <a href="signup.html" class="dropdown-item"><i class="fas fa-user-plus"></i> Sign Up</a>
+                    </div>
+                </div>
+                <button class="quiz-trigger btn-interactive" data-quiz-type="entertainment" data-tooltip="Take a quiz!">
+                    <i class="fas fa-question-circle"></i> Quiz
+                </button>
             </div>
-            <div class="footer-section">
-                <h4>Connect With Us</h4>
-                <div class="social-links">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="profile-header">
+            <div class="profile-header-content">
+                <div class="profile-avatar">
+                    <img src="../images/Avatar.jpg" alt="User profile picture">
+                </div>
+                <div class="profile-info">
+                    <h1>FilmFanatic42</h1>
+                    <p>Member since April 2023</p>
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">247</span>
+                            <span class="stat-label">Reviews</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">89</span>
+                            <span class="stat-label">Lists</span>
+                        </div>
+                        <div class="stat-item">
+                            <a href="ratings.html" style="color:inherit;text-decoration:none;">
+                                <span class="stat-number">1,256</span>
+                                <span class="stat-label">Ratings</span>
+                            </a>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">352</span>
+                            <span class="stat-label">Following</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">189</span>
+                            <span class="stat-label">Followers</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <a href="edit-profile.html" class="btn btn-secondary">Edit Profile</a>
                 </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+
+        <main class="main-profile">
+            <aside class="profile-sidebar">
+                <nav class="profile-nav">
+                    <ul>
+                        <li><a href="#activity" class="active"><i class="fas fa-chart-line"></i> Activity</a></li>
+                        <li><a href="#reviews"><i class="fas fa-star"></i> Reviews</a></li>
+                        <li><a href="#lists"><i class="fas fa-list"></i> Lists</a></li>
+                        <li><a href="#watchlist"><i class="fas fa-bookmark"></i> Watchlist</a></li>
+                        <li><a href="#history"><i class="fas fa-history"></i> History</a></li>
+                        <li><a href="#manga-shelf"><i class="fas fa-book-open"></i> Manga Shelf</a></li>
+                        <li><a href="#badges"><i class="fas fa-award"></i> Badges</a></li>
+                        <li><a href="#stats"><i class="fas fa-chart-bar"></i> Stats</a></li>
+                        <li><a href="#following"><i class="fas fa-users"></i> Following</a></li>
+                        <li><a href="#preferences"><i class="fas fa-cog"></i> Preferences</a></li>
+                        <li><a href="ratings.html"><i class="fas fa-star-half-alt"></i> Ratings</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <div class="profile-content">
+                <div id="activity" class="profile-section">
+                    <div class="section-header">
+                        <h2>Recent Activity</h2>
+                        <a href="activity.html" class="view-all">View All</a>
+                    </div>
+
+                    <div class="activity-feed">
+                        <div class="activity-item">
+                            <div class="activity-avatar">
+                                <img src="../images/Avatar.jpg" alt="User avatar">
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-header">
+                                    <span class="activity-user">You</span>
+                                    <span class="activity-action">rated</span>
+                                    <span class="activity-time">2 hours ago</span>
+                                </div>
+                                <div class="activity-body">
+                                    <a href="#" class="activity-title">Oppenheimer - 9.2/10</a>
+                                    <p>"A mesmerizing historical drama with outstanding performances. Nolan delivers another masterpiece that will be remembered for years to come."</p>
+                                </div>
+                                <div class="activity-footer">
+                                    <div class="activity-reactions">
+                                        <button><i class="fas fa-heart"></i> <span>24</span></button>
+                                        <button><i class="fas fa-comment"></i> <span>8</span></button>
+                                        <button><i class="fas fa-share"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-avatar">
+                                <img src="../images/Avatar.jpg" alt="User avatar">
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-header">
+                                    <span class="activity-user">You</span>
+                                    <span class="activity-action">added to manga collection</span>
+                                    <span class="activity-time">Yesterday</span>
+                                </div>
+                                <div class="activity-body">
+                                    <a href="#" class="activity-title">Chainsaw Man - Volume 14</a>
+                                    <p>Latest volume in Tatsuki Fujimoto's critically acclaimed dark fantasy series.</p>
+                                </div>
+                                <div class="activity-footer">
+                                    <div class="activity-reactions">
+                                        <button><i class="fas fa-heart"></i> <span>31</span></button>
+                                        <button><i class="fas fa-comment"></i> <span>5</span></button>
+                                        <button><i class="fas fa-share"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-avatar">
+                                <img src="../images/Avatar.jpg" alt="User avatar">
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-header">
+                                    <span class="activity-user">You</span>
+                                    <span class="activity-action">created a list</span>
+                                    <span class="activity-time">3 days ago</span>
+                                </div>
+                                <div class="activity-body">
+                                    <a href="#" class="activity-title">Top 10 Sci-Fi Movies of the Last Decade</a>
+                                    <p>My personal selection of the best science fiction films released between 2015-2025.</p>
+                                </div>
+                                <div class="activity-footer">
+                                    <div class="activity-reactions">
+                                        <button><i class="fas fa-heart"></i> <span>42</span></button>
+                                        <button><i class="fas fa-comment"></i> <span>15</span></button>
+                                        <button><i class="fas fa-share"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Manga Shelf Section -->
+                <div id="manga-shelf" class="profile-section">
+                    <div class="section-header">
+                        <h2>Your Manga Shelf</h2>
+                        <a href="#" class="view-all">View All</a>
+                    </div>
+
+                    <div class="content-grid">
+                        <div class="manga-shelf-item">
+                            <div class="manga-cover">
+                                <img src="../images/Chainsaw.jpg" alt="Chainsaw Man">
+                                <div class="manga-progress-badge">Vol. 14</div>
+                            </div>
+                            <div class="manga-shelf-info">
+                                <h3>Chainsaw Man</h3>
+                                <div class="manga-author">by Tatsuki Fujimoto</div>
+                                <div class="progress-stats">
+                                    <span>14/14 volumes</span>
+                                    <span>100% complete</span>
+                                </div>
+                                <div class="manga-actions">
+                                    <button class="btn-sm">Read</button>
+                                    <button class="btn-sm btn-outline">Rate</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="manga-shelf-item">
+                            <div class="manga-cover">
+                                <img src="../images/JJK.jpeg" alt="Jujutsu Kaisen">
+                                <div class="manga-progress-badge">Vol. 18</div>
+                            </div>
+                            <div class="manga-shelf-info">
+                                <h3>Jujutsu Kaisen</h3>
+                                <div class="manga-author">by Gege Akutami</div>
+                                <div class="progress-stats">
+                                    <span>18/22 volumes</span>
+                                    <span>82% complete</span>
+                                </div>
+                                <div class="manga-actions">
+                                    <button class="btn-sm">Read</button>
+                                    <button class="btn-sm btn-outline">Rate</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="manga-shelf-item">
+                            <div class="manga-cover">
+                                <img src="../images/OnePiece.jpg" alt="One Piece">
+                                <div class="manga-progress-badge">Vol. 105</div>
+                            </div>
+                            <div class="manga-shelf-info">
+                                <h3>One Piece</h3>
+                                <div class="manga-author">by Eiichiro Oda</div>
+                                <div class="progress-stats">
+                                    <span>105/107 volumes</span>
+                                    <span>98% complete</span>
+                                </div>
+                                <div class="manga-actions">
+                                    <button class="btn-sm">Read</button>
+                                    <button class="btn-sm btn-outline">Rate</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="manga-shelf-item">
+                            <div class="manga-cover">
+                                <img src="../images/DemonSlayer.jpg" alt="Demon Slayer">
+                                <div class="manga-progress-badge">Complete</div>
+                            </div>
+                            <div class="manga-shelf-info">
+                                <h3>Demon Slayer</h3>
+                                <div class="manga-author">by Koyoharu Gotouge</div>
+                                <div class="progress-stats">
+                                    <span>23/23 volumes</span>
+                                    <span>100% complete</span>
+                                </div>
+                                <div class="manga-actions">
+                                    <button class="btn-sm">Read</button>
+                                    <button class="btn-sm btn-outline">Rate</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Personalized Recommendations section -->
+                <div id="recommendations" class="profile-section">
+                    <div class="section-header">
+                        <h2>Your Recommendations</h2>
+                        <a href="recommendations.html" class="view-all">See All Recommendations</a>
+                    </div>
+
+                    <div class="recommendations-preview">
+                        <div class="reco-stats">
+                            <div class="reco-stat">
+                                <div class="reco-stat-number">87%</div>
+                                <div class="reco-stat-label">Match Accuracy</div>
+                            </div>
+                            <div class="reco-stat">
+                                <div class="reco-stat-number">325</div>
+                                <div class="reco-stat-label">New Recommendations</div>
+                            </div>
+                            <div class="reco-stat">
+                                <div class="reco-stat-number">42</div>
+                                <div class="reco-stat-label">Added to Watchlist</div>
+                            </div>
+                        </div>
+                        
+                        <div class="reco-preview-grid">
+                            <div class="reco-preview-item">
+                                <img src="../images/Interstellar.jpg" alt="Interstellar">
+                                <div class="reco-preview-content">
+                                    <span class="reco-match">98% Match</span>
+                                    <h4>Interstellar</h4>
+                                    <span class="reco-type">Movie • Sci-Fi</span>
+                                    <a href="recommendations.html" class="reco-action">View Details</a>
+                                </div>
+                            </div>
+                            <div class="reco-preview-item">
+                                <img src="../images/Steins.jpg" alt="Steins;Gate">
+                                <div class="reco-preview-content">
+                                    <span class="reco-match">95% Match</span>
+                                    <h4>Steins;Gate</h4>
+                                    <span class="reco-type">Anime • Sci-Fi</span>
+                                    <a href="recommendations.html" class="reco-action">View Details</a>
+                                </div>
+                            </div>
+                            <div class="reco-preview-item">
+                                <img src="../images/JJK.jpeg" alt="Jujutsu Kaisen">
+                                <div class="reco-preview-content">
+                                    <span class="reco-match">93% Match</span>
+                                    <h4>Jujutsu Kaisen</h4>
+                                    <span class="reco-type">Manga • Action</span>
+                                    <a href="recommendations.html" class="reco-action">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="reco-preferences-summary">
+                            <div class="reco-preferences-title">Based on your preferences:</div>
+                            <div class="reco-preferences-tags">
+                                <span class="reco-preference">Sci-Fi</span>
+                                <span class="reco-preference">Drama</span>
+                                <span class="reco-preference">Fantasy</span>
+                                <span class="reco-preference">Horror</span>
+                                <span class="reco-preference">Seinen</span>
+                            </div>
+                            <a href="recommendations.html" class="btn btn-primary-outline btn-sm">Edit Preferences</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="history" class="profile-section">
+                    <div class="section-header">
+                        <h2>Recently Watched</h2>
+                        <a href="history.html" class="view-all">View All</a>
+                    </div>
+
+                    <div class="content-grid">
+                        <div class="history-item">
+                            <img src="../images/Oppenheimer.jpg" alt="Oppenheimer">
+                            <div class="history-info">
+                                <h3>Oppenheimer</h3>
+                                <div class="history-meta">
+                                    <span>Movie</span>
+                                    <span>3 hours ago</span>
+                                </div>
+                                <div class="history-progress">
+                                    <div class="history-progress-bar" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="history-item">
+                            <img src="../images/DemonSlayer.jpg" alt="Demon Slayer">
+                            <div class="history-info">
+                                <h3>Demon Slayer S3E5</h3>
+                                <div class="history-meta">
+                                    <span>Anime</span>
+                                    <span>Yesterday</span>
+                                </div>
+                                <div class="history-progress">
+                                    <div class="history-progress-bar" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="history-item">
+                            <img src="../images/FightClub.jpg" alt="Fight Club">
+                            <div class="history-info">
+                                <h3>Fight Club</h3>
+                                <div class="history-meta">
+                                    <span>Movie</span>
+                                    <span>3 days ago</span>
+                                </div>
+                                <div class="history-progress">
+                                    <div class="history-progress-bar" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="history-item">
+                            <img src="../images/BladeRunner.jpg" alt="Blade Runner 2049">
+                            <div class="history-info">
+                                <h3>Blade Runner 2049</h3>
+                                <div class="history-meta">
+                                    <span>Movie</span>
+                                    <span>Last week</span>
+                                </div>
+                                <div class="history-progress">
+                                    <div class="history-progress-bar" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>Entertainment Hub</h3>
+                    <p>Your ultimate destination for entertainment reviews and discussions.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="movies.html">Movies</a></li>
+                        <li><a href="anime.html">Anime</a></li>
+                        <li><a href="manga.html">Manga</a></li>
+                        <li><a href="mangareader.html">Manga Reader</a></li>
+                        <li><a href="community.html">Community</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Entertainment Hub. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <div id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+            <i class="fas fa-moon"></i>
         </div>
-    </footer>
 
-    <div id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">
-        <i class="fas fa-moon"></i>
-    </div>
+        <a href="#" id="back-to-top" class="back-to-top" aria-label="Back to top">
+            <i class="fas fa-chevron-up"></i>
+        </a>
 
-    <a href="#" id="back-to-top" class="back-to-top" aria-label="Back to top">
-        <i class="fas fa-chevron-up"></i>
-    </a>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../js/main.js"></script>
-    <script>
-        // Initialize charts for the profile stats section
-        document.addEventListener('DOMContentLoaded', () => {
-            // Activity chart
-            const activityCtx = document.getElementById('activity-chart')?.getContext('2d');
-            if (activityCtx) {
-                new Chart(activityCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                        datasets: [{
-                            label: 'Reviews',
-                            data: [12, 19, 15, 25, 22, 30],
-                            backgroundColor: 'rgba(255, 111, 97, 0.7)'
-                        }, {
-                            label: 'Watchlist Adds',
-                            data: [8, 15, 12, 17, 10, 15],
-                            backgroundColor: 'rgba(0, 123, 255, 0.7)'
-                        }, {
-                            label: 'Manga Chapters Read',
-                            data: [22, 35, 28, 42, 38, 45],
-                            backgroundColor: 'rgba(75, 192, 192, 0.7)'
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="../js/main.js"></script>
+        <script>
+            // Initialize charts for the profile stats section
+            document.addEventListener('DOMContentLoaded', () => {
+                // Activity chart
+                const activityCtx = document.getElementById('activity-chart')?.getContext('2d');
+                if (activityCtx) {
+                    new Chart(activityCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                            datasets: [{
+                                label: 'Reviews',
+                                data: [12, 19, 15, 25, 22, 30],
+                                backgroundColor: 'rgba(255, 111, 97, 0.7)'
+                            }, {
+                                label: 'Watchlist Adds',
+                                data: [8, 15, 12, 17, 10, 15],
+                                backgroundColor: 'rgba(0, 123, 255, 0.7)'
+                            }, {
+                                label: 'Manga Chapters Read',
+                                data: [22, 35, 28, 42, 38, 45],
+                                backgroundColor: 'rgba(75, 192, 192, 0.7)'
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
                             }
                         }
-                    }
-                });
-            }
-            
-            // Time spent chart
-            const timeCtx = document.getElementById('time-chart')?.getContext('2d');
-            if (timeCtx) {
-                new Chart(timeCtx, {
-                    type: 'pie',
-                    data: {
-                        labels: ['Movies', 'TV Shows', 'Anime', 'Manga', 'Games'],
-                        datasets: [{
-                            data: [120, 80, 65, 95, 35],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.7)',
-                                'rgba(54, 162, 235, 0.7)',
-                                'rgba(255, 206, 86, 0.7)',
-                                'rgba(75, 192, 192, 0.7)',
-                                'rgba(153, 102, 255, 0.7)'
+                    });
+                }
+                
+                // Time spent chart
+                const timeCtx = document.getElementById('time-chart')?.getContext('2d');
+                if (timeCtx) {
+                    new Chart(timeCtx, {
+                        type: 'pie',
+                        data: {
+                            labels: ['Movies', 'TV Shows', 'Anime', 'Manga', 'Games'],
+                            datasets: [{
+                                data: [120, 80, 65, 95, 35],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.7)',
+                                    'rgba(54, 162, 235, 0.7)',
+                                    'rgba(255, 206, 86, 0.7)',
+                                    'rgba(75, 192, 192, 0.7)',
+                                    'rgba(153, 102, 255, 0.7)'
                             ],
                             borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false
-                    }
-                });
-            }
-
-            // Manga-specific animation effects
-            const mangaItems = document.querySelectorAll('.manga-shelf-item');
-            if (mangaItems.length) {
-                mangaItems.forEach(item => {
-                    item.addEventListener('mouseenter', () => {
-                        const cover = item.querySelector('.manga-cover');
-                        cover.style.transform = 'translateY(-10px) rotateY(10deg)';
-                        cover.style.boxShadow = '5px 5px 15px rgba(0,0,0,0.3)';
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false
+                        }
                     });
+                }
 
-                    item.addEventListener('mouseleave', () => {
-                        const cover = item.querySelector('.manga-cover');
-                        cover.style.transform = '';
-                        cover.style.boxShadow = '';
+                // Manga-specific animation effects
+                const mangaItems = document.querySelectorAll('.manga-shelf-item');
+                if (mangaItems.length) {
+                    mangaItems.forEach(item => {
+                        item.addEventListener('mouseenter', () => {
+                            const cover = item.querySelector('.manga-cover');
+                            cover.style.transform = 'translateY(-10px) rotateY(10deg)';
+                            cover.style.boxShadow = '5px 5px 15px rgba(0,0,0,0.3)';
+                        });
+
+                        item.addEventListener('mouseleave', () => {
+                            const cover = item.querySelector('.manga-cover');
+                            cover.style.transform = '';
+                            cover.style.boxShadow = '';
+                        });
                     });
-                });
-            }
-        });
-    </script>
-</body>
+                }
+            });
+        </script>
+    </body>
 
 </html>

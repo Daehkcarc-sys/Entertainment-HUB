@@ -6,14 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy | Entertainment Hub</title>
     
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="../css/styles.css">
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- Master Stylesheet - includes all CSS files -->
+    <link rel="stylesheet" href="../css/master.css">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/dark-theme.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/audio-player.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Privacy Policy for Entertainment Hub - Learn how we protect your data">
+    <meta name="keywords" content="privacy policy, data protection, entertainment hub, user privacy">
+    <meta property="og:title" content="Privacy Policy | Entertainment Hub">
+    <meta property="og:description" content="Learn how Entertainment Hub protects your privacy and handles your data">
+    <meta property="og:url" content="https://entertainment-hub.com/privacy.html">
+    
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#6C63FF">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    
+    <!-- Audio Player -->
+    <audio id="background-music" loop preload="none">
+        <source src="../Morning-Routine-Lofi-Study-Music(chosic.com).mp3" type="audio/mpeg">
+    </audio>
     
     <style>
         .privacy-container {
@@ -56,24 +83,100 @@
 </head>
 
 <body data-theme="light">
-    <header>
-        <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="movies.html">Movies</a></li>
-                <li><a href="anime.html">Anime</a></li>
-                <li><a href="manga.html">Manga</a></li>
-                <li><a href="series.html">Series</a></li>
-                <li><a href="games.html">Games</a></li>
-                <li><a href="leaderboard.html">Leaderboard</a></li>
-                <li><a href="community.html">Community</a></li>
-                <li><a href="discussions.html">Discussions</a></li>
-                <li><a href="watchlist.html">Watchlist</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="signin.html">Sign In / Sign Up</a></li>
+    <!-- Main Header - Contains navigation, logo, user menu, theme toggle and search -->
+    <header class="main-header">
+        <!-- Mobile Menu Toggle - Only visible on small screens -->
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="main-navigation">
+            <span class="burger-icon"></span>
+        </button>
+        
+        <!-- Site Logo - Links back to homepage -->
+        <div class="logo">
+            <a href="index.html" aria-label="Entertainment Hub Home">
+                <i class="fas fa-film"></i> Entertainment Hub
+            </a>
+        </div>
+        
+        <!-- Main Navigation - Primary site navigation links -->
+        <nav id="main-navigation" aria-label="Main navigation">
+            <ul class="nav-list">
+                <!-- Home link - Returns to main page -->
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                
+                <!-- Movies section - Links to movie listings and categories -->
+                <li class="nav-item"><a href="movies.html" class="nav-link">Movies</a></li>
+                
+                <!-- Anime section - Links to anime content -->
+                <li class="nav-item"><a href="anime.html" class="nav-link">Anime</a></li>
+                
+                <!-- Manga section - Links to manga content -->
+                <li class="nav-item"><a href="manga.html" class="nav-link">Manga</a></li>
+                
+                <!-- TV Series section - Links to TV series content -->
+                <li class="nav-item"><a href="series.html" class="nav-link">Series</a></li>
+                
+                <!-- Games section - Links to gaming content and reviews -->
+                <li class="nav-item"><a href="games.html" class="nav-link">Games</a></li>
+                
+                <!-- Leaderboard - Shows top users and content -->
+                <li class="nav-item"><a href="leaderboard.html" class="nav-link">Leaderboard</a></li>
+                
+                <!-- Community dropdown - Contains community-related links -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle">Community <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="discussions.html">Discussions</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="polls.html">Polls</a></li>
+                        <li><a href="support.html">Support</a></li>
+                    </ul>
+                </li>
+                
+                <!-- Watchlist - User's saved content -->
+                <li class="nav-item"><a href="watchlist.html" class="nav-link">Watchlist</a></li>
             </ul>
         </nav>
+        
+        <!-- Right Header Section - Contains utilities like search, theme toggle and user menu -->
+        <div class="header-right">
+            <!-- Search Form - Global site search -->
+            <form class="search-form" action="search.html" method="get">
+                <input type="search" name="q" placeholder="Search..." aria-label="Search">
+                <button type="submit" aria-label="Submit search">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+            
+            <!-- Audio Player Controls - For background music -->
+            <div class="audio-controls">
+                <button id="play-pause-btn" class="audio-btn" aria-label="Play or pause background music">
+                    <i class="fas fa-play"></i>
+                </button>
+                <div class="volume-container">
+                    <button id="mute-btn" class="audio-btn" aria-label="Mute or unmute background music">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5" aria-label="Volume control">
+                </div>
+            </div>
+            
+            <!-- Theme Toggle - Light/Dark mode switch -->
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+            
+            <!-- Quiz Trigger - Opens the daily quiz popup -->
+            <button id="quiz-trigger" class="quiz-btn" aria-label="Take daily quiz">
+                <i class="fas fa-question-circle"></i>
+            </button>
+            
+            <!-- User Menu - Contains profile and authentication links -->
+            <div class="user-menu">
+                <a href="signin.html" class="btn btn-primary">Sign In</a>
+                <a href="signup.html" class="btn">Sign Up</a>
+            </div>
+        </div>
     </header>
 
     <main>

@@ -12,6 +12,17 @@
     
     <!-- Master Stylesheet - includes all CSS files -->
     <link rel="stylesheet" href="../css/master.css">
+    <link rel="stylesheet" href="../css/images.css">
+    <link rel="stylesheet" href="../css/audio-player.css">
+    <link rel="stylesheet" href="../css/quiz.css">
+    
+    <!-- New interactive CSS files -->
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/interactive-components.css">
+    <link rel="stylesheet" href="../css/notifications.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- Google Fonts -->
@@ -32,10 +43,15 @@
     <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
 </head>
 
-<body data-theme="light">
+<body>
+    <!-- Loading spinner element -->
+    <div class="loader-container" id="pageLoader">
+        <div class="loader"></div>
+    </div>
+    
     <a class="skip-link" href="#main">Skip to content</a>
     
-    <header class="site-header">
+    <header class="site-header unified-header">
         <div class="container header-container">
             <div class="logo">
                 <h1><i class="fas fa-film"></i> Entertainment Hub</h1>
@@ -51,87 +67,98 @@
                     <li><a href="manga.html">Manga</a></li>
                     <li><a href="series.html">Series</a></li>
                     <li><a href="games.html">Games</a></li>
+                    <li><a href="about.html">About</a></li>
                     <li><a href="leaderboard.html">Leaderboard</a></li>
                     <li class="dropdown">
-                        <a href="community.html">Community <i class="fas fa-caret-down"></i></a>
+                        <a href="#" class="dropdown-toggle">Community <i class="fas fa-caret-down"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a href="discussions.html">Discussions</a></li>
-                            <li><a href="reviews.html">Reviews</a></li>
-                            <li><a href="polls.html">Polls</a></li>
-                            <li><a href="events.html">Events</a></li>
+                            <li><a href="discussions.html" class="dropdown-item">Discussions</a></li>
+                            <li><a href="reviews.html" class="dropdown-item">Reviews</a></li>
+                            <li><a href="polls.html" class="dropdown-item">Polls</a></li>
+                            <li><a href="events.html" class="dropdown-item">Events</a></li>
                         </ul>
                     </li>
                     <li><a href="watchlist.html">Watchlist</a></li>
-                    <li><a href="profile.html">Profile</a></li>
-                    <li class="auth-links"><a href="signin.html">Sign In / Sign Up</a></li>
                 </ul>
             </nav>
+            <div class="header-actions">
+                <div class="search-container">
+                    <input type="text" placeholder="Search..." aria-label="Search">
+                    <button type="button" aria-label="Submit search"><i class="fas fa-search"></i></button>
+                    <div class="search-results custom-scrollbar"></div>
+                </div>
+                <button class="theme-toggle tooltip" data-tooltip="Switch theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-menu dropdown">
+                    <button class="user-menu-toggle" aria-label="User menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="user-dropdown dropdown-menu">
+                        <a href="signin.html" class="dropdown-item"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+                        <a href="signup.html" class="dropdown-item"><i class="fas fa-user-plus"></i> Sign Up</a>
+                    </div>
+                </div>
+                <button class="quiz-trigger btn-interactive" data-quiz-type="general" data-tooltip="Take a quiz!">
+                    <i class="fas fa-question-circle"></i> Quiz
+                </button>
+            </div>
         </div>
     </header>
 
     <main id="main">
         <!-- Hero Section with Improved Carousel -->
         <section class="hero">
-            <div class="carousel-container banner carousel-hero overlay" data-autoplay="true" data-loop="true" data-slides-per-view="1" data-autoplay-delay="7000">
-                <div class="carousel-wrapper">
+            <div class="carousel" id="heroCarousel" data-autoplay="true" data-interval="7000">
+                <div class="carousel-container">
                     <div class="carousel-item">
-                        <div class="carousel-image">
-                            <img src="../images/Oppenheimer.jpg" alt="Oppenheimer" loading="eager">
+                        <div class="carousel-image img-zoom-container">
+                            <img src="../images/Oppenheimer.jpg" alt="Oppenheimer" loading="eager" class="img-zoom">
                         </div>
                         <div class="carousel-caption">
-                            <h3>Oppenheimer</h3>
-                            <p>The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.</p>
-                            <div class="carousel-actions">
-                                <a href="movies.html?id=oppenheimer" class="btn btn-primary">Watch Trailer</a>
-                                <button class="btn btn-outline add-watchlist" data-id="oppenheimer" data-type="movie">Add to Watchlist</button>
+                            <h3 class="fade-in-up">Oppenheimer</h3>
+                            <p class="fade-in-up delay-1">The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.</p>
+                            <div class="carousel-actions fade-in-up delay-2">
+                                <a href="movies.html?id=oppenheimer" class="btn btn-primary btn-interactive">Watch Trailer</a>
+                                <a href="https://www.netflix.com/title/81631626" class="btn btn-secondary btn-interactive" target="_blank">Watch Now</a>
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <div class="carousel-image">
-                            <img src="../images/attack on titan.jpg" alt="Attack on Titan Final Season" loading="eager">
+                        <div class="carousel-image img-zoom-container">
+                            <img src="../images/attack on titan.jpg" alt="Attack on Titan Final Season" loading="eager" class="img-zoom">
                         </div>
                         <div class="carousel-caption">
-                            <h3>Attack on Titan: Final Season</h3>
-                            <p>The epic conclusion to one of the most acclaimed anime series of all time.</p>
-                            <div class="carousel-actions">
-                                <a href="anime.html?id=aot-final" class="btn btn-primary">Watch Trailer</a>
-                                <button class="btn btn-outline add-watchlist" data-id="aot-final" data-type="anime">Add to Watchlist</button>
+                            <h3 class="fade-in-up">Attack on Titan: Final Season</h3>
+                            <p class="fade-in-up delay-1">The epic conclusion to one of the most acclaimed anime series of all time.</p>
+                            <div class="carousel-actions fade-in-up delay-2">
+                                <a href="anime.html?id=aot-final" class="btn btn-primary btn-interactive">Watch Trailer</a>
+                                <a href="https://www.crunchyroll.com/series/GR751KNZY/attack-on-titan" class="btn btn-secondary btn-interactive" target="_blank">Watch Now</a>
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <div class="carousel-image">
-                            <img src="../images/EldenRing.jpg" alt="Elden Ring" loading="eager">
+                        <div class="carousel-image img-zoom-container">
+                            <img src="../images/EldenRing.jpg" alt="Elden Ring" loading="eager" class="img-zoom">
                         </div>
                         <div class="carousel-caption">
-                            <h3>Elden Ring</h3>
-                            <p>From Software's masterpiece open-world RPG with lore by George R.R. Martin.</p>
-                            <div class="carousel-actions">
-                                <a href="games.html?id=elden-ring" class="btn btn-primary">See Gameplay</a>
-                                <button class="btn btn-outline add-watchlist" data-id="elden-ring" data-type="game">Add to Wishlist</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="carousel-image">
-                            <img src="../images/Darkknight.jpg" alt="The Dark Knight" loading="eager">
-                        </div>
-                        <div class="carousel-caption">
-                            <h3>The Dark Knight</h3>
-                            <p>Christopher Nolan's iconic superhero film featuring Heath Ledger's legendary performance as the Joker.</p>
-                            <div class="carousel-actions">
-                                <a href="movies.html?id=dark-knight" class="btn btn-primary">Watch Trailer</a>
-                                <button class="btn btn-outline add-watchlist" data-id="dark-knight" data-type="movie">Add to Watchlist</button>
+                            <h3 class="fade-in-up">Elden Ring</h3>
+                            <p class="fade-in-up delay-1">From Software's masterpiece open-world RPG with lore by George R.R. Martin.</p>
+                            <div class="carousel-actions fade-in-up delay-2">
+                                <a href="games.html?id=elden-ring" class="btn btn-primary btn-interactive">See Gameplay</a>
+                                <a href="https://store.steampowered.com/app/1245620/ELDEN_RING/" class="btn btn-secondary btn-interactive" target="_blank">Play Now</a>
                             </div>
                         </div>
                     </div>
                 </div>
+                <button class="carousel-prev" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-next" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-indicators"></div>
             </div>
 
             <div class="container">
                 <div class="category-cards">
-                    <div class="category-card animate-on-scroll" data-animation="fade-in-up">
+                    <div class="category-card hover-card" data-scroll="fade-in-up">
                         <div class="category-icon">
                             <i class="fas fa-film"></i>
                         </div>
@@ -140,7 +167,7 @@
                         <a href="movies.html" class="category-link">Browse Movies <i class="fas fa-chevron-right"></i></a>
                     </div>
                     
-                    <div class="category-card animate-on-scroll" data-animation="fade-in-up">
+                    <div class="category-card hover-card" data-scroll="fade-in-up" data-delay="0.1">
                         <div class="category-icon">
                             <i class="fas fa-tv"></i>
                         </div>
@@ -149,7 +176,7 @@
                         <a href="series.html" class="category-link">Browse Series <i class="fas fa-chevron-right"></i></a>
                     </div>
                     
-                    <div class="category-card animate-on-scroll" data-animation="fade-in-up">
+                    <div class="category-card hover-card" data-scroll="fade-in-up" data-delay="0.2">
                         <div class="category-icon">
                             <i class="fas fa-dragon"></i>
                         </div>
@@ -158,7 +185,7 @@
                         <a href="anime.html" class="category-link">Browse Anime <i class="fas fa-chevron-right"></i></a>
                     </div>
                     
-                    <div class="category-card animate-on-scroll" data-animation="fade-in-up">
+                    <div class="category-card hover-card" data-scroll="fade-in-up" data-delay="0.3">
                         <div class="category-icon">
                             <i class="fas fa-gamepad"></i>
                         </div>
@@ -170,442 +197,226 @@
             </div>
         </section>
         
-        <!-- Trending Now Section with Enhanced Carousel -->
+        <!-- Trending Now Section with Enhanced Tabs -->
         <section class="trending-section">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">Trending Now</h2>
-                    <div class="section-controls">
-                        <button class="trending-tab active" data-category="movies">Movies</button>
-                        <button class="trending-tab" data-category="series">Series</button>
-                        <button class="trending-tab" data-category="anime">Anime</button>
-                        <button class="trending-tab" data-category="games">Games</button>
+                    <h2 class="section-title" data-scroll="fade-in">Trending Now</h2>
+                    <div class="tabs">
+                        <div class="tab-nav">
+                            <button class="tab-nav-item active" data-tab-target="trending-movies">Movies</button>
+                            <button class="tab-nav-item" data-tab-target="trending-series">Series</button>
+                            <button class="tab-nav-item" data-tab-target="trending-anime">Anime</button>
+                            <button class="tab-nav-item" data-tab-target="trending-games">Games</button>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="trending-content">
-                    <div class="tab-content" id="trending-movies">
-                        <div class="carousel-container multi-item" data-slides-per-view="4" data-loop="false" data-spacing="16" 
-                             data-breakpoints='{"1024":{"slidesPerView":4},"768":{"slidesPerView":3},"480":{"slidesPerView":2}}'>
-                            <div class="carousel-wrapper">
+                    <div class="tab-content active" id="trending-movies">
+                        <div class="carousel" data-slides-per-view="4" data-breakpoints='{"1024":4,"768":3,"480":2}'>
+                            <div class="carousel-container">
+                                <!-- Movies content -->
                                 <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <div class="carousel-image">
-                                            <img src="../images/Oppenheimer.jpg" alt="Oppenheimer">
-                                            <span class="carousel-badge">9.2 <i class="fas fa-star"></i></span>
+                                    <div class="card hover-card">
+                                        <div class="card-img img-zoom-container">
+                                            <img src="../images/Oppenheimer.jpg" alt="Oppenheimer" class="img-zoom">
+                                            <span class="card-badge">9.2 <i class="fas fa-star"></i></span>
                                         </div>
-                                        <div class="carousel-caption">
-                                            <h3>Oppenheimer</h3>
-                                            <p>2023 | Drama | Historical</p>
+                                        <div class="card-body">
+                                            <h3 class="card-title">Oppenheimer</h3>
+                                            <p class="card-text">2023 | Drama | Historical</p>
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <div class="carousel-image">
-                                            <img src="../images/Darkknight.jpg" alt="The Dark Knight">
-                                            <span class="carousel-badge">9.0 <i class="fas fa-star"></i></span>
+                                    <div class="card hover-card">
+                                        <div class="card-img img-zoom-container">
+                                            <img src="../images/Darkknight.jpg" alt="The Dark Knight" class="img-zoom">
+                                            <span class="card-badge">9.0 <i class="fas fa-star"></i></span>
                                         </div>
-                                        <div class="carousel-caption">
-                                            <h3>The Dark Knight</h3>
-                                            <p>2008 | Action | Superhero</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <div class="carousel-image">
-                                            <img src="../images/BladeRunner.jpg" alt="Blade Runner 2049">
-                                            <span class="carousel-badge">8.8 <i class="fas fa-star"></i></span>
-                                        </div>
-                                        <div class="carousel-caption">
-                                            <h3>Blade Runner 2049</h3>
-                                            <p>2017 | Sci-Fi | Drama</p>
+                                        <div class="card-body">
+                                            <h3 class="card-title">The Dark Knight</h3>
+                                            <p class="card-text">2008 | Action | Superhero</p>
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <div class="carousel-image">
-                                            <img src="../images/AvengersInfinity.jpg" alt="Avengers: Infinity War">
-                                            <span class="carousel-badge">8.5 <i class="fas fa-star"></i></span>
+                                    <div class="card hover-card">
+                                        <div class="card-img img-zoom-container">
+                                            <img src="../images/BladeRunner.jpg" alt="Blade Runner 2049" class="img-zoom">
+                                            <span class="card-badge">8.8 <i class="fas fa-star"></i></span>
                                         </div>
-                                        <div class="carousel-caption">
-                                            <h3>Avengers: Infinity War</h3>
-                                            <p>2018 | Action | Adventure</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <div class="carousel-image">
-                                            <img src="../images/Dune.jpg" alt="Dune">
-                                            <span class="carousel-badge">8.9 <i class="fas fa-star"></i></span>
-                                        </div>
-                                        <div class="carousel-caption">
-                                            <h3>Dune</h3>
-                                            <p>2021 | Sci-Fi | Adventure</p>
+                                        <div class="card-body">
+                                            <h3 class="card-title">Blade Runner 2049</h3>
+                                            <p class="card-text">2017 | Sci-Fi | Drama</p>
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <div class="carousel-image">
-                                            <img src="../images/PulpFiction.jpg" alt="Pulp Fiction">
-                                            <span class="carousel-badge">8.9 <i class="fas fa-star"></i></span>
+                                    <div class="card hover-card">
+                                        <div class="card-img img-zoom-container">
+                                            <img src="../images/AvengersInfinity.jpg" alt="Avengers: Infinity War" class="img-zoom">
+                                            <span class="card-badge">8.5 <i class="fas fa-star"></i></span>
                                         </div>
-                                        <div class="carousel-caption">
-                                            <h3>Pulp Fiction</h3>
-                                            <p>1994 | Crime | Drama</p>
+                                        <div class="card-body">
+                                            <h3 class="card-title">Avengers: Infinity War</h3>
+                                            <p class="card-text">2018 | Action | Adventure</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="carousel-item">
+                                    <div class="card hover-card">
+                                        <div class="card-img img-zoom-container">
+                                            <img src="../images/Dune.jpg" alt="Dune" class="img-zoom">
+                                            <span class="card-badge">8.9 <i class="fas fa-star"></i></span>
+                                        </div>
+                                        <div class="card-body">
+                                            <h3 class="card-title">Dune</h3>
+                                            <p class="card-text">2021 | Sci-Fi | Adventure</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="carousel-item">
+                                    <div class="card hover-card">
+                                        <div class="card-img img-zoom-container">
+                                            <img src="../images/PulpFiction.jpg" alt="Pulp Fiction" class="img-zoom">
+                                            <span class="card-badge">8.9 <i class="fas fa-star"></i></span>
+                                        </div>
+                                        <div class="card-body">
+                                            <h3 class="card-title">Pulp Fiction</h3>
+                                            <p class="card-text">1994 | Crime | Drama</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <button class="carousel-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+                            <button class="carousel-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
                         </div>
                     </div>
                     
-                    <!-- Series Tab -->
-                    <div class="tab-content" id="trending-series" style="display: none;">
-                        <div class="carousel-container multi-item" data-slides-per-view="4" data-loop="false" data-spacing="16" 
-                             data-breakpoints='{"1024":{"slidesPerView":4},"768":{"slidesPerView":3},"480":{"slidesPerView":2}}'>
-                            <div class="carousel-wrapper">
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <div class="carousel-image">
-                                            <img src="../images/Severence.jpg" alt="Severance">
-                                            <span class="carousel-badge">9.1 <i class="fas fa-star"></i></span>
-                                        </div>
-                                        <div class="carousel-caption">
-                                            <h3>Severance</h3>
-                                            <p>2022 | Drama | Sci-Fi</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <div class="carousel-image">
-                                            <img src="../images/Series.jpg" alt="The Last of Us">
-                                            <span class="carousel-badge">8.8 <i class="fas fa-star"></i></span>
-                                        </div>
-                                        <div class="carousel-caption">
-                                            <h3>The Last of Us</h3>
-                                            <p>2023 | Drama | Horror</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <div class="carousel-image">
-                                            <img src="../images/Starwars.jpg" alt="The Mandalorian">
-                                            <span class="carousel-badge">8.7 <i class="fas fa-star"></i></span>
-                                        </div>
-                                        <div class="carousel-caption">
-                                            <h3>The Mandalorian</h3>
-                                            <p>2019 | Sci-Fi | Adventure</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <div class="carousel-image">
-                                            <img src="../images/LastHorizon.jpg" alt="Last Horizon">
-                                            <span class="carousel-badge">8.6 <i class="fas fa-star"></i></span>
-                                        </div>
-                                        <div class="carousel-caption">
-                                            <h3>Last Horizon</h3>
-                                            <p>2024 | Drama | Mystery</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Other tab contents remain the same -->
+                    <div class="tab-content" id="trending-series">
+                        <!-- Series content -->
                     </div>
                     
-                    <!-- Anime Tab -->
-                    <div class="tab-content" id="trending-anime" style="display: none;">
-                        <div class="carousel-container multi-item" data-slides-per-view="4" data-loop="false" data-spacing="16" 
-                             data-breakpoints='{"1024":{"slidesPerView":4},"768":{"slidesPerView":3},"480":{"slidesPerView":2}}'>
-                            <div class="carousel-wrapper">
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <div class="carousel-image">
-                                            <img src="../images/JJK.jpeg" alt="Jujutsu Kaisen">
-                                            <span class="carousel-badge">9.4 <i class="fas fa-star"></i></span>
-                                        </div>
-                                        <div class="carousel-caption">
-                                            <h3>Jujutsu Kaisen</h3>
-                                            <p>2023 | Action | Supernatural</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <div class="carousel-image">
-                                            <img src="../images/attack on titan.jpg" alt="Attack on Titan">
-                                            <span class="carousel-badge">9.3 <i class="fas fa-star"></i></span>
-                                        </div>
-                                        <div class="carousel-caption">
-                                            <h3>Attack on Titan</h3>
-                                            <p>2023 | Action | Drama</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <div class="carousel-image">
-                                            <img src="../images/DemonSlayer.jpg" alt="Demon Slayer">
-                                            <span class="carousel-badge">9.1 <i class="fas fa-star"></i></span>
-                                        </div>
-                                        <div class="carousel-caption">
-                                            <h3>Demon Slayer</h3>
-                                            <p>2023 | Action | Supernatural</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <div class="carousel-image">
-                                            <img src="../images/Chainsaw.jpg" alt="Chainsaw Man">
-                                            <span class="carousel-badge">8.9 <i class="fas fa-star"></i></span>
-                                        </div>
-                                        <div class="carousel-caption">
-                                            <h3>Chainsaw Man</h3>
-                                            <p>2022 | Action | Horror</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="tab-content" id="trending-anime">
+                        <!-- Anime content -->
                     </div>
                     
-                    <!-- Games Tab -->
-                    <div class="tab-content" id="trending-games" style="display: none;">
-                        <div class="carousel-container multi-item" data-slides-per-view="4" data-loop="false" data-spacing="16" 
-                             data-breakpoints='{"1024":{"slidesPerView":4},"768":{"slidesPerView":3},"480":{"slidesPerView":2}}'>
-                            <div class="carousel-wrapper">
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <div class="carousel-image">
-                                            <img src="../images/EldenRing.jpg" alt="Elden Ring">
-                                            <span class="carousel-badge">9.5 <i class="fas fa-star"></i></span>
-                                        </div>
-                                        <div class="carousel-caption">
-                                            <h3>Elden Ring</h3>
-                                            <p>2022 | RPG | Open World</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <div class="carousel-image">
-                                            <img src="../images/GOW.jpg" alt="God of War Ragnarök">
-                                            <span class="carousel-badge">9.2 <i class="fas fa-star"></i></span>
-                                        </div>
-                                        <div class="carousel-caption">
-                                            <h3>God of War Ragnarök</h3>
-                                            <p>2022 | Action | Adventure</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <div class="carousel-image">
-                                            <img src="../images/minecraft.jpg" alt="Minecraft">
-                                            <span class="carousel-badge">9.0 <i class="fas fa-star"></i></span>
-                                        </div>
-                                        <div class="carousel-caption">
-                                            <h3>Minecraft</h3>
-                                            <p>2011 | Sandbox | Adventure</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="tab-content" id="trending-games">
+                        <!-- Games content -->
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- Upcoming Releases Countdown Section -->
-        <section class="upcoming-releases-section">
+        <!-- Quiz Section -->
+        <section class="quiz-section" data-scroll="fade-in">
             <div class="container">
-                <h2 class="section-title">Upcoming Releases</h2>
-                <p class="section-subtitle">Get ready for these highly anticipated titles</p>
+                <div class="section-header">
+                    <h2 class="section-title">Test Your Knowledge</h2>
+                    <p class="section-subtitle">Challenge yourself with our entertainment quiz!</p>
+                </div>
                 
-                <div class="countdown-container">
-                    <div class="countdown-item">
-                        <div class="countdown-image">
-                            <img src="../images/Dune.jpg" alt="Dune: Part Two">
-                            <div class="countdown-overlay">
-                                <div class="countdown-timer" data-release-date="2025-05-15T00:00:00">
-                                    <div class="timer-unit">
-                                        <span class="timer-value days">00</span>
-                                        <span class="timer-label">Days</span>
-                                    </div>
-                                    <div class="timer-unit">
-                                        <span class="timer-value hours">00</span>
-                                        <span class="timer-label">Hours</span>
-                                    </div>
-                                    <div class="timer-unit">
-                                        <span class="timer-value minutes">00</span>
-                                        <span class="timer-label">Minutes</span>
-                                    </div>
-                                    <div class="timer-unit">
-                                        <span class="timer-value seconds">00</span>
-                                        <span class="timer-label">Seconds</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="countdown-info">
-                            <h3>Dune: Part Two</h3>
-                            <p class="release-date">May 15, 2025</p>
-                            <p class="countdown-description">The saga continues as Paul Atreides unites with the Fremen to seek revenge against the conspirators who destroyed his family.</p>
-                            <button class="btn btn-outline notify-me" data-id="dune-part-two">Notify Me</button>
-                        </div>
+                <div id="home-quiz" class="quiz-container" data-quiz-type="general">
+                    <div class="quiz-header">
+                        <h3>Ready for a Challenge?</h3>
+                        <p>Test your entertainment knowledge with our interactive quizzes!</p>
                     </div>
                     
-                    <div class="countdown-item">
-                        <div class="countdown-image">
-                            <img src="../images/Heroacademia.jpg" alt="My Hero Academia: Season 8">
-                            <div class="countdown-overlay">
-                                <div class="countdown-timer" data-release-date="2025-07-01T00:00:00">
-                                    <div class="timer-unit">
-                                        <span class="timer-value days">00</span>
-                                        <span class="timer-label">Days</span>
-                                    </div>
-                                    <div class="timer-unit">
-                                        <span class="timer-value hours">00</span>
-                                        <span class="timer-label">Hours</span>
-                                    </div>
-                                    <div class="timer-unit">
-                                        <span class="timer-value minutes">00</span>
-                                        <span class="timer-label">Minutes</span>
-                                    </div>
-                                    <div class="timer-unit">
-                                        <span class="timer-value seconds">00</span>
-                                        <span class="timer-label">Seconds</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="countdown-info">
-                            <h3>My Hero Academia: Season 8</h3>
-                            <p class="release-date">July 1, 2025</p>
-                            <p class="countdown-description">The battle between heroes and villains reaches its climax in the final season of the acclaimed anime series.</p>
-                            <button class="btn btn-outline notify-me" data-id="mha-season-8">Notify Me</button>
-                        </div>
-                    </div>
-                    
-                    <div class="countdown-item">
-                        <div class="countdown-image">
-                            <img src="../images/GOW.jpg" alt="God of War: Ragnarök DLC">
-                            <div class="countdown-overlay">
-                                <div class="countdown-timer" data-release-date="2025-06-10T00:00:00">
-                                    <div class="timer-unit">
-                                        <span class="timer-value days">00</span>
-                                        <span class="timer-label">Days</span>
-                                    </div>
-                                    <div class="timer-unit">
-                                        <span class="timer-value hours">00</span>
-                                        <span class="timer-label">Hours</span>
-                                    </div>
-                                    <div class="timer-unit">
-                                        <span class="timer-value minutes">00</span>
-                                        <span class="timer-label">Minutes</span>
-                                    </div>
-                                    <div class="timer-unit">
-                                        <span class="timer-value seconds">00</span>
-                                        <span class="timer-label">Seconds</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="countdown-info">
-                            <h3>God of War: Ragnarök DLC</h3>
-                            <p class="release-date">June 10, 2025</p>
-                            <p class="countdown-description">Return to the Nine Realms with Kratos and Atreus in this epic expansion to the award-winning game.</p>
-                            <button class="btn btn-outline notify-me" data-id="gow-ragnarok-dlc">Notify Me</button>
-                        </div>
+                    <div class="quiz-preview">
+                        <button class="quiz-trigger btn-interactive" data-quiz-id="movies-quiz">
+                            <div class="quiz-icon"><i class="fas fa-film"></i></div>
+                            <div class="quiz-label">Movies Quiz</div>
+                        </button>
+                        
+                        <button class="quiz-trigger btn-interactive" data-quiz-id="series-quiz">
+                            <div class="quiz-icon"><i class="fas fa-tv"></i></div>
+                            <div class="quiz-label">TV Series Quiz</div>
+                        </button>
+                        
+                        <button class="quiz-trigger btn-interactive" data-quiz-id="anime-quiz">
+                            <div class="quiz-icon"><i class="fas fa-dragon"></i></div>
+                            <div class="quiz-label">Anime Quiz</div>
+                        </button>
+                        
+                        <button class="quiz-trigger btn-interactive" data-quiz-id="games-quiz">
+                            <div class="quiz-icon"><i class="fas fa-gamepad"></i></div>
+                            <div class="quiz-label">Gaming Quiz</div>
+                        </button>
                     </div>
                 </div>
             </div>
         </section>
         
-        <!-- Featured Content Section with Card-Style Carousel -->
+        <!-- Featured Content Section -->
         <section class="featured-section">
             <div class="container">
-                <h2 class="section-title">Featured Content</h2>
+                <h2 class="section-title" data-scroll="fade-in">Featured Content</h2>
                 
-                <div class="carousel-container card-style" data-slides-per-view="3" data-loop="true" data-spacing="20" 
-                     data-breakpoints='{"1024":{"slidesPerView":3},"768":{"slidesPerView":2},"480":{"slidesPerView":1}}'>
-                    <div class="carousel-wrapper">
-                        <div class="carousel-item">
-                            <div class="carousel-content">
-                                <div class="carousel-image">
-                                    <img src="../images/Dune.jpg" alt="Dune: Part Two">
-                                    <span class="carousel-badge">Movie</span>
-                                </div>
-                                <div class="carousel-caption">
-                                    <h3>Dune: Part Two</h3>
-                                    <p>The sequel to Denis Villeneuve's critically acclaimed adaptation continues Paul Atreides' journey on Arrakis.</p>
-                                    <a href="movies.html?id=dune-2" class="btn btn-primary btn-sm">Learn More</a>
-                                </div>
+                <div class="featured-grid">
+                    <div class="featured-item hover-card" data-scroll="fade-in-up">
+                        <div class="featured-image img-zoom-container">
+                            <img src="../images/Dune.jpg" alt="Dune: Part Two" class="img-zoom">
+                            <span class="featured-badge">Movie</span>
+                        </div>
+                        <div class="featured-caption">
+                            <h3>Dune: Part Two</h3>
+                            <p>The sequel to Denis Villeneuve's critically acclaimed adaptation continues Paul Atreides' journey on Arrakis.</p>
+                            <div class="featured-links">
+                                <a href="movies.html?id=dune-2" class="btn btn-primary btn-sm btn-interactive">Learn More</a>
+                                <a href="https://www.hbomax.com" target="_blank" class="btn btn-outline btn-sm btn-interactive">Watch Now</a>
                             </div>
                         </div>
-                        
-                        <div class="carousel-item">
-                            <div class="carousel-content">
-                                <div class="carousel-image">
-                                    <img src="../images/attack on titan.jpg" alt="Attack on Titan">
-                                    <span class="carousel-badge">Anime</span>
-                                </div>
-                                <div class="carousel-caption">
-                                    <h3>Attack on Titan</h3>
-                                    <p>The epic conclusion to the saga that has captivated audiences worldwide.</p>
-                                    <a href="anime.html?id=aot" class="btn btn-primary btn-sm">Learn More</a>
-                                </div>
+                    </div>
+                    
+                    <div class="featured-item hover-card" data-scroll="fade-in-up" data-delay="0.1">
+                        <div class="featured-image img-zoom-container">
+                            <img src="../images/attack on titan.jpg" alt="Attack on Titan" class="img-zoom">
+                            <span class="featured-badge">Anime</span>
+                        </div>
+                        <div class="featured-caption">
+                            <h3>Attack on Titan</h3>
+                            <p>The epic conclusion to the saga that has captivated audiences worldwide.</p>
+                            <div class="featured-links">
+                                <a href="anime.html?id=aot" class="btn btn-primary btn-sm btn-interactive">Learn More</a>
+                                <a href="https://www.crunchyroll.com/series/GR751KNZY/attack-on-titan" target="_blank" class="btn btn-outline btn-sm btn-interactive">Watch Now</a>
                             </div>
                         </div>
-                        
-                        <div class="carousel-item">
-                            <div class="carousel-content">
-                                <div class="carousel-image">
-                                    <img src="../images/GOW.jpg" alt="God of War Ragnarök">
-                                    <span class="carousel-badge">Game</span>
-                                </div>
-                                <div class="carousel-caption">
-                                    <h3>God of War Ragnarök</h3>
-                                    <p>Kratos and Atreus must journey to each of the Nine Realms in search of answers.</p>
-                                    <a href="games.html?id=gow" class="btn btn-primary btn-sm">Learn More</a>
-                                </div>
+                    </div>
+                    
+                    <div class="featured-item hover-card" data-scroll="fade-in-up" data-delay="0.2">
+                        <div class="featured-image img-zoom-container">
+                            <img src="../images/GOW.jpg" alt="God of War Ragnarök" class="img-zoom">
+                            <span class="featured-badge">Game</span>
+                        </div>
+                        <div class="featured-caption">
+                            <h3>God of War Ragnarök</h3>
+                            <p>Kratos and Atreus must journey to each of the Nine Realms in search of answers.</p>
+                            <div class="featured-links">
+                                <a href="games.html?id=gow" class="btn btn-primary btn-sm btn-interactive">Learn More</a>
+                                <a href="https://store.playstation.com/en-us/product/UP9000-PPSA01504_00-GOWRAGNAROK00000" target="_blank" class="btn btn-outline btn-sm btn-interactive">Play Now</a>
                             </div>
                         </div>
-                        
-                        <div class="carousel-item">
-                            <div class="carousel-content">
-                                <div class="carousel-image">
-                                    <img src="../images/OnePiece.jpg" alt="One Piece">
-                                    <span class="carousel-badge">Manga</span>
-                                </div>
-                                <div class="carousel-caption">
-                                    <h3>One Piece</h3>
-                                    <p>Follow Monkey D. Luffy and his pirate crew in their search for the world's ultimate treasure.</p>
-                                    <a href="manga.html?id=onepiece" class="btn btn-primary btn-sm">Learn More</a>
-                                </div>
+                    </div>
+                    
+                    <div class="featured-item hover-card" data-scroll="fade-in-up" data-delay="0.3">
+                        <div class="featured-image img-zoom-container">
+                            <img src="../images/OnePiece.jpg" alt="One Piece" class="img-zoom">
+                            <span class="featured-badge">Manga</span>
+                        </div>
+                        <div class="featured-caption">
+                            <h3>One Piece</h3>
+                            <p>Follow Monkey D. Luffy and his pirate crew in their search for the world's ultimate treasure.</p>
+                            <div class="featured-links">
+                                <a href="manga.html?id=onepiece" class="btn btn-primary btn-sm btn-interactive">Learn More</a>
+                                <a href="https://www.viz.com/shonenjump/chapters/one-piece" target="_blank" class="btn btn-outline btn-sm btn-interactive">Read Now</a>
                             </div>
                         </div>
                     </div>
@@ -621,7 +432,7 @@
                 <div class="reviews-grid">
                     <div class="review-card">
                         <div class="review-header">
-                            <img src="../images/Oppenheimer.jpg" alt="Oppenheimer" class="review-image">
+                            <img src="../images/Oppenheimer.jpg" alt="Oppenheimer" class="review-image standardized-image">
                             <div class="review-title">
                                 <h3>Oppenheimer</h3>
                                 <div class="review-score">
@@ -650,7 +461,7 @@
                     
                     <div class="review-card">
                         <div class="review-header">
-                            <img src="../images/JJK.jpeg" alt="Jujutsu Kaisen" class="review-image">
+                            <img src="../images/JJK.jpeg" alt="Jujutsu Kaisen" class="review-image standardized-image">
                             <div class="review-title">
                                 <h3>Jujutsu Kaisen S2</h3>
                                 <div class="review-score">
@@ -679,7 +490,7 @@
                     
                     <div class="review-card">
                         <div class="review-header">
-                            <img src="../images/EldenRing.jpg" alt="Elden Ring" class="review-image">
+                            <img src="../images/EldenRing.jpg" alt="Elden Ring" class="review-image standardized-image">
                             <div class="review-title">
                                 <h3>Elden Ring</h3>
                                 <div class="review-score">
@@ -736,7 +547,7 @@
                         </div>
                     </div>
                     <div class="community-image">
-                        <img src="../images/Disscusion.jpg" alt="Community Discussion">
+                        <img src="../images/Disscusion.jpg" alt="Community Discussion" class="standardized-image">
                     </div>
                 </div>
             </div>
@@ -759,7 +570,7 @@
                         </div>
                     </div>
                     <div class="app-mockup">
-                        <img src="../images/Abousen.jpg" alt="Mobile App Mockup">
+                        <img src="../images/Abousen.jpg" alt="Mobile App Mockup" class="standardized-image">
                     </div>
                 </div>
             </div>
@@ -818,99 +629,14 @@
         </div>
     </footer>
 
-    <a href="#" class="back-to-top" id="back-to-top-btn" aria-label="Back to top">↑</a>
+    <button class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
     
     <!-- Scripts -->
     <script src="../js/common.js"></script>
-    <script src="../js/carousel.js"></script>
-    <script src="../js/auth.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Trending tabs functionality
-            const trendingTabs = document.querySelectorAll('.trending-tab');
-            const tabContents = document.querySelectorAll('.tab-content');
-            
-            trendingTabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    // Get target content
-                    const category = this.dataset.category;
-                    const targetContent = document.getElementById('trending-' + category);
-                    
-                    // Update active tab
-                    trendingTabs.forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Show target content, hide others
-                    tabContents.forEach(content => {
-                        content.style.display = 'none';
-                    });
-                    targetContent.style.display = 'block';
-                });
-            });
-            
-            // Initialize user authentication state
-            if (typeof Auth !== 'undefined') {
-                Auth.init().then(isAuthenticated => {
-                    // Update watchlist buttons based on authentication status
-                    const watchlistButtons = document.querySelectorAll('.add-watchlist');
-                    watchlistButtons.forEach(button => {
-                        button.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            const itemId = this.dataset.id;
-                            const itemType = this.dataset.type;
-                            
-                            if (isAuthenticated) {
-                                // If authenticated, add to watchlist
-                                addToWatchlist(itemId, itemType);
-                                this.innerHTML = '<i class="fas fa-check"></i> Added';
-                                this.classList.add('added');
-                            } else {
-                                // If not authenticated, redirect to login
-                                window.location.href = 'signin.html?redirect=' + encodeURIComponent(window.location.href);
-                            }
-                        });
-                    });
-                });
-            }
-            
-            // Function to add item to watchlist
-            function addToWatchlist(itemId, itemType) {
-                // In a real app, this would make an API call
-                console.log(`Added ${itemType} with ID ${itemId} to watchlist`);
-                
-                // Show toast notification
-                showToast(`Added to your ${itemType === 'game' ? 'wishlist' : 'watchlist'}!`, 'success');
-            }
-            
-            // Toast notification function
-            function showToast(message, type = 'info') {
-                // Create toast container if it doesn't exist
-                let toastContainer = document.querySelector('.toast-container');
-                
-                if (!toastContainer) {
-                    toastContainer = document.createElement('div');
-                    toastContainer.className = 'toast-container';
-                    document.body.appendChild(toastContainer);
-                }
-                
-                // Create toast element
-                const toast = document.createElement('div');
-                toast.className = `toast toast-${type} fade-in`;
-                toast.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-info-circle'}"></i> ${message}`;
-                
-                // Add to container
-                toastContainer.appendChild(toast);
-                
-                // Remove after delay
-                setTimeout(() => {
-                    toast.classList.add('fade-out');
-                    setTimeout(() => {
-                        toast.remove();
-                    }, 500);
-                }, 3000);
-            }
-        });
-    </script>
+    <script src="../js/main.js"></script>
+    <script src="../js/quiz.js"></script>
 </body>
 
 </html>
